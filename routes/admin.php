@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\EnquiryController;
 use App\Http\Controllers\Admin\GlobalController;
+use App\Http\Controllers\Admin\ListingController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\SeoController;
@@ -24,12 +25,16 @@ Route::middleware(['auth:admin', 'admin'])->group(function () {
         Route::match(['get', 'post'], 'delete/{type}/{id}', 'delete_data')->name('delete_data');
     });
 
+    // Listing
+    // Route::controller(ListingController::class)->group(function () {
+    // });
+    Route::resource('listing-data', ListingController::class);
+
     // Profile
     Route::controller(ProfileController::class)->group(function () {
         Route::match(['get', 'post'], 'profile', 'profile')->name('profile');
         Route::match(['get', 'post'], 'change_password', 'change_password')->name('change_password');
         Route::match(['get', 'post'], 'update_profile', 'update_profile')->name('update_profile');
-
     });
 
     // category
