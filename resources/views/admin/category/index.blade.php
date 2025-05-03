@@ -1,8 +1,8 @@
 <x-admin.layout type="category">
     @php
-        $create = App\Models\Permission::getPermissionBySlugAndId('Category', 'Create');
-        $edit = App\Models\Permission::getPermissionBySlugAndId('Category', 'Edit');
-        $delete = App\Models\Permission::getPermissionBySlugAndId('Category', 'Delete');
+        $create = true;
+        $edit = true;
+        $delete = true;
     @endphp
         <div class="page-content">
             <!--breadcrumb-->

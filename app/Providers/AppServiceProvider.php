@@ -30,6 +30,10 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->configureRoutes();
         $router->aliasMiddleware('admin', RoleCheck::class);
+        
+        Blade::directive('active', function ($route) {
+            return "<?php echo request()->routeIs($route) ? 'active' : ''; ?>";
+        });
     }
 
     /**
