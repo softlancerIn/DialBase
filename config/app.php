@@ -84,6 +84,8 @@ return [
 
     'faker_locale' => env('APP_FAKER_LOCALE', 'en_US'),
 
+    'custom_path' => env('CUSTOM_PATH', 'http://127.0.0.1:8000/public/'),
+
     /*
     |--------------------------------------------------------------------------
     | Encryption Key
