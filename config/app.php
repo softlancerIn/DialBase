@@ -84,8 +84,6 @@ return [
 
     'faker_locale' => env('APP_FAKER_LOCALE', 'en_US'),
 
-    'custom_path' => env('CUSTOM_PATH', 'http://localhost/DialBase/public/'),
-
     /*
     |--------------------------------------------------------------------------
     | Encryption Key

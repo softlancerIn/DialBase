@@ -36,7 +36,7 @@
     <!-- ======================= Home Banner ======================== -->
 
     <!-- ======================= Listing Categories ======================== -->
-    @include('web.component.category_list')
+    @include('web.components.category_list')
     <!-- ======================= Listing Categories End ======================== -->
 
     <!-- ======================= All Types Listing ======================== -->
@@ -103,7 +103,7 @@
                                             </div>
                                             <div class="Goodup-grid-thumb">
                                                 <a href="single-listing-detail-2.html"
-                                                    class="d-block text-center m-auto"><img src="assets/img/listing/l-5.jpg"
+                                                    class="d-block text-center m-auto"><img src="{{asset('assets/img/listing/l-5.jpg')}}"
                                                         class="img-fluid" alt=""></a>
                                             </div>
                                             <div class="Goodup-rating overlay">
@@ -123,7 +123,7 @@
                                         <div class="Goodup-grid-fl-wrap">
                                             <div class="Goodup-caption px-3 py-2">
                                                 <div class="Goodup-author"><a href="author-detail.html"><img
-                                                            src="assets/img/t-1.png" class="img-fluid circle" alt=""></a>
+                                                            src="{{asset('assets/img/t-1.png')}}" class="img-fluid circle" alt=""></a>
                                                 </div>
                                                 <h4 class="mb-0 ft-medium medium"><a href="single-listing-detail-2.html"
                                                         class="text-dark fs-md">Pretty Woman Smart Batra</a></h4>
@@ -166,7 +166,7 @@
                                             </div>
                                             <div class="Goodup-grid-thumb">
                                                 <a href="single-listing-detail-2.html"
-                                                    class="d-block text-center m-auto"><img src="assets/img/listing/l-6.jpg"
+                                                    class="d-block text-center m-auto"><img src="{{asset('assets/img/listing/l-6.jpg')}}"
                                                         class="img-fluid" alt=""></a>
                                             </div>
                                             <div class="Goodup-rating overlay">
@@ -186,7 +186,7 @@
                                         <div class="Goodup-grid-fl-wrap">
                                             <div class="Goodup-caption px-3 py-2">
                                                 <div class="Goodup-author"><a href="author-detail.html"><img
-                                                            src="assets/img/t-2.png" class="img-fluid circle" alt=""></a>
+                                                            src="{{asset('assets/img/t-2.png')}}" class="img-fluid circle" alt=""></a>
                                                 </div>
                                                 <h4 class="mb-0 ft-medium medium"><a href="single-listing-detail-2.html"
                                                         class="text-dark fs-md">The Sartaj Blue Night</a></h4>
@@ -228,7 +228,7 @@
                                             </div>
                                             <div class="Goodup-grid-thumb">
                                                 <a href="single-listing-detail-2.html"
-                                                    class="d-block text-center m-auto"><img src="assets/img/listing/l-7.jpg"
+                                                    class="d-block text-center m-auto"><img src="{{asset('assets/img/listing/l-7.jpg')}}"
                                                         class="img-fluid" alt=""></a>
                                             </div>
                                             <div class="Goodup-rating overlay">
@@ -248,7 +248,7 @@
                                         <div class="Goodup-grid-fl-wrap">
                                             <div class="Goodup-caption px-3 py-2">
                                                 <div class="Goodup-author"><a href="author-detail.html"><img
-                                                            src="assets/img/t-3.png" class="img-fluid circle" alt=""></a>
+                                                            src="{{asset('assets/img/t-3.png')}}" class="img-fluid circle" alt=""></a>
                                                 </div>
                                                 <h4 class="mb-0 ft-medium medium"><a href="single-listing-detail-2.html"
                                                         class="text-dark fs-md">Pizza Delight Cafe Shop</a></h4>
@@ -291,7 +291,7 @@
                                             </div>
                                             <div class="Goodup-grid-thumb">
                                                 <a href="single-listing-detail-2.html"
-                                                    class="d-block text-center m-auto"><img src="assets/img/listing/l-8.jpg"
+                                                    class="d-block text-center m-auto"><img src="{{asset('assets/img/listing/l-8.jpg')}}"
                                                         class="img-fluid" alt=""></a>
                                             </div>
                                             <div class="Goodup-rating overlay">
@@ -311,7 +311,7 @@
                                         <div class="Goodup-grid-fl-wrap">
                                             <div class="Goodup-caption px-3 py-2">
                                                 <div class="Goodup-author"><a href="author-detail.html"><img
-                                                            src="assets/img/t-4.png" class="img-fluid circle" alt=""></a>
+                                                            src="{{asset('assets/img/t-4.png')}}" class="img-fluid circle" alt=""></a>
                                                 </div>
                                                 <h4 class="mb-0 ft-medium medium"><a href="single-listing-detail-2.html"
                                                         class="text-dark fs-md">The Great Allante Shop</a></h4>
@@ -353,7 +353,7 @@
                                             </div>
                                             <div class="Goodup-grid-thumb">
                                                 <a href="single-listing-detail-2.html"
-                                                    class="d-block text-center m-auto"><img src="assets/img/listing/l-9.jpg"
+                                                    class="d-block text-center m-auto"><img src="{{asset('assets/img/listing/l-9.jpg')}}"
                                                         class="img-fluid" alt=""></a>
                                             </div>
                                             <div class="Goodup-rating overlay">
@@ -373,7 +373,7 @@
                                         <div class="Goodup-grid-fl-wrap">
                                             <div class="Goodup-caption px-3 py-2">
                                                 <div class="Goodup-author"><a href="author-detail.html"><img
-                                                            src="assets/img/t-5.png" class="img-fluid circle" alt=""></a>
+                                                            src="{{asset('assets/img/t-5.png')}}" class="img-fluid circle" alt=""></a>
                                                 </div>
                                                 <h4 class="mb-0 ft-medium medium"><a href="single-listing-detail-2.html"
                                                         class="text-dark fs-md">Unisex Blue Spa Massage</a></h4>
@@ -417,7 +417,7 @@
                                             <div class="Goodup-grid-thumb">
                                                 <a href="single-listing-detail-2.html"
                                                     class="d-block text-center m-auto"><img
-                                                        src="assets/img/listing/l-10.jpg" class="img-fluid" alt=""></a>
+                                                        src="{{asset('assets/img/listing/l-10.jpg')}}" class="img-fluid" alt=""></a>
                                             </div>
                                             <div class="Goodup-rating overlay">
                                                 <div class="Goodup-pr-average poor">2.7</div>
@@ -436,7 +436,7 @@
                                         <div class="Goodup-grid-fl-wrap">
                                             <div class="Goodup-caption px-3 py-2">
                                                 <div class="Goodup-author"><a href="author-detail.html"><img
-                                                            src="assets/img/t-6.png" class="img-fluid circle" alt=""></a>
+                                                            src="{{asset('assets/img/t-6.png')}}" class="img-fluid circle" alt=""></a>
                                                 </div>
                                                 <h4 class="mb-0 ft-medium medium"><a href="single-listing-detail-2.html"
                                                         class="text-dark fs-md">Washington, Canada</a></h4>
@@ -479,7 +479,7 @@
                                             <div class="Goodup-grid-thumb">
                                                 <a href="single-listing-detail-2.html"
                                                     class="d-block text-center m-auto"><img
-                                                        src="assets/img/listing/l-11.jpg" class="img-fluid" alt=""></a>
+                                                        src="{{asset('assets/img/listing/l-11.jpg')}}" class="img-fluid" alt=""></a>
                                             </div>
                                             <div class="Goodup-rating overlay">
                                                 <div class="Goodup-pr-average high">4.3</div>
@@ -498,7 +498,7 @@
                                         <div class="Goodup-grid-fl-wrap">
                                             <div class="Goodup-caption px-3 py-2">
                                                 <div class="Goodup-author"><a href="author-detail.html"><img
-                                                            src="assets/img/t-7.png" class="img-fluid circle" alt=""></a>
+                                                            src="{{asset('assets/img/t-7.png')}}" class="img-fluid circle" alt=""></a>
                                                 </div>
                                                 <h4 class="mb-0 ft-medium medium"><a href="single-listing-detail-2.html"
                                                         class="text-dark fs-md">Ubber Shopping Services</a></h4>
@@ -541,7 +541,7 @@
                                             </div>
                                             <div class="Goodup-grid-thumb">
                                                 <a href="single-listing-detail-2.html"
-                                                    class="d-block text-center m-auto"><img src="assets/img/listing/l-1.jpg"
+                                                    class="d-block text-center m-auto"><img src="{{asset('assets/img/listing/l-1.jpg')}}"
                                                         class="img-fluid" alt=""></a>
                                             </div>
                                             <div class="Goodup-rating overlay">
@@ -561,7 +561,7 @@
                                         <div class="Goodup-grid-fl-wrap">
                                             <div class="Goodup-caption px-3 py-2">
                                                 <div class="Goodup-author"><a href="author-detail.html"><img
-                                                            src="assets/img/t-8.png" class="img-fluid circle" alt=""></a>
+                                                            src="{{asset('assets/img/t-8.png')}}" class="img-fluid circle" alt=""></a>
                                                 </div>
                                                 <h4 class="mb-0 ft-medium medium"><a href="single-listing-detail-2.html"
                                                         class="text-dark fs-md">Rajwara Marriage Home</a></h4>
@@ -610,7 +610,7 @@
                                                         class="lni lni-heart-filled position-absolute"></i></button></div>
                                             <div class="Goodup-grid-thumb">
                                                 <a href="event-detail.html" class="d-block text-center m-auto"><img
-                                                        src="assets/img/listing/l-1.jpg" class="img-fluid" alt=""></a>
+                                                        src="{{asset('assets/img/listing/l-1.jpg')}}" class="img-fluid" alt=""></a>
                                             </div>
                                             <div class="Goodup-overlay-caps">
                                                 <h4 class="mb-0 ft-medium medium"><a href="event-detail.html"
@@ -642,7 +642,7 @@
                                                         class="lni lni-heart-filled position-absolute"></i></button></div>
                                             <div class="Goodup-grid-thumb">
                                                 <a href="event-detail.html" class="d-block text-center m-auto"><img
-                                                        src="assets/img/listing/l-2.jpg" class="img-fluid" alt=""></a>
+                                                        src="{{asset('assets/img/listing/l-2.jpg')}}" class="img-fluid" alt=""></a>
                                             </div>
                                             <div class="Goodup-overlay-caps">
                                                 <h4 class="mb-0 ft-medium medium"><a href="event-detail.html"
@@ -674,7 +674,7 @@
                                                         class="lni lni-heart-filled position-absolute"></i></button></div>
                                             <div class="Goodup-grid-thumb">
                                                 <a href="event-detail.html" class="d-block text-center m-auto"><img
-                                                        src="assets/img/listing/l-3.jpg" class="img-fluid" alt=""></a>
+                                                        src="{{asset('assets/img/listing/l-3.jpg')}}" class="img-fluid" alt=""></a>
                                             </div>
                                             <div class="Goodup-overlay-caps">
                                                 <h4 class="mb-0 ft-medium medium"><a href="event-detail.html"
@@ -706,7 +706,7 @@
                                                         class="lni lni-heart-filled position-absolute"></i></button></div>
                                             <div class="Goodup-grid-thumb">
                                                 <a href="event-detail.html" class="d-block text-center m-auto"><img
-                                                        src="assets/img/listing/l-4.jpg" class="img-fluid" alt=""></a>
+                                                        src="{{asset('assets/img/listing/l-4.jpg')}}" class="img-fluid" alt=""></a>
                                             </div>
                                             <div class="Goodup-overlay-caps">
                                                 <h4 class="mb-0 ft-medium medium"><a href="event-detail.html"
@@ -738,7 +738,7 @@
                                                         class="lni lni-heart-filled position-absolute"></i></button></div>
                                             <div class="Goodup-grid-thumb">
                                                 <a href="event-detail.html" class="d-block text-center m-auto"><img
-                                                        src="assets/img/listing/l-5.jpg" class="img-fluid" alt=""></a>
+                                                        src="{{asset('assets/img/listing/l-5.jpg')}}" class="img-fluid" alt=""></a>
                                             </div>
                                             <div class="Goodup-overlay-caps">
                                                 <h4 class="mb-0 ft-medium medium"><a href="event-detail.html"
@@ -770,7 +770,7 @@
                                                         class="lni lni-heart-filled position-absolute"></i></button></div>
                                             <div class="Goodup-grid-thumb">
                                                 <a href="event-detail.html" class="d-block text-center m-auto"><img
-                                                        src="assets/img/listing/l-6.jpg" class="img-fluid" alt=""></a>
+                                                        src="{{asset('assets/img/listing/l-6.jpg')}}" class="img-fluid" alt=""></a>
                                             </div>
                                             <div class="Goodup-overlay-caps">
                                                 <h4 class="mb-0 ft-medium medium"><a href="event-detail.html"
@@ -802,7 +802,7 @@
                                                         class="lni lni-heart-filled position-absolute"></i></button></div>
                                             <div class="Goodup-grid-thumb">
                                                 <a href="event-detail.html" class="d-block text-center m-auto"><img
-                                                        src="assets/img/listing/l-7.jpg" class="img-fluid" alt=""></a>
+                                                        src="{{asset('assets/img/listing/l-7.jpg')}}" class="img-fluid" alt=""></a>
                                             </div>
                                             <div class="Goodup-overlay-caps">
                                                 <h4 class="mb-0 ft-medium medium"><a href="event-detail.html"
@@ -834,7 +834,7 @@
                                                         class="lni lni-heart-filled position-absolute"></i></button></div>
                                             <div class="Goodup-grid-thumb">
                                                 <a href="event-detail.html" class="d-block text-center m-auto"><img
-                                                        src="assets/img/listing/l-8.jpg" class="img-fluid" alt=""></a>
+                                                        src="{{asset('assets/img/listing/l-8.jpg')}}" class="img-fluid" alt=""></a>
                                             </div>
                                             <div class="Goodup-overlay-caps">
                                                 <h4 class="mb-0 ft-medium medium"><a href="event-detail.html"
@@ -870,7 +870,7 @@
                                 <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
                                     <div class="doctor-grid-view">
                                         <div class="doctor-grid-thumb">
-                                            <a href="single-listing-detail-4.html"><img src="assets/img/doc-1.jpg"
+                                            <a href="single-listing-detail-4.html"><img src="{{asset('assets/img/doc-1.jpg')}}"
                                                     class="img-fluid" alt=""></a>
                                         </div>
 
@@ -912,7 +912,7 @@
                                 <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
                                     <div class="doctor-grid-view">
                                         <div class="doctor-grid-thumb">
-                                            <a href="single-listing-detail-4.html"><img src="assets/img/doc-2.jpg"
+                                            <a href="single-listing-detail-4.html"><img src="{{asset('assets/img/doc-2.jpg')}}"
                                                     class="img-fluid" alt=""></a>
                                         </div>
 
@@ -954,7 +954,7 @@
                                 <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
                                     <div class="doctor-grid-view">
                                         <div class="doctor-grid-thumb">
-                                            <a href="single-listing-detail-4.html"><img src="assets/img/doc-3.jpg"
+                                            <a href="single-listing-detail-4.html"><img src="{{asset('assets/img/doc-3.jpg')}}"
                                                     class="img-fluid" alt=""></a>
                                         </div>
 
@@ -996,7 +996,7 @@
                                 <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
                                     <div class="doctor-grid-view">
                                         <div class="doctor-grid-thumb">
-                                            <a href="single-listing-detail-4.html"><img src="assets/img/doc-4.jpg"
+                                            <a href="single-listing-detail-4.html"><img src="{{asset('assets/img/doc-4.jpg')}}"
                                                     class="img-fluid" alt=""></a>
                                         </div>
 
@@ -1038,7 +1038,7 @@
                                 <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
                                     <div class="doctor-grid-view">
                                         <div class="doctor-grid-thumb">
-                                            <a href="single-listing-detail-4.html"><img src="assets/img/doc-5.jpg"
+                                            <a href="single-listing-detail-4.html"><img src="{{asset('assets/img/doc-5.jpg')}}"
                                                     class="img-fluid" alt=""></a>
                                         </div>
 
@@ -1080,7 +1080,7 @@
                                 <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
                                     <div class="doctor-grid-view">
                                         <div class="doctor-grid-thumb">
-                                            <a href="single-listing-detail-4.html"><img src="assets/img/doc-6.jpg"
+                                            <a href="single-listing-detail-4.html"><img src="{{asset('assets/img/doc-6.jpg')}}"
                                                     class="img-fluid" alt=""></a>
                                         </div>
 
@@ -1122,7 +1122,7 @@
                                 <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
                                     <div class="doctor-grid-view">
                                         <div class="doctor-grid-thumb">
-                                            <a href="single-listing-detail-4.html"><img src="assets/img/doc-7.jpg"
+                                            <a href="single-listing-detail-4.html"><img src="{{asset('assets/img/doc-7.jpg')}}"
                                                     class="img-fluid" alt=""></a>
                                         </div>
 
@@ -1164,7 +1164,7 @@
                                 <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
                                     <div class="doctor-grid-view">
                                         <div class="doctor-grid-thumb">
-                                            <a href="single-listing-detail-4.html"><img src="assets/img/doc-8.jpg"
+                                            <a href="single-listing-detail-4.html"><img src="{{asset('assets/img/doc-8.jpg')}}"
                                                     class="img-fluid" alt=""></a>
                                         </div>
 
@@ -1221,7 +1221,7 @@
                                             </div>
                                             <div class="Goodup-grid-thumb">
                                                 <a href="single-listing-detail-7.html"
-                                                    class="d-block text-center m-auto"><img src="assets/img/car/c-1.jpg"
+                                                    class="d-block text-center m-auto"><img src="{{asset('assets/img/car/c-1.jpg')}}"
                                                         class="img-fluid" alt=""></a>
                                             </div>
                                             <div class="Goodup-rating overlay">
@@ -1265,7 +1265,7 @@
                                                         class="lni lni-heart-filled position-absolute"></i></button></div>
                                             <div class="Goodup-grid-thumb">
                                                 <a href="single-listing-detail-7.html"
-                                                    class="d-block text-center m-auto"><img src="assets/img/car/c-2.jpg"
+                                                    class="d-block text-center m-auto"><img src="{{asset('assets/img/car/c-2.jpg')}}"
                                                         class="img-fluid" alt=""></a>
                                             </div>
                                             <div class="Goodup-rating overlay">
@@ -1314,7 +1314,7 @@
                                             </div>
                                             <div class="Goodup-grid-thumb">
                                                 <a href="single-listing-detail-7.html"
-                                                    class="d-block text-center m-auto"><img src="assets/img/car/c-3.jpg"
+                                                    class="d-block text-center m-auto"><img src="{{asset('assets/img/car/c-3.jpg')}}"
                                                         class="img-fluid" alt=""></a>
                                             </div>
                                             <div class="Goodup-rating overlay">
@@ -1358,7 +1358,7 @@
                                                         class="lni lni-heart-filled position-absolute"></i></button></div>
                                             <div class="Goodup-grid-thumb">
                                                 <a href="single-listing-detail-7.html"
-                                                    class="d-block text-center m-auto"><img src="assets/img/car/c-4.jpg"
+                                                    class="d-block text-center m-auto"><img src="{{asset('assets/img/car/c-4.jpg')}}"
                                                         class="img-fluid" alt=""></a>
                                             </div>
                                             <div class="Goodup-rating overlay">
@@ -1404,7 +1404,7 @@
                                                         class="lni lni-heart-filled position-absolute"></i></button></div>
                                             <div class="Goodup-grid-thumb">
                                                 <a href="single-listing-detail-7.html"
-                                                    class="d-block text-center m-auto"><img src="assets/img/car/c-5.jpg"
+                                                    class="d-block text-center m-auto"><img src="{{asset('assets/img/car/c-5.jpg')}}"
                                                         class="img-fluid" alt=""></a>
                                             </div>
                                             <div class="Goodup-rating overlay">
@@ -1451,7 +1451,7 @@
                                             </div>
                                             <div class="Goodup-grid-thumb">
                                                 <a href="single-listing-detail-7.html"
-                                                    class="d-block text-center m-auto"><img src="assets/img/car/c-6.jpg"
+                                                    class="d-block text-center m-auto"><img src="{{asset('assets/img/car/c-6.jpg')}}"
                                                         class="img-fluid" alt=""></a>
                                             </div>
                                             <div class="Goodup-rating overlay">
@@ -1495,7 +1495,7 @@
                                                         class="lni lni-heart-filled position-absolute"></i></button></div>
                                             <div class="Goodup-grid-thumb">
                                                 <a href="single-listing-detail-7.html"
-                                                    class="d-block text-center m-auto"><img src="assets/img/car/c-7.jpg"
+                                                    class="d-block text-center m-auto"><img src="{{asset('assets/img/car/c-7.jpg')}}"
                                                         class="img-fluid" alt=""></a>
                                             </div>
                                             <div class="Goodup-rating overlay">
@@ -1544,7 +1544,7 @@
                                             </div>
                                             <div class="Goodup-grid-thumb">
                                                 <a href="single-listing-detail-7.html"
-                                                    class="d-block text-center m-auto"><img src="assets/img/car/c-8.jpg"
+                                                    class="d-block text-center m-auto"><img src="{{asset('assets/img/car/c-8.jpg')}}"
                                                         class="img-fluid" alt=""></a>
                                             </div>
                                             <div class="Goodup-rating overlay">
@@ -1600,7 +1600,7 @@
                                             </div>
                                             <div class="Goodup-grid-thumb">
                                                 <a href="single-listing-detail-5.html"
-                                                    class="d-block text-center m-auto"><img src="assets/img/real/r-1.jpg"
+                                                    class="d-block text-center m-auto"><img src="{{asset('assets/img/real/r-1.jpg')}}"
                                                         class="img-fluid" alt=""></a>
                                             </div>
                                             <div class="Goodup-rating overlay">
@@ -1610,7 +1610,7 @@
                                         <div class="Goodup-grid-fl-wrap">
                                             <div class="Goodup-caption px-3 py-2">
                                                 <div class="Goodup-author"><a href="author-detail.html"><img
-                                                            src="assets/img/t-1.png" class="img-fluid circle" alt=""></a>
+                                                            src="{{asset('assets/img/t-1.png')}}" class="img-fluid circle" alt=""></a>
                                                 </div>
                                                 <div class="Goodup-cates multi"><span class="Goodup-apr-rates"><i
                                                             class="fas fa-star"></i>4.8</span><a href="search-property.html"
@@ -1659,7 +1659,7 @@
                                             </div>
                                             <div class="Goodup-grid-thumb">
                                                 <a href="single-listing-detail-5.html"
-                                                    class="d-block text-center m-auto"><img src="assets/img/real/r-2.jpg"
+                                                    class="d-block text-center m-auto"><img src="{{asset('assets/img/real/r-2.jpg')}}"
                                                         class="img-fluid" alt=""></a>
                                             </div>
                                             <div class="Goodup-rating overlay">
@@ -1669,7 +1669,7 @@
                                         <div class="Goodup-grid-fl-wrap">
                                             <div class="Goodup-caption px-3 py-2">
                                                 <div class="Goodup-author"><a href="author-detail.html"><img
-                                                            src="assets/img/t-2.png" class="img-fluid circle" alt=""></a>
+                                                            src="{{asset('assets/img/t-2.png')}}" class="img-fluid circle" alt=""></a>
                                                 </div>
                                                 <div class="Goodup-cates multi"><span class="Goodup-apr-rates"><i
                                                             class="fas fa-star"></i>4.7</span><a href="search-property.html"
@@ -1719,7 +1719,7 @@
                                             </div>
                                             <div class="Goodup-grid-thumb">
                                                 <a href="single-listing-detail-5.html"
-                                                    class="d-block text-center m-auto"><img src="assets/img/real/r-3.jpg"
+                                                    class="d-block text-center m-auto"><img src="{{asset('assets/img/real/r-3.jpg')}}"
                                                         class="img-fluid" alt=""></a>
                                             </div>
                                             <div class="Goodup-rating overlay">
@@ -1729,7 +1729,7 @@
                                         <div class="Goodup-grid-fl-wrap">
                                             <div class="Goodup-caption px-3 py-2">
                                                 <div class="Goodup-author"><a href="author-detail.html"><img
-                                                            src="assets/img/t-3.png" class="img-fluid circle" alt=""></a>
+                                                            src="{{asset('assets/img/t-3.png')}}" class="img-fluid circle" alt=""></a>
                                                 </div>
                                                 <div class="Goodup-cates multi"><span class="Goodup-apr-rates"><i
                                                             class="fas fa-star"></i>4.5</span><a href="search-property.html"
@@ -1778,7 +1778,7 @@
                                             </div>
                                             <div class="Goodup-grid-thumb">
                                                 <a href="single-listing-detail-5.html"
-                                                    class="d-block text-center m-auto"><img src="assets/img/real/r-4.jpg"
+                                                    class="d-block text-center m-auto"><img src="{{asset('assets/img/real/r-4.jpg')}}"
                                                         class="img-fluid" alt=""></a>
                                             </div>
                                             <div class="Goodup-rating overlay">
@@ -1788,7 +1788,7 @@
                                         <div class="Goodup-grid-fl-wrap">
                                             <div class="Goodup-caption px-3 py-2">
                                                 <div class="Goodup-author"><a href="author-detail.html"><img
-                                                            src="assets/img/t-4.png" class="img-fluid circle" alt=""></a>
+                                                            src="{{asset('assets/img/t-4.png')}}" class="img-fluid circle" alt=""></a>
                                                 </div>
                                                 <div class="Goodup-cates multi"><span class="Goodup-apr-rates"><i
                                                             class="fas fa-star"></i>4.9</span><a href="search-property.html"
@@ -1837,7 +1837,7 @@
                                             </div>
                                             <div class="Goodup-grid-thumb">
                                                 <a href="single-listing-detail-5.html"
-                                                    class="d-block text-center m-auto"><img src="assets/img/real/r-5.jpg"
+                                                    class="d-block text-center m-auto"><img src="{{asset('assets/img/real/r-5.jpg')}}"
                                                         class="img-fluid" alt=""></a>
                                             </div>
                                             <div class="Goodup-rating overlay">
@@ -1847,7 +1847,7 @@
                                         <div class="Goodup-grid-fl-wrap">
                                             <div class="Goodup-caption px-3 py-2">
                                                 <div class="Goodup-author"><a href="author-detail.html"><img
-                                                            src="assets/img/t-5.png" class="img-fluid circle" alt=""></a>
+                                                            src="{{asset('assets/img/t-5.png')}}" class="img-fluid circle" alt=""></a>
                                                 </div>
                                                 <div class="Goodup-cates multi"><span class="Goodup-apr-rates"><i
                                                             class="fas fa-star"></i>4.6</span><a href="search-property.html"
@@ -1897,7 +1897,7 @@
                                             </div>
                                             <div class="Goodup-grid-thumb">
                                                 <a href="single-listing-detail-5.html"
-                                                    class="d-block text-center m-auto"><img src="assets/img/real/r-6.jpg"
+                                                    class="d-block text-center m-auto"><img src="{{asset('assets/img/real/r-6.jpg')}}"
                                                         class="img-fluid" alt=""></a>
                                             </div>
                                             <div class="Goodup-rating overlay">
@@ -1907,7 +1907,7 @@
                                         <div class="Goodup-grid-fl-wrap">
                                             <div class="Goodup-caption px-3 py-2">
                                                 <div class="Goodup-author"><a href="author-detail.html"><img
-                                                            src="assets/img/t-6.png" class="img-fluid circle" alt=""></a>
+                                                            src="{{asset('assets/img/t-6.png')}}" class="img-fluid circle" alt=""></a>
                                                 </div>
                                                 <div class="Goodup-cates multi"><span class="Goodup-apr-rates"><i
                                                             class="fas fa-star"></i>4.2</span><a href="search-property.html"
@@ -1956,7 +1956,7 @@
                                             </div>
                                             <div class="Goodup-grid-thumb">
                                                 <a href="single-listing-detail-5.html"
-                                                    class="d-block text-center m-auto"><img src="assets/img/real/r-7.jpg"
+                                                    class="d-block text-center m-auto"><img src="{{asset('assets/img/real/r-7.jpg')}}"
                                                         class="img-fluid" alt=""></a>
                                             </div>
                                             <div class="Goodup-rating overlay">
@@ -1966,7 +1966,7 @@
                                         <div class="Goodup-grid-fl-wrap">
                                             <div class="Goodup-caption px-3 py-2">
                                                 <div class="Goodup-author"><a href="author-detail.html"><img
-                                                            src="assets/img/t-7.png" class="img-fluid circle" alt=""></a>
+                                                            src="{{asset('assets/img/t-7.png')}}" class="img-fluid circle" alt=""></a>
                                                 </div>
                                                 <div class="Goodup-cates multi"><span class="Goodup-apr-rates"><i
                                                             class="fas fa-star"></i>4.5</span><a href="search-property.html"
@@ -2016,7 +2016,7 @@
                                             </div>
                                             <div class="Goodup-grid-thumb">
                                                 <a href="single-listing-detail-5.html"
-                                                    class="d-block text-center m-auto"><img src="assets/img/real/r-1.jpg"
+                                                    class="d-block text-center m-auto"><img src="{{asset('assets/img/real/r-1.jpg')}}"
                                                         class="img-fluid" alt=""></a>
                                             </div>
                                             <div class="Goodup-rating overlay">
@@ -2026,7 +2026,7 @@
                                         <div class="Goodup-grid-fl-wrap">
                                             <div class="Goodup-caption px-3 py-2">
                                                 <div class="Goodup-author"><a href="author-detail.html"><img
-                                                            src="assets/img/t-8.png" class="img-fluid circle" alt=""></a>
+                                                            src="{{asset('assets/img/t-8.png')}}" class="img-fluid circle" alt=""></a>
                                                 </div>
                                                 <div class="Goodup-cates multi"><span class="Goodup-apr-rates"><i
                                                             class="fas fa-star"></i>4.7</span><a href="search-property.html"
@@ -2083,7 +2083,7 @@
                                             </div>
                                             <div class="Goodup-grid-thumb">
                                                 <a href="single-listing-detail-8.html"
-                                                    class="d-block text-center m-auto"><img src="assets/img/rooms/1.jpg"
+                                                    class="d-block text-center m-auto"><img src="{{asset('assets/img/rooms/1.jpg')}}"
                                                         class="img-fluid" alt=""></a>
                                             </div>
                                             <div class="Goodup-rating overlay">
@@ -2141,7 +2141,7 @@
                                             </div>
                                             <div class="Goodup-grid-thumb">
                                                 <a href="single-listing-detail-8.html"
-                                                    class="d-block text-center m-auto"><img src="assets/img/rooms/2.jpg"
+                                                    class="d-block text-center m-auto"><img src="{{asset('assets/img/rooms/2.jpg')}}"
                                                         class="img-fluid" alt=""></a>
                                             </div>
                                             <div class="Goodup-rating overlay">
@@ -2199,7 +2199,7 @@
                                             </div>
                                             <div class="Goodup-grid-thumb">
                                                 <a href="single-listing-detail-8.html"
-                                                    class="d-block text-center m-auto"><img src="assets/img/rooms/3.jpg"
+                                                    class="d-block text-center m-auto"><img src="{{asset('assets/img/rooms/3.jpg')}}"
                                                         class="img-fluid" alt=""></a>
                                             </div>
                                             <div class="Goodup-rating overlay">
@@ -2254,7 +2254,7 @@
                                                         class="lni lni-heart-filled position-absolute"></i></button></div>
                                             <div class="Goodup-grid-thumb">
                                                 <a href="single-listing-detail-8.html"
-                                                    class="d-block text-center m-auto"><img src="assets/img/rooms/4.jpg"
+                                                    class="d-block text-center m-auto"><img src="{{asset('assets/img/rooms/4.jpg')}}"
                                                         class="img-fluid" alt=""></a>
                                             </div>
                                             <div class="Goodup-rating overlay">
@@ -2313,7 +2313,7 @@
                                             </div>
                                             <div class="Goodup-grid-thumb">
                                                 <a href="single-listing-detail-8.html"
-                                                    class="d-block text-center m-auto"><img src="assets/img/rooms/5.jpg"
+                                                    class="d-block text-center m-auto"><img src="{{asset('assets/img/rooms/5.jpg')}}"
                                                         class="img-fluid" alt=""></a>
                                             </div>
                                             <div class="Goodup-rating overlay">
@@ -2371,7 +2371,7 @@
                                             </div>
                                             <div class="Goodup-grid-thumb">
                                                 <a href="single-listing-detail-8.html"
-                                                    class="d-block text-center m-auto"><img src="assets/img/rooms/6.jpg"
+                                                    class="d-block text-center m-auto"><img src="{{asset('assets/img/rooms/6.jpg')}}"
                                                         class="img-fluid" alt=""></a>
                                             </div>
                                             <div class="Goodup-rating overlay">
@@ -2429,7 +2429,7 @@
                                             </div>
                                             <div class="Goodup-grid-thumb">
                                                 <a href="single-listing-detail-8.html"
-                                                    class="d-block text-center m-auto"><img src="assets/img/rooms/7.jpg"
+                                                    class="d-block text-center m-auto"><img src="{{asset('assets/img/rooms/7.jpg')}}"
                                                         class="img-fluid" alt=""></a>
                                             </div>
                                             <div class="Goodup-rating overlay">
@@ -2487,7 +2487,7 @@
                                             </div>
                                             <div class="Goodup-grid-thumb">
                                                 <a href="single-listing-detail-8.html"
-                                                    class="d-block text-center m-auto"><img src="assets/img/rooms/8.jpg"
+                                                    class="d-block text-center m-auto"><img src="{{asset('assets/img/rooms/8.jpg')}}"
                                                         class="img-fluid" alt=""></a>
                                             </div>
                                             <div class="Goodup-rating overlay">
@@ -2552,7 +2552,7 @@
                                         <div class="_jb_list72_flex">
                                             <div class="_jb_list72_first">
                                                 <div class="_jb_list72_yhumb">
-                                                    <img src="assets/img/c-1.png" class="img-fluid" alt="">
+                                                    <img src="{{asset('assets/img/c-1.png')}}" class="img-fluid" alt="">
                                                 </div>
                                             </div>
                                             <div class="_jb_list72_last">
@@ -2578,7 +2578,7 @@
                                         <div class="_jb_list72_flex">
                                             <div class="_jb_list72_first">
                                                 <div class="_jb_list72_yhumb">
-                                                    <img src="assets/img/c-2.png" class="img-fluid" alt="">
+                                                    <img src="{{asset('assets/img/c-2.png')}}" class="img-fluid" alt="">
                                                 </div>
                                             </div>
                                             <div class="_jb_list72_last">
@@ -2604,7 +2604,7 @@
                                         <div class="_jb_list72_flex">
                                             <div class="_jb_list72_first">
                                                 <div class="_jb_list72_yhumb">
-                                                    <img src="assets/img/c-3.png" class="img-fluid" alt="">
+                                                    <img src="{{asset('assets/img/c-3.png')}}" class="img-fluid" alt="">
                                                 </div>
                                             </div>
                                             <div class="_jb_list72_last">
@@ -2630,7 +2630,7 @@
                                         <div class="_jb_list72_flex">
                                             <div class="_jb_list72_first">
                                                 <div class="_jb_list72_yhumb">
-                                                    <img src="assets/img/c-4.png" class="img-fluid" alt="">
+                                                    <img src="{{asset('assets/img/c-4.png')}}" class="img-fluid" alt="">
                                                 </div>
                                             </div>
                                             <div class="_jb_list72_last">
@@ -2656,7 +2656,7 @@
                                         <div class="_jb_list72_flex">
                                             <div class="_jb_list72_first">
                                                 <div class="_jb_list72_yhumb">
-                                                    <img src="assets/img/c-5.png" class="img-fluid" alt="">
+                                                    <img src="{{asset('assets/img/c-5.png')}}" class="img-fluid" alt="">
                                                 </div>
                                             </div>
                                             <div class="_jb_list72_last">
@@ -2682,7 +2682,7 @@
                                         <div class="_jb_list72_flex">
                                             <div class="_jb_list72_first">
                                                 <div class="_jb_list72_yhumb">
-                                                    <img src="assets/img/c-6.png" class="img-fluid" alt="">
+                                                    <img src="{{asset('assets/img/c-6.png')}}" class="img-fluid" alt="">
                                                 </div>
                                             </div>
                                             <div class="_jb_list72_last">
@@ -2708,7 +2708,7 @@
                                         <div class="_jb_list72_flex">
                                             <div class="_jb_list72_first">
                                                 <div class="_jb_list72_yhumb">
-                                                    <img src="assets/img/c-7.png" class="img-fluid" alt="">
+                                                    <img src="{{asset('assets/img/c-7.png')}}" class="img-fluid" alt="">
                                                 </div>
                                             </div>
                                             <div class="_jb_list72_last">
@@ -2734,7 +2734,7 @@
                                         <div class="_jb_list72_flex">
                                             <div class="_jb_list72_first">
                                                 <div class="_jb_list72_yhumb">
-                                                    <img src="assets/img/c-8.png" class="img-fluid" alt="">
+                                                    <img src="{{asset('assets/img/c-8.png')}}" class="img-fluid" alt="">
                                                 </div>
                                             </div>
                                             <div class="_jb_list72_last">
@@ -2760,7 +2760,7 @@
                                         <div class="_jb_list72_flex">
                                             <div class="_jb_list72_first">
                                                 <div class="_jb_list72_yhumb">
-                                                    <img src="assets/img/c-9.png" class="img-fluid" alt="">
+                                                    <img src="{{asset('assets/img/c-9.png')}}" class="img-fluid" alt="">
                                                 </div>
                                             </div>
                                             <div class="_jb_list72_last">
@@ -2786,7 +2786,7 @@
                                         <div class="_jb_list72_flex">
                                             <div class="_jb_list72_first">
                                                 <div class="_jb_list72_yhumb">
-                                                    <img src="assets/img/c-10.png" class="img-fluid" alt="">
+                                                    <img src="{{asset('assets/img/c-10.png')}}" class="img-fluid" alt="">
                                                 </div>
                                             </div>
                                             <div class="_jb_list72_last">
@@ -2812,7 +2812,7 @@
                                         <div class="_jb_list72_flex">
                                             <div class="_jb_list72_first">
                                                 <div class="_jb_list72_yhumb">
-                                                    <img src="assets/img/c-11.png" class="img-fluid" alt="">
+                                                    <img src="{{asset('assets/img/c-11.png')}}" class="img-fluid" alt="">
                                                 </div>
                                             </div>
                                             <div class="_jb_list72_last">
@@ -2859,61 +2859,61 @@
 
                 <div class="col-xl-2 col-lg-2 col-md-3 col-sm-4 col-6">
                     <div class="empl-thumb text-center px-3 py-4">
-                        <img src="assets/img/l-9.png" class="img-fluid mx-auto" alt="" />
+                        <img src="{{asset('assets/img/l-9.png')}}" class="img-fluid mx-auto" alt="" />
                     </div>
                 </div>
 
                 <div class="col-xl-2 col-lg-2 col-md-3 col-sm-4 col-6">
                     <div class="empl-thumb text-center px-3 py-4">
-                        <img src="assets/img/l-10.png" class="img-fluid mx-auto" alt="" />
+                        <img src="{{asset('assets/img/l-10.png')}}" class="img-fluid mx-auto" alt="" />
                     </div>
                 </div>
 
                 <div class="col-xl-2 col-lg-2 col-md-3 col-sm-4 col-6">
                     <div class="empl-thumb text-center px-3 py-4">
-                        <img src="assets/img/l-11.png" class="img-fluid mx-auto" alt="" />
+                        <img src="{{asset('assets/img/l-11.png')}}" class="img-fluid mx-auto" alt="" />
                     </div>
                 </div>
 
                 <div class="col-xl-2 col-lg-2 col-md-3 col-sm-4 col-6">
                     <div class="empl-thumb text-center px-3 py-4">
-                        <img src="assets/img/l-12.png" class="img-fluid mx-auto" alt="" />
+                        <img src="{{asset('assets/img/l-12.png')}}" class="img-fluid mx-auto" alt="" />
                     </div>
                 </div>
 
                 <div class="col-xl-2 col-lg-2 col-md-3 col-sm-4 col-6">
                     <div class="empl-thumb text-center px-3 py-4">
-                        <img src="assets/img/l-13.png" class="img-fluid mx-auto" alt="" />
+                        <img src="{{asset('assets/img/l-13.png')}}" class="img-fluid mx-auto" alt="" />
                     </div>
                 </div>
 
                 <div class="col-xl-2 col-lg-2 col-md-3 col-sm-4 col-6">
                     <div class="empl-thumb text-center px-3 py-4">
-                        <img src="assets/img/l-14.png" class="img-fluid mx-auto" alt="" />
+                        <img src="{{asset('assets/img/l-14.png')}}" class="img-fluid mx-auto" alt="" />
                     </div>
                 </div>
 
                 <div class="col-xl-2 col-lg-2 col-md-3 col-sm-4 col-6">
                     <div class="empl-thumb text-center px-3 py-4">
-                        <img src="assets/img/l-15.png" class="img-fluid mx-auto" alt="" />
+                        <img src="{{asset('assets/img/l-15.png')}}" class="img-fluid mx-auto" alt="" />
                     </div>
                 </div>
 
                 <div class="col-xl-2 col-lg-2 col-md-3 col-sm-4 col-6">
                     <div class="empl-thumb text-center px-3 py-4">
-                        <img src="assets/img/l-16.png" class="img-fluid mx-auto" alt="" />
+                        <img src="{{asset('assets/img/l-16.png')}}" class="img-fluid mx-auto" alt="" />
                     </div>
                 </div>
 
                 <div class="col-xl-2 col-lg-2 col-md-3 col-sm-4 col-6">
                     <div class="empl-thumb text-center px-3 py-4">
-                        <img src="assets/img/l-17.png" class="img-fluid mx-auto" alt="" />
+                        <img src="{{asset('assets/img/l-17.png')}}" class="img-fluid mx-auto" alt="" />
                     </div>
                 </div>
 
                 <div class="col-xl-2 col-lg-2 col-md-3 col-sm-4 col-6">
                     <div class="empl-thumb text-center px-3 py-4">
-                        <img src="assets/img/l-18.png" class="img-fluid mx-auto" alt="" />
+                        <img src="{{asset('assets/img/l-18.png')}}" class="img-fluid mx-auto" alt="" />
                     </div>
                 </div>
 
@@ -2943,7 +2943,7 @@
                 <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
                     <div class="gup_blg_grid_box">
                         <div class="gup_blg_grid_thumb">
-                            <a href="blog-detail.html"><img src="assets/img/b-4.jpg" class="img-fluid" alt=""></a>
+                            <a href="blog-detail.html"><img src="{{asset('assets/img/b-4.jpg')}}" class="img-fluid" alt=""></a>
                         </div>
                         <div class="gup_blg_grid_caption">
                             <div class="blg_tag"><span>Marketing</span></div>
@@ -2960,7 +2960,7 @@
                                 <div class="crs_fl_first">
                                     <div class="crs_tutor">
                                         <div class="crs_tutor_thumb"><a href="javascript:void(0);"><img
-                                                    src="assets/img/team-2.jpg" class="img-fluid circle" width="35"
+                                                    src="{{asset('assets/img/team-2.jpg')}}" class="img-fluid circle" width="35"
                                                     alt=""></a></div>
                                     </div>
                                 </div>
@@ -2987,7 +2987,7 @@
                 <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
                     <div class="gup_blg_grid_box">
                         <div class="gup_blg_grid_thumb">
-                            <a href="blog-detail.html"><img src="assets/img/b-5.jpg" class="img-fluid" alt=""></a>
+                            <a href="blog-detail.html"><img src="{{asset('assets/img/b-5.jpg')}}" class="img-fluid" alt=""></a>
                         </div>
                         <div class="gup_blg_grid_caption">
                             <div class="blg_tag"><span>Business</span></div>
@@ -3004,7 +3004,7 @@
                                 <div class="crs_fl_first">
                                     <div class="crs_tutor">
                                         <div class="crs_tutor_thumb"><a href="javascript:void(0);"><img
-                                                    src="assets/img/team-3.jpg" class="img-fluid circle" width="35"
+                                                    src="{{asset('assets/img/team-3.jpg')}}" class="img-fluid circle" width="35"
                                                     alt=""></a></div>
                                     </div>
                                 </div>
@@ -3031,7 +3031,7 @@
                 <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
                     <div class="gup_blg_grid_box">
                         <div class="gup_blg_grid_thumb">
-                            <a href="blog-detail.html"><img src="assets/img/b-6.jpg" class="img-fluid" alt=""></a>
+                            <a href="blog-detail.html"><img src="{{asset('assets/img/b-6.jpg')}}" class="img-fluid" alt=""></a>
                         </div>
                         <div class="gup_blg_grid_caption">
                             <div class="blg_tag"><span>Accounting</span></div>
@@ -3048,7 +3048,7 @@
                                 <div class="crs_fl_first">
                                     <div class="crs_tutor">
                                         <div class="crs_tutor_thumb"><a href="javascript:void(0);"><img
-                                                    src="assets/img/team-5.jpg" class="img-fluid circle" width="35"
+                                                    src="{{asset('assets/img/team-5.jpg')}}" class="img-fluid circle" width="35"
                                                     alt=""></a></div>
                                     </div>
                                 </div>
@@ -3227,9 +3227,9 @@
                             </div>
                             <div class="btn-box clearfix mt-5">
                                 <a href="index.html" class="download-btn play-store me-1 d-inline-flex"><img
-                                        src="assets/img/ios.png" width="200" alt="" /></a>
+                                        src="{{asset('assets/img/ios.png')}}" width="200" alt="" /></a>
                                 <a href="index.html" class="download-btn play-store ms-2 mb-1 d-inline-flex"><img
-                                        src="assets/img/and.png" width="200" alt="" /></a>
+                                        src="{{asset('assets/img/and.png')}}" width="200" alt="" /></a>
                             </div>
                         </div>
                     </div>
@@ -3237,7 +3237,7 @@
 
                 <div class="col-lg-5 col-md-12 col-sm-12 image-column">
                     <div class="image-box">
-                        <figure class="image"><img src="assets/img/app.png" class="img-fluid" alt=""></figure>
+                        <figure class="image"><img src="{{asset('assets/img/app.png')}}" class="img-fluid" alt=""></figure>
                     </div>
                 </div>
             </div>

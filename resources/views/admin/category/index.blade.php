@@ -1,9 +1,4 @@
 <x-admin.layout type="category">
-    @php
-        $create = true;
-        $edit = true;
-        $delete = true;
-    @endphp
         <div class="page-content">
             <!--breadcrumb-->
             <div
@@ -28,7 +23,6 @@
                     </nav>
                 </div>
                 <div class="ms-auto">
-                    @if ($create)
                     <div class="btn-group">
                         <a href="{{route('category_form',['type' => 'create', 'id' => '0'])}}">
                             <button type="button" class="btn btn-primary">
@@ -36,7 +30,6 @@
                             </button>
                         </a>
                     </div>
-                    @endif
                 </div>
             </div>
             <!--end breadcrumb-->
@@ -56,9 +49,7 @@
                                     <th>Image</th>
                                     <th>Description</th>
                                     <th>Created Date</th>
-                                    @if ($edit || $delete)
                                     <th>Action</th>
-                                    @endif
                                 </tr>
                             </thead>
                             <tbody>
@@ -71,34 +62,19 @@
                                         </td>
                                         <td>{!!$category->description!!}</td>
                                         <td>{{$category->created_at}}</td>
-                                        @if ($edit || $delete)
                                         <td>
-                                            @if ($edit)
                                             <a href="{{route('category_form',['type'=>'edit','id'=>$category->id])}}">
-                                                <i class="text-primary" data-feather="edit"></i>
+                                                <i class="fas fa-edit me-1" data-feather="edit"></i>
                                             </a>
-                                            @endif
-                                            @if ($delete)
+
                                             <a  data-bs-toggle="modal" data-bs-target="#deleteModal{{ $category->id }}" href="#">
-                                                <i class="text-primary" data-feather="trash-2"></i>
+                                                <i class="fas fa-trash me-1" data-feather="trash-2"></i>
                                             </a>
-                                            @endif
                                             <x-admin.modal type="category" id="{{ $category->id }}" />
                                         </td>
-                                        @endif
                                     </tr>
                                 @endforeach
                             </tbody>
-                            {{-- <tfoot>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Position</th>
-                                    <th>Office</th>
-                                    <th>Age</th>
-                                    <th>Start date</th>
-                                    <th>Salary</th>
-                                </tr>
-                            </tfoot> --}}
                         </table>
                     </div>
                 </div>

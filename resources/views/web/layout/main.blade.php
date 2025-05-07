@@ -12,10 +12,10 @@
     <title>Goodup - Business Directory & Listing HTML Template</title>
 
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="{{config('app.custom_path') . 'assets/img/favicon.png'}}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{asset('assets/img/favicon.png')}}">
 
     <!-- Custom CSS -->
-    <link href="{{config('app.custom_path') . 'assets/css/styles.css'}}" rel="stylesheet">
+    <link href="{{asset('assets/css/styles.css')}}" rel="stylesheet">
 
 </head>
 
@@ -30,12 +30,12 @@
     <!-- Main wrapper - style you can find in pages.scss -->
     <!-- ============================================================== -->
     <div id="main-wrapper">
-        @include('web.component.header')
+        @include('web.components.header')
         <div class="clearfix"></div>
 
         @yield('content')
 
-        @include('web.component.footer')
+        @include('web.components.footer')
         <!-- Log In Modal -->
         <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="loginmodal" aria-hidden="true">
             <div class="modal-dialog login-pop-form" role="document">
@@ -83,10 +83,10 @@
                                 <p class="extra">Or login with</p>
                                 <div class="option-log">
                                     <div class="single-log-opt"><a href="javascript:void(0);" class="log-btn"><img
-                                                src="assets/img/c-1.png" class="img-fluid" alt="" />Login with
+                                                src="{{asset('assets/img/c-1.png')}}" class="img-fluid" alt="" />Login with
                                             Google</a></div>
                                     <div class="single-log-opt"><a href="javascript:void(0);" class="log-btn"><img
-                                                src="assets/img/facebook.png" class="img-fluid" alt="" />Login with
+                                                src="{{asset('assets/img/facebook.png')}}" class="img-fluid" alt="" />Login with
                                             Facebook</a></div>
                                 </div>
                             </div>
@@ -103,19 +103,19 @@
     </div>
     <!-- All Jquery -->
     <!-- ============================================================== -->
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/js/popper.min.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
-    <script src="assets/js/slick.js"></script>
-    <script src="assets/js/jquery.magnific-popup.min.js"></script>
-    <script src="assets/js/dropzone.js"></script>
-    <script src="assets/js/counterup.js"></script>
-    <script src="assets/js/lightbox.js"></script>
-    <script src="assets/js/moment.min.js"></script>
-    <script src="assets/js/daterangepicker.js"></script>
-    <script src="assets/js/lightbox.js"></script>
-    <script src="assets/js/jQuery.style.switcher.js"></script>
-    <script src="assets/js/custom.js"></script>
+    <script src="{{asset('assets/js/jquery.min.js')}}"></script>
+    <script src="{{asset('assets/js/popper.min.js')}}"></script>
+    <script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
+    <script src="{{asset('assets/js/slick.js')}}"></script>
+    <script src="{{asset('assets/js/jquery.magnific-popup.min.js')}}"></script>
+    <script src="{{asset('assets/js/dropzone.js')}}"></script>
+    <script src="{{asset('assets/js/counterup.js')}}"></script>
+    <script src="{{asset('assets/js/lightbox.js')}}"></script>
+    <script src="{{asset('assets/js/moment.min.js')}}"></script>
+    <script src="{{asset('assets/js/daterangepicker.js')}}"></script>
+    <script src="{{asset('assets/js/lightbox.js')}}"></script>
+    <script src="{{asset('assets/js/jQuery.style.switcher.js')}}"></script>
+    <script src="{{asset('assets/js/custom.js')}}"></script>
     <!-- ============================================================== -->
     <!-- This page plugins -->
     <!-- ============================================================== -->
