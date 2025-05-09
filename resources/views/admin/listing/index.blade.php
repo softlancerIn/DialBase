@@ -30,43 +30,45 @@
                             <div class="dashboard-listing-wraps">
 
                                 <!-- Single Listing Item -->
-                                <div class="dsd-single-listing-wraps">
-                                    <div class="dsd-single-lst-thumb"><img src="assets/img/listing/l-1.jpg"
-                                            class="img-fluid" alt="" /></div>
-                                    <div class="dsd-single-lst-caption">
-                                        <div class="dsd-single-lst-title">
-                                            <h5>Rajwara Marriage Home</h5>
-                                        </div>
-                                        <span class="agd-location"><i class="lni lni-map-marker me-1"></i>San Francisco,
-                                            USA</span>
-                                        <div class="ico-content">
-                                            <div class="Goodup-ft-first">
-                                                <div class="Goodup-rating">
-                                                    <div class="Goodup-rates">
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
+                                @foreach($listings as $key => $data)
+                                    <div class="dsd-single-listing-wraps">
+                                        <div class="dsd-single-lst-thumb"><img src="assets/img/listing/l-1.jpg"
+                                                class="img-fluid" alt="" /></div>
+                                        <div class="dsd-single-lst-caption">
+                                            <div class="dsd-single-lst-title">
+                                                <h5>{{$data->title}}</h5>
+                                            </div>
+                                            <span class="agd-location"><i
+                                                    class="lni lni-map-marker me-1"></i>{{$data->address}}</span>
+                                            <div class="ico-content">
+                                                <div class="Goodup-ft-first">
+                                                    <div class="Goodup-rating">
+                                                        <div class="Goodup-rates">
+                                                            <i class="fas fa-star"></i>
+                                                            <i class="fas fa-star"></i>
+                                                            <i class="fas fa-star"></i>
+                                                            <i class="fas fa-star"></i>
+                                                            <i class="fas fa-star"></i>
+                                                        </div>
+                                                    </div>
+                                                    <div class="Goodup-price-range">
+                                                        <span class="ft-medium">34 Reviews</span>
                                                     </div>
                                                 </div>
-                                                <div class="Goodup-price-range">
-                                                    <span class="ft-medium">34 Reviews</span>
-                                                </div>
+                                            </div>
+                                            <div class="dsd-single-lst-footer">
+                                                <a href="{{route('listing-data.edit', $data->id)}}"
+                                                    class="btn btn-edit mr-1"><i class="fas fa-edit me-1"></i>Edit</a>
+                                                <a href="{{route('listing-data.show', $data->id)}}"
+                                                    class="btn btn-view mr-1"><i class="fas fa-eye me-1"></i>View</a>
+                                                <a href="{{route('listing-data.destroy', $data->id)}}"
+                                                    class="btn btn-delete"><i class="fas fa-trash me-1"></i>Delete</a>
                                             </div>
                                         </div>
-                                        <div class="dsd-single-lst-footer">
-                                            <a href="javascript:void(0);" class="btn btn-edit mr-1"><i
-                                                    class="fas fa-edit me-1"></i>Edit</a>
-                                            <a href="javascript:void(0);" class="btn btn-view mr-1"><i
-                                                    class="fas fa-eye me-1"></i>View</a>
-                                            <a href="javascript:void(0);" class="btn btn-delete"><i
-                                                    class="fas fa-trash me-1"></i>Delete</a>
-                                        </div>
                                     </div>
-                                </div>
+                                @endforeach
 
-                                <!-- Single Listing Item -->
+                                {{-- <!-- Single Listing Item -->
                                 <div class="dsd-single-listing-wraps">
                                     <div class="dsd-single-lst-thumb"><img src="assets/img/listing/l-2.jpg"
                                             class="img-fluid" alt="" /></div>
@@ -286,7 +288,7 @@
                                                     class="fas fa-trash me-1"></i>Delete</a>
                                         </div>
                                     </div>
-                                </div>
+                                </div> --}}
 
                             </div>
                         </div>

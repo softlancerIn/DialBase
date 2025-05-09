@@ -9,6 +9,7 @@ class WorkingHour extends Model
 {
     use HasFactory;
 
+    protected $table = 'working_hours';
     protected $fillable = [
         'listing_id',
         'day',

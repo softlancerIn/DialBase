@@ -8,7 +8,7 @@
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item text-muted"><a href="#">Home</a></li>
                             <li class="breadcrumb-item text-muted"><a href="#">Dashboard</a></li>
-                            <li class="breadcrumb-item"><a href="#" class="theme-cl">Add Listing</a></li>
+                            <li class="breadcrumb-item"><a href="#" class="theme-cl">Edit Listing</a></li>
                         </ol>
                     </nav>
                 </div>
@@ -17,7 +17,7 @@
         <div class="dashboard-widg-bar d-block">
             <div class="row">
                 <div class="col-xl-12 col-lg-2 col-md-12 col-sm-12">
-                    <form action="{{route('listing-data.store')}}" method="POST" enctype="multipart/form-data">
+                    <form action="{{route('listing-data.update')}}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="submit-form">
                             <!-- Listing Info -->
@@ -46,13 +46,6 @@
                                                     @foreach ($data['category'] as $c_data)
                                                         <option value="{{ $c_data->id }}">{{ $c_data->name }}</option>
                                                     @endforeach
-                                                    {{-- <option>Hotel & Spa</option>
-                                                    <option>Education</option>
-                                                    <option>Wedding</option>
-                                                    <option>Restaurents</option>
-                                                    <option>Cafe & Bars</option>
-                                                    <option>Bankings</option>
-                                                    <option>Services</option> --}}
                                                 </select>
                                             </div>
                                         </div>
@@ -198,7 +191,7 @@
                                         <!-- Featured Image -->
                                         <div class="col-lg-4 col-md-6">
                                             <label class="mb-1">Featured Image</label>
-                                            <input type="file" name="featured_image" class="form-control rounded">
+                                            <input type="file" name="featured" class="form-control rounded">
                                             {{-- <form action="https://shreethemes.net/file-upload" class="dropzone"
                                                 id="featured-image">
                                                 <input type="hidden" name="">
@@ -209,8 +202,8 @@
 
                                         <!-- Gallery -->
                                         <div class="col-lg-4 col-md-12">
-                                            <label class="mb-1">logo</label>
-                                            <input type="file" name="logo" class="form-control rounded">
+                                            <label class="mb-1">Image Gallery</label>
+                                            <input type="file" name="gallery" class="form-control rounded">
                                             {{-- <form action="https://shreethemes.net/file-upload" class="dropzone"
                                                 id="gallery">
                                                 <i class="fas fa-upload"></i>

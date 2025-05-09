@@ -19,7 +19,8 @@ class ListingController extends Controller
 {
     public function index()
     {
-        $listings = Listing::with(['logoImage', 'featuredImage', 'galleryImages', 'menuItems', 'workingHours', 'amenities', 'socialLinks'])->get();
+        // $listings = Listing::with(['logoImage', 'featuredImage', 'galleryImages', 'menuItems', 'workingHours', 'amenities', 'socialLinks'])->get();
+        $listings = Listing::with(['menuItems', 'workingHours', 'socialLink'])->get();
         return view('admin.listing.index', compact('listings'));
     }
 
@@ -86,18 +87,13 @@ class ListingController extends Controller
                 }
             }
 
-            dd($request->working_hours);
-
             // Save Working Hours
             $listing->workingHours()->create([
-                'day' => 'All',
+                'day_of_week' => 'All',
                 'open_time' => json_encode($request->working_hours['open_time']),
                 'close_time' => json_encode($request->working_hours['close_time']),
             ]);
 
-            // foreach ($request->working_hours as $day => $times) {
-            //     dd($times, $day);
-            // }
             $listing->update(['is_open_24' => $request->is_open_24]);
 
             // Save Amenities
@@ -114,8 +110,9 @@ class ListingController extends Controller
             ]);
 
             DB::commit();
-            return response()->json(['message' => 'Listing created successfully', 'listing' => $listing], 201);
+            return redirect()->back()->with('success', 'Data Added Successfully!');
         } catch (\Exception $e) {
+            dd($e->getMessage());
             DB::rollBack();
             return response()->json(['message' => 'Failed to create listing', 'error' => $e->getMessage()], 500);
         }
@@ -133,6 +130,13 @@ class ListingController extends Controller
         // You can return a form or a view if needed
         $data['category'] = Category::where('status', 1)->get();
         return view('admin.listing.create', compact('data'));
+    }
+
+    public function edit($id)
+    {
+        $data = [];
+        $data['category'] = Category::where('status', 1)->get();
+        return view('admin.listing.edit', compact('data'));
     }
 
     public function update(Request $request, $id)

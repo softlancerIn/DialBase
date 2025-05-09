@@ -9,6 +9,7 @@ class SocialLink extends Model
 {
     use HasFactory;
 
+    protected $table = 'social_links';
     protected $fillable = [
         'listing_id',
         'facebook',

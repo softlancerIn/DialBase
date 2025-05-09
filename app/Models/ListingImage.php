@@ -9,6 +9,7 @@ class ListingImage extends Model
 {
     use HasFactory;
 
+    protected $table = 'lisitngs_images';
     protected $fillable = [
         'listing_id',
         'type', // logo, featured, gallery
