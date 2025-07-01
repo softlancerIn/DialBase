@@ -9,7 +9,6 @@ class Amenity extends Model
 {
     use HasFactory;
 
-    protected $table = 'listing_amenities';
     protected $fillable = ['name'];
 
     public function listings()

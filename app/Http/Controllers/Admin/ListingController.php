@@ -20,7 +20,8 @@ class ListingController extends Controller
     public function index()
     {
         // $listings = Listing::with(['logoImage', 'featuredImage', 'galleryImages', 'menuItems', 'workingHours', 'amenities', 'socialLinks'])->get();
-        $listings = Listing::with(['menuItems', 'workingHours', 'socialLink'])->get();
+        $listings = Listing::with(['menuItems', 'workingHours', 'socialLink', 'amenities'])->get();
+
         return view('admin.listing.index', compact('listings'));
     }
 
@@ -110,17 +111,20 @@ class ListingController extends Controller
             ]);
 
             DB::commit();
+
             return redirect()->back()->with('success', 'Data Added Successfully!');
         } catch (\Exception $e) {
             dd($e->getMessage());
             DB::rollBack();
+
             return response()->json(['message' => 'Failed to create listing', 'error' => $e->getMessage()], 500);
         }
     }
 
     public function show($id)
     {
-        $listing = Listing::with(['logoImage', 'featuredImage', 'galleryImages', 'menuItems', 'workingHours', 'amenities', 'socialLinks'])->findOrFail($id);
+        $listing = Listing::with(['images', 'menuItems', 'workingHours', 'amenities', 'socialLink'])->findOrFail($id);
+
         return response()->json($listing);
     }
 
@@ -129,21 +133,142 @@ class ListingController extends Controller
         // This method is not typically used in API controllers
         // You can return a form or a view if needed
         $data['category'] = Category::where('status', 1)->get();
+
         return view('admin.listing.create', compact('data'));
     }
 
     public function edit($id)
     {
         $data = [];
-        $data['category'] = Category::where('status', 1)->get();
+        $data['listing'] = Listing::with([
+            'images',
+            'menuItems',
+            'workingHours',
+            'amenities',
+            'socialLink'
+        ])->findOrFail($id);
+    
+        $data['categories'] = Category::where('status', 1)->get();
+        $data['all_amenities'] = Amenity::all(); 
         return view('admin.listing.edit', compact('data'));
-    }
+    }    
 
     public function update(Request $request, $id)
     {
-        // Similar to store(), but updating existing listing
-        // Would you like me to create this full update logic too? (Because it's a bit longer) ✅
-    }
+        DB::beginTransaction();
+    
+        try {
+            $listing = Listing::findOrFail($id);
+    
+            // Update Basic Info
+            $listing->update([
+                'title' => $request->title ?? '',
+                'category_id' => $request->category_id ?? '',
+                'keywords' => $request->keywords ?? '',
+                'about' => $request->about ?? '',
+                'latitude' => $request->latitude ?? '',
+                'longitude' => $request->longitude ?? '',
+                'state' => $request->state ?? '',
+                'city' => $request->city ?? '',
+                'address' => $request->address  ?? '',
+                'zip_code' => $request->zip_code ?? '',
+                'mobile' => $request->mobile ?? '',
+                'email' => $request->email ?? '',
+                'website' => $request->website ?? '',
+            ]);
+    
+            // Update logo
+            if ($request->hasFile('logo')) {
+                // Optionally delete old logo
+                $listing->images()->where('type', 'logo')->delete();
+    
+                $logoPath = $request->file('logo')->store('listing_logos', 'public');
+                $listing->images()->create([
+                    'image_path' => $logoPath,
+                    'type' => 'logo'
+                ]);
+            }
+    
+            // Update featured image
+            if ($request->hasFile('featured_image')) {
+                $listing->images()->where('type', 'featured')->delete();
+    
+                $featuredPath = $request->file('featured_image')->store('listing_featured', 'public');
+                $listing->images()->create([
+                    'image_path' => $featuredPath,
+                    'type' => 'featured'
+                ]);
+            }
+    
+            // Update gallery
+            if ($request->hasFile('gallery')) {
+                $listing->images()->where('type', 'gallery')->delete();
+    
+                foreach ($request->file('gallery') as $galleryImage) {
+                    $galleryPath = $galleryImage->store('listing_gallery', 'public');
+                    $listing->images()->create([
+                        'image_path' => $galleryPath,
+                        'type' => 'gallery'
+                    ]);
+                }
+            }
+    
+            // Update Menu Items
+            if ($request->menu_items) {
+                $listing->menuItems()->delete();
+    
+                foreach ($request->menu_items as $menuItem) {
+                    $listing->menuItems()->create([
+                        'item_name' => $menuItem['item_name'],
+                        'category' => $menuItem['category'],
+                        'price' => $menuItem['price'],
+                        'about' => $menuItem['about'],
+                        'image' => isset($menuItem['image']) ? $menuItem['image']->store('menu_items', 'public') : null,
+                    ]);
+                }
+            }
+    
+            // Update Working Hours
+            $listing->workingHours()->delete();
+            $listing->workingHours()->create([
+                'day_of_week' => 'All',
+                'open_time' => json_encode($request->working_hours['open_time']),
+                'close_time' => json_encode($request->working_hours['close_time']),
+            ]);
+    
+            $listing->update(['is_open_24' => $request->is_open_24]);
+    
+            // Sync Amenities
+            if ($request->amenities) {
+                $listing->amenities()->sync($request->amenities);
+            }
+    
+            // Update or Create Social Links
+            if ($listing->socialLink) {
+                $listing->socialLink()->update([
+                    'facebook' => $request->facebook ?? '',
+                    'twitter' => $request->twitter ?? '',
+                    'instagram' => $request->instagram ?? '',
+                    'linkedin' => $request->linkedin ?? '',
+                ]);
+            } else {
+                $listing->socialLink()->create([
+                    'facebook' => $request->facebook ?? '',
+                    'twitter' => $request->twitter ?? '',
+                    'instagram' => $request->instagram ?? '',
+                    'linkedin' => $request->linkedin ?? '',
+                ]);
+            }
+    
+            DB::commit();
+    
+            return redirect()->back()->with('success', 'Listing updated successfully!');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            dd($e->getMessage());
+            return response()->json(['message' => 'Failed to update listing', 'error' => $e->getMessage()], 500);
+        }
+    }    
 
     public function destroy($id)
     {

@@ -38,7 +38,7 @@
 				<div class="container">
 					<nav id="navigation" class="navigation navigation-landscape">
 						<div class="nav-header">
-							<a class="nav-brand" href="#">
+							<a class="nav-brand" href="{{route('index')}}">
 								<img src="{{asset('admin/assets/img/logo.png')}}" class="logo" alt="" />
 							</a>
 							<div class="nav-toggle"></div>

@@ -51,15 +51,16 @@
                             <h4 class="m-0 ft-medium">Login Your Account</h4>
                         </div>
 
-                        <form class="submit-form">
+                        <form action="{{route('logincheck')}}" class="submit-form" method="post">
+                            @csrf
                             <div class="form-group">
                                 <label class="mb-1">User Name</label>
-                                <input type="text" class="form-control rounded bg-light" placeholder="Username*">
+                                <input type="text" name="email" class="form-control rounded bg-light" placeholder="Username*">
                             </div>
 
                             <div class="form-group">
                                 <label class="mb-1">Password</label>
-                                <input type="password" class="form-control rounded bg-light" placeholder="Password*">
+                                <input type="password" name="password" class="form-control rounded bg-light" placeholder="Password*">
                             </div>
 
                             <div class="form-group">

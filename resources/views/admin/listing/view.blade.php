@@ -102,16 +102,28 @@
                                         <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
                                             <div class="form-group">
                                                 <label class="mb-1">State</label>
-                                                <select class="form-control" id="state" name="state">
-                                                    <option value="" selected disabled>Select State</option>
+                                                <select class="form-control" name="state">
+                                                    <option>Uttar Pradesh</option>
+                                                    <option>Uttrakhand</option>
+                                                    <option>Gujrat</option>
+                                                    <option>Mumbai</option>
+                                                    <option>Karnatak</option>
+                                                    <option>Goa</option>
+                                                    <option>Punjab</option>
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
                                             <div class="form-group">
                                                 <label class="mb-1">City</label>
-                                                <select class="form-control" id="city" name="city">
-                                                    <option value="" selected disabled>Select City</option>
+                                                <select class="form-control" name="city">
+                                                    <option>Aligarh</option>
+                                                    <option>Allahabad</option>
+                                                    <option>Agra</option>
+                                                    <option>Gonda</option>
+                                                    <option>Lucknow</option>
+                                                    <option>Meeruth</option>
+                                                    <option>Gaziabad</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -975,49 +987,4 @@
             </div>
 
         </div>
-        <script>
-            document.addEventListener('DOMContentLoaded', function () {
-                const stateDropdown = document.getElementById('state');
-                const cityDropdown = document.getElementById('city');
-
-                // Fetch states from GeoNames API
-                fetch('https://api.countrystatecity.in/v1/countries/IN/states', {
-                    headers: {
-                        "X-CSCAPI-KEY": "demo"
-                    }
-                })
-                .then(response => response.json())
-                .then(states => {
-                    states.forEach(state => {
-                        const option = document.createElement('option');
-                        option.value = state.iso2;
-                        option.textContent = state.name;
-                        stateDropdown.appendChild(option);
-                    });
-                });
-
-                // Fetch cities based on selected state
-                stateDropdown.addEventListener('change', function () {
-                    const selectedState = this.value;
-
-                    // Clear previous cities
-                    cityDropdown.innerHTML = '<option value="" selected disabled>Select City</option>';
-
-                    fetch(`https://api.countrystatecity.in/v1/countries/IN/states/${selectedState}/cities`, {
-                        headers: {
-                            "X-CSCAPI-KEY": "demo"
-                        }
-                    })
-                    .then(response => response.json())
-                    .then(cities => {
-                        cities.forEach(city => {
-                            const option = document.createElement('option');
-                            option.value = city.name;
-                            option.textContent = city.name;
-                            cityDropdown.appendChild(option);
-                        });
-                    });
-                });
-            });
-        </script>
 </x-admin.layout>

@@ -14,10 +14,11 @@ return new class extends Migration
         Schema::create('listing_amenities', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('listing_id');
-            $table->string('amenity_name');
+            $table->unsignedBigInteger('amenity_id');
             $table->timestamps();
 
             $table->foreign('listing_id')->references('id')->on('listings')->onDelete('cascade');
+            $table->foreign('amenity_id')->references('id')->on('amenities')->onDelete('cascade');
         });
     }
 

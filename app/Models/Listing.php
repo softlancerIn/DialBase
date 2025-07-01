@@ -41,8 +41,8 @@ class Listing extends Model
 
     public function amenities()
     {
-        return $this->belongsToMany(Amenity::class, 'listing_amenities');
-    }
+        return $this->belongsToMany(Amenity::class, 'listing_amenities', 'listing_id', 'amenity_id');
+    }    
 
     public function socialLink()
     {
