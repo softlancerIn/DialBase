@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Traits\UploadFileTrait;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
@@ -45,6 +46,7 @@ class CategoryController extends Controller
         $string = preg_replace('/[^a-z0-9]+/', '-', $string);
         $add_data = Category::updateOrCreate(['id' => $request->id], [
             'name' => $request->name,
+            'slug' => Str::slug($request->name, '-'),
             'image' => $image,
             'description' => $request->description,
             'slug' => $string,

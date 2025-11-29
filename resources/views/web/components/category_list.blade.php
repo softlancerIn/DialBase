@@ -1,6 +1,3 @@
-@php
-    $category = App\Models\Category::where('status', '1')->get();
-@endphp
 <section class="space min gray">
     <div class="container">
 
@@ -15,10 +12,10 @@
 
         <!-- row -->
         <div class="row align-items-center">
-            @foreach ($category as $c_data)
+            @foreach ($data['category'] as $c_data)
                 <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6">
                     <div class="cats-wrap text-center">
-                        <a href="#" class="Goodup-catg-wrap">
+                        <a href="{{ route('category.slug', $c_data->slug) }}" class="Goodup-catg-wrap">
                             <div class="Goodup-catg-city">07 Cities</div>
                             <div class="Goodup-catg-icon">
                                 {!!$c_data->icon ?? '--' !!}

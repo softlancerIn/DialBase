@@ -6,6 +6,7 @@ use App\Models\Amenity;
 use App\Models\Listing;
 
 use App\Models\Category;
+use Illuminate\Support\Str;
 use App\Models\MenuItem;
 use App\Models\SocialLink;
 use App\Models\WorkingHour;
@@ -32,6 +33,7 @@ class ListingController extends Controller
             // Save Basic Listing Info
             $listing = Listing::create([
                 'title' => $request->title ?? '',
+                'slug' => Str::slug($request->title),
                 'category_id' => $request->category_id ?? '',
                 'keywords' => $request->keywords ?? '',
                 'about' => $request->about ?? '',
@@ -51,7 +53,7 @@ class ListingController extends Controller
                 $logoPath = $request->file('logo')->store('listing_logos', 'public');
                 $listing->images()->create([
                     'image_path' => $logoPath,
-                    'type' => 'logo'
+                    'image_type' => 'logo'
                 ]);
             }
 
@@ -60,19 +62,17 @@ class ListingController extends Controller
                 $featuredPath = $request->file('featured_image')->store('listing_featured', 'public');
                 $listing->images()->create([
                     'image_path' => $featuredPath,
-                    'type' => 'featured'
+                    'image_type' => 'featured'
                 ]);
             }
 
-            // Upload gallery images
+            // Upload gallery image
             if ($request->hasFile('gallery')) {
-                foreach ($request->file('gallery') as $galleryImage) {
-                    $galleryPath = $galleryImage->store('listing_gallery', 'public');
-                    $listing->images()->create([
-                        'image_path' => $galleryPath,
-                        'type' => 'gallery'
-                    ]);
-                }
+                $galleryPath = $request->file('gallery')->store('listing_gallery/'.$listing->id, 'public');
+                $listing->images()->create([
+                    'image_path' => $galleryPath,
+                    'image_type' => 'gallery'
+                ]);
             }
 
             // Save Menu Items
@@ -159,10 +159,11 @@ class ListingController extends Controller
     
         try {
             $listing = Listing::findOrFail($id);
-    
+
             // Update Basic Info
             $listing->update([
                 'title' => $request->title ?? '',
+                'slug' => Str::slug($request->title),
                 'category_id' => $request->category_id ?? '',
                 'keywords' => $request->keywords ?? '',
                 'about' => $request->about ?? '',
@@ -177,40 +178,37 @@ class ListingController extends Controller
                 'website' => $request->website ?? '',
             ]);
     
-            // Update logo
+            // Upload logo
             if ($request->hasFile('logo')) {
-                // Optionally delete old logo
-                $listing->images()->where('type', 'logo')->delete();
-    
-                $logoPath = $request->file('logo')->store('listing_logos', 'public');
+                $listing->images()->where('image_type', 'logo')->delete();
+
+                $logoPath = $request->file('logo')->store("listing_logos/".$listing->id, 'public');
                 $listing->images()->create([
                     'image_path' => $logoPath,
-                    'type' => 'logo'
+                    'image_type' => 'logo'
                 ]);
             }
     
-            // Update featured image
-            if ($request->hasFile('featured_image')) {
-                $listing->images()->where('type', 'featured')->delete();
-    
-                $featuredPath = $request->file('featured_image')->store('listing_featured', 'public');
+            // Upload featured image
+            if ($request->hasFile('featured')) {
+                $listing->images()->where('image_type', 'featured')->delete();
+
+                $featuredPath = $request->file('featured')->store("listing_featured/".$listing->id, 'public');
                 $listing->images()->create([
                     'image_path' => $featuredPath,
-                    'type' => 'featured'
+                    'image_type' => 'featured'
                 ]);
             }
-    
+
             // Update gallery
             if ($request->hasFile('gallery')) {
-                $listing->images()->where('type', 'gallery')->delete();
+                $listing->images()->where('image_type', 'gallery')->delete();
     
-                foreach ($request->file('gallery') as $galleryImage) {
-                    $galleryPath = $galleryImage->store('listing_gallery', 'public');
-                    $listing->images()->create([
-                        'image_path' => $galleryPath,
-                        'type' => 'gallery'
-                    ]);
-                }
+                $galleryPath = $request->file('gallery')->store('listing_gallery/'.$listing->id, 'public');
+                $listing->images()->create([
+                    'image_path' => $galleryPath,
+                    'image_type' => 'gallery'
+                ]);
             }
     
             // Update Menu Items

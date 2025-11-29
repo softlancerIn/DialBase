@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('cat_id')->nullable();
             $table->string('name')->unique();
+            $table->string('slug')->unique()->index();
             $table->string('image')->nullable();
             $table->string('icon')->nullable();
             $table->longText('description')->nullable();

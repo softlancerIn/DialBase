@@ -12,7 +12,7 @@ class ListingImage extends Model
     protected $table = 'lisitngs_images';
     protected $fillable = [
         'listing_id',
-        'type', // logo, featured, gallery
+        'image_type', // logo, featured, gallery
         'image_path',
     ];
 

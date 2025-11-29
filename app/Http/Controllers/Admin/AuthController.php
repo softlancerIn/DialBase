@@ -23,12 +23,12 @@ class AuthController extends Controller
         ]);
 
         $userCheck = User::where('email', $request->email)->first();
-        if (Hash::check($request->password, $userCheck->password)) {
+        if ($userCheck && Hash::check($request->password, $userCheck->password)) {
             Auth::guard('admin')->login($userCheck);
 
             return redirect()->route('dashboard')->with('success', 'Login Successfully!');
         } else {
-            return redirect()->back()->with('error', 'Invalid Crtedentials!');
+            return redirect()->back()->with('error', 'Invalid Credentials!');
         }
     }
 

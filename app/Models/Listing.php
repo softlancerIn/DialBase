@@ -10,6 +10,7 @@ class Listing extends Model
     // use HasFactory;
     protected $fillable = [
         'title',
+        'slug',
         'category_id',
         'keywords',
         'about',
@@ -22,6 +23,7 @@ class Listing extends Model
         'mobile',
         'email',
         'website',
+        'is_247_open',
     ];
 
     public function images()
@@ -37,6 +39,11 @@ class Listing extends Model
     public function workingHours()
     {
         return $this->hasMany(WorkingHour::class);
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
     }
 
     public function amenities()

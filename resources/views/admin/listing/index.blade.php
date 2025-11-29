@@ -243,7 +243,7 @@
                                             </div>
                                         </div>
                                         <div class="dsd-single-lst-footer">
-                                            <a href="javascript:void(0);" class="btn btn-edit mr-1"><i
+                                            <a href="{{ route('listing-data.edit') }}" class="btn btn-edit mr-1"><i
                                                     class="fas fa-edit me-1"></i>Edit</a>
                                             <a href="javascript:void(0);" class="btn btn-view mr-1"><i
                                                     class="fas fa-eye me-1"></i>View</a>

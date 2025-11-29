@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('listings', function (Blueprint $table) {
             $table->id();
             $table->string('title');
+            $table->string('slug', '255')->unique()->index();
             $table->unsignedBigInteger('category_id')->nullable();
             $table->text('keywords')->nullable();
             $table->longText('about')->nullable();

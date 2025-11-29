@@ -3,27 +3,34 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
-use App\Models\Blog;
 use App\Models\Category;
 use App\Models\Enquiry;
-use App\Models\Product;
+use App\Models\Listing;
 use DB;
 use Illuminate\Http\Request;
 
 class WebController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        // $data['blogs'] = Blog::where('is_deleted', '0')->orderBy('id', 'desc')->take(3)->get();
-        $data['category'] = Category::where('cat_id', '0')->get();
-        $data['subCategory'] = Category::where('cat_id', '!=', '0')->take(3)->get();
-        $data['products'] = Product::get();
-        foreach ($data['products'] as $key => $product) {
-            $image = DB::table('images')->where('product_id', $product->id)->latest()->first('name');
-            if ($image) {
-                $data['products'][$key]['image'] = DB::table('images')->where('product_id', $product->id)->latest()->first()->name;
-            }
+        $name = $request->query('name');
+        $address = $request->query('address');
+
+        $data['category'] = Category::where('status', '1')->get();
+
+        $query = Listing::with('images');
+
+        if (! empty($name)) {
+            $query->where('title', 'like', "%{$name}%");
         }
+
+        if (! empty($address)) {
+            $query->where(function ($q) use ($address) {
+                $q->where('city', 'like', "%{$address}%")->orWhere('state', 'like', "%{$address}%");
+            });
+        }
+
+        $data['listing'] = $query->get();
 
         return view('web.index', compact('data'));
     }
