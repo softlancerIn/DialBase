@@ -1,0 +1,120 @@
+@extends('web.layout.main')
+
+@section('content')
+    <!-- ======================= Breadcrumb ======================== -->
+    <div class="breadcrumb-wrap" style="background:#f41b3b url({{ asset('assets/img/banner-2.jpg') }}) no-repeat;" data-overlay="5">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <div class="breadcrumb_caption text-center py-5">
+                        <h1 class="page_title ft-bold mb-4" style="font-size: 3rem;">{{ $data['category']->name ?? 'Category' }}</h1>
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb justify-content-center mt-2" style="color: white;">
+                                <li class=""><a href="{{ route('index') }}" style="color: white;">Home </a></li>
+                                <li class="active" aria-current="page" style="color: white;"> / {{ $data['category']->name ?? 'Category' }}</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ======================= Breadcrumb End ======================== -->
+
+    <!-- ======================= Category Section ======================== -->
+    <section class="gray py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12">
+                    <div class="bg-white rounded mb-4">							
+                    
+                        <div class="sidebar_header d-flex align-items-center justify-content-between px-4 py-3 br-bottom">
+                            <h4 class="ft-medium fs-lg mb-0">Search Filter</h4>
+                            <div class="ssh-header">
+                                <a href="{{ route('category.slug', $data['category']->slug) }}" class="clear_all ft-medium text-muted">Clear All</a>
+                                <a href="#search_open" data-bs-toggle="collapse" aria-expanded="false" role="button" class="collapsed _filter-ico ml-2"><i class="lni lni-text-align-right"></i></a>
+                            </div>
+                        </div>
+                        
+                        <!-- Filter Form -->
+                        <div class="sidebar-widgets collapse miz_show" id="search_open" data-bs-parent="#search_open">
+                            <div class="search-inner">
+                                <form method="GET" action="{{ route('category.slug', $data['category']->slug) }}">
+                                    <div class="side-filter-box">
+                                        <div class="side-filter-box-body">
+                                            
+                                            <!-- Featured -->
+                                            <div class="inner_widget_link">
+                                                <h6 class="ft-medium">Status</h6>
+                                                <ul class="no-ul-list filter-list">
+                                                    <li>
+                                                        <input id="featured" class="checkbox-custom" name="featured" type="checkbox" value="1" {{ request('featured') ? 'checked' : '' }}>
+                                                        <label for="featured" class="checkbox-custom-label">Featured</label>
+                                                    </li>
+                                                </ul>
+                                            </div>
+
+                                            <!-- Open/Close -->
+                                            <div class="inner_widget_link">
+                                                <h6 class="ft-medium">Availability</h6>
+                                                <ul class="no-ul-list filter-list">
+                                                    <li>
+                                                        <input id="open_now_filter" class="checkbox-custom" name="open_now" type="checkbox" value="1" {{ request('open_now') ? 'checked' : '' }}>
+                                                        <label for="open_now_filter" class="checkbox-custom-label">Open Now</label>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            
+                                            <!-- Location -->
+                                            @if(!empty($data['locations']) && $data['locations']->count() > 0)
+                                            <div class="inner_widget_link">
+                                                <h6 class="ft-medium">Location</h6>
+                                                <select name="location" class="form-control form-select">
+                                                    <option value="">All Locations</option>
+                                                    @foreach($data['locations'] as $location)
+                                                        <option value="{{ $location }}" {{ request('location') == $location ? 'selected' : '' }}>{{ $location }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            @endif
+                                            
+                                            <div class="form-group filter_button">
+                                                <button type="submit" class="btn theme-bg text-light rounded full-width">Apply Filter</button>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>							
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-9 col-lg-8 col-md-12">
+                    <div class="row">
+                        @if ($data['listings'] && $data['listings']->count() > 0)
+                            @foreach ($data['listings'] as $listing)
+                                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 mb-4">
+                                    @include('web.components.category_details', ['listing' => $listing])
+                                </div>
+                            @endforeach
+                        @else
+                            <div class="col-12 text-center py-5">
+                                <h5>No listings found in this category.</h5>
+                            </div>
+                        @endif
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12 d-flex justify-content-center mt-4">
+                            @if(isset($data['listings']))
+                                {{ $data['listings']->links() }}
+                            @endif
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ======================= Category Section End ======================== -->
+@endsection

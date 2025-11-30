@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Enquiry;
 use App\Models\Listing;
+use App\Models\Amenity;
 use DB;
 use Illuminate\Http\Request;
 
@@ -33,6 +34,65 @@ class WebController extends Controller
         $data['listing'] = $query->get();
 
         return view('web.index', compact('data'));
+    }
+
+    public function category_detail(Request $request, $slug)
+    {
+        $address = $request->query('address');
+        $amenities = $request->query('amenities', []);
+        $open_now = $request->boolean('open_now');
+        $featured = $request->boolean('featured');
+        $location = $request->query('location');
+
+        $data['category'] = Category::where('slug', $slug)->where('status', '1')->first();
+
+        if (! $data['category']) {
+            return redirect()->route('index');
+        }
+
+        $data['all_categories'] = Category::where('status', '1')->get();
+        $data['all_amenities'] = Amenity::all();
+
+        $query = Listing::where('category_id', $data['category']->id)->with('images');
+
+        if (! empty($address)) {
+            $tokens = preg_split('/[\s,]+/', trim($address));
+            $query->where(function ($q) use ($tokens) {
+                foreach ($tokens as $token) {
+                    $token = trim($token);
+                    if ($token === '') {
+                        continue;
+                    }
+                    $t = mb_strtolower($token);
+                    $q->orWhereRaw('LOWER(city) LIKE ?', ["%{$t}%"]) ->orWhereRaw('LOWER(state) LIKE ?', ["%{$t}%"]);
+                }
+            });
+        }
+
+        if (! empty($amenities) && is_array($amenities)) {
+            $query->whereHas('amenities', function ($q) use ($amenities) {
+                $q->whereIn('amenities.id', $amenities);
+            });
+        }
+
+        if ($open_now) {
+            $query->where('is_247_open', 1);
+        }
+
+        if ($featured) {
+            $query->where('is_featured', 1);
+        }
+
+        if (! empty($location)) {
+            $query->where('city', $location);
+        }
+
+        $data['listings'] = $query->paginate(12)->withQueryString();
+
+        $all_listings_for_locations = Listing::where('category_id', $data['category']->id)->get();
+        $data['locations'] = $all_listings_for_locations->pluck('city')->unique()->sort()->values();
+
+        return view('web.pages.category_details', compact('data'));
     }
 
     public function about()
