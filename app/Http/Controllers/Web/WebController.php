@@ -120,6 +120,21 @@ class WebController extends Controller
         return view('web.pages.promoters');
     }
 
+    public function listing_detail($slug)
+    {
+        $data['listing'] = Listing::where('slug', $slug)->with('images', 'workingHours', 'amenities', 'socialLink', 'category')->first();
+
+        if (! $data['listing']) {
+            return redirect()->route('index');
+        }
+
+        $data['category'] = $data['listing']->category() ? $data['listing']->category()->first() : null;
+        $data['featured_image'] = $data['listing']->images->where('type', 'featured')->first();
+        $data['logo_image'] = $data['listing']->images->where('type', 'logo')->first();
+
+        return view('web.pages.listing_details', compact('data'));
+    }
+
     public function contact()
     {
         return view('web.pages.contact');
