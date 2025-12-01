@@ -31,4 +31,5 @@ Route::controller(WebController::class)->group(function () {
     Route::get('certificate', 'certificate')->name('certificate');
     Route::get('contact', 'contact')->name('contact');
     Route::post('save-enquiry', 'save_enquiry')->name('save_enquiry');
+    Route::post('/listings/{slug}/reviews', [WebController::class, 'saveReview'])->name('listings.saveReview');
 });

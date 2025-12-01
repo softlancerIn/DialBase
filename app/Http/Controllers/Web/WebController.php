@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Enquiry;
 use App\Models\Listing;
 use App\Models\Amenity;
+use App\Models\ListingReview;
 use DB;
 use Illuminate\Http\Request;
 
@@ -237,5 +238,23 @@ class WebController extends Controller
         } else {
             return redirect()->route('home');
         }
+    }
+
+    public function saveReview(Request $request, $slug) {
+        $request->validate([
+            'review' => 'required|string',
+            'rating' => 'required|integer|min:1|max:5',
+        ]);
+
+        $listing = Listing::where('slug', $slug)->firstOrFail();
+
+        $review = new ListingReview();
+        $review->listing_id = $listing->id;
+        $review->user_id = auth()->id(); // Assuming user is authenticated
+        $review->review = $request->review;
+        $review->rating = $request->rating;
+        $review->save();
+
+        return redirect()->back()->with('success', 'Review submitted successfully!');
     }
 }

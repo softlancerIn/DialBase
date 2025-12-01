@@ -285,54 +285,54 @@
                             <div class="jbd-01 px-4 py-4">
                                 <div class="jbd-details mb-4">
                                     <h5 class="ft-bold fs-lg">Drop Your Review</h5>
-                                    <div class="review-form-box form-submit mt-3">
-                                        <form>
-                                            <div class="row">
-                                                
-                                                <div class="col-lg-12 col-md-12 col-sm-12">
-                                                    <div class="form-group mb-3">
-                                                        <label class="ft-medium small mb-1">Choose Rate</label>
-                                                        <select class="form-control rounded" fdprocessedid="ttdgyr">
-                                                            <option>Choose Rating</option>
-                                                            <option>1 Star</option>
-                                                            <option>2 Star</option>
-                                                            <option>3 Star</option>
-                                                            <option>4 Star</option>
-                                                            <option>5 Star</option>
-                                                        </select>
-                                                    </div>
+                                    
+                                    <form action='{{ route('listings.saveReview', $data['listing']->slug) }}' method='POST'>
+                                        @csrf
+                                        <div class="row">
+                                            
+                                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                                <div class="form-group mb-3">
+                                                    <label class="ft-medium small mb-1">Choose Rate</label>
+                                                    <select class="form-control rounded" name='rating' required>
+                                                        <option value=''>Choose Rating</option>
+                                                        <option value='1'>1</option>
+                                                        <option value='2'>2</option>
+                                                        <option value='3'>3</option>
+                                                        <option value='4'>4</option>
+                                                        <option value='5'>5</option>
+                                                    </select>
                                                 </div>
-                                                
-                                                <div class="col-lg-6 col-md-6 col-sm-12">
-                                                    <div class="form-group mb-3">
-                                                        <label class="ft-medium small mb-1">Name</label>
-                                                        <input class="form-control rounded" type="text" placeholder="Your Name" fdprocessedid="6mqrr">
-                                                    </div>
-                                                </div>
-                                                
-                                                <div class="col-lg-6 col-md-6 col-sm-12">
-                                                    <div class="form-group mb-3">
-                                                        <label class="ft-medium small mb-1">Email</label>
-                                                        <input class="form-control rounded" type="email" placeholder="Your Email" fdprocessedid="n0m6x4">
-                                                    </div>
-                                                </div>
-                                                
-                                                <div class="col-lg-12 col-md-12 col-sm-12">
-                                                    <div class="form-group mb-3">
-                                                        <label class="ft-medium small mb-1">Review</label>
-                                                        <textarea class="form-control rounded ht-140" placeholder="Review"></textarea>
-                                                    </div>
-                                                </div>
-                                                
-                                                <div class="col-lg-12 col-md-12 col-sm-12">
-                                                    <div class="form-group">
-                                                        <button type="submit" class="btn theme-bg text-light rounded" fdprocessedid="l6x365">Submit Review</button>
-                                                    </div>
-                                                </div>
-                                                
                                             </div>
-                                        </form>
-                                    </div>
+                                            
+                                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                                <div class="form-group mb-3">
+                                                    <label class="ft-medium small mb-1">Name</label>
+                                                    <input class="form-control rounded" type="text" placeholder="Your Name" fdprocessedid="6mqrr">
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                                <div class="form-group mb-3">
+                                                    <label class="ft-medium small mb-1">Email</label>
+                                                    <input class="form-control rounded" type="email" placeholder="Your Email" fdprocessedid="n0m6x4">
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                                <div class="form-group mb-3">
+                                                    <label class="ft-medium small mb-1">Review</label>
+                                                    <textarea class="form-control rounded ht-140" name='review' placeholder="Review" required></textarea>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                                <div class="form-group">
+                                                    <button type="submit" class="btn theme-bg text-light rounded" fdprocessedid="l6x365">Submit Review</button>
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
