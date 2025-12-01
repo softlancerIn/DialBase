@@ -125,7 +125,7 @@
                         @endif
 
                         <!-- Reviews -->
-                         <div class="bg-white rounded mb-4">
+                        <div class="bg-white rounded mb-4">
                             <div class="jbd-01 px-4 py-4">
                                 <div class="jbd-details mb-4">
                                     <h5 class="ft-bold fs-lg">Recommended Reviews</h5>
