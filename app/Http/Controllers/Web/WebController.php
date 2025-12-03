@@ -9,32 +9,71 @@ use App\Models\Listing;
 use App\Models\Amenity;
 use App\Models\ListingReview;
 use DB;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class WebController extends Controller
 {
     public function index(Request $request)
     {
-        $name = $request->query('name');
-        $address = $request->query('address');
-
         $data['category'] = Category::where('status', '1')->get();
 
-        $query = Listing::with('images');
+        $query = Listing::with(['images', 'workingHours', 'amenities', 'category']);
+
+        $data['listing'] = $query->take(12)->get();
+
+        return view('web.index', compact('data'));
+    }
+
+    /**
+     * Accepts GET `name` and `address` (and optional filters) from home search form.
+     */
+    public function search(Request $request)
+    {
+        $name = $request->query('name');
+        $address = $request->query('address');
+        $open_now = $request->boolean('open_now');
+        $featured = $request->boolean('featured');
+
+        $data['category'] = Category::where('status', '1')->get();
+        $data['all_amenities'] = Amenity::all();
+
+        $query = Listing::with(['images', 'workingHours', 'amenities', 'category']);
 
         if (! empty($name)) {
             $query->where('title', 'like', "%{$name}%");
         }
 
         if (! empty($address)) {
-            $query->where(function ($q) use ($address) {
-                $q->where('city', 'like', "%{$address}%")->orWhere('state', 'like', "%{$address}%");
+            $tokens = preg_split('/[\s,]+/', trim($address));
+            $query->where(function ($q) use ($tokens) {
+                foreach ($tokens as $token) {
+                    $token = trim($token);
+                    if ($token === '') {
+                        continue;
+                    }
+                    $t = mb_strtolower($token);
+                    $q->orWhereRaw('LOWER(city) LIKE ?', ["%{$t}%"]) ->orWhereRaw('LOWER(state) LIKE ?', ["%{$t}%"]);
+                }
             });
         }
 
-        $data['listing'] = $query->get();
+        if ($featured) {
+            $query->where('is_featured', 1);
+        }
 
-        return view('web.index', compact('data'));
+        $data['listings'] = $query->paginate(12)->withQueryString();
+
+        if ($open_now) {
+            $collection = $data['listings']->getCollection()->filter(function ($listing) {
+                return ! empty($listing->is_247_open);
+            });
+            $data['listings']->setCollection($collection->values());
+        }
+
+        $data['locations'] = Listing::whereNotNull('city')->pluck('city')->unique()->sort()->values();
+
+        return view('web.pages.search_results', compact('data'));
     }
 
     public function category_detail(Request $request, $slug)
@@ -123,7 +162,7 @@ class WebController extends Controller
 
     public function listing_detail($slug)
     {
-        $data['listing'] = Listing::where('slug', $slug)->with('images', 'workingHours', 'amenities', 'socialLink', 'category')->first();
+        $data['listing'] = Listing::where('slug', $slug)->with('images', 'workingHours', 'amenities', 'socialLink', 'category', 'reviews.user')->first();
 
         if (! $data['listing']) {
             return redirect()->route('index');
@@ -244,17 +283,30 @@ class WebController extends Controller
         $request->validate([
             'review' => 'required|string',
             'rating' => 'required|integer|min:1|max:5',
+            'email' => 'required|email',
+            'name' => 'nullable|string',
         ]);
 
         $listing = Listing::where('slug', $slug)->firstOrFail();
 
+        $existing = ListingReview::where('listing_id', $listing->id)
+            ->where('email', $request->email)
+            ->first();
+
+        if ($existing) {
+            return redirect()->back()->with('error', 'You have already submitted a review for this listing.');
+        }
+
         $review = new ListingReview();
         $review->listing_id = $listing->id;
-        $review->user_id = auth()->id(); // Assuming user is authenticated
+        $review->user_id = auth()->id() ?: null;
+        $review->name = $request->name;
+        $review->email = $request->email;
         $review->review = $request->review;
         $review->rating = $request->rating;
+        $review->status = 0;
         $review->save();
 
-        return redirect()->back()->with('success', 'Review submitted successfully!');
+        return redirect()->back()->with('success', 'Review submitted successfully! Your review will appear after approval.');
     }
 }

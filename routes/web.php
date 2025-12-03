@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::controller(WebController::class)->group(function () {
     Route::get('/', 'index')->name('index');
+    // Search
+    Route::get('/search', 'search')->name('search');
     
     // Listing detail
     Route::get('listing/{slug}', 'listing_detail')->name('listing.slug');

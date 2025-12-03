@@ -9,8 +9,11 @@ class ListingReview extends Model
     protected $fillable = [
         'listing_id',
         'user_id',
+        'name',
+        'email',
         'rating',
-        'comment',
+        'review',
+        'status',
     ];
 
     public function listing()

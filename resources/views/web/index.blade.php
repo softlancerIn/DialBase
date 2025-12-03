@@ -13,7 +13,7 @@
                             areas.</p>
                     </div>
 
-                    <form class="main-search-wrap fl-wrap half-column" method="GET" action="{{ route('index') }}">
+                    <form class="main-search-wrap fl-wrap half-column" method="GET" action="{{ route('search') }}">
                         <div class="main-search-item">
                             <span class="search-tag">Find</span>
                             <input name="name" type="text" class="form-control radius"
@@ -61,86 +61,7 @@
                         <div class="row justify-content-center">
                             @foreach ($data['listing'] as $list)
                                 <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
-                                    <div class="Goodup-grid-wrap">
-                                        <div class="Goodup-grid-upper">
-                                            <div class="Goodup-pos ab-left">
-                                                <div class="Goodup-status {{ $list->is_247_open ? 'open' : 'close'}} me-2">{{ $list->is_247_open ? 'Open' : 'Close' }}</div>
-                                            </div>
-                                            <div class="Goodup-grid-thumb">
-                                                @php
-                                                    $featuredImage = $list['images']->where('image_type', 'featured')->first();
-                                                    $logoImage = $list['images']->where('image_type', 'logo')->first();
-
-                                                @endphp
-                                                <a href="{{ route('listing.slug', $list->slug) }}"
-                                                    class="d-block text-center m-auto">
-                                                    @if($featuredImage) 
-                                                        <img
-                                                            src="{{ Storage::url($featuredImage['image_path']) }}"
-                                                            class="img-fluid" alt="">
-                                                    @else
-                                                        <img src="{{asset('assets/img/listing/l-5.jpg')}}" class="img-fluid" alt="">
-                                                    @endif
-                                                </a>
-                                            </div>
-                                            <div class="Goodup-rating overlay">
-                                                <div class="Goodup-pr-average high">4.5</div>
-                                                <div class="Goodup-aldeio">
-                                                    <div class="Goodup-rates">
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                    </div>
-                                                    <div class="Goodup-all-review"><span>25 Reviews</span></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="Goodup-grid-fl-wrap">
-                                            <div class="Goodup-caption px-3 py-2">
-                                                <div class="Goodup-author">
-                                                    @if ($logoImage)
-                                                        <img
-                                                            src="{{ Storage::url($logoImage['image_path']) }}"
-                                                            class="img-fluid circle" alt="">
-                                                    @else
-                                                        <img src="{{asset('assets/img/t-1.png')}}" class="img-fluid circle" alt="">
-                                                        
-                                                    @endif
-                                                </div>
-                                                <h4 class="mb-0 ft-medium medium">
-                                                    <p class="text-dark fs-md">{{ $list->title }}</p></h4>
-                                                <div class="Goodup-location"><i
-                                                        class="fas fa-map-marker-alt me-1 theme-cl"></i>{{ $list->city }}, {{ $list->state }}
-                                                </div>
-                                                <div class="Goodup-middle-caption mt-3">
-                                                    <p>{{ Str::limit($list->about, 60) }}</p>
-                                                </div>
-                                            </div>
-                                            @php
-                                                $category = $list->category()?->first();
-                                            @endphp
-                                            <div class="Goodup-grid-footer py-2 px-3">
-                                                <div class="Goodup-ft-first">
-                                                    <a href="{{ route('category.slug', $category->slug) }}" class="Goodup-cats-wrap">
-                                                        <div class="cats-ico bg-2"><i class="lni lni-slim"></i></div><span
-                                                            class="cats-title">{{ $category->name ?? 'Uncategorized' }}</span>
-                                                    </a>
-                                                </div>
-                                                <div class="Goodup-ft-last">
-                                                    <div class="Goodup-inline">
-                                                        <div class="Goodup-bookmark-btn"><button type="button"><i
-                                                                    class="lni lni-envelope position-absolute"></i></button>
-                                                        </div>
-                                                        <div class="Goodup-bookmark-btn"><button type="button"><i
-                                                                    class="lni lni-heart-filled position-absolute"></i></button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    @include('web.components.category_details', ['listing' => $list])
                                 </div>
                             @endforeach
                         </div>

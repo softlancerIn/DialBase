@@ -1,6 +1,11 @@
 <!-- Listing Card Component -->
 <div class="Goodup-grid-wrap">
     <div class="Goodup-grid-upper">
+        <div class="Goodup-bookmark-btn">
+            <button type="button" fdprocessedid="y3izb6">
+                <i class="lni lni-heart-filled position-absolute"></i>
+            </button>
+        </div>
         <div class="Goodup-pos ab-left">
             <div class="Goodup-status {{ $listing->is_247_open ? 'open' : 'close' }} me-2">
                 {{ $listing->is_247_open ? 'Open' : 'Close' }}
@@ -45,36 +50,34 @@
             <h4 class="mb-0 ft-medium medium">
                 <p class="text-dark fs-md">{{ $listing->title }}</p>
             </h4>
-            <div class="Goodup-location">
-                <i class="fas fa-map-marker-alt me-1 theme-cl"></i>{{ $listing->city }}, {{ $listing->state }}
-            </div>
             <div class="Goodup-middle-caption mt-3">
-                <p>{{ Str::limit($listing->about, 60) }}</p>
+                <div class="Goodup-location">
+                    <i class="fas fa-map-marker-alt"></i>{{ $listing->city }}, {{ $listing->state }}
+                </div>
+                <div class="Goodup-call"><i class="fas fa-phone-alt"></i>{{ $listing->mobile }}</div>
             </div>
         </div>
-        @php
-            $category = $listing->category() ? $listing->category()->first() : null;
-        @endphp
-        <div class="Goodup-grid-footer py-2 px-3">
+        <div class="Goodup-grid-footer py-3 px-3">
             <div class="Goodup-ft-first">
-                @if ($category)
-                    <a href="{{ route('category.slug', $category->slug) }}" class="Goodup-cats-wrap">
-                        <div class="cats-ico bg-2"><i class="lni lni-slim"></i></div>
-                        <span class="cats-title">{{ $category->name }}</span>
-                    </a>
-                @else
-                    <span class="cats-title">Uncategorized</span>
-                @endif
-            </div>
-            <div class="Goodup-ft-last">
-                <div class="Goodup-inline">
-                    <div class="Goodup-bookmark-btn">
-                        <button type="button"><i class="lni lni-envelope position-absolute"></i></button>
-                    </div>
-                    <div class="Goodup-bookmark-btn">
-                        <button type="button"><i class="lni lni-heart-filled position-absolute"></i></button>
+                <div class="Goodup-rating">
+                    <div class="Goodup-pr-average high">4.3</div>
+                    <div class="Goodup-rates">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
                     </div>
                 </div>
+                <!-- <div class="Goodup-price-range">
+                    <span class="active"><i class="fas fa-dollar-sign"></i></span>
+                    <span class="active"><i class="fas fa-dollar-sign"></i></span>
+                    <span class="active"><i class="fas fa-dollar-sign"></i></span>
+                    <span class="active"><i class="fas fa-dollar-sign"></i></span>
+                </div> -->
+            </div>
+            <div class="Goodup-ft-last">
+                <span class="small">{{ $listing->updated_at->diffForHumans() }}</span>
             </div>
         </div>
     </div>

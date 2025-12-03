@@ -130,86 +130,75 @@
                                 <div class="jbd-details mb-4">
                                     <h5 class="ft-bold fs-lg">Recommended Reviews</h5>
                                     <div class="reviews-comments-wrap">
-                                    
-                                        <!-- reviews-comments-item -->  
-                                        <div class="reviews-comments-item">
-                                            <div class="review-comments-avatar">
-                                                <img src="{{ asset('assets/img/t-1.png')}}" class="img-fluid" alt=""> 
-                                            </div>
-                                            <div class="reviews-comments-item-text">
-                                                <h4><a href="#">Kayla E. Claxton</a><span class="reviews-comments-item-date"><i class="ti-calendar theme-cl me-1"></i>27 Oct 2019</span></h4>
-                                                <span class="agd-location"><i class="lni lni-map-marker me-1"></i>San Francisco, USA</span>
-                                                <div class="listing-rating high"><i class="fas fa-star active"></i><i class="fas fa-star active"></i><i class="fas fa-star active"></i><i class="fas fa-star active"></i><i class="fas fa-star active"></i></div>
-                                                <div class="clearfix"></div>
-                                                <p>" Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. "</p>
-                                                <div class="pull-left reviews-reaction">
-                                                    <a href="#" class="comment-like active"><i class="ti-thumb-up"></i> 12</a>
-                                                    <a href="#" class="comment-dislike active"><i class="ti-thumb-down"></i> 1</a>
-                                                    <a href="#" class="comment-love active"><i class="ti-heart"></i> 07</a>
+
+                                        @php
+                                            $approvedReviews = $data['listing']->reviews ? $data['listing']->reviews->where('status', 1) : collect();
+                                        @endphp
+
+                                        @if($approvedReviews && $approvedReviews->count() > 0)
+                                            @foreach($approvedReviews as $review)
+                                                <!-- reviews-comments-item -->  
+                                                <div class="reviews-comments-item">
+                                                    <div class="review-comments-avatar">
+                                                        @if($review->user && $review->user->profile_image)
+                                                            <img src="{{ Storage::url($review->user->profile_image) }}" class="img-fluid" alt="{{ $review->user->name }}"> 
+                                                        @else
+                                                            <img src="{{ asset('assets/img/t-1.png') }}" class="img-fluid" alt="User"> 
+                                                        @endif
+                                                    </div>
+                                                    <div class="reviews-comments-item-text">
+                                                        <h4>
+                                                            <a href="#">{{ $review->user->name ?? 'Anonymous' }}</a>
+                                                            <span class="reviews-comments-item-date">
+                                                                <i class="ti-calendar theme-cl me-1"></i>{{ $review->created_at->format('d M Y') }}
+                                                            </span>
+                                                        </h4>
+                                                        <div class="listing-rating">
+                                                            @for($i = 1; $i <= 5; $i++)
+                                                                @if($i <= $review->rating)
+                                                                    <i class="fas fa-star active"></i>
+                                                                @else
+                                                                    <i class="fas fa-star"></i>
+                                                                @endif
+                                                            @endfor
+                                                        </div>
+                                                        <div class="clearfix"></div>
+                                                        <p>" {{ $review->review }} "</p>
+                                                        <div class="pull-left reviews-reaction">
+                                                            <a href="#" class="comment-like active"><i class="ti-thumb-up"></i> 0</a>
+                                                            <a href="#" class="comment-dislike active"><i class="ti-thumb-down"></i> 0</a>
+                                                            <a href="#" class="comment-love active"><i class="ti-heart"></i> 0</a>
+                                                        </div>
+                                                    </div>
                                                 </div>
+                                                <!--reviews-comments-item end-->
+                                            @endforeach
+                                        @else
+                                            <div class="alert alert-info">
+                                                <p class="mb-0">No reviews yet. Be the first to review this listing!</p>
                                             </div>
-                                        </div>
-                                        <!--reviews-comments-item end-->  
+                                        @endif
                                         
-                                        <!-- reviews-comments-item -->  
-                                        <div class="reviews-comments-item">
-                                            <div class="review-comments-avatar">
-                                                <img src="{{ asset('assets/img/t-2.png')}}" class="img-fluid" alt=""> 
-                                            </div>
-                                            <div class="reviews-comments-item-text">
-                                                <h4><a href="#">Amy M. Taylor</a><span class="reviews-comments-item-date"><i class="ti-calendar theme-cl me-1"></i>2 Nov May 2019</span></h4>
-                                                <span class="agd-location"><i class="lni lni-map-marker me-1"></i>Liverpool, London UK</span>
-                                                <div class="listing-rating mid"><i class="fas fa-star active"></i><i class="fas fa-star active"></i><i class="fas fa-star active"></i><i class="fas fa-star active"></i><i class="fas fa-star"></i></div>
-                                                <div class="clearfix"></div>
-                                                <p>" Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. "</p>
-                                                <div class="pull-left reviews-reaction">
-                                                    <a href="#" class="comment-like active"><i class="ti-thumb-up"></i> 12</a>
-                                                    <a href="#" class="comment-dislike active"><i class="ti-thumb-down"></i> 1</a>
-                                                    <a href="#" class="comment-love active"><i class="ti-heart"></i> 07</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!--reviews-comments-item end-->
-                                        
-                                        <!-- reviews-comments-item -->  
-                                        <div class="reviews-comments-item">
-                                            <div class="review-comments-avatar">
-                                                <img src="{{ asset('assets/img/t-3.png')}}" class="img-fluid" alt=""> 
-                                            </div>
-                                            <div class="reviews-comments-item-text">
-                                                <h4><a href="#">Susan C. Daggett</a><span class="reviews-comments-item-date"><i class="ti-calendar theme-cl me-1"></i>10 Nov 2019</span></h4>
-                                                <span class="agd-location"><i class="lni lni-map-marker me-1"></i>Denver, United State</span>
-                                                <div class="listing-rating good"><i class="fas fa-star active"></i><i class="fas fa-star active"></i><i class="fas fa-star active"></i><i class="fas fa-star active"></i><i class="fas fa-star"></i></div>
-                                                <div class="clearfix"></div>
-                                                <p>" Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. "</p>
-                                                <div class="pull-left reviews-reaction">
-                                                    <a href="#" class="comment-like active"><i class="ti-thumb-up"></i> 12</a>
-                                                    <a href="#" class="comment-dislike active"><i class="ti-thumb-down"></i> 1</a>
-                                                    <a href="#" class="comment-love active"><i class="ti-heart"></i> 07</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!--reviews-comments-item end-->
-                                        
-                                        <ul class="pagination">
-                                            <li class="page-item">
-                                                <a class="page-link" href="#" aria-label="Previous">
-                                                <span class="fas fa-arrow-circle-right"></span>
-                                                <span class="sr-only">Previous</span>
-                                                </a>
-                                            </li>
-                                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                            <li class="page-item active"><a class="page-link" href="#">3</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">...</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">18</a></li>
-                                            <li class="page-item">
-                                                <a class="page-link" href="#" aria-label="Next">
-                                                <span class="fas fa-arrow-circle-right"></span>
-                                                <span class="sr-only">Next</span>
-                                                </a>
-                                            </li>
-                                        </ul>
+                                        @if($data['listing']->reviews && $data['listing']->reviews->count() > 3)
+                                            <ul class="pagination">
+                                                <li class="page-item">
+                                                    <a class="page-link" href="#" aria-label="Previous">
+                                                    <span class="fas fa-arrow-circle-left"></span>
+                                                    <span class="sr-only">Previous</span>
+                                                    </a>
+                                                </li>
+                                                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                                <li class="page-item active"><a class="page-link" href="#">3</a></li>
+                                                <li class="page-item"><a class="page-link" href="#">...</a></li>
+                                                <li class="page-item">
+                                                    <a class="page-link" href="#" aria-label="Next">
+                                                    <span class="fas fa-arrow-circle-right"></span>
+                                                    <span class="sr-only">Next</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        @endif
                                         
                                     </div>
                                 </div>
@@ -236,41 +225,56 @@
                                             <div class="col-xl-6 col-lg-6 col-md-12">
                                                 <table class="table table-borderless">
                                                     <tbody>
-                                                        <tr>
-                                                            <th scope="row">Mon</th>
-                                                            <td>5:00 PM - 8:30 PM</td>
-                                                            <td class="text-success">Open now</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Tue</td>
-                                                            <td>5:00 PM - 8:30 PM</td>
-                                                            <td></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Wed</td>
-                                                            <td>5:00 PM - 8:30 PM</td>
-                                                            <td></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Thu</td>
-                                                            <td>5:00 PM - 8:30 PM</td>
-                                                            <td></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Fri</td>
-                                                            <td>5:00 PM - 6:30 PM</td>
-                                                            <td></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Sat</td>
-                                                            <td>Closed</td>
-                                                            <td></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Sun</td>
-                                                            <td>Closed</td>
-                                                            <td></td>
-                                                        </tr>
+                                                        @php
+                                                            $daysOrder = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+                                                            $hours = $data['listing']->workingHours ?? collect();
+                                                            // Normalize day labels to short form if possible
+                                                            $grouped = $hours->groupBy(function($item) {
+                                                                $d = $item->day_of_week ?? ($item->day ?? 'All');
+                                                                $short = substr($d,0,3);
+                                                                return ucfirst($short);
+                                                            });
+                                                        @endphp
+
+                                                        @foreach($daysOrder as $day)
+                                                            <tr>
+                                                                <th scope="row">{{ $day }}</th>
+                                                                <td>
+                                                                    @if(isset($grouped[$day]) && $grouped[$day]->count() > 0)
+                                                                        @foreach($grouped[$day] as $entry)
+                                                                            @php
+                                                                                $open = $entry->open_time;
+                                                                                $close = $entry->close_time;
+                                                                                // if JSON, try to decode and format
+                                                                                if ($open && is_string($open) && \Illuminate\Support\Str::startsWith($open, '[')) {
+                                                                                    $decodedOpen = json_decode($open, true);
+                                                                                    $open = is_array($decodedOpen) ? implode(', ', $decodedOpen) : $open;
+                                                                                }
+                                                                                if ($close && is_string($close) && \Illuminate\Support\Str::startsWith($close, '[')) {
+                                                                                    $decodedClose = json_decode($close, true);
+                                                                                    $close = is_array($decodedClose) ? implode(', ', $decodedClose) : $close;
+                                                                                }
+                                                                            @endphp
+                                                                            <div>{{ $open ? $open : 'Closed' }} @if($close)- {{ $close }} @endif</div>
+                                                                        @endforeach
+                                                                    @else
+                                                                        <div>Closed</div>
+                                                                    @endif
+                                                                </td>
+                                                                <td>
+                                                                    @php
+                                                                        $isOpenNow = false;
+                                                                        // If any entry has is_247_open flag true, mark open
+                                                                        if(isset($grouped[$day]) && $grouped[$day]->where('is_247_open', true)->count()>0) {
+                                                                            $isOpenNow = true;
+                                                                        }
+                                                                    @endphp
+                                                                    @if($isOpenNow)
+                                                                        <span class="text-success">Open now</span>
+                                                                    @endif
+                                                                </td>
+                                                            </tr>
+                                                        @endforeach
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -307,14 +311,14 @@
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group mb-3">
                                                     <label class="ft-medium small mb-1">Name</label>
-                                                    <input class="form-control rounded" type="text" placeholder="Your Name" fdprocessedid="6mqrr">
+                                                    <input name="name" class="form-control rounded" type="text" placeholder="Your Name">
                                                 </div>
                                             </div>
                                             
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group mb-3">
                                                     <label class="ft-medium small mb-1">Email</label>
-                                                    <input class="form-control rounded" type="email" placeholder="Your Email" fdprocessedid="n0m6x4">
+                                                    <input name="email" class="form-control rounded" type="email" placeholder="Your Email" required>
                                                 </div>
                                             </div>
                                             

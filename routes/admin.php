@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\SeoController;
 use App\Http\Controllers\Admin\SubCategoryController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\ReviewController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth:admin', 'admin'])->group(function () {
@@ -89,5 +90,11 @@ Route::middleware(['auth:admin', 'admin'])->group(function () {
         Route::match(['get', 'post'], 'user', 'user_list')->name('user_list');
         Route::match(['get', 'post'], 'user/{type}/{id}', 'user_form')->name('user_form');
         Route::match(['get', 'post'], 'save-user', 'save_user')->name('save_user');
+    });
+
+    // reviews
+    Route::controller(ReviewController::class)->group(function () {
+        Route::get('reviews', 'index')->name('reviews.index');
+        Route::post('reviews/{id}/status', 'updateStatus')->name('reviews.update_status');
     });
 });
