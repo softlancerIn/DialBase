@@ -33,11 +33,6 @@
                                         <input type="checkbox" name="open_now" value="1" {{ request('open_now') ? 'checked' : '' }}>
                                     </label>
                                 </div>
-                                <div class="form-group mb-3">
-                                    <label class="checkbox-custom">Featured
-                                        <input type="checkbox" name="featured" value="1" {{ request('featured') ? 'checked' : '' }}>
-                                    </label>
-                                </div>
                                 <div class="form-group">
                                     <button class="btn theme-bg text-light full-width">Apply</button>
                                 </div>
