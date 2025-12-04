@@ -97,9 +97,54 @@ class ListingController extends Controller
 
             $listing->update(['is_open_24' => $request->is_open_24]);
 
-            // Save Amenities
-            if ($request->amenities) {
-                $listing->amenities()->sync($request->amenities);
+            $amenityIds = $request->amenities ? (array) $request->amenities : [];
+            if ($request->filled('new_amenities')) {
+                $names = array_filter(array_map(fn($n) => trim($n), explode(',', $request->input('new_amenities'))));
+                foreach ($names as $name) {
+                    if ($name !== '') {
+                        $amenity = Amenity::firstOrCreate(['name' => $name]);
+                        $amenityIds[] = $amenity->id;
+                    }
+                }
+            }
+            // Map static checkboxes am1..am25 from create page to amenity names
+            $staticAmenities = [
+                'Health Score 8.7 / 10',
+                'Reservations',
+                'Vegetarian Options',
+                'Moderate Noise',
+                'Good For Kids',
+                'Private Lot Parking',
+                'Beer & Wine',
+                'TV Services',
+                'Pets Allow',
+                'Offers Delivery',
+                'Staff wears masks',
+                'Accepts Credit Cards',
+                'Offers Catering',
+                'Good for Breakfast',
+                'Waiter Service',
+                'Drive-Thru',
+                'Outdoor Seating',
+                'Offers Takeout',
+                'Vegan Options',
+                'Casual',
+                'Good for Groups',
+                'Brunch, Lunch, Dinner',
+                'Free Wi-Fi',
+                'Wheelchair Accessible',
+                'Happy Hour',
+            ];
+            foreach ($staticAmenities as $i => $label) {
+                $key = 'am' . ($i + 1);
+                if ($request->boolean($key)) {
+                    $amenity = Amenity::firstOrCreate(['name' => $label]);
+                    $amenityIds[] = $amenity->id;
+                }
+            }
+
+            if (!empty($amenityIds)) {
+                $listing->amenities()->sync($amenityIds);
             }
 
             // Save Social Links
@@ -130,9 +175,8 @@ class ListingController extends Controller
 
     public function create()
     {
-        // This method is not typically used in API controllers
-        // You can return a form or a view if needed
         $data['category'] = Category::where('status', 1)->get();
+        $data['all_amenities'] = Amenity::all();
 
         return view('admin.listing.create', compact('data'));
     }
@@ -236,9 +280,18 @@ class ListingController extends Controller
     
             $listing->update(['is_open_24' => $request->is_open_24]);
     
-            // Sync Amenities
-            if ($request->amenities) {
-                $listing->amenities()->sync($request->amenities);
+            $amenityIds = $request->amenities ? (array) $request->amenities : [];
+            if ($request->filled('new_amenities')) {
+                $names = array_filter(array_map(fn($n) => trim($n), explode(',', $request->input('new_amenities'))));
+                foreach ($names as $name) {
+                    if ($name !== '') {
+                        $amenity = Amenity::firstOrCreate(['name' => $name]);
+                        $amenityIds[] = $amenity->id;
+                    }
+                }
+            }
+            if (!empty($amenityIds)) {
+                $listing->amenities()->sync($amenityIds);
             }
     
             // Update or Create Social Links

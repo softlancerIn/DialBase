@@ -90,18 +90,6 @@
 
                         <!-- Amenities -->
                         @if($data['listing']->amenities && $data['listing']->amenities->count() > 0)
-                        <div class="mt-4">
-                            <h5 class="ft-bold mb-3">Amenities</h5>
-                            <div style="display: flex; flex-wrap: wrap; gap: 10px;">
-                                @foreach($data['listing']->amenities as $amenity)
-                                    <span class="badge bg-light text-dark">{{ $amenity->name }}</span>
-                                @endforeach
-                            </div>
-                        </div>
-                        @endif
-
-                        <!-- Amenities -->
-                        @if($data['listing']->amenities && $data['listing']->amenities->count() > 0)
                             <div class="bg-white rounded mb-4">
                                 <div class="jbd-01 px-4 py-4">
                                     <div class="jbd-details mb-4">

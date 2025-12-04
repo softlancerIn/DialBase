@@ -340,43 +340,18 @@
                                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
                                             <div class="Goodup-all-features-list">
                                                 <ul>
-                                                    @php
-                                                        $staticAmenities = [
-                                                            'Health Score 8.7 / 10',
-                                                            'Reservations',
-                                                            'Vegetarian Options',
-                                                            'Moderate Noise',
-                                                            'Good For Kids',
-                                                            'Private Lot Parking',
-                                                            'Beer & Wine',
-                                                            'TV Services',
-                                                            'Pets Allow',
-                                                            'Offers Delivery',
-                                                            'Staff wears masks',
-                                                            'Accepts Credit Cards',
-                                                            'Offers Catering',
-                                                            'Good for Breakfast',
-                                                            'Waiter Service',
-                                                            'Drive-Thru',
-                                                            'Outdoor Seating',
-                                                            'Offers Takeout',
-                                                            'Vegan Options',
-                                                            'Casual',
-                                                            'Good for Groups',
-                                                            'Brunch, Lunch, Dinner',
-                                                            'Free Wi-Fi',
-                                                            'Wheelchair Accessible',
-                                                            'Happy Hour',
-                                                        ];
-                                                    @endphp
-
-                                                    @foreach($staticAmenities as $index => $label)
+                                                    @php $selectedAmenityIds = $data['listing']->amenities->pluck('id')->toArray(); @endphp
+                                                    @foreach($data['all_amenities'] as $amenity)
                                                         <li>
-                                                            <input id="am{{ $index+1 }}" class="checkbox-custom" name="am{{ $index+1 }}" type="checkbox">
-                                                            <label for="am{{ $index+1 }}" class="checkbox-custom-label">{{ $label }}</label>
+                                                            <input id="amenity-{{ $amenity->id }}" class="checkbox-custom" name="amenities[]" type="checkbox" value="{{ $amenity->id }}" {{ in_array($amenity->id, $selectedAmenityIds) ? 'checked' : '' }}>
+                                                            <label for="amenity-{{ $amenity->id }}" class="checkbox-custom-label">{{ $amenity->name }}</label>
                                                         </li>
                                                     @endforeach
                                                 </ul>
+                                            </div>
+                                            <div class="form-group mt-3">
+                                                <label class="mb-1">Add New Amenities (comma-separated)</label>
+                                                <input type="text" class="form-control rounded" name="new_amenities" placeholder="e.g. Free Parking, Live Music">
                                             </div>
                                         </div>
                                     </div>
