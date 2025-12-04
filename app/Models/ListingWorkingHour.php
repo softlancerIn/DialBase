@@ -3,9 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class ListingWorkingHour extends Model
 {
+    use HasFactory;
+
     protected $table = 'listing_working_hours';
 
     protected $fillable = [

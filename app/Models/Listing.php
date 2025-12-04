@@ -2,13 +2,13 @@
 
 namespace App\Models;
 
-use HasFactory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 
 class Listing extends Model
 {
-    // use HasFactory;
+    use HasFactory;
     protected $fillable = [
         'title',
         'slug',
