@@ -42,17 +42,6 @@
                                 <form method="GET" action="{{ route('category.slug', $data['category']->slug) }}">
                                     <div class="side-filter-box">
                                         <div class="side-filter-box-body">
-                                            
-                                            <!-- Featured -->
-                                            <div class="inner_widget_link">
-                                                <h6 class="ft-medium">Status</h6>
-                                                <ul class="no-ul-list filter-list">
-                                                    <li>
-                                                        <input id="featured" class="checkbox-custom" name="featured" type="checkbox" value="1" {{ request('featured') ? 'checked' : '' }}>
-                                                        <label for="featured" class="checkbox-custom-label">Featured</label>
-                                                    </li>
-                                                </ul>
-                                            </div>
 
                                             <!-- Open/Close -->
                                             <div class="inner_widget_link">
