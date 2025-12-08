@@ -16,7 +16,7 @@ class WebController extends Controller
 {
     public function index(Request $request)
     {
-        $data['category'] = Category::where('status', '1')->get();
+        $data['category'] = Category::where('status', '1')->withCount('listing')->get();
 
         $query = Listing::with(['images', 'workingHours', 'amenities', 'category']);
 
@@ -133,6 +133,21 @@ class WebController extends Controller
         $data['locations'] = $all_listings_for_locations->pluck('city')->unique()->sort()->values();
 
         return view('web.pages.category_details', compact('data'));
+    }
+
+    public function city_listing(Request $request, $slug)
+    {
+        $data['category'] = Category::where('slug', $slug)->where('status', '1')->first();
+
+        if (! $data['category']) {
+            return redirect()->route('index');
+        }
+        $data['city_listings'] = Listing::where('category_id', $data['category']->id)
+            ->selectRaw('city, COUNT(*) as listing_count')
+            ->groupBy('city')
+            ->get();
+
+        return view('web.pages.city_listings', compact('data'));
     }
 
     public function about()

@@ -17,4 +17,9 @@ class Category extends Model
         'cat_id',
         'status',
     ];
+
+    public function listing()
+    {
+        return $this->hasMany(Listing::class, 'category_id', 'id');
+    }
 }

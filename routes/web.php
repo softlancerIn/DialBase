@@ -11,6 +11,9 @@ Route::controller(WebController::class)->group(function () {
     // Listing detail
     Route::get('listing/{slug}', 'listing_detail')->name('listing.slug');
 
+    // city detail
+    Route::get('city/{slug}', 'city_listing')->name('city.slug');
+
     // Category detail
     Route::get('category/{slug}', 'category_detail')->name('category.slug');
 
