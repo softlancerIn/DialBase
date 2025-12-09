@@ -7,7 +7,7 @@
             <div class="row">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                     <div class="breadcrumb_caption text-center py-5">
-                        <h1 class="page_title ft-bold mb-4" style="font-size: 3rem;">{{ $data['category']->name ?? 'Category' }}</h1>
+                        <h1 class="page_title ft-bold mb-4" style="font-size: 3rem;">{{ $data['category']->name ?? 'Category' }} {{ !empty($_GET['location']) ? 'In ' .$_GET['location'] : '' }}</h1>
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb justify-content-center mt-2" style="color: white;">
                                 <li class=""><a href="{{ route('index') }}" style="color: white;">Home </a></li>
@@ -81,6 +81,9 @@
 
                 <div class="col-xl-9 col-lg-8 col-md-12">
                     <div class="row">
+                        <div>
+                            <p class="text-dark fs-md">{{ $data['category']->description ?? '' }}</p>
+                        </div>
                         @if ($data['listings'] && $data['listings']->count() > 0)
                             @foreach ($data['listings'] as $listing)
                                 <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 mb-4">
