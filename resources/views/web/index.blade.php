@@ -2393,7 +2393,7 @@
 
 
     <!-- ======================= Blog Start ============================ -->
-    @if ($data['homeBlogs'] ?? [])
+    @if (count($data['homeBlogs']) > 0)
         <section class="space min pt-0">
             <div class="container">
 
