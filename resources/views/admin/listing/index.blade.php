@@ -7,7 +7,6 @@
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item text-muted"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item text-muted"><a href="#">Dashboard</a></li>
                             <li class="breadcrumb-item"><a href="#" class="theme-cl">Manage Listings</a></li>
                         </ol>
                     </nav>

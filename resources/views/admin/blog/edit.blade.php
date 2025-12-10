@@ -1,75 +1,67 @@
-<x-admin.layout type="blog">
-    <style>
-        .preview {
-            display: inline-block;
-            margin: 10px;
-        }
-
-        .preview img {
-            width: 100px;
-            height: 100px;
-            margin-right: 10px;
-        }
-    </style>
-
-    <div class="page-content">
-        <!--breadcrumb-->
-        <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-            <div class="breadcrumb-title pe-3">Blog</div>
-            <div class="ps-3">
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb mb-0 p-0">
-                        <li class="breadcrumb-item">
-                            <a href="{{ route('dashboard') }}"><i class="bx bx-home-alt"></i></a>
-                        </li>
-                        <li class="breadcrumb-item active" aria-current="page">
-                            Blog
-                        </li>
-                    </ol>
-                </nav>
+<x-admin.layout>
+    <div class="goodup-dashboard-content p-0">
+        <div class="dashboard-tlbar d-block mb-3">
+            <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12">
+                    <h1 class="ft-medium">{{ isset($data['blog']) && !empty($data['blog']) && !empty($data['blog']['id']) ? 'Edit Blog' : 'Create Blog' }}</h1>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item text-muted"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item"><a href="#" class="theme-cl">{{ isset($data['blog']) && !empty($data['blog']) && !empty($data['blog']['id']) ? 'Edit Blog' : 'Create Blog' }}</a></li>
+                        </ol>
+                    </nav>
+                </div>
             </div>
         </div>
-        <!--end breadcrumb-->
-        <hr />
-        <div class="row">
-            <div class="col-xl-12 mx-auto">
-                <div class="card border-top border-0 border-4 border-primary">
-                    <div class="card-body p-5">
-                        <form action="{{ route('save_blog') }}" method="POST" class="row g-3"
-                            enctype="multipart/form-data">
-                            @csrf
-                            <div class="col-12">
-                                <label for="inputFirstName" class="form-label">Blog Name</label>
-                                <input type="text" name="name" class="form-control"
-                                    value="{{ $data['blog']['name'] ?? '' }}" placeholder="Blog Name..."
-                                    id="inputFirstName">
-                                <input type="hidden" name="id" value="{{ $data['blog']['id'] ?? '0' }}">
-                            </div>
 
-                            <div class="col-12">
-                                <label for="inputAddress2" class="form-label">Upload Image</label>
-                                <input type="file" name="image" class="form-control" id="formFile" >
-                                <input type="hidden" name="old_image" value="{{$data['blog']['image'] ?? old('image')  ?? ''}}">
-                            </div>
-                            
-                            <div class="col-12">
-                                <label for="inputAddress2" class="form-label">Description</label>
-                                <textarea name="description" class="form-control" id="mytextarea" placeholder="Description..." rows="5">{{ $data['blog']['description'] ?? '' }}</textarea>
-                            </div>
-                            <div class="col-12">
-                                <label for="inputAddress2" class="form-label">Long Description</label>
-                                <textarea name="long_description" class="form-control" id="longtextarea" placeholder="Long Description..."
-                                    rows="5">{{ $data['blog']['long_description'] ?? '' }}</textarea>
-                            </div>
+        <div class="dashboard-widg-bar d-block">
+            <div class="row">
+                <div class="col-xl-12 col-lg-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <form action="{{ route('save_blog') }}" method="POST" class="row g-3" enctype="multipart/form-data">
+                                @csrf
+                                <div class="col-12">
+                                    <label for="inputFirstName" class="form-label">Blog Name</label>
+                                    <input type="text" name="name" class="form-control" value="{{ $data['blog']['name'] ?? '' }}" placeholder="Blog Name..." id="inputFirstName">
+                                    <input type="hidden" name="id" value="{{ $data['blog']['id'] ?? '0' }}">
+                                </div>
 
-                            <div class="col-2">
-                                <button type="submit" class="btn btn-primary px-5">Submit</button>
-                            </div>
-                        </form>
+                                <div class="col-12">
+                                    <label for="formFile" class="form-label">Upload Image</label>
+                                    <input type="file" name="image" class="form-control" id="formFile">
+                                    <input type="hidden" name="old_image" value="{{ $data['blog']['image'] ?? old('image') ?? '' }}">
+                                </div>
+
+                                <div class="col-12">
+                                    <label for="category_id" class="form-label">Category</label>
+                                    <select class="form-control" id="category_id" name="category_id">
+                                        <option value="">Select Category</option>
+                                        @foreach(($data['categories'] ?? []) as $cat)
+                                            <option value="{{ $cat->id }}" {{ (isset($data['blog']['category_id']) && $data['blog']['category_id'] == $cat->id) ? 'selected' : '' }}>{{ $cat->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+
+                                <div class="col-12">
+                                    <label for="mytextarea" class="form-label">Description</label>
+                                    <textarea name="description" class="form-control" id="mytextarea" placeholder="Description..." rows="5">{{ $data['blog']['description'] ?? '' }}</textarea>
+                                </div>
+
+                                <div class="col-12">
+                                    <label for="longtextarea" class="form-label">Long Description</label>
+                                    <textarea name="long_description" class="form-control" id="longtextarea" placeholder="Long Description..." rows="5">{{ $data['blog']['long_description'] ?? '' }}</textarea>
+                                </div>
+
+                                <div class="col-12">
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!--end row-->
 </x-admin.layout>

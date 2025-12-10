@@ -8,6 +8,8 @@ use App\Models\Enquiry;
 use App\Models\Listing;
 use App\Models\Amenity;
 use App\Models\ListingReview;
+use App\Models\Blog;
+use App\Models\Product;
 use DB;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -21,6 +23,8 @@ class WebController extends Controller
         $query = Listing::with(['images', 'workingHours', 'amenities', 'category']);
 
         $data['listing'] = $query->take(12)->get();
+
+        $data['homeBlogs'] = Blog::where('status', 1)->with('category')->latest('created_at')->take(3)->get();
 
         return view('web.index', compact('data'));
     }
@@ -229,7 +233,7 @@ class WebController extends Controller
 
     public function blogs()
     {
-        $data['blogs'] = Blog::where('is_deleted', '0')->orderBy('id', 'desc')->paginate(3);
+        $data['blogs'] = Blog::where('status', 1)->orderBy('id', 'desc')->paginate(6);
 
         return view('web.pages.blogs', compact('data'));
     }

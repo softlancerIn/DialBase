@@ -22,6 +22,11 @@
                         <i class="lni lni-add-files me-2"></i>Add Listing
                     </a>
                 </li>
+                <li class="@active('blog_list')">
+                    <a href="{{ route('blog_list') }}">
+                        <i class="lni lni-files me-2"></i>Blogs
+                    </a>
+                </li>
                 <li class="@active('reviews.index')">
                     <a href="{{ route('reviews.index') }}">
                         <i class="lni lni-star me-2"></i>Reviews
