@@ -3,6 +3,7 @@
 @section('content')
     @php
         $approvedReviews = $data['listing']->reviews ? $data['listing']->reviews->where('status', 1) : collect();
+        $averageRating = $approvedReviews->avg('rating');
     @endphp
     <!-- ======================= Listing Hero Section ======================== -->
     <div class="listing-hero" style="position: relative; height: 400px; overflow: hidden;">
@@ -164,28 +165,6 @@
                                                 <p class="mb-0">No reviews yet. Be the first to review this listing!</p>
                                             </div>
                                         @endif
-                                        
-                                        @if($data['listing']->reviews && $data['listing']->reviews->count() > 3)
-                                            <ul class="pagination">
-                                                <li class="page-item">
-                                                    <a class="page-link" href="#" aria-label="Previous">
-                                                    <span class="fas fa-arrow-circle-left"></span>
-                                                    <span class="sr-only">Previous</span>
-                                                    </a>
-                                                </li>
-                                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                                <li class="page-item active"><a class="page-link" href="#">3</a></li>
-                                                <li class="page-item"><a class="page-link" href="#">...</a></li>
-                                                <li class="page-item">
-                                                    <a class="page-link" href="#" aria-label="Next">
-                                                    <span class="fas fa-arrow-circle-right"></span>
-                                                    <span class="sr-only">Next</span>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        @endif
-                                        
                                     </div>
                                 </div>
                             </div>

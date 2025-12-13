@@ -25,16 +25,17 @@
             </a>
         </div>
         <div class="Goodup-rating overlay">
-            <div class="Goodup-pr-average high">4.5</div>
             <div class="Goodup-aldeio">
                 <div class="Goodup-rates">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
+                    @foreach(range(1,5) as $i)
+                        @if($i <= round($listing?->average_rating))
+                            <i class="fas fa-star"></i>
+                        @else
+                            <i class="fas fa-star text-gray"></i>
+                        @endif
+                    @endforeach
                 </div>
-                <div class="Goodup-all-review"><span>25 Reviews</span></div>
+                <div class="Goodup-all-review"><span>{{ round($listing?->reviews_count) ?? 25 }} Reviews</span></div>
             </div>
         </div>
     </div>
@@ -60,21 +61,16 @@
         <div class="Goodup-grid-footer py-3 px-3">
             <div class="Goodup-ft-first">
                 <div class="Goodup-rating">
-                    <div class="Goodup-pr-average high">4.3</div>
                     <div class="Goodup-rates">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
+                        @foreach(range(1,5) as $i)
+                            @if($i <= round($listing?->average_rating))
+                                <i class="fas fa-star"></i>
+                            @else
+                                <i class="fas fa-star text-gray"></i>
+                            @endif
+                        @endforeach
                     </div>
                 </div>
-                <!-- <div class="Goodup-price-range">
-                    <span class="active"><i class="fas fa-dollar-sign"></i></span>
-                    <span class="active"><i class="fas fa-dollar-sign"></i></span>
-                    <span class="active"><i class="fas fa-dollar-sign"></i></span>
-                    <span class="active"><i class="fas fa-dollar-sign"></i></span>
-                </div> -->
             </div>
             <div class="Goodup-ft-last">
                 <span class="small">{{ $listing->updated_at->diffForHumans() }}</span>

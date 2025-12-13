@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Blog;
 use App\Models\Category;
 use App\Models\Enquiry;
+use App\Models\ListingReview;   
 use App\Models\Product;
+use App\Models\Listing;
 use App\Models\Seo;
 use App\Models\User;
 use Auth;
@@ -16,10 +18,10 @@ class AdminController extends Controller
 {
     public function dashboard()
     {
-        $data['totalCategories'] = Category::where('cat_id', '0')->count();
-        $data['totalSubCategories'] = Category::where('cat_id', '!=', '0')->count();
-        $data['totalProducts'] = Product::where('status', '1')->count();
-        $data['totalenquiries'] = Product::where('status', '1')->count();
+        $data['totalListings'] = Listing::count();
+        $data['totalCategories'] = Category::where('status', '!=', '0')->where('cat_id', '0')->count();
+        $data['totalListings'] = ListingReview::where('status', 1)->count();
+        $data['totalBlogs'] = Blog::count();
 
         return view('admin.index', compact('data'));
     }

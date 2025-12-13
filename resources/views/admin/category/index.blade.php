@@ -46,7 +46,6 @@
                                 <tr>
                                     <th>Id</th>
                                     <th>Category Name</th>
-                                    <th>Image</th>
                                     <th>Description</th>
                                     <th>Created Date</th>
                                     <th>Action</th>
@@ -57,9 +56,6 @@
                                     <tr>
                                         <td>{{$key+1}}</td>
                                         <td>{{$category->name}}</td>
-                                        <td>
-                                            <img src="{{asset('upload_image/category/'.$category->image)}}" class="rounded-circle p-1 border" width="45" height="45" alt="...">
-                                        </td>
                                         <td>{!!$category->description!!}</td>
                                         <td>{{$category->created_at}}</td>
                                         <td>

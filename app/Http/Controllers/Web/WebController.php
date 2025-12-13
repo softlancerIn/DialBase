@@ -20,9 +20,14 @@ class WebController extends Controller
     {
         $data['category'] = Category::where('status', '1')->withCount('listing')->get();
 
-        $query = Listing::with(['images', 'workingHours', 'amenities', 'category']);
+        $query = Listing::with(['images', 'workingHours', 'amenities', 'category', 'reviews.user']);
 
         $data['listing'] = $query->take(12)->get();
+
+        foreach ($data['listing'] as $listing) {
+            $listing->reviews_count = $listing->reviews->where('status', 1)->count();
+            $listing->average_rating = $listing->reviews->where('status', 1)->avg('rating');
+        }
 
         $data['homeBlogs'] = Blog::where('status', 1)->with('category')->latest('created_at')->take(3)->get();
 

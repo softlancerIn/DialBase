@@ -26,7 +26,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12">
-                    <div class="bg-white rounded mb-4">							
+                    <div class="bg-white rounded mb-4">
                     
                         <div class="sidebar_header d-flex align-items-center justify-content-between px-4 py-3 br-bottom">
                             <h4 class="ft-medium fs-lg mb-0">Search Filter</h4>

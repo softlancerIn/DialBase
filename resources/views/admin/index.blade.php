@@ -19,29 +19,29 @@
         <div class="row">
             <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
                 <div class="dsd-boxed-widget py-5 px-4 bg-danger rounded">
-                    <h2 class="ft-medium mb-1 fs-xl text-light count">46</h2>
+                    <h2 class="ft-medium mb-1 fs-xl text-light count">{{ $data['totalListings'] }}</h2>
                     <p class="p-0 m-0 text-light fs-md">Active Listings</p>
                     <i class="lni lni-empty-file"></i>
                 </div>
             </div>
             <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
                 <div class="dsd-boxed-widget py-5 px-4 bg-success rounded">
-                    <h2 class="ft-medium mb-1 fs-xl text-light count">2615</h2>
-                    <p class="p-0 m-0 text-light fs-md">Views Listing</p>
+                    <h2 class="ft-medium mb-1 fs-xl text-light count">{{ $data['totalCategories'] }}</h2>
+                    <p class="p-0 m-0 text-light fs-md">Total Categories</p>
                     <i class="lni lni-eye"></i>
                 </div>
             </div>
             <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
                 <div class="dsd-boxed-widget py-5 px-4 bg-warning rounded">
-                    <h2 class="ft-medium mb-1 fs-xl text-light count">312</h2>
+                    <h2 class="ft-medium mb-1 fs-xl text-light count">{{ $data['totalListings'] }}</h2>
                     <p class="p-0 m-0 text-light fs-md">Total Reviews</p>
                     <i class="lni lni-comments"></i>
                 </div>
             </div>
             <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
                 <div class="dsd-boxed-widget py-5 px-4 bg-purple rounded">
-                    <h2 class="ft-medium mb-1 fs-xl text-light count">410</h2>
-                    <p class="p-0 m-0 text-light fs-md">Total Bookings</p>
+                    <h2 class="ft-medium mb-1 fs-xl text-light count">{{ $data['totalBlogs'] }}</h2>
+                    <p class="p-0 m-0 text-light fs-md">Total Blogs</p>
                     <i class="lni lni-wallet"></i>
                 </div>
             </div>
@@ -140,7 +140,7 @@
         </div>
         <!-- /.row -->
 
-        <div class="row">
+        <!-- <div class="row">
             <div class="col-lg-6 col-md-12">
                 <div class="goodup-dashboard-grouping-list with-icons">
                     <h4>Recent Activities</h4>
@@ -276,7 +276,7 @@
                     </ul>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
 
 </x-admin.layout>
