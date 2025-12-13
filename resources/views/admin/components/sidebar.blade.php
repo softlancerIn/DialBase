@@ -32,6 +32,11 @@
                         <i class="lni lni-star me-2"></i>Reviews
                     </a>
                 </li>
+                <li class="@active('enquiry_list')">
+                    <a href="{{ route('enquiry_list') }}">
+                        <i class="lni lni-files me-2"></i>Enquiry
+                    </a>
+                </li>
             </ul>
             <ul data-submenu-title="My Accounts">
                 <li class="@active('profile')">

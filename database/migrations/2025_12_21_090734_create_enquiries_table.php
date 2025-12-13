@@ -13,14 +13,15 @@ return new class extends Migration
     {
         Schema::create('enquiries', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique();
-            $table->string('phone')->unique();
+            $table->unsignedBigInteger('listing_id');
+            $table->string('name')->nullable();
+            $table->string('phone')->nullable();
             $table->string('email')->nullable();
             $table->string('subject')->nullable();
-            $table->string('city')->nullable();
-            $table->string('state')->nullable();
             $table->longText('message')->nullable();
             $table->timestamps();
+
+            $table->foreign('listing_id')->references('id')->on('listings')->onDelete('cascade');
         });
     }
 

@@ -76,6 +76,8 @@ Route::middleware(['auth:admin', 'admin'])->group(function () {
     // enquiry
     Route::controller(EnquiryController::class)->group(function () {
         Route::match(['get', 'post'], 'enquiry-details', 'enquiry_list')->name('enquiry_list');
+        Route::match(['get', 'post'], 'enquiry-export', 'enquiry_export')->name('enquiry_export');
+        Route::get('enquiry-download', 'enquiry_download')->name('enquiry_download');
     });
 
     // // role
