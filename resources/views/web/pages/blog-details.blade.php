@@ -14,7 +14,12 @@
                         @endif
                     </div>
                     @if(!empty($data['blog']->image))
-                        <img class="img-fluid rounded mb-4" src="{{ asset('upload_image/blog/' . $data['blog']->image) }}" alt="{{ $data['blog']->name }}" />
+                        <img
+                            src="{{ $data['blog']->image ? asset('upload_image/blog/'.$data['blog']->image) : asset('assets/img/b-4.jpg') }}"
+                            class="img-fluid"
+                            alt="{{ $data['blog']->name }}"
+                            style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;"
+                        >
                     @endif
 
                     @if(!empty($data['blog']->description))
