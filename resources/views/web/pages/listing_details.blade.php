@@ -49,7 +49,7 @@
                                         </div>
                                     </div>
                                     <div style="font-size:12px; color: #989bb1;">
-                                        <span class="ft-medium text-light">$approvedReviews->count() Reviews</span>
+                                        <span class="ft-medium text-light">{{ $approvedReviews->count() }} Reviews</span>
                                     </div>
                                 </div>
                                 <div class="d-block mt-3">
