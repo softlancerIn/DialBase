@@ -3,6 +3,7 @@
 @section('content')
     @php
         $approvedReviews = $data['listing']->reviews ? $data['listing']->reviews->where('status', 1) : collect();
+        $averageRating = 0;
     @endphp
     <!-- ======================= Listing Hero Section ======================== -->
     <div class="listing-hero" style="position: relative; height: 400px; overflow: hidden;">
