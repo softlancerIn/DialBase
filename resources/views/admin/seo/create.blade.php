@@ -1,35 +1,19 @@
 <x-admin.layout type="seo">
-    <style>
-        .preview {
-            display: inline-block;
-            margin: 10px;
-        }
-
-        .preview img {
-            width: 100px;
-            height: 100px;
-            margin-right: 10px;
-        }
-    </style>
-
     <div class="page-content">
-        <!--breadcrumb-->
-        <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-            <div class="breadcrumb-title pe-3">Seo</div>
-            <div class="ps-3">
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb mb-0 p-0">
-                        <li class="breadcrumb-item">
-                            <a href="{{ route('dashboard') }}"><i class="bx bx-home-alt"></i></a>
-                        </li>
-                        <li class="breadcrumb-item active" aria-current="page">
-                            Create Seo
-                        </li>
-                    </ol>
-                </nav>
+        <div class="dashboard-tlbar d-block mb-3">
+            <div class="row">
+                <div class="colxl-12 col-lg-12 col-md-12">
+                    <h1 class="ft-medium">Create Seo</h1>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item text-muted"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item"><a href="#" class="theme-cl">Create Seo</a></li>
+                        </ol>
+                    </nav>
+                </div>
             </div>
         </div>
-        <!--end breadcrumb-->
+
         <hr />
         <div class="row">
             <div class="col-xl-12 mx-auto">
@@ -39,7 +23,7 @@
                             enctype="multipart/form-data">
                             @csrf
                             <div class="col-12">
-                                <label for="inputFirstName" class="form-label">Page Url ()</label>
+                                <label for="inputFirstName" class="form-label">Page Url</label>
                                 <input type="url" name="url" class="form-control"
                                     value="{{ old('url', '') }}" placeholder="Page Url..."
                                     id="inputFirstName">
