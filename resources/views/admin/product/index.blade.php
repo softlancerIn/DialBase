@@ -1,9 +1,4 @@
 <x-admin.layout type="product">
-    @php
-        $create = App\Models\Permission::getPermissionBySlugAndId('Product', 'Create');
-        $edit = App\Models\Permission::getPermissionBySlugAndId('Product', 'Edit');
-        $delete = App\Models\Permission::getPermissionBySlugAndId('Product', 'Delete');
-    @endphp
     <div class="page-content">
         <!--breadcrumb-->
         <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
@@ -21,15 +16,13 @@
                 </nav>
             </div>
             <div class="ms-auto">
-                @if ($create)
-                    <div class="btn-group">
-                        <a href="{{ route('product_form', ['type' => 'create', 'id' => '0']) }}">
-                            <button type="button" class="btn btn-primary">
-                                Add Product
-                            </button>
-                        </a>
-                    </div>
-                @endif
+                <div class="btn-group">
+                    <a href="{{ route('product_form', ['type' => 'create', 'id' => '0']) }}">
+                        <button type="button" class="btn btn-primary">
+                            Add Product
+                        </button>
+                    </a>
+                </div>
             </div>
         </div>
         <!--end breadcrumb-->
@@ -46,9 +39,7 @@
                                 <th>Image</th>
                                 <th>Description</th>
                                 <th>Created Date</th>
-                                @if ($edit || $delete)
                                 <th>Action</th>
-                                @endif
                             </tr>
                         </thead>
                         <tbody>
@@ -66,22 +57,16 @@
                                     </td>
                                     <td>{!! $product->description !!}</td>
                                     <td>{{ $product->created_at }}</td>
-                                    @if ($edit || $delete)
                                     <td>
-                                        @if ($edit)
-                                            <a href="{{ route('product_form', ['type' => 'edit', 'id' => $product->id]) }}">
-                                                <i class="text-primary" data-feather="edit"></i>
-                                            </a>
-                                        @endif
-                                        @if ($delete)
-                                            <a data-bs-toggle="modal" data-bs-target="#deleteModal{{ $product->id }}"
+                                        <a href="{{ route('product_form', ['type' => 'edit', 'id' => $product->id]) }}">
+                                            <i class="text-primary" data-feather="edit"></i>
+                                        </a>
+                                        <a data-bs-toggle="modal" data-bs-target="#deleteModal{{ $product->id }}"
                                                 href="#">
                                                 <i class="text-primary" data-feather="trash-2"></i>
                                             </a>
-                                        @endif
                                         <x-admin.modal type="product" id="{{ $product->id }}" />
                                     </td>
-                                    @endif
                                 </tr>
                             @endforeach
                         </tbody>

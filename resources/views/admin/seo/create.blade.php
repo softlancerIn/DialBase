@@ -23,7 +23,7 @@
                             <a href="{{ route('dashboard') }}"><i class="bx bx-home-alt"></i></a>
                         </li>
                         <li class="breadcrumb-item active" aria-current="page">
-                            Seo
+                            Create Seo
                         </li>
                     </ol>
                 </nav>
@@ -39,54 +39,54 @@
                             enctype="multipart/form-data">
                             @csrf
                             <div class="col-12">
-                                <label for="inputFirstName" class="form-label">Page Url</label>
+                                <label for="inputFirstName" class="form-label">Page Url ()</label>
                                 <input type="url" name="url" class="form-control"
-                                    value="{{ $data['seo']['url'] ?? '' }}" placeholder="Page Url..."
+                                    value="{{ old('url', '') }}" placeholder="Page Url..."
                                     id="inputFirstName">
-                                <input type="hidden" name="id" value="{{ $data['seo']['id'] ?? '0' }}">
+                                <input type="hidden" name="id" value="0">
                             </div>
 
                             <div class="col-12">
                                 <label for="inputTitle" class="form-label">Page Title (H1)</label>
                                 <input type="text" name="page_title" class="form-control"
-                                    value="{{ $data['seo']['page_title'] ?? '' }}" placeholder="Page Title..."
+                                    value="{{ old('page_title', '') }}" placeholder="Page Title..."
                                     id="inputTitle">
                             </div>
 
                             <div class="col-12">
                                 <label for="inputTitle" class="form-label">Page Sort Description</label>
                                 <textarea id="mytextarea" name="page_sort_description" class="form-control"
-                                    value="{{ $data['seo']['page_sort_description'] ?? '' }}" placeholder="Page Sort Description..."
+                                    value="{{ old('page_sort_description', '') }}" placeholder="Page Sort Description..."
                                     id="inputTitle"></textarea>
                             </div>
 
                             <div class="col-12">
                                 <label for="inputTitle" class="form-label">Page Description</label>
                                 <textarea id="longtextarea" name="page_description" class="form-control"
-                                    value="{{ $data['seo']['page_description'] ?? '' }}" placeholder="Page Description..."
+                                    value="{{ old('page_description', '') }}" placeholder="Page Description..."
                                     id="inputTitle"></textarea>
                             </div>
 
                             <div class="col-12">
                                 <label for="inputTitle" class="form-label">Meta Title</label>
                                 <input type="text" name="title" class="form-control"
-                                    value="{{ $data['seo']['title'] ?? '' }}" placeholder="Meta Title..."
+                                    value="{{ old('title', '') }}" placeholder="Meta Title..."
                                     id="inputTitle">
                             </div>
                             
                             <div class="col-12">
                                 <label for="inputKeyword" class="form-label">Meta Keyword</label>
-                                <textarea name="keywords" class="form-control" id="inputKeyword" placeholder="Meta Keyword..." rows="3">{{ $data['seo']['keywords'] ?? '' }}</textarea>
+                                <textarea name="keywords" class="form-control" id="inputKeyword" placeholder="Meta Keyword..." rows="3">{{ old('keywords', '') }}</textarea>
                             </div>
 
                             <div class="col-12">
                                 <label for="inputDescription" class="form-label">Meta Description</label>
-                                <textarea name="description" class="form-control" id="inputDescription" placeholder="Meta Description..." rows="4">{{ $data['seo']['description'] ?? '' }}</textarea>
+                                <textarea name="description" class="form-control" id="inputDescription" placeholder="Meta Description..." rows="5">{{ old('description', '') }}</textarea>
                             </div>
 
                             <div class="col-12">
                                 <label for="inputScript" class="form-label">Meta Script</label>
-                                <textarea name="script" class="form-control" id="inputScript" placeholder="Meta Script..." rows="5">{{ $data['seo']['script'] ?? '' }}</textarea>
+                                <textarea name="script" class="form-control" id="inputScript" placeholder="Meta Script..." rows="5">{{ old('script', '') }}</textarea>
                             </div>
 
                             <div class="col-2">

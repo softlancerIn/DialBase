@@ -43,15 +43,9 @@
                                     </select>
                                 </div>
 
-
                                 <div class="col-12">
-                                    <label for="mytextarea" class="form-label">Description</label>
-                                    <textarea name="description" class="form-control" id="mytextarea" placeholder="Description..." rows="5">{{ $data['blog']['description'] ?? '' }}</textarea>
-                                </div>
-
-                                <div class="col-12">
-                                    <label for="longtextarea" class="form-label">Long Description</label>
-                                    <textarea name="long_description" class="form-control" id="longtextarea" placeholder="Long Description..." rows="5">{{ $data['blog']['long_description'] ?? '' }}</textarea>
+                                    <label for="longtextarea" class="form-label">Description</label>
+                                    <textarea name="description" class="form-control" id="longtextarea" placeholder="Description..." rows="5">{{ $data['blog']['description'] ?? '' }}</textarea>
                                 </div>
 
                                 <div class="col-12">

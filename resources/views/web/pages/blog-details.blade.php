@@ -23,14 +23,8 @@
                     @endif
 
                     @if(!empty($data['blog']->description))
-                        <div class="mb-2 fw-bold fs-5">
+                        <div class="mt-2">
                             {!! $data['blog']->description !!}
-                        </div>
-                    @endif
-
-                    @if(!empty($data['blog']->long_description))
-                        <div class="mb-5">
-                            {!! $data['blog']->long_description !!}
                         </div>
                     @endif
                 </div>

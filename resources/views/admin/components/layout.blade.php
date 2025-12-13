@@ -129,6 +129,51 @@
         <!-- This page plugins -->
         <!-- ============================================================== -->
 
+        <!-- TinyMCE Editor -->
+        <script src='https://cdn.jsdelivr.net/npm/tinymce@5/tinymce.min.js' referrerpolicy="origin">
+        </script>
+        <script src="https://unpkg.com/feather-icons"></script>
+        <script>
+            setTimeout(function() {
+                $('.alert-success,.alert-danger').fadeOut('fast');
+            }, 3000);
+
+            tinymce.init({
+                selector: '#mytextarea,#longtextarea',
+                height: 400,
+                plugins: [
+                    'advlist', 'autolink', 'link', 'image', 'lists', 'charmap', 'preview', 'anchor', 'pagebreak',
+                    'searchreplace', 'wordcount', 'visualblocks', 'visualchars', 'code', 'fullscreen', 'insertdatetime',
+                    'media', 'table', 'emoticons', 'help'
+                ],
+                menubar: true,
+                toolbar: 'undo redo | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | code | styleselect',
+                extended_valid_elements: 'i[class|style],table[class|style],th[class|style],td[class|style],h1[class|style],h2[class|style],h3[class|style],h4[class|style],h5[class|style],h6[class|style]',
+                valid_elements: '*[*]',
+                content_css: false,
+                content_style: 'i { font-style: italic; }',
+                entity_encoding: 'raw',
+                remove_trailing_brs: false,
+                valid_children: '+body[style|i]',
+                style_formats: [
+                    {
+                        title: 'Custom Table Styles',
+                        items: [
+                            { title: 'Table Striped', selector: 'table', classes: 'table mt-3 table-striped table-hover table-bordered' }
+                        ]
+                    },
+                    {
+                        title: 'Custom Heading Styles',
+                        items: [
+                            { title: 'Product Title', selector: 'h1,h2,h3,h4,h5,h6', classes: 'product-details__description__title' }
+                        ]
+                    }
+                ]
+            });
+
+            feather.replace()
+        </script>
+
 </body>
 
 <!-- Mirrored from shreethemes.net/goodup-live-2/goodup/dashboard.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 21 Feb 2025 18:57:00 GMT -->

@@ -1,13 +1,12 @@
 <x-admin.layout type="reviews">
     <div class="goodup-dashboard-content p-0">
-        <div class="dashboard-tlbar d-block mb-5">
+        <div class="dashboard-tlbar d-block mb-3">
             <div class="row">
                 <div class="colxl-12 col-lg-12 col-md-12">
                     <h1 class="ft-medium">Reviews</h1>
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item text-muted"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item text-muted"><a href="#">Dashboard</a></li>
                             <li class="breadcrumb-item"><a href="#" class="theme-cl">Reviews</a></li>
                         </ol>
                     </nav>
@@ -15,7 +14,8 @@
             </div>
         </div>
 
-        <!--end breadcrumb-->
+        <hr />
+
         @if(session('success'))
             <div class="alert alert-success">{{ session('success') }}</div>
         @endif
@@ -27,9 +27,7 @@
                         <thead>
                             <tr>
                                 <th>Id</th>
-                                <th>Listing</th>
                                 <th>Name</th>
-                                <th>Email</th>
                                 <th>Rating</th>
                                 <th>Review</th>
                                 <th>Created</th>
@@ -41,12 +39,10 @@
                             @foreach($reviews as $review)
                                 <tr>
                                     <td>{{ $review->id }}</td>
-                                    <td>{{ $review->listing->title ?? '—' }}</td>
                                     <td>{{ $review->name ?? ($review->user->name ?? 'Anonymous') }}</td>
-                                    <td>{{ $review->email }}</td>
                                     <td>{{ $review->rating }}</td>
-                                    <td>{{ \Illuminate\Support\Str::limit($review->review, 120) }}</td>
-                                    <td>{{ $review->created_at->format('d M Y') }}</td>
+                                    <td>{{ \Illuminate\Support\Str::limit($review->review, 30) }}</td>
+                                    <td>{{ daysAgo($review->created_at) }}</td>
                                     <td>
                                         @if($review->status == 0)
                                             <span class="badge bg-warning">Pending</span>

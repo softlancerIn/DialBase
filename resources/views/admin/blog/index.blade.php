@@ -24,6 +24,8 @@
             </div>
         </div>
 
+        <hr />
+
          <div class="dashboard-widg-bar d-block">
             <div class="row">
                 <div class="col-xl-12 col-lg-12">
@@ -52,7 +54,7 @@
                                                             alt="...">
                                                 </td>
                                                 <td>{!! $blog->description !!}</td>
-                                                <td>{{ $blog->created_at }}</td>
+                                                <td>{{ daysAgo($blog->created_at) }}</td>
                                                 <td>
                                                     <a href="{{ route('blog_form', ['type' => 'edit', 'id' => $blog->id]) }}">
                                                         <i class="fas fa-edit me-1" data-feather="edit"></i>

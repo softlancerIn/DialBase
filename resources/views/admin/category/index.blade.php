@@ -1,38 +1,29 @@
 <x-admin.layout type="category">
         <div class="page-content">
-            <!--breadcrumb-->
-            <div
-                class="page-breadcrumb d-none d-sm-flex align-items-center mb-3"
-            >
-                <div class="breadcrumb-title pe-3">Category</div>
-                <div class="ps-3">
-                    <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb mb-0 p-0">
-                            <li class="breadcrumb-item">
-                                <a href="{{route('dashboard')}}"
-                                    ><i class="bx bx-home-alt"></i
-                                ></a>
-                            </li>
-                            <li
-                                class="breadcrumb-item active"
-                                aria-current="page"
-                            >
-                               Category
-                            </li>
-                        </ol>
-                    </nav>
-                </div>
-                <div class="ms-auto">
-                    <div class="btn-group">
-                        <a href="{{route('category_form',['type' => 'create', 'id' => '0'])}}">
-                            <button type="button" class="btn btn-primary">
-                                Add Category
-                            </button>
-                        </a>
+            <div class="dashboard-tlbar d-block mb-3">
+                <div class="row">
+                    <div class="colxl-10 col-lg-10 col-md-10">
+                        <h1 class="ft-medium">Manage Category</h1>
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item text-muted"><a href="#">Home</a></li>
+                                <li class="breadcrumb-item"><a href="#" class="theme-cl">Manage Category</a></li>
+                            </ol>
+                        </nav>
+                    </div>
+
+                    <div class="col-xl-2 col-lg-2 col-md-2">
+                        <div class="btn-group">
+                            <a href="{{route('category_form',['type' => 'create', 'id' => '0'])}}">
+                                <button type="button" class="btn btn-primary">
+                                    Add Category
+                                </button>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
-            <!--end breadcrumb-->
+
             <hr />
             <div class="card">
                 <div class="card-body">
@@ -57,7 +48,7 @@
                                         <td>{{$key+1}}</td>
                                         <td>{{$category->name}}</td>
                                         <td>{!!$category->description!!}</td>
-                                        <td>{{$category->created_at}}</td>
+                                        <td>{{ daysAgo($category->created_at)}}</td>
                                         <td>
                                             <a href="{{route('category_form',['type'=>'edit','id'=>$category->id])}}">
                                                 <i class="fas fa-edit me-1" data-feather="edit"></i>

@@ -1,8 +1,8 @@
 <x-admin.layout>
     <div class="goodup-dashboard-content p-0">
-        <div class="dashboard-tlbar d-block mb-5">
+        <div class="dashboard-tlbar d-block mb-3">
             <div class="row">
-                <div class="colxl-12 col-lg-12 col-md-12">
+                <div class="colxl-10 col-lg-10 col-md-10">
                     <h1 class="ft-medium">Manage Listings</h1>
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
@@ -11,8 +11,20 @@
                         </ol>
                     </nav>
                 </div>
+
+                <div class="col-xl-2 col-lg-2 col-md-2">
+                    <div class="btn-group">
+                        <a href="{{route('listing-data.create')}}">
+                            <button type="button" class="btn btn-primary">
+                                Add Listing
+                            </button>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
+
+        <hr />
 
         <div class="dashboard-widg-bar d-block">
             <div class="row">

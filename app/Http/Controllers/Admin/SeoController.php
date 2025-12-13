@@ -13,7 +13,6 @@ class SeoController extends Controller
 
     public function seo_list()
     {
-
         $data['seo'] = Seo::get();
 
         return view('admin.seo.index', compact('data'));
@@ -21,6 +20,9 @@ class SeoController extends Controller
 
     public function seo_form($type, $id)
     {
+        if ($type === 'create') {
+            return view('admin.seo.create');
+        }
 
         $data['seo'] = Seo::where('id', $id)->first();
 

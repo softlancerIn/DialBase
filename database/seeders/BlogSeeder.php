@@ -16,18 +16,117 @@ class BlogSeeder extends Seeder
         $items = [
             [
                 'name' => 'Welcome to Our Blog',
-                'short_description' => 'Introducing our new blog section with updates and tips.',
-                'description' => 'This is the beginning of our blog journey. Stay tuned for more updates.',
+                'description' => '<h2>How to Calculate Average Ratings Out of 5</h2>
+
+                <p>
+                Customer reviews play a crucial role in building trust and helping users make informed decisions.
+                Understanding how to calculate the average rating correctly ensures transparency and accuracy.
+                </p>
+
+                <p>
+                When you have multiple reviews, each rated out of <strong>5 stars</strong>, the average rating is
+                calculated by adding all individual ratings together and dividing the total by the number of reviews.
+                </p>
+
+                <h3>Example Calculation</h3>
+
+                <p>
+                If you have <strong>10 reviews</strong> with a combined total rating score of <strong>37</strong>,
+                the average rating is calculated as follows:
+                </p>
+
+                <ul>
+                <li>Total ratings: 37</li>
+                <li>Number of reviews: 10</li>
+                <li>Average rating: <strong>3.7 out of 5</strong></li>
+                </ul>
+
+                <p>
+                Displaying accurate average ratings helps improve credibility, enhances user experience,
+                and allows customers to quickly evaluate the quality of a product or service.
+                </p>
+
+                <p>
+                Whether you are running an e-commerce store, a review platform, or a service-based website,
+                properly calculated ratings can significantly impact customer trust and engagement.
+                </p>
+',
             ],
             [
                 'name' => 'How To Get Listed',
-                'short_description' => 'Step-by-step guide to list your business.',
-                'description' => 'We walk you through creating a compelling listing that converts.',
+                'description' => '<h2>How to Calculate Average Ratings Out of 5</h2>
+
+                <p>
+                Customer reviews play a crucial role in building trust and helping users make informed decisions.
+                Understanding how to calculate the average rating correctly ensures transparency and accuracy.
+                </p>
+
+                <p>
+                When you have multiple reviews, each rated out of <strong>5 stars</strong>, the average rating is
+                calculated by adding all individual ratings together and dividing the total by the number of reviews.
+                </p>
+
+                <h3>Example Calculation</h3>
+
+                <p>
+                If you have <strong>10 reviews</strong> with a combined total rating score of <strong>37</strong>,
+                the average rating is calculated as follows:
+                </p>
+
+                <ul>
+                <li>Total ratings: 37</li>
+                <li>Number of reviews: 10</li>
+                <li>Average rating: <strong>3.7 out of 5</strong></li>
+                </ul>
+
+                <p>
+                Displaying accurate average ratings helps improve credibility, enhances user experience,
+                and allows customers to quickly evaluate the quality of a product or service.
+                </p>
+
+                <p>
+                Whether you are running an e-commerce store, a review platform, or a service-based website,
+                properly calculated ratings can significantly impact customer trust and engagement.
+                </p>
+',
             ],
             [
                 'name' => 'Top 10 Local SEO Tips',
-                'short_description' => 'Boost your local visibility with these practical tips.',
-                'description' => 'Local SEO matters. Here are 10 tips you can apply today.',
+                'description' => '<h2>How to Calculate Average Ratings Out of 5</h2>
+
+                <p>
+                Customer reviews play a crucial role in building trust and helping users make informed decisions.
+                Understanding how to calculate the average rating correctly ensures transparency and accuracy.
+                </p>
+
+                <p>
+                When you have multiple reviews, each rated out of <strong>5 stars</strong>, the average rating is
+                calculated by adding all individual ratings together and dividing the total by the number of reviews.
+                </p>
+
+                <h3>Example Calculation</h3>
+
+                <p>
+                If you have <strong>10 reviews</strong> with a combined total rating score of <strong>37</strong>,
+                the average rating is calculated as follows:
+                </p>
+
+                <ul>
+                <li>Total ratings: 37</li>
+                <li>Number of reviews: 10</li>
+                <li>Average rating: <strong>3.7 out of 5</strong></li>
+                </ul>
+
+                <p>
+                Displaying accurate average ratings helps improve credibility, enhances user experience,
+                and allows customers to quickly evaluate the quality of a product or service.
+                </p>
+
+                <p>
+                Whether you are running an e-commerce store, a review platform, or a service-based website,
+                properly calculated ratings can significantly impact customer trust and engagement.
+                </p>
+',
             ],
         ];
 
@@ -41,9 +140,7 @@ class BlogSeeder extends Seeder
                 [
                     'name' => $data['name'],
                     'slug' => $slug,
-                    'short_description' => $data['short_description'] ?? null,
                     'description' => $data['description'] ?? null,
-                    'long_description' => $data['long_description'] ?? null,
                     'status' => 1,
                     'category_id' => $category?->id,
                 ]

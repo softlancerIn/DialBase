@@ -33,16 +33,4 @@ class Permission extends Model
 
         return $allPermission;
     }
-
-    public static function getPermissionBySlugAndId(string $name, ?string $type = null): bool
-    {
-        $type = ! empty($type) ? $type : $name;
-        $permissionType = Permission::where('slug', $name)->first();
-        $allPermission = null;
-        if ($permissionType) {
-            $allPermission = Permission::where(['slug' => $type, 'groupby' => $permissionType->groupby])->first();
-        }
-
-        return Role::HasPermission($allPermission?->id);
-    }
 }

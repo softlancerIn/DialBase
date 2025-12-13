@@ -17,14 +17,14 @@
                         <i class="lni lni-files me-2"></i>My Listings
                     </a>
                 </li>
-                <li class="@active('listing-data.create')">
-                    <a href="{{ route('listing-data.create') }}">
-                        <i class="lni lni-add-files me-2"></i>Add Listing
-                    </a>
-                </li>
                 <li class="@active('blog_list')">
                     <a href="{{ route('blog_list') }}">
                         <i class="lni lni-files me-2"></i>Blogs
+                    </a>
+                </li>
+                <li class="@active('seo_list')">
+                    <a href="{{ route('seo_list') }}">
+                        <i class="lni lni-target me-2"></i>SEO
                     </a>
                 </li>
                 <li class="@active('reviews.index')">
