@@ -3,7 +3,6 @@
 @section('content')
     @php
         $approvedReviews = $data['listing']->reviews ? $data['listing']->reviews->where('status', 1) : collect();
-        $averageRating = 0;
     @endphp
     <!-- ======================= Listing Hero Section ======================== -->
     <div class="listing-hero" style="position: relative; height: 400px; overflow: hidden;">
@@ -42,25 +41,15 @@
                                 <div class="Goodup-ft-first">
                                     <div class="Goodup-rating">
                                         <div class="Goodup-rates">
-                                            <div class="Goodup-rate-it">
-                                                @php
-                                                    $totalReviews = $approvedReviews->count();
-                                                    $averageRating = $totalReviews > 0 ? round($averageRating / $totalReviews, 1) : 0;
-                                                @endphp
-
-                                                @for($i = 1; $i <= 5; $i++)
-                                                    @if($i <= floor($averageRating))
-                                                        <i class="fas fa-star filled"></i>
-                                                    @elseif($i - $averageRating < 1)
-                                                        <i class="fas fa-star-half-alt filled"></i>
-                                                    @else
-                                                        <i class="fas fa-star"></i>
-                                                    @endif
-                                                @endfor
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
                                         </div>
                                     </div>
                                     <div style="font-size:12px; color: #989bb1;">
-                                        <span class="ft-medium text-light">{{ $approvedReviews->count() }} Reviews</span>
+                                        <span class="ft-medium text-light">$approvedReviews->count() Reviews</span>
                                     </div>
                                 </div>
                                 <div class="d-block mt-3">
@@ -134,9 +123,6 @@
                                     <div class="reviews-comments-wrap">
                                         @if($approvedReviews && $approvedReviews->count() > 0)
                                             @foreach($approvedReviews as $review)
-                                            @php
-                                                $averageRating += $review->rating;
-                                            @endphp
                                                 <!-- reviews-comments-item -->  
                                                 <div class="reviews-comments-item">
                                                     <div class="review-comments-avatar">
