@@ -333,4 +333,14 @@ class WebController extends Controller
 
         return redirect()->back()->with('success', 'Review submitted successfully! Your review will appear after approval.');
     }
+
+    public function termsAndCondition()
+    {
+        return view('web.pages.terms_and_condition');
+    }
+
+    public function privacyPolicy()
+    {
+        return view('web.pages.privacy_policy');
+    }
 }

@@ -219,10 +219,6 @@ SOFTWARE.
 					self.updateStyle(newStyle);
 					// update default ref
 					self.defaultTheme = newStyle;
-					// try to store cookie
-					if (self.config.cookie) {
-						_docCookies.setItem(_cookieKey, asset, self.config.cookie.expires, 'https://shreethemes.net/');
-					}
 				}
 			);
 		}

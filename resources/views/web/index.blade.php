@@ -8,9 +8,8 @@
                 <div class="col-xl-11 col-lg-12 col-md-12 col-sm-12 col-12">
 
                     <div class="banner_caption text-center">
-                        <h1 class="banner_title ft-bold mb-1">Explore Great Place in Your Town</h1>
-                        <p class="fs-lg ft-light">Explore wonderful place to stay, salon, shoping, massage or visit local
-                            areas.</p>
+                        <h1 class="banner_title ft-bold mb-1">Find & Connect with Verified B2B Companies Worldwide</h1>
+                        <p class="fs-lg ft-light">Connecting businesses across industries, globally</p>
                     </div>
 
                     <form class="main-search-wrap fl-wrap half-column" method="GET" action="{{ route('search') }}">
@@ -2461,8 +2460,8 @@
             <div class="row justify-content-center">
                 <div class="col-xl-5 col-lg-7 col-md-9 col-sm-12">
                     <div class="sec_title position-relative text-center mb-5">
-                        <h6 class="theme-cl mb-0">Our Pricing</h6>
-                        <h2 class="ft-bold">Choose Your Package</h2>
+                        <h6 class="theme-cl mb-0">Our Cost</h6>
+                        <h2 class="ft-bold">Choose Your Growth Path</h2>
                     </div>
                 </div>
             </div>
@@ -2473,25 +2472,26 @@
                     <div class="Goodup-price-wrap">
                         <div class="Goodup-author-header">
                             <div class="Goodup-price-currency">
-                                <h3><span class="Goodup-new-price">$<del>49</del></span><span
-                                        class="Goodup-old-price">$<del>149</del></span></h3>
+                                <h3><span class="Goodup-new-price">$<del>0</del></span>
+                                    <!-- <span class="Goodup-old-price">$<del>149</del></span> -->
+                                </h3>
                             </div>
                             <div class="Goodup-price-title">
                                 <div class="Goodup-price-tlt">
-                                    <h4>Personal</h4>
+                                    <h4>Basic / Starter</h4>
                                 </div>
-                                <div class="Goodup-price-ribbon"><span class="Goodup-ribbon-offer all">50% Off</span></div>
+                                <!-- <div class="Goodup-price-ribbon"><span class="Goodup-ribbon-offer all">50% Off</span></div> -->
                             </div>
-                            <div class="Goodup-price-subtitle">Best Choice for Individuals </div>
+                            <div class="Goodup-price-subtitle">Best for Small businesses & startups </div>
                         </div>
                         <div class="Goodup-price-body">
                             <ul class="price__features">
-                                <li><i class="fa fa-angle-right"></i>Lifetime Bandwidth Usage</li>
-                                <li><i class="fa fa-angle-right"></i>6 Months Support &amp; Updates</li>
-                                <li><i class="fa fa-angle-right"></i>10 Website License</li>
-                                <li><i class="fa fa-angle-right"></i>Quickstart Included</li>
-                                <li><i class="fa fa-angle-right"></i>Access to Plugins &amp; Theme</li>
-                                <li><i class="fa fa-angle-right"></i>Branding/Copyright Removal</li>
+                                <li><i class="fa fa-angle-right"></i>Basic company listing</li>
+                                <li><i class="fa fa-angle-right"></i>Company profile with logo</li>
+                                <li><i class="fa fa-angle-right"></i>Contact details display</li>
+                                <li><i class="fa fa-angle-right"></i>Search visibility</li>
+                                <li><i class="fa fa-angle-right"></i>5 product/service listings</li>
+                                <li><i class="fa fa-angle-right"></i>Standard support</li>
                             </ul>
                         </div>
                         <div class="Goodup-price-bottom">
@@ -2504,25 +2504,30 @@
                     <div class="Goodup-price-wrap">
                         <div class="Goodup-author-header">
                             <div class="Goodup-price-currency">
-                                <h3><span class="Goodup-new-price theme-cl">$<del>129</del></span><span
-                                        class="Goodup-old-price">$<del>199</del></span></h3>
+                                <h3><span class="Goodup-new-price theme-cl">$<del>49</del></span>
+                                    <!-- <span class="Goodup-old-price">$<del>199</del></span> -->
+                                </h3>
                             </div>
                             <div class="Goodup-price-title">
                                 <div class="Goodup-price-tlt">
-                                    <h4>Platinum</h4>
+                                    <h4>Professional / Growth ⭐ Most Popular</h4>
                                 </div>
-                                <div class="Goodup-price-ribbon"><span class="Goodup-ribbon-offer">50% Off</span></div>
+                                <!-- <div class="Goodup-price-ribbon"><span class="Goodup-ribbon-offer">50% Off</span></div> -->
                             </div>
-                            <div class="Goodup-price-subtitle">Best Choice for Individuals </div>
+                            <div class="Goodup-price-subtitle">Best for Growing businesses </div>
                         </div>
                         <div class="Goodup-price-body">
                             <ul class="price__features">
-                                <li><i class="fa fa-angle-right"></i>Lifetime Bandwidth Usage</li>
-                                <li><i class="fa fa-angle-right"></i>12 Months Support &amp; Updates</li>
-                                <li><i class="fa fa-angle-right"></i>20 Website License</li>
-                                <li><i class="fa fa-angle-right"></i>Quickstart Included</li>
-                                <li><i class="fa fa-angle-right"></i>Access to Plugins &amp; Theme</li>
-                                <li><i class="fa fa-angle-right"></i>Branding/Copyright Removal</li>
+                                <li><i class="fa fa-angle-right"></i>Everything in Basic, plus:</li>
+                                <li><i class="fa fa-angle-right"></i>Featured listing badge</li>
+                                <li><i class="fa fa-angle-right"></i>Priority in search results</li>
+                                <li><i class="fa fa-angle-right"></i>Unlimited product/service listings</li>
+                                <li><i class="fa fa-angle-right"></i>Photo & video gallery (up to 20)</li>
+                                <li><i class="fa fa-angle-right"></i>Lead inquiry notifications</li>
+                                <li><i class="fa fa-angle-right"></i>Verified company badge</li>
+                                <li><i class="fa fa-angle-right"></i>Priority customer support</li>
+                                <li><i class="fa fa-angle-right"></i>Detailed analytics dashboard</li>
+                                <li><i class="fa fa-angle-right"></i>Social media integration</li>
                             </ul>
                         </div>
                         <div class="Goodup-price-bottom">
@@ -2536,25 +2541,32 @@
                     <div class="Goodup-price-wrap">
                         <div class="Goodup-author-header">
                             <div class="Goodup-price-currency">
-                                <h3><span class="Goodup-new-price">$<del>149</del></span><span
-                                        class="Goodup-old-price">$<del>249</del></span></h3>
+                                <h3><span class="Goodup-new-price">$<del>149</del></span>
+                                    <!-- <span class="Goodup-old-price">$<del>249</del></span> -->
+                                </h3>
                             </div>
                             <div class="Goodup-price-title">
                                 <div class="Goodup-price-tlt">
-                                    <h4>Standard</h4>
+                                    <h4>Enterprise / Premium</h4>
                                 </div>
-                                <div class="Goodup-price-ribbon"><span class="Goodup-ribbon-offer all">50% Off</span></div>
+                                <!-- <div class="Goodup-price-ribbon"><span class="Goodup-ribbon-offer all">50% Off</span></div> -->
                             </div>
-                            <div class="Goodup-price-subtitle">Best Choice for Individuals </div>
+                            <div class="Goodup-price-subtitle">Best for Established companies & market leaders </div>
                         </div>
                         <div class="Goodup-price-body">
                             <ul class="price__features">
-                                <li><i class="fa fa-angle-right"></i>Lifetime Bandwidth Usage</li>
-                                <li><i class="fa fa-angle-right"></i>Lifetime Support &amp; Updates</li>
-                                <li><i class="fa fa-angle-right"></i>50 Website License</li>
-                                <li><i class="fa fa-angle-right"></i>Quickstart Included</li>
-                                <li><i class="fa fa-angle-right"></i>Access to Plugins &amp; Theme</li>
-                                <li><i class="fa fa-angle-right"></i>Branding/Copyright Removal</li>
+                                <li><i class="fa fa-angle-right"></i>Everything in Professional, plus:</li>
+                                <li><i class="fa fa-angle-right"></i>Homepage featured spotlight</li>
+                                <li><i class="fa fa-angle-right"></i>Category page prominence</li>
+                                <li><i class="fa fa-angle-right"></i>Unlimited media uploads</li>
+                                <li><i class="fa fa-angle-right"></i>Custom company page URL</li>
+                                <li><i class="fa fa-angle-right"></i>Advanced SEO optimization</li>
+                                <li><i class="fa fa-angle-right"></i>Dedicated account manager</li>
+                                <li><i class="fa fa-angle-right"></i>API access for integration</li>
+                                <li><i class="fa fa-angle-right"></i>Remove competitor listings from your page</li>
+                                <li><i class="fa fa-angle-right"></i>Quarterly business review</li>
+                                <li><i class="fa fa-angle-right"></i>Custom branding options</li>
+                                <li><i class="fa fa-angle-right"></i>Premium badge & trust markers</li>
                             </ul>
                         </div>
                         <div class="Goodup-price-bottom">
@@ -2579,16 +2591,13 @@
                     <div class="content_block_2 pr-3 py-4">
                         <div class="content-box">
                             <div class="sec-title light">
-                                <p class="theme-cl px-3 py-1 rounded bg-light-danger d-inline-flex">Download apps</p>
-                                <h2 class="ft-bold">Download the Goodup App<br>For Easy Use</h2>
+                                <!-- <p class="theme-cl px-3 py-1 rounded bg-light-danger d-inline-flex">About Us</p> -->
+                                <h2 class="ft-bold">About Us</h2>
                             </div>
-                            <div class="text mb-3">
-                                <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium
-                                    voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint
-                                    occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt
-                                    mollitia animi, id est laborum et dolorum fuga.</p>
+                            <div class="text fw-2 mb-3">
+                                <p>We connect companies around the world through our extensive B2B directory. With more than 10,000 verified businesses across all sectors We make it easier for businesses to locate reliable partners, suppliers or service suppliers. Our platform facilitates global trade by offering transparent listings, trusted connections as well as growth possibilities for businesses of all sizes.</p>
                             </div>
-                            <div class="position-relative row">
+                            <!-- <div class="position-relative row">
                                 <div class="col-lg-4 col-md-4 col-4">
                                     <h3 class="ft-bold theme-cl mb-0"><span class="count">10</span>k+</h3>
                                     <p class="ft-medium">Active Jobs</p>
@@ -2601,13 +2610,13 @@
                                     <h3 class="ft-bold theme-cl mb-0"><span class="count">07</span>k+</h3>
                                     <p class="ft-medium">Employers</p>
                                 </div>
-                            </div>
-                            <div class="btn-box clearfix mt-5">
+                            </div> -->
+                            <!-- <div class="btn-box clearfix mt-5">
                                 <a href="index.html" class="download-btn play-store me-1 d-inline-flex"><img
                                         src="{{asset('assets/img/ios.png')}}" width="200" alt="" /></a>
                                 <a href="index.html" class="download-btn play-store ms-2 mb-1 d-inline-flex"><img
                                         src="{{asset('assets/img/and.png')}}" width="200" alt="" /></a>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>

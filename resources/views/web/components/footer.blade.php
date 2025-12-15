@@ -8,10 +8,10 @@
                         <img src="{{asset('assets/img/logo.png')}}" class="img-footer small mb-2" alt="" />
 
                         <div class="address mt-2">
-                            7742 Sadar Street Range Road, USA<br>United Kingdom GHQ11
+                            1st Sector, HSR Layout, Bengaluru, Karnataka 560102
                         </div>
                         <div class="address mt-3">
-                            40 568 423 6597<br>support@Goodup.com
+                            9971123025<br>sales@aboutfirms.com
                         </div>
                         <div class="address mt-2">
                             <ul class="list-inline">
@@ -57,13 +57,11 @@
 
                 <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12">
                     <div class="footer_widget">
-                        <h4 class="widget_title">About Company</h4>
+                        <h4 class="widget_title">Quick Links</h4>
                         <ul class="footer-menu">
-                            <li><a href="#">Who We'r?</a></li>
-                            <li><a href="#">Our Mission</a></li>
-                            <li><a href="#">Our team</a></li>
-                            <li><a href="#">Packages</a></li>
-                            <li><a href="#">Dashboard</a></li>
+                            <li><a href="{{ route('about') }}">About Us</a></li>
+                            <li><a href="{{ route('terms_and_condition') }}">Terms & Conditions</a></li>
+                            <li><a href="{{ route('privacy_policy') }}">Privacy Policy</a></li>
                         </ul>
                     </div>
                 </div>
