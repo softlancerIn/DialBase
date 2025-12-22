@@ -26,6 +26,35 @@
 
         <hr />
 
+        <div class="row mb-3">
+            <div class="col-12">
+                <form action="{{ route('listing-data.index') }}" method="GET" class="row g-3">
+                    <div class="col-md-3">
+                        <select name="category_id" class="form-control">
+                            <option value="">Select Category</option>
+                            @foreach(\App\Models\Category::where('status', '1')->get() as $cat)
+                                <option value="{{ $cat->id }}" {{ request('category_id') == $cat->id ? 'selected' : '' }}>{{ $cat->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <input type="text" name="country" class="form-control" placeholder="Country" value="{{ request('country') }}">
+                    </div>
+                    <div class="col-md-3">
+                        <input type="text" name="state" class="form-control" placeholder="State" value="{{ request('state') }}">
+                    </div>
+                    <div class="col-md-2">
+                        <input type="text" name="city" class="form-control" placeholder="City" value="{{ request('city') }}">
+                    </div>
+                    <div class="col-md-1">
+                        <button type="submit" class="btn btn-primary w-100">Filter</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <hr />
+
         <div class="dashboard-widg-bar d-block">
             <div class="row">
                 <div class="col-xl-12 col-lg-12">

@@ -7,7 +7,10 @@
             <div class="row">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                     <div class="breadcrumb_caption text-center py-5">
-                        <h1 class="page_title ft-bold mb-4" style="font-size: 3rem;">{{ $data['category']->name ?? 'Category' }} {{ !empty($_GET['location']) ? 'In ' .$_GET['location'] : '' }}</h1>
+                        @php
+                            $currentLocation = request()->route('location') ?? request('location');
+                        @endphp
+                        <h1 class="page_title ft-bold mb-4" style="font-size: 3rem;">{{ $data['category']->name ?? 'Category' }} {{ !empty($currentLocation) ? 'In ' . $currentLocation : '' }}</h1>
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb justify-content-center mt-2" style="color: white;">
                                 <li class=""><a href="{{ route('index') }}" style="color: white;">Home </a></li>
@@ -39,7 +42,7 @@
                         <!-- Filter Form -->
                         <div class="sidebar-widgets collapse miz_show" id="search_open" data-bs-parent="#search_open">
                             <div class="search-inner">
-                                <form method="GET" action="{{ route('category.slug', $data['category']->slug) }}">
+                                <form method="GET" action="{{ route('category.slug', $data['category']->slug) }}" id="categoryFilterForm">
                                     <div class="side-filter-box">
                                         <div class="side-filter-box-body">
 
@@ -61,7 +64,7 @@
                                                 <select name="location" class="form-control form-select">
                                                     <option value="">All Locations</option>
                                                     @foreach($data['locations'] as $location)
-                                                        <option value="{{ $location }}" {{ request('location') == $location ? 'selected' : '' }}>{{ $location }}</option>
+                                                        <option value="{{ $location }}" {{ ($currentLocation == $location) ? 'selected' : '' }}>{{ $location }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -78,6 +81,22 @@
                         </div>
                     </div>
                 </div>
+
+                {{-- Ensure form action uses path parameter for location when submitted --}}
+                <script>
+                    (function () {
+                        var form = document.getElementById('categoryFilterForm');
+                        if (!form) return;
+                        form.addEventListener('submit', function (e) {
+                            var select = form.querySelector('select[name="location"]');
+                            if (select && select.value) {
+                                // Append the selected location to the form action as a path param
+                                var action = form.action.replace(/\/+$/, '');
+                                form.action = action + '/' + encodeURIComponent(select.value);
+                            }
+                        });
+                    })();
+                </script>
 
                 <div class="col-xl-9 col-lg-8 col-md-12">
                     <div class="row">

@@ -21,7 +21,22 @@ class ListingController extends Controller
     public function index()
     {
         // $listings = Listing::with(['logoImage', 'featuredImage', 'galleryImages', 'menuItems', 'workingHours', 'amenities', 'socialLinks'])->get();
-        $listings = Listing::with(['menuItems', 'workingHours', 'socialLink', 'amenities'])->get();
+        $query = Listing::with(['menuItems', 'workingHours', 'socialLink', 'amenities']);
+
+        if (request()->has('category_id') && request()->category_id != '') {
+            $query->where('category_id', request()->category_id);
+        }
+        if (request()->has('country') && request()->country != '') {
+            $query->where('country', 'like', '%' . request()->country . '%');
+        }
+        if (request()->has('state') && request()->state != '') {
+            $query->where('state', 'like', '%' . request()->state . '%');
+        }
+        if (request()->has('city') && request()->city != '') {
+            $query->where('city', 'like', '%' . request()->city . '%');
+        }
+
+        $listings = $query->paginate(25);
 
         return view('admin.listing.index', compact('listings'));
     }

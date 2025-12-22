@@ -32,6 +32,13 @@
                 </div>
             @endforeach
         </div>
+        </div>
+        
+        <div class="row justify-content-center mt-4">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 text-center">
+                <a href="{{ route('all_categories') }}" class="btn btn-md theme-bg rounded text-light">More Categories</a>
+            </div>
+        </div>
         <!-- row -->
 
     </div>

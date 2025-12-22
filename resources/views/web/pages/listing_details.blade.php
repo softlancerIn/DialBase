@@ -7,32 +7,29 @@
     @endphp
     <!-- ======================= Listing Hero Section ======================== -->
     <div class="listing-hero" style="position: relative; height: 400px; overflow: hidden;">
-        @if($data['featured_image'])
-            <img src="{{ Storage::url($data['featured_image']->image_path) }}" 
-                 alt="{{ $data['listing']->title }}" 
-                 style="width: 100%; height: 100%; object-fit: cover;">
+        @if ($data['featured_image'])
+            <img src="{{ Storage::url($data['featured_image']->image_path) }}" alt="{{ $data['listing']->title }}"
+                style="width: 100%; height: 100%; object-fit: cover;">
         @else
-            <img src="{{ asset('assets/img/listing/l-5.jpg') }}" 
-                 alt="" 
-                 style="width: 100%; height: 100%; object-fit: cover;">
+            <img src="{{ asset('assets/img/listing/l-5.jpg') }}" alt=""
+                style="width: 100%; height: 100%; object-fit: cover;">
         @endif
 
         <!-- Overlay with listing info -->
-        <div style="position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); padding: 40px 20px 20px; color: white;">
+        <div
+            style="position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); padding: 40px 20px 20px; color: white;">
             <div class="container">
                 <div class="row align-items-end">
                     <div class="col-md-8">
                         <div class="d-flex align-items-start justify-content-start">
                             <!-- Logo -->
                             <div style="flex-shrink: 0;">
-                                @if($data['logo_image'])
-                                    <img src="{{ Storage::url($data['logo_image']->image_path) }}" 
-                                         alt="Logo" 
-                                         style="width: 90px; height: 90px; border-radius: 8px; border: 3px solid white; object-fit: cover;">
+                                @if ($data['logo_image'])
+                                    <img src="{{ Storage::url($data['logo_image']->image_path) }}" alt="Logo"
+                                        style="width: 90px; height: 90px; border-radius: 8px; border: 3px solid white; object-fit: cover;">
                                 @else
-                                    <img src="{{ asset('assets/img/t-1.png') }}" 
-                                         alt="Logo" 
-                                         style="width: 90px; height: 90px; border-radius: 8px; border: 3px solid white; object-fit: cover;">
+                                    <img src="{{ asset('assets/img/t-1.png') }}" alt="Logo"
+                                        style="width: 90px; height: 90px; border-radius: 8px; border: 3px solid white; object-fit: cover;">
                                 @endif
                             </div>
 
@@ -55,15 +52,22 @@
                                 </div>
                                 <div class="d-block mt-3">
                                     <div class="list-lioe">
-                                        <div class="list-lioe-single"><span class="ft-medium text-info"><i class="fas fa-check-circle me-1"></i>Claimed</span></div>
+                                        <div class="list-lioe-single"><span class="ft-medium text-info"><i
+                                                    class="fas fa-check-circle me-1"></i>Claimed</span></div>
                                         <div class="list-lioe-single ms-2 ps-3 seperate">
-                                            <a href="javascript:void(0);" class="text-light ft-medium">Chicken Wings</a>,<a href="javascript:void(0);" class="text-light ft-medium ms-1">Sports Bars</a>,<a href="javascript:void(0);" class="text-light ft-medium ms-1">American (Traditional)</a>,<a href="javascript:void(0);" class="text-light ft-medium ms-1">Seafood</a>
+                                            <a href="javascript:void(0);" class="text-light ft-medium">Chicken Wings</a>,<a
+                                                href="javascript:void(0);" class="text-light ft-medium ms-1">Sports
+                                                Bars</a>,<a href="javascript:void(0);"
+                                                class="text-light ft-medium ms-1">American (Traditional)</a>,<a
+                                                href="javascript:void(0);" class="text-light ft-medium ms-1">Seafood</a>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="d-block mt-1">
                                     <div class="list-lioe">
-                                        <div class="list-lioe-single"><span class="ft-medium {{ $data['listing']->is_247_open ? 'text-success' : 'text-danger' }}">{{ $data['listing']->is_247_open ? 'Open' : 'Closed' }}</span><span class="text-light ft-medium ms-2">11:00 AM - 12:00 AM</span></div>
+                                        <div class="list-lioe-single"><span
+                                                class="ft-medium {{ $data['listing']->is_247_open ? 'text-success' : 'text-danger' }}">{{ $data['listing']->is_247_open ? 'Open' : 'Closed' }}</span><span
+                                                class="text-light ft-medium ms-2">11:00 AM - 12:00 AM</span></div>
 
                                     </div>
                                 </div>
@@ -93,18 +97,19 @@
                         </div>
 
                         <!-- Amenities -->
-                        @if($data['listing']->amenities && $data['listing']->amenities->count() > 0)
+                        @if ($data['listing']->amenities && $data['listing']->amenities->count() > 0)
                             <div class="bg-white rounded mb-4">
                                 <div class="jbd-01 px-4 py-4">
                                     <div class="jbd-details mb-4">
                                         <h5 class="ft-bold fs-lg">Amenities and More</h5>
-                                        
+
                                         <div class="Goodup-all-features-list mt-3">
                                             <ul>
-                                                @foreach($data['listing']->amenities as $amenity)
+                                                @foreach ($data['listing']->amenities as $amenity)
                                                     <li>
                                                         <div class="Goodup-afl-pace">
-                                                            <img src="{{ asset('assets/img/verify.svg') }}" class="img-fluid" alt="">
+                                                            <img src="{{ asset('assets/img/verify.svg') }}"
+                                                                class="img-fluid" alt="">
                                                             <span>{{ $amenity->name }}</span>
                                                         </div>
                                                     </li>
@@ -122,27 +127,30 @@
                                 <div class="jbd-details mb-4">
                                     <h5 class="ft-bold fs-lg">Recommended Reviews</h5>
                                     <div class="reviews-comments-wrap">
-                                        @if($approvedReviews && $approvedReviews->count() > 0)
-                                            @foreach($approvedReviews as $review)
-                                                <!-- reviews-comments-item -->  
+                                        @if ($approvedReviews && $approvedReviews->count() > 0)
+                                            @foreach ($approvedReviews as $review)
+                                                <!-- reviews-comments-item -->
                                                 <div class="reviews-comments-item">
                                                     <div class="review-comments-avatar">
-                                                        @if($review->user && $review->user->profile_image)
-                                                            <img src="{{ Storage::url($review->user->profile_image) }}" class="img-fluid" alt="{{ $review->user->name }}"> 
+                                                        @if ($review->user && $review->user->profile_image)
+                                                            <img src="{{ Storage::url($review->user->profile_image) }}"
+                                                                class="img-fluid" alt="{{ $review->user->name }}">
                                                         @else
-                                                            <img src="{{ asset('assets/img/t-1.png') }}" class="img-fluid" alt="User"> 
+                                                            <img src="{{ asset('assets/img/t-1.png') }}" class="img-fluid"
+                                                                alt="User">
                                                         @endif
                                                     </div>
                                                     <div class="reviews-comments-item-text">
                                                         <h4>
                                                             <a href="#">{{ $review->user->name ?? 'Anonymous' }}</a>
                                                             <span class="reviews-comments-item-date">
-                                                                <i class="ti-calendar theme-cl me-1"></i>{{ $review->created_at->format('d M Y') }}
+                                                                <i
+                                                                    class="ti-calendar theme-cl me-1"></i>{{ $review->created_at->format('d M Y') }}
                                                             </span>
                                                         </h4>
                                                         <div class="listing-rating">
-                                                            @for($i = 1; $i <= 5; $i++)
-                                                                @if($i <= $review->rating)
+                                                            @for ($i = 1; $i <= 5; $i++)
+                                                                @if ($i <= $review->rating)
                                                                     <i class="fas fa-star active"></i>
                                                                 @else
                                                                     <i class="fas fa-star"></i>
@@ -152,9 +160,12 @@
                                                         <div class="clearfix"></div>
                                                         <p>" {{ $review->review }} "</p>
                                                         <div class="pull-left reviews-reaction">
-                                                            <a href="#" class="comment-like active"><i class="ti-thumb-up"></i> 0</a>
-                                                            <a href="#" class="comment-dislike active"><i class="ti-thumb-down"></i> 0</a>
-                                                            <a href="#" class="comment-love active"><i class="ti-heart"></i> 0</a>
+                                                            <a href="#" class="comment-like active"><i
+                                                                    class="ti-thumb-up"></i> 0</a>
+                                                            <a href="#" class="comment-dislike active"><i
+                                                                    class="ti-thumb-down"></i> 0</a>
+                                                            <a href="#" class="comment-love active"><i
+                                                                    class="ti-heart"></i> 0</a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -171,7 +182,7 @@
                         </div>
 
                         <!-- Locations -->
-                         <div class="bg-white rounded mb-4">
+                        <div class="bg-white rounded mb-4">
                             <div class="jbd-01 px-4 py-4">
                                 <div class="jbd-details mb-4">
                                     <h5 class="ft-bold fs-lg">Location &amp; Hours</h5>
@@ -179,48 +190,92 @@
                                         <div class="row g-4">
                                             <div class="col-xl-6 col-lg-6 col-md-12">
                                                 <div class="list-map-lot">
-                                                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3559.0148908503734!2d80.97350361499701!3d26.871267983145383!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399bfd9a9f6d1727%3A0xb87eabf63f7e4cee!2sCafe%20Repertwahr!5e0!3m2!1sen!2sin!4v1649059491407!5m2!1sen!2sin" width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                                                    <iframe
+                                                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3559.0148908503734!2d80.97350361499701!3d26.871267983145383!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399bfd9a9f6d1727%3A0xb87eabf63f7e4cee!2sCafe%20Repertwahr!5e0!3m2!1sen!2sin!4v1649059491407!5m2!1sen!2sin"
+                                                        width="100%" height="250" style="border:0;"
+                                                        allowfullscreen="" loading="lazy"
+                                                        referrerpolicy="no-referrer-when-downgrade"></iframe>
                                                 </div>
                                                 <div class="list-map-capt">
-                                                    <div class="lio-pact"><span class="ft-medium text-info">2919 N Flores St</span></div>
-                                                    <div class="lio-pact"><span class="hkio-oilp ft-bold">San Antonio, TX 78212</span></div>
-                                                    <div class="lio-pact"><p class="ft-medium">Alta Vista</p></div>
+                                                    <div class="lio-pact"><span class="ft-medium text-info">2919 N Flores
+                                                            St</span></div>
+                                                    <div class="lio-pact"><span class="hkio-oilp ft-bold">San Antonio, TX
+                                                            78212</span></div>
+                                                    <div class="lio-pact">
+                                                        <p class="ft-medium">Alta Vista</p>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="col-xl-6 col-lg-6 col-md-12">
                                                 <table class="table table-borderless">
                                                     <tbody>
                                                         @php
-                                                            $daysOrder = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+                                                            $daysOrder = [
+                                                                'Mon',
+                                                                'Tue',
+                                                                'Wed',
+                                                                'Thu',
+                                                                'Fri',
+                                                                'Sat',
+                                                                'Sun',
+                                                            ];
                                                             $hours = $data['listing']->workingHours ?? collect();
                                                             // Normalize day labels to short form if possible
-                                                            $grouped = $hours->groupBy(function($item) {
+                                                            $grouped = $hours->groupBy(function ($item) {
                                                                 $d = $item->day_of_week ?? ($item->day ?? 'All');
-                                                                $short = substr($d,0,3);
+                                                                $short = substr($d, 0, 3);
                                                                 return ucfirst($short);
                                                             });
                                                         @endphp
 
-                                                        @foreach($daysOrder as $day)
+                                                        @foreach ($daysOrder as $day)
                                                             <tr>
                                                                 <th scope="row">{{ $day }}</th>
                                                                 <td>
-                                                                    @if(isset($grouped[$day]) && $grouped[$day]->count() > 0)
-                                                                        @foreach($grouped[$day] as $entry)
+                                                                    @if (isset($grouped[$day]) && $grouped[$day]->count() > 0)
+                                                                        @foreach ($grouped[$day] as $entry)
                                                                             @php
                                                                                 $open = $entry->open_time;
                                                                                 $close = $entry->close_time;
                                                                                 // if JSON, try to decode and format
-                                                                                if ($open && is_string($open) && \Illuminate\Support\Str::startsWith($open, '[')) {
-                                                                                    $decodedOpen = json_decode($open, true);
-                                                                                    $open = is_array($decodedOpen) ? implode(', ', $decodedOpen) : $open;
+                                                                                if (
+                                                                                    $open &&
+                                                                                    is_string($open) &&
+                                                                                    \Illuminate\Support\Str::startsWith(
+                                                                                        $open,
+                                                                                        '[',
+                                                                                    )
+                                                                                ) {
+                                                                                    $decodedOpen = json_decode(
+                                                                                        $open,
+                                                                                        true,
+                                                                                    );
+                                                                                    $open = is_array($decodedOpen)
+                                                                                        ? implode(', ', $decodedOpen)
+                                                                                        : $open;
                                                                                 }
-                                                                                if ($close && is_string($close) && \Illuminate\Support\Str::startsWith($close, '[')) {
-                                                                                    $decodedClose = json_decode($close, true);
-                                                                                    $close = is_array($decodedClose) ? implode(', ', $decodedClose) : $close;
+                                                                                if (
+                                                                                    $close &&
+                                                                                    is_string($close) &&
+                                                                                    \Illuminate\Support\Str::startsWith(
+                                                                                        $close,
+                                                                                        '[',
+                                                                                    )
+                                                                                ) {
+                                                                                    $decodedClose = json_decode(
+                                                                                        $close,
+                                                                                        true,
+                                                                                    );
+                                                                                    $close = is_array($decodedClose)
+                                                                                        ? implode(', ', $decodedClose)
+                                                                                        : $close;
                                                                                 }
                                                                             @endphp
-                                                                            <div>{{ $open ? $open : 'Closed' }} @if($close)- {{ $close }} @endif</div>
+                                                                            <div>{{ $open ? $open : 'Closed' }}
+                                                                                @if ($close)
+                                                                                    - {{ $close }}
+                                                                                @endif
+                                                                            </div>
                                                                         @endforeach
                                                                     @else
                                                                         <div>Closed</div>
@@ -230,11 +285,16 @@
                                                                     @php
                                                                         $isOpenNow = false;
                                                                         // If any entry has is_247_open flag true, mark open
-                                                                        if(isset($grouped[$day]) && $grouped[$day]->where('is_247_open', true)->count()>0) {
+                                                                        if (
+                                                                            isset($grouped[$day]) &&
+                                                                            $grouped[$day]
+                                                                                ->where('is_247_open', true)
+                                                                                ->count() > 0
+                                                                        ) {
                                                                             $isOpenNow = true;
                                                                         }
                                                                     @endphp
-                                                                    @if($isOpenNow)
+                                                                    @if ($isOpenNow)
                                                                         <span class="text-success">Open now</span>
                                                                     @endif
                                                                 </td>
@@ -254,11 +314,12 @@
                             <div class="jbd-01 px-4 py-4">
                                 <div class="jbd-details mb-4">
                                     <h5 class="ft-bold fs-lg">Drop Your Review</h5>
-                                    
-                                    <form action='{{ route('listings.saveReview', $data['listing']->slug) }}' method='POST'>
+
+                                    <form action='{{ route('listings.saveReview', $data['listing']->slug) }}'
+                                        method='POST'>
                                         @csrf
                                         <div class="row">
-                                            
+
                                             <div class="col-lg-12 col-md-12 col-sm-12">
                                                 <div class="form-group mb-3">
                                                     <label class="ft-medium small mb-1">Choose Rate</label>
@@ -272,34 +333,37 @@
                                                     </select>
                                                 </div>
                                             </div>
-                                            
+
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group mb-3">
                                                     <label class="ft-medium small mb-1">Name</label>
-                                                    <input name="name" class="form-control rounded" type="text" placeholder="Your Name">
+                                                    <input name="name" class="form-control rounded" type="text"
+                                                        placeholder="Your Name">
                                                 </div>
                                             </div>
-                                            
+
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group mb-3">
                                                     <label class="ft-medium small mb-1">Email</label>
-                                                    <input name="email" class="form-control rounded" type="email" placeholder="Your Email" required>
+                                                    <input name="email" class="form-control rounded" type="email"
+                                                        placeholder="Your Email" required>
                                                 </div>
                                             </div>
-                                            
+
                                             <div class="col-lg-12 col-md-12 col-sm-12">
                                                 <div class="form-group mb-3">
                                                     <label class="ft-medium small mb-1">Review</label>
                                                     <textarea class="form-control rounded ht-140" name='review' placeholder="Review" required></textarea>
                                                 </div>
                                             </div>
-                                            
+
                                             <div class="col-lg-12 col-md-12 col-sm-12">
                                                 <div class="form-group">
-                                                    <button type="submit" class="btn theme-bg text-light rounded" fdprocessedid="l6x365">Submit Review</button>
+                                                    <button type="submit" class="btn theme-bg text-light rounded"
+                                                        fdprocessedid="l6x365">Submit Review</button>
                                                 </div>
                                             </div>
-                                            
+
                                         </div>
                                     </form>
                                 </div>
@@ -312,67 +376,89 @@
                 <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
                     <div class="bg-white rounded py-4 px-4 box-static mb-4">
                         <h4 class="ft-bold mb-1">Order Food</h4>
-                        
+
                         <div style="display: block; width: 100%; position: relative; padding: 2rem 0;">
                             <ul style="display: inline-block; padding: 0; margin: 0;">
-                                <li style="display: inline-block; list-style: none; padding: 1px 12px; font-weight: 500; color: #252525; border-right: 1px solid #eceef2;">$0.99+<span>delivery fee</span></li>
-                                <li style="display: inline-block; list-style: none; padding: 1px 12px; font-weight: 500; color: #252525; border-right: 1px solid #eceef2;">$0<span>min</span></li>
-                                <li style="display: inline-block; list-style: none; padding: 1px 12px; font-weight: 500; color: #252525; border-right: 1px solid #eceef2;">35-45<span>mins</span></li>
+                                <li
+                                    style="display: inline-block; list-style: none; padding: 1px 12px; font-weight: 500; color: #252525; border-right: 1px solid #eceef2;">
+                                    $0.99+<span>delivery fee</span></li>
+                                <li
+                                    style="display: inline-block; list-style: none; padding: 1px 12px; font-weight: 500; color: #252525; border-right: 1px solid #eceef2;">
+                                    $0<span>min</span></li>
+                                <li
+                                    style="display: inline-block; list-style: none; padding: 1px 12px; font-weight: 500; color: #252525; border-right: 1px solid #eceef2;">
+                                    35-45<span>mins</span></li>
                             </ul>
                         </div>
-                        
+
                         <form class="_apply_form_form">
                             <div class="form-group">
                                 <div class="side-search-item">
                                     <span class="search-tag"><i class="lni lni-map-marker"></i></span>
-                                    <input type="text" class="form-control b-0 ps-2" placeholder="Enter delivery address" fdprocessedid="bf6noq">
+                                    <input type="text" class="form-control b-0 ps-2"
+                                        placeholder="Enter delivery address" fdprocessedid="bf6noq">
                                 </div>
                             </div>
-                            
+
                             <div class="form-group">
-                                <button type="button" class="btn btn-md rounded theme-bg text-light ft-medium fs-sm full-width" fdprocessedid="3341wf">Start Your Order</button>
-                            </div>									
+                                <button type="button"
+                                    class="btn btn-md rounded theme-bg text-light ft-medium fs-sm full-width"
+                                    fdprocessedid="3341wf">Start Your Order</button>
+                            </div>
                         </form>
-                        
+
                     </div>
 
                     <div class="jb-apply-form bg-white rounded py-4 px-4 box-static mb-4">
                         <div class="uli-list-info">
                             <ul>
-                                
+
                                 <li>
                                     <div class="list-uiyt">
                                         <div class="list-iobk"><i class="fas fa-globe"></i></div>
-                                        <div class="list-uiyt-capt"><h5>Live Site</h5><p>https://www.Goodup.com/</p></div>
+                                        <div class="list-uiyt-capt">
+                                            <h5>Live Site</h5>
+                                            <p>https://www.Goodup.com/</p>
+                                        </div>
                                     </div>
                                 </li>
-                                
+
                                 <li>
                                     <div class="list-uiyt">
                                         <div class="list-iobk"><i class="fas fa-envelope"></i></div>
-                                        <div class="list-uiyt-capt"><h5>Drop a Mail</h5><p>support@Goodup.com</p></div>
+                                        <div class="list-uiyt-capt">
+                                            <h5>Drop a Mail</h5>
+                                            <p>support@Goodup.com</p>
+                                        </div>
                                     </div>
                                 </li>
-                                
+
                                 <li>
                                     <div class="list-uiyt">
                                         <div class="list-iobk"><i class="fas fa-phone"></i></div>
-                                        <div class="list-uiyt-capt"><h5>Call Us</h5><p>(210) 659 584 756</p></div>
+                                        <div class="list-uiyt-capt">
+                                            <h5>Call Us</h5>
+                                            <p>(210) 659 584 756</p>
+                                        </div>
                                     </div>
                                 </li>
                                 <li>
                                     <div class="list-uiyt">
                                         <div class="list-iobk"><i class="fas fa-map-marker-alt"></i></div>
-                                        <div class="list-uiyt-capt"><h5>Get Directions</h5><p>2919 N Flores St San Antonio, TX 78212</p></div>
+                                        <div class="list-uiyt-capt">
+                                            <h5>Get Directions</h5>
+                                            <p>2919 N Flores St San Antonio, TX 78212</p>
+                                        </div>
                                     </div>
                                 </li>
-                                
+
                             </ul>
                         </div>
                     </div>
 
                     <div class="row g-3 mb-3">
-                        <div class="col-4"><a href="javascript:void(0);" class="adv-btn full-width"><i class="fas fa-share"></i>Share</a></div>
+                        <div class="col-4"><a href="javascript:void(0);" class="adv-btn full-width"><i
+                                    class="fas fa-share"></i>Share</a></div>
                     </div>
                 </div>
             </div>

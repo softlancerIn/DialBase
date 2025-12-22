@@ -85,13 +85,14 @@ class WebController extends Controller
         return view('web.pages.search_results', compact('data'));
     }
 
-    public function category_detail(Request $request, $slug)
+    public function category_detail(Request $request, $slug, $location = null)
     {
         $address = $request->query('address');
         $amenities = $request->query('amenities', []);
         $open_now = $request->boolean('open_now');
         $featured = $request->boolean('featured');
-        $location = $request->query('location');
+        // Support location coming from query string (old style) or path parameter (new style)
+        $location = $location ?? $request->query('location');
 
         $data['category'] = Category::where('slug', $slug)->where('status', '1')->first();
 
@@ -137,6 +138,11 @@ class WebController extends Controller
         }
 
         $data['listings'] = $query->paginate(12)->withQueryString();
+
+        foreach ($data['listings'] as $listing) {
+            $listing->reviews_count = $listing->reviews->where('status', 1)->count();
+            $listing->average_rating = $listing->reviews->where('status', 1)->avg('rating');
+        }
 
         $all_listings_for_locations = Listing::where('category_id', $data['category']->id)->get();
         $data['locations'] = $all_listings_for_locations->pluck('city')->unique()->sort()->values();
@@ -253,9 +259,9 @@ class WebController extends Controller
 
     public function all_categories()
     {
-        $data['category'] = Category::where('cat_id', '0')->get();
+        $all_category = Category::where('cat_id', '0')->withCount('listing')->get();
 
-        return view('web.pages.product', compact('data'));
+        return view('web.pages.category_listings', compact('all_category'));
     }
 
     public function master_function($slug)
@@ -342,5 +348,54 @@ class WebController extends Controller
     public function privacyPolicy()
     {
         return view('web.pages.privacy_policy');
+    }
+
+    public function seo_listing_detail($country, $category_slug, $city, $slug)
+    {
+        $listing = Listing::where('slug', $slug)
+            ->where('country', $country)
+            ->where('city', $city)
+            ->with(['images', 'workingHours', 'amenities', 'socialLink', 'category', 'reviews.user'])
+            ->first();
+
+        if (!$listing) {
+            // Fallback: try finding by slug only if strict path fails, or redirect
+            $listing = Listing::where('slug', $slug)->first();
+            if (!$listing) {
+                return redirect()->route('index');
+            }
+            // Optional: Redirect to correct URL if found but path mismatch?
+        }
+
+        $data['listing'] = $listing;
+        $data['category'] = $listing->category;
+        $data['featured_image'] = $listing->images->where('type', 'featured')->first();
+        $data['logo_image'] = $listing->images->where('type', 'logo')->first();
+
+        return view('web.pages.listing_details', compact('data'));
+    }
+
+    public function seo_city_category($country, $category_slug, $city)
+    {
+        $category = Category::where('slug', $category_slug)->first();
+        if (!$category) {
+            return redirect()->route('index');
+        }
+
+        $data['category'] = $category;
+        $data['all_categories'] = Category::where('status', '1')->get();
+        $data['all_amenities'] = Amenity::all();
+
+        $query = Listing::where('category_id', $category->id)
+            ->where('country', $country)
+            ->where('city', $city)
+            ->with('images');
+
+        $data['listings'] = $query->paginate(12);
+        
+        // Populate locations for filter (maybe just this city?)
+        $data['locations'] = collect([$city]);
+
+        return view('web.pages.category_details', compact('data'));
     }
 }

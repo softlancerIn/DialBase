@@ -29,7 +29,8 @@
                 @foreach($data['city_listings'] as $city)
                 <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6">
                     <div class="cats-wrap text-center">
-                        <a href="{{ route('category.slug', $data['category']->slug. '?location='.$city->city) }}" class="Goodup-catg-wrap">
+                        {{-- Link to category with location as path parameter --}}
+                        <a href="{{ route('category.slug', [$data['category']->slug, $city->city]) }}" class="Goodup-catg-wrap">
                             <div class="Goodup-catg-icon">
                                 <i class="fas fa-building"></i>
                             </div>

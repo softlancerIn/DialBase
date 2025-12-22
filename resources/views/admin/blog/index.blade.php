@@ -14,7 +14,7 @@
 
                 <div class="col-xl-2 col-lg-2 col-md-2">
                     <div class="btn-group">
-                        <a href="{{route('blog_form',['type' => 'create', 'id' => '0'])}}">
+                        <a href="{{ route('blog_form', ['type' => 'create', 'id' => '0']) }}">
                             <button type="button" class="btn btn-primary">
                                 Add Blog
                             </button>
@@ -26,7 +26,7 @@
 
         <hr />
 
-         <div class="dashboard-widg-bar d-block">
+        <div class="dashboard-widg-bar d-block">
             <div class="row">
                 <div class="col-xl-12 col-lg-12">
                     <div class="card">
@@ -38,7 +38,6 @@
                                             <th>Id</th>
                                             <th>Blog Name</th>
                                             <th>Image</th>
-                                            <th>Description</th>
                                             <th>Created Date</th>
                                             <th>Action</th>
                                         </tr>
@@ -50,17 +49,18 @@
                                                 <td>{{ $blog->name }}</td>
                                                 <td>
                                                     <img src="{{ asset('upload_image/blog/' . $blog->image) }}"
-                                                            class="rounded-circle p-1 border" width="45" height="45"
-                                                            alt="...">
+                                                        class="rounded-circle p-1 border" width="45" height="45"
+                                                        alt="...">
                                                 </td>
-                                                <td>{!! $blog->description !!}</td>
                                                 <td>{{ daysAgo($blog->created_at) }}</td>
                                                 <td>
-                                                    <a href="{{ route('blog_form', ['type' => 'edit', 'id' => $blog->id]) }}">
+                                                    <a
+                                                        href="{{ route('blog_form', ['type' => 'edit', 'id' => $blog->id]) }}">
                                                         <i class="fas fa-edit me-1" data-feather="edit"></i>
                                                     </a>
 
-                                                    <a  data-bs-toggle="modal" data-bs-target="#deleteModal{{ $blog->id }}" href="#">
+                                                    <a data-bs-toggle="modal"
+                                                        data-bs-target="#deleteModal{{ $blog->id }}" href="#">
                                                         <i class="fas fa-trash me-1" data-feather="trash-2"></i>
                                                     </a>
                                                     <x-admin.modal type="blog" id="{{ $blog->id }}" />

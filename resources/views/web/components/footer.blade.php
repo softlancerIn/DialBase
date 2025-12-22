@@ -72,7 +72,7 @@
                         <ul class="footer-menu">
                             <li><a href="#">Site Map</a></li>
                             <li><a href="#">Security</a></li>
-                            <li><a href="#">Contact</a></li>
+                            <li><a href="{{ route('contact') }}">Contact</a></li>
                             <li><a href="#">FAQ's Page</a></li>
                             <li><a href="#">Privacy</a></li>
                         </ul>

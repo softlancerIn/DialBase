@@ -14,8 +14,8 @@ Route::controller(WebController::class)->group(function () {
     // city detail
     Route::get('city/{slug}', 'city_listing')->name('city.slug');
 
-    // Category detail
-    Route::get('category/{slug}', 'category_detail')->name('category.slug');
+    // Category detail (optional location filter as path parameter)
+    Route::get('category/{slug}/{location?}', 'category_detail')->name('category.slug');
 
     // about
     Route::get('about', 'about')->name('about');
@@ -40,4 +40,8 @@ Route::controller(WebController::class)->group(function () {
 
     Route::get('terms-and-condition', 'termsAndCondition')->name('terms_and_condition');
     Route::get('privacy-policy', 'privacyPolicy')->name('privacy_policy');
+
+    // SEO Friendly Routes (Place at the end to avoid conflicts)
+    // Route::get('{country}/{category}/{city}/{slug}', 'seo_listing_detail')->name('seo.listing.detail');
+    // Route::get('{country}/{category}/{city}', 'seo_city_category')->name('seo.city.category');
 });

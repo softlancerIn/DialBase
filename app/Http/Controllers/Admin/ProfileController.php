@@ -14,7 +14,7 @@ class ProfileController extends Controller
 
     public function profile()
     {
-        $data['user'] = User::first();
+        $data['user'] = auth()->user();
 
         return view('admin.profile.edit', compact('data'));
     }
@@ -28,23 +28,15 @@ class ProfileController extends Controller
 
         $userData = User::where('id', $request->user_id)->first();
 
-        if ($userData['password'] != $request->password) {
-            $update_data = User::where('id', $request->user_id)->update([
-                'name' => $request->name,
-                'email' => $request->email,
-                'password' => Hash::make($request->password),
-            ]);
-        } else {
-            $update_data = User::where('id', $request->user_id)->update([
-                'name' => $request->name,
-                'email' => $request->email,
-            ]);
-        }
+        $update_data = User::where('id', $request->user_id)->update([
+            'name' => $request->name,
+            'email' => $request->email,
+        ]);
 
         if (! empty($update_data)) {
             return redirect()->back()->with('success', 'Profile Updated Successfully!');
         } else {
-            return redirect()->back()->wih('error', 'Something went wrong!');
+            return redirect()->back()->with('error', 'Something went wrong!');
         }
     }
 
@@ -68,7 +60,7 @@ class ProfileController extends Controller
                 if (! empty($update_data)) {
                     return redirect()->back()->with('success', 'Password Updated Successfully!');
                 } else {
-                    return redirect()->back()->with('error', 'Something went wring!');
+                    return redirect()->back()->with('error', 'Something went wrong!');
                 }
             }
         } else {

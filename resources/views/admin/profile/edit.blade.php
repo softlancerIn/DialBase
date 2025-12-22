@@ -32,7 +32,9 @@
                     </div>
                 </div>
                 <div class="col-xl-9 col-lg-9 col-md-8 col-sm-12">
-                    <form class="submit-form">
+                    <form action="{{ route('update_profile') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <input type="hidden" name="user_id" value="{{ $data['user']->id }}">
                         <div class="dashboard-list-wraps bg-white rounded mb-4">
                             <div class="dashboard-list-wraps-head br-bottom py-3 px-3">
                                 <div class="dashboard-list-wraps-flx">
@@ -45,21 +47,20 @@
                                 <div class="row">
                                     <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
                                         <div class="form-group">
-                                            <label class="mb-1">First Name</label>
-                                            <input type="text" class="form-control rounded" placeholder="Amit Kumar" />
+                                            <label class="mb-1">User ID</label>
+                                            <input type="text" class="form-control rounded" value="{{ $data['user']->id }}" readonly />
                                         </div>
                                     </div>
                                     <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
                                         <div class="form-group">
-                                            <label class="mb-1">Last Name</label>
-                                            <input type="text" class="form-control rounded" placeholder="Singh" />
+                                            <label class="mb-1">Name</label>
+                                            <input type="text" class="form-control rounded" name="name" value="{{ $data['user']->name }}" />
                                         </div>
                                     </div>
-                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
                                         <div class="form-group">
                                             <label class="mb-1">Email ID</label>
-                                            <input type="text" class="form-control rounded"
-                                                placeholder="amitkumar@gmail.com" />
+                                            <input type="email" class="form-control rounded" name="email" value="{{ $data['user']->email }}" />
                                         </div>
                                     </div>
                                     <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
@@ -164,6 +165,47 @@
                                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
                                         <div class="form-group">
                                             <button class="btn theme-bg rounded text-light">Save Changes</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                    <form action="{{ route('change_password') }}" method="POST">
+                        @csrf
+                        <input type="hidden" name="user_id" value="{{ $data['user']->id }}">
+                        <div class="dashboard-list-wraps bg-white rounded mb-4">
+                            <div class="dashboard-list-wraps-head br-bottom py-3 px-3">
+                                <div class="dashboard-list-wraps-flx">
+                                    <h4 class="mb-0 ft-medium fs-md"><i
+                                            class="fa fa-lock me-2 theme-cl fs-sm"></i>Change Password</h4>
+                                </div>
+                            </div>
+
+                            <div class="dashboard-list-wraps-body py-3 px-3">
+                                <div class="row">
+                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                        <div class="form-group">
+                                            <label class="mb-1">Old Password</label>
+                                            <input type="password" class="form-control rounded" name="old_password" placeholder="Current Password" />
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                                        <div class="form-group">
+                                            <label class="mb-1">New Password</label>
+                                            <input type="password" class="form-control rounded" name="new_password" placeholder="New Password" />
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                                        <div class="form-group">
+                                            <label class="mb-1">Confirm Password</label>
+                                            <input type="password" class="form-control rounded" name="password_confirmation" placeholder="Confirm New Password" />
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                        <div class="form-group">
+                                            <button type="submit" class="btn theme-bg rounded text-light">Update Password</button>
                                         </div>
                                     </div>
                                 </div>
