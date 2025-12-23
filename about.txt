@@ -1,0 +1,61 @@
+Blog details se details page ka path remove karne par
+
+https://aboutfirms.com/public/blog
+
+Need blog page
+Need Mobile friendly website
+
+Footer link not working
+Meta tags option (give me one box for par page)
+Schema data option (give me one box for par page)
+
+use one time "blog" text in image url
+blog/1766292407-blog-backlink-strategy-2026-how-to-build-high-quality-links-that-google-trusts.png
+
+Home page section category: after 3 line put the Botton more category
+
+Company listing:
+Default location 
+Midpoint Cafe
+SCO 41, Sector 21C, Sector 21, Chandigarh, 160022
+only 7 State showing
+and 7 city
+no country option
+Keywords not working
+location not working
+Address not working
+Address,Mobile,Email, Website, Image & Gallery Option, Working Hours, Social Links, etc is not working
+Blog section in admin:
+showing all blog content in the admin
+Manage Seo: section is not working
+
+
+Profile Info
+change password, id, email id
+
+Enquiry form
+contact page
+
+https://aboutfirms.com/category/it-banking?location=Lake%20Myriam
+its not seo friendly
+i want to
+https://aboutfirms.com/in/mobile-app-developers/delhi
+Home>Mobile App Development>India>Delhi
+https://aboutfirms.com/ae/mobile-app-development/dubai
+Home>Mobile App Development>United Arab Emirates>Dubai
+
+https://aboutfirms.com/admin/listing-data/51
+its not right
+
+Featured Listings kaise aa raha hai?
+homepage section change option
+
+
+Manage Listings: 
+I want to filter data
+Category- country- State- city
+and Manage listing position lite 
+listing number 10 fix 25 
+
+we need one box for script code or other code for apply all page
+

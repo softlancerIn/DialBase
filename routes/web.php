@@ -25,6 +25,7 @@ Route::controller(WebController::class)->group(function () {
 
     // our product
     Route::get('all-categories', 'all_categories')->name('all_categories');
+    Route::get('all-blogs', 'all_blogs')->name('all_blogs');
     Route::get('{slug}.html', 'master_function')->name('products');
 
     // blog

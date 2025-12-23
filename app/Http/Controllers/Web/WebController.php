@@ -18,7 +18,7 @@ class WebController extends Controller
 {
     public function index(Request $request)
     {
-        $data['category'] = Category::where('status', '1')->withCount('listing')->get();
+        $data['category'] = Category::where('status', '1')->withCount('listing')->take(12)->get();
 
         $query = Listing::with(['images', 'workingHours', 'amenities', 'category', 'reviews.user']);
 
@@ -262,6 +262,13 @@ class WebController extends Controller
         $all_category = Category::where('cat_id', '0')->withCount('listing')->get();
 
         return view('web.pages.category_listings', compact('all_category'));
+    }
+
+    public function all_blogs()
+    {
+        $all_blogs = Blog::paginate(12);
+
+        return view('web.pages.blog_listings', compact('all_blogs'));
     }
 
     public function master_function($slug)

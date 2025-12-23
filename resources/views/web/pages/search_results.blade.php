@@ -73,10 +73,10 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-12 d-flex justify-content-center mt-4">
-                        @if(isset($data['listings']))
-                            {{ $data['listings']->links() }}
-                        @endif
+                    <div class="row mt-5 mb-5">
+                        <div class="col-12">
+                            {{ $data['listings']->links('pagination.custom') }}
+                        </div>
                     </div>
                 </div>
             </div>
