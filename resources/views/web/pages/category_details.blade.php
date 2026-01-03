@@ -10,7 +10,7 @@
                         @php
                             $currentLocation = request()->route('location') ?? request('location');
                         @endphp
-                        <h1 class="page_title ft-bold mb-4" style="font-size: 3rem;">{{ $data['category']->name ?? 'Category' }} {{ !empty($currentLocation) ? 'In ' . $currentLocation : '' }}</h1>
+                        <h1 class="page_title ft-bold mb-4 max-md:fw-2" style="font-size: 3rem;">{{ $data['category']->name ?? 'Category' }} {{ !empty($currentLocation) ? 'In ' . $currentLocation : '' }}</h1>
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb justify-content-center mt-2" style="color: white;">
                                 <li class=""><a href="{{ route('index') }}" style="color: white;">Home </a></li>
