@@ -352,7 +352,7 @@
 
 
     <!-- ========================== Download App Section =============================== -->
-    <section class="py-md-10">
+    <section class="py-md-5">
         <div class="container">
             <div class="row align-items-center justify-content-between">
 
