@@ -10,6 +10,7 @@ Route::controller(WebController::class)->group(function () {
     
     // Listing detail
     Route::get('listing/{slug}', 'listing_detail')->name('listing.slug');
+    Route::get('listings', 'all_listings')->name('all_listings');
 
     // city detail
     Route::get('city/{slug}', 'city_listing')->name('city.slug');
