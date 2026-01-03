@@ -79,7 +79,7 @@
     <!-- ======================= All Types Listing ======================== -->
 
     <!-- ======================= Our Partner Start ============================ -->
-    <section class="gray">
+    <section class="gray pt-0">
         <div class="container">
 
             <div class="row justify-content-center">
@@ -162,7 +162,7 @@
 
     <!-- ======================= Blog Start ============================ -->
     @if (count($data['homeBlogs']) > 0)
-        <section class="space min pt-0">
+        <section class="space min">
             <div class="container">
 
                 <div class="row justify-content-center">
