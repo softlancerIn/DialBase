@@ -190,6 +190,12 @@ class WebController extends Controller
         return view('web.pages.promoters');
     }
 
+    public function all_listings() {
+        $listings = Listing::paginate(12);
+
+        return view('web.pages.listings', compact('$listings'));
+    }
+
     public function listing_detail($slug)
     {
         $data['listing'] = Listing::where('slug', $slug)->with('images', 'workingHours', 'amenities', 'socialLink', 'category', 'reviews.user')->first();
