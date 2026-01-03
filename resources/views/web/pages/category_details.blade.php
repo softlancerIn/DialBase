@@ -10,7 +10,7 @@
                         @php
                             $currentLocation = request()->route('location') ?? request('location');
                         @endphp
-                        <h1 class="page_title fw-bold mb-4 fs-3 fs-md-2 fs-lg-1">
+                        <h1 class="page_title fw-bold fs-1 fs-md-2 fs-lg-1">
                             {{ $data['category']->name ?? 'Category' }}
                             {{ !empty($currentLocation) ? 'In ' . $currentLocation : '' }}
                         </h1>
