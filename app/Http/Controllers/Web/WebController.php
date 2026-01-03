@@ -193,7 +193,7 @@ class WebController extends Controller
     public function all_listings() {
         $listings = Listing::paginate(12);
 
-        return view('web.pages.listings', compact('$listings'));
+        return view('web.pages.listings', compact('listings'));
     }
 
     public function listing_detail($slug)
