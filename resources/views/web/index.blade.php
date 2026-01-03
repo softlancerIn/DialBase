@@ -212,10 +212,10 @@
                     @endforeach
                 </div>
 
-            </div>
-            <div class="row justify-content-center mt-4">
-                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 text-center">
-                    <a href="{{ route('all_blogs') }}" class="btn btn-md theme-bg rounded text-light">More Blogs</a>
+                <div class="row justify-content-center md:mt-4">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 text-center">
+                        <a href="{{ route('all_blogs') }}" class="btn btn-md theme-bg rounded text-light">More Blogs</a>
+                    </div>
                 </div>
             </div>
         </section>
