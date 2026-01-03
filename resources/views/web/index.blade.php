@@ -79,7 +79,7 @@
     <!-- ======================= All Types Listing ======================== -->
 
     <!-- ======================= Our Partner Start ============================ -->
-    <section class="pt-0">
+    <section class="gray">
         <div class="container">
 
             <div class="row justify-content-center">
