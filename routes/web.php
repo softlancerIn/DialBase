@@ -30,7 +30,7 @@ Route::controller(WebController::class)->group(function () {
 
     // blog
     Route::get('blog/{slug}', 'blog_details')->name('web_blog_details');
-    Route::get('blogs', 'blogs')->name('blogs');
+    //Route::get('blogs', 'blogs')->name('blogs');
 
     // other
     Route::get('quality', 'quality')->name('quality');
