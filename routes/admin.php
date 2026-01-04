@@ -41,7 +41,7 @@ Route::middleware(['auth:admin', 'admin'])->group(function () {
     // category
     Route::controller(CategoryController::class)->group(function () {
         Route::match(['get', 'post'], 'category', 'category_list')->name('category_list');
-        Route::match(['get', 'post'], 'category/{type}/{id}', 'category_form')->name('category_form');
+        Route::match(['get', 'post'], 'category/{type}/{id?}', 'category_form')->name('category_form');
         Route::match(['get', 'post'], 'save-category', 'save_category')->name('save_category');
     });
 

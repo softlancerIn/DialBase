@@ -13,7 +13,7 @@
                 </div>
 
                 <div class="col-xl-2 col-lg-2 col-md-2">
-                    <div class="btn-group">
+                    <div class="btn-group float-end mt-2">
                         <a href="{{ route('blog_form', ['type' => 'create', 'id' => '0']) }}">
                             <button type="button" class="btn btn-primary">
                                 Add Blog

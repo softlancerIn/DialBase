@@ -65,7 +65,7 @@
                                             @if(!empty($data['locations']) && $data['locations']->count() > 0)
                                             <div class="inner_widget_link">
                                                 <h6 class="ft-medium">Location</h6>
-                                                <select name="location" class="form-control form-select">
+                                                <select name="location" class="form-control">
                                                     <option value="">All Locations</option>
                                                     @foreach($data['locations'] as $location)
                                                         <option value="{{ $location }}" {{ ($currentLocation == $location) ? 'selected' : '' }}>{{ $location }}</option>
