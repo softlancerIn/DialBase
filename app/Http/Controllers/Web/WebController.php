@@ -192,8 +192,9 @@ class WebController extends Controller
 
     public function all_listings() {
         $listings = Listing::paginate(12);
+        $allLocations = Listing::whereNotNull('city')->pluck('city')->unique()->sort()->values();
 
-        return view('web.pages.listings', compact('listings'));
+        return view('web.pages.listings', compact('listings', 'allLocations'));
     }
 
     public function listing_detail($slug)

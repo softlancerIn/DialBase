@@ -13,7 +13,9 @@
                     </div>
 
                     <div class="col-xl-2 col-lg-2 col-md-2">
-                        <a href="{{ route('enquiry_export', request()->query()) }}" class="btn btn-primary">Export</a>
+                        <div class="float-end mt-2">
+                            <a href="{{ route('enquiry_export', request()->query()) }}" class="btn btn-primary">Export</a>
+                        </div>
                     </div>
                 </div>
             </div>

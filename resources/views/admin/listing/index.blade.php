@@ -13,7 +13,7 @@
                 </div>
 
                 <div class="col-xl-2 col-lg-2 col-md-2">
-                    <div class="btn-group">
+                    <div class="btn-group float-end mt-2">
                         <a href="{{route('listing-data.create')}}">
                             <button type="button" class="btn btn-primary">
                                 Add Listing
@@ -29,7 +29,7 @@
         <div class="row mb-3">
             <div class="col-12">
                 <form action="{{ route('listing-data.index') }}" method="GET" class="row g-3">
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <select name="category_id" class="form-control">
                             <option value="">Select Category</option>
                             @foreach(\App\Models\Category::where('status', '1')->get() as $cat)
@@ -37,13 +37,10 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="col-md-3">
-                        <input type="text" name="country" class="form-control" placeholder="Country" value="{{ request('country') }}">
-                    </div>
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <input type="text" name="state" class="form-control" placeholder="State" value="{{ request('state') }}">
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-3">
                         <input type="text" name="city" class="form-control" placeholder="City" value="{{ request('city') }}">
                     </div>
                     <div class="col-md-1">
@@ -101,8 +98,13 @@
                                                     class="btn btn-edit mr-1"><i class="fas fa-edit me-1"></i>Edit</a>
                                                 <a href="{{route('listing-data.show', $data->id)}}"
                                                     class="btn btn-view mr-1"><i class="fas fa-eye me-1"></i>View</a>
-                                                <a href="{{route('listing-data.destroy', $data->id)}}"
-                                                    class="btn btn-delete"><i class="fas fa-trash me-1"></i>Delete</a>
+                                                <form action="{{ route('listing-data.destroy', $data->id) }}" method="POST" style="display:inline">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-delete" onclick="return confirm('Are you sure you want to delete this listing?')">
+                                                        <i class="fas fa-trash me-1"></i>Delete
+                                                    </button>
+                                                </form>
                                             </div>
                                         </div>
                                     </div>

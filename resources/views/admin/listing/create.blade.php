@@ -17,8 +17,23 @@
         <div class="dashboard-widg-bar d-block">
             <div class="row">
                 <div class="col-xl-12 col-lg-2 col-md-12 col-sm-12">
-                    <form action="{{route('listing-data.store')}}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('listing-data.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
+                        @if (session('success'))
+                            <div class="alert alert-success">{{ session('success') }}</div>
+                        @endif
+                        @if (session('message') || session('error'))
+                            <div class="alert alert-warning">{{ session('message') ?? session('error') }}</div>
+                        @endif
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul class="mb-0">
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
                         <div class="submit-form">
                             <!-- Listing Info -->
                             <div class="dashboard-list-wraps bg-white rounded mb-4">
@@ -36,12 +51,16 @@
                                                 <label class="mb-1">Listing Tile</label>
                                                 <input type="text" class="form-control rounded"
                                                     placeholder="Decathlon Sport House" name="title" />
+                                                @error('title')
+                                                    <div class="invalid-feedback d-block">{{ $message }}</div>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
                                             <div class="form-group">
                                                 <label class="mb-1">Categories</label>
-                                                <select class="form-control" name="category_id">
+                                                <select class="form-control @error('category_id') is-invalid @enderror"
+                                                    name="category_id">
                                                     <option value="" selected disabled>Select Category</option>
                                                     @foreach ($data['category'] as $c_data)
                                                         <option value="{{ $c_data->id }}">{{ $c_data->name }}</option>
@@ -54,6 +73,9 @@
                                                     <option>Bankings</option>
                                                     <option>Services</option> --}}
                                                 </select>
+                                                @error('category_id')
+                                                    <div class="invalid-feedback d-block">{{ $message }}</div>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
@@ -61,13 +83,18 @@
                                                 <label class="mb-1">Keywords</label>
                                                 <input type="text" class="form-control rounded" name="keywords"
                                                     placeholder="Type keywords by comma's" />
+                                                @error('keywords')
+                                                    <div class="invalid-feedback d-block">{{ $message }}</div>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
                                             <div class="form-group">
                                                 <label class="mb-1">About Listing</label>
-                                                <textarea class="form-control rounded ht-150" name="about"
-                                                    placeholder="Describe your self"></textarea>
+                                                <textarea class="form-control rounded ht-150" name="about" placeholder="Describe your self"></textarea>
+                                                @error('about')
+                                                    <div class="invalid-feedback d-block">{{ $message }}</div>
+                                                @enderror
                                             </div>
                                         </div>
                                     </div>
@@ -85,61 +112,66 @@
 
                                 <div class="dashboard-list-wraps-body py-3 px-3">
                                     <div class="row">
-                                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
-                                            <div class="form-group">
-                                                <label class="mb-1">Latitude</label>
-                                                <input type="text" class="form-control rounded" name="latitude"
-                                                    placeholder="8054256" />
+                                            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                                                <div class="form-group">
+                                                    <label class="mb-1">Latitude</label>
+                                                    <input id="latitude" type="text" class="form-control rounded" name="latitude"
+                                                        placeholder="8054256" value="{{ old('latitude') }}" />
+                                                    @error('latitude')
+                                                        <div class="invalid-feedback d-block">{{ $message }}</div>
+                                                    @enderror
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
-                                            <div class="form-group">
-                                                <label class="mb-1">Longitude</label>
-                                                <input type="text" class="form-control rounded" name="longitude"
-                                                    placeholder="-7254625" />
+                                            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                                                <div class="form-group">
+                                                    <label class="mb-1">Longitude</label>
+                                                    <input id="longitude" type="text" class="form-control rounded" name="longitude"
+                                                        placeholder="-7254625" value="{{ old('longitude') }}" />
+                                                    @error('longitude')
+                                                        <div class="invalid-feedback d-block">{{ $message }}</div>
+                                                    @enderror
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-                                            <div class="form-group">
-                                                <iframe
-                                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d27437.803590312993!2d76.75937213955079!3d30.726117899999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390feda9761bdc2f%3A0x5e764f7f18edc390!2sMidpoint%20Cafe!5e0!3m2!1sen!2sin!4v1649569611177!5m2!1sen!2sin"
-                                                    class="full-width" height="300" style="border:0;" allowfullscreen=""
-                                                    loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                                <div class="form-group">
+                                                    <label class="mb-1">Map location (drag pin to update coords)</label>
+                                                    <div class="d-flex mb-2 gap-2">
+                                                        <button type="button" id="use-location-btn" class="btn btn-sm btn-outline-primary">Use my location</button>
+                                                        <div id="map-error" class="alert alert-warning mb-0" style="display:none; padding: .35rem .5rem;">Map failed to load</div>
+                                                    </div>
+                                                    <div id="listing-map" style="width:100%;height:300px;border:1px solid #e6e6e6;border-radius:4px"></div>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
-                                            <div class="form-group">
-                                                <label class="mb-1">State</label>
-                                                <select class="form-control" name="state">
-                                                    <option>Uttar Pradesh</option>
-                                                    <option>Uttrakhand</option>
-                                                    <option>Gujrat</option>
-                                                    <option>Mumbai</option>
-                                                    <option>Karnatak</option>
-                                                    <option>Goa</option>
-                                                    <option>Punjab</option>
-                                                </select>
+                                            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                                                <div class="form-group">
+                                                    <label class="mb-1">State</label>
+                                                    <select id="state" class="form-control @error('state') is-invalid @enderror" name="state">
+                                                        <option value="" selected disabled>Select State</option>
+                                                    </select>
+                                                    @error('state')
+                                                        <div class="invalid-feedback d-block">{{ $message }}</div>
+                                                    @enderror
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
-                                            <div class="form-group">
-                                                <label class="mb-1">City</label>
-                                                <select class="form-control" name="city">
-                                                    <option>Aligarh</option>
-                                                    <option>Allahabad</option>
-                                                    <option>Agra</option>
-                                                    <option>Gonda</option>
-                                                    <option>Lucknow</option>
-                                                    <option>Meeruth</option>
-                                                    <option>Gaziabad</option>
-                                                </select>
+                                            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                                                <div class="form-group">
+                                                    <label class="mb-1">City</label>
+                                                    <select id="city" class="form-control @error('city') is-invalid @enderror" name="city">
+                                                        <option value="" selected disabled>Select City</option>
+                                                    </select>
+                                                    @error('city')
+                                                        <div class="invalid-feedback d-block">{{ $message }}</div>
+                                                    @enderror
+                                                </div>
                                             </div>
-                                        </div>
                                         <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
                                             <div class="form-group">
                                                 <label class="mb-1">Address</label>
                                                 <input type="text" class="form-control rounded" name="address"
                                                     placeholder="USA 20TH Berlin Market NY" />
+                                                @error('address')
+                                                    <div class="invalid-feedback d-block">{{ $message }}</div>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
@@ -147,6 +179,9 @@
                                                 <label class="mb-1">Zip Code</label>
                                                 <input type="text" class="form-control rounded" name="zip_code"
                                                     placeholder="HQ125478" />
+                                                @error('zip_code')
+                                                    <div class="invalid-feedback d-block">{{ $message }}</div>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
@@ -154,6 +189,9 @@
                                                 <label class="mb-1">Mobile</label>
                                                 <input type="text" class="form-control rounded" name="mobile"
                                                     placeholder="91 256 584 7895" />
+                                                @error('mobile')
+                                                    <div class="invalid-feedback d-block">{{ $message }}</div>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
@@ -161,13 +199,19 @@
                                                 <label class="mb-1">Email</label>
                                                 <input type="text" class="form-control rounded" name="email"
                                                     placeholder="kumarsrikan@gmail.com" />
+                                                @error('email')
+                                                    <div class="invalid-feedback d-block">{{ $message }}</div>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
                                             <div class="form-group">
                                                 <label class="mb-1">Website</label>
-                                                <input type="text" class="form-control rounded" name="webiste"
+                                                <input type="text" class="form-control rounded" name="website"
                                                     placeholder="https://www.kuamrsrikant.com/" />
+                                                @error('website')
+                                                    <div class="invalid-feedback d-block">{{ $message }}</div>
+                                                @enderror
                                             </div>
                                         </div>
                                     </div>
@@ -179,7 +223,8 @@
                                 <div class="dashboard-list-wraps-head br-bottom py-3 px-3">
                                     <div class="dashboard-list-wraps-flx">
                                         <h4 class="mb-0 ft-medium fs-md"><i
-                                                class="fa fa-camera me-2 theme-cl fs-sm"></i>Image & Gallery Option</h4>
+                                                class="fa fa-camera me-2 theme-cl fs-sm"></i>Image & Gallery Option
+                                        </h4>
                                     </div>
                                 </div>
 
@@ -235,66 +280,42 @@
                                         <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
                                             <div class="form-group">
                                                 <label class="mb-1">Item Name</label>
-                                                <input type="text" class="form-control rounded" name="item_name"
+                                                <input type="text" class="form-control rounded"
+                                                    name="menu_items[0][item_name]"
                                                     placeholder="Spicy Brunchi Burger" />
+                                                @error('menu_items.0.item_name')
+                                                    <div class="invalid-feedback d-block">{{ $message }}</div>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
                                             <div class="form-group">
                                                 <label class="mb-1">Category</label>
-                                                <input type="text" class="form-control rounded" name="category"
-                                                    placeholder="Fast Food" />
+                                                <input type="text" class="form-control rounded"
+                                                    name="menu_items[0][category]" placeholder="Fast Food" />
                                             </div>
                                         </div>
                                         <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
                                             <div class="form-group">
                                                 <label class="mb-1">Price</label>
-                                                <input type="text" class="form-control rounded" name="price"
-                                                    placeholder="ex. 49 USD" />
+                                                <input type="text" class="form-control rounded"
+                                                    name="menu_items[0][price]" placeholder="ex. 49 USD" />
                                             </div>
                                         </div>
                                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
                                             <div class="form-group">
                                                 <label class="mb-1">About Item</label>
-                                                <textarea class="form-control rounded ht-80" name="about_item"
-                                                    placeholder="Describe your Item"></textarea>
+                                                <textarea class="form-control rounded ht-80" name="menu_items[0][about]" placeholder="Describe your Item"></textarea>
                                             </div>
                                         </div>
                                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
                                             <div class="form-group">
                                                 <label for="formFileLg" class="form-label">Upload Item Image</label>
                                                 <input class="form-control rounded" id="formFileLg" type="file"
-                                                    name="item_image">
+                                                    name="menu_items[0][image]">
                                             </div>
                                         </div>
-                                        {{-- <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-                                            <div class="form-group">
-                                                <button type="button"
-                                                    class="btn theme-cl rounded theme-bg-light ft-medium">Add
-                                                    New</button>
-                                            </div>
-                                        </div> --}}
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Working hours -->
-                            <div class="dashboard-list-wraps bg-white rounded mb-4">
-                                <div class="dashboard-list-wraps-head br-bottom py-3 px-3">
-                                    <div class="dashboard-list-wraps-flx">
-                                        <h4 class="mb-0 ft-medium fs-md"><i
-                                                class="fa fa-clock me-2 theme-cl fs-sm"></i>Working Hours</h4>
-                                    </div>
-                                </div>
-
-                                <div class="dashboard-list-wraps-body py-3 px-3">
-                                    <div class="row">
-                                        <div class="form-group">
-                                            <div class="row align-items-center">
-                                                <label class="control-label col-lg-2 col-md-2">Monday</label>
-                                                <div class="col-lg-5 col-md-5">
-                                                    <select class="form-control chosen-select"
-                                                        name="working_hours[open_time][]">
+                                        
                                                         <option>Opening Time</option>
                                                         <option>1 :00 AM</option>
                                                         <option>2 :00 AM</option>
@@ -758,7 +779,8 @@
                                         </div>
 
                                         <div class="form-group mt-4">
-                                            <input id="t24" class="checkbox-custom" name="24-1" type="checkbox">
+                                            <input id="t24" class="checkbox-custom" name="24-1"
+                                                type="checkbox">
                                             <label for="t24" class="checkbox-custom-label">This Business open
                                                 7x24</label>
                                         </div>
@@ -771,7 +793,8 @@
                                 <div class="dashboard-list-wraps-head br-bottom py-3 px-3">
                                     <div class="dashboard-list-wraps-flx">
                                         <h4 class="mb-0 ft-medium fs-md"><i
-                                                class="lni lni-coffee-cup me-2 theme-cl fs-sm"></i>Amenties Options</h4>
+                                                class="lni lni-coffee-cup me-2 theme-cl fs-sm"></i>Amenties Options
+                                        </h4>
                                     </div>
                                 </div>
 
@@ -783,7 +806,8 @@
                                                     <li>
                                                         <input id="am1" class="checkbox-custom" name="am1"
                                                             type="checkbox">
-                                                        <label for="am1" class="checkbox-custom-label">Health Score 8.7
+                                                        <label for="am1" class="checkbox-custom-label">Health
+                                                            Score 8.7
                                                             /
                                                             10</label>
                                                     </li>
@@ -814,7 +838,8 @@
                                                     <li>
                                                         <input id="am6" class="checkbox-custom" name="am6"
                                                             type="checkbox">
-                                                        <label for="am6" class="checkbox-custom-label">Private Lot
+                                                        <label for="am6" class="checkbox-custom-label">Private
+                                                            Lot
                                                             Parking</label>
                                                     </li>
                                                     <li>
@@ -844,13 +869,15 @@
                                                     <li>
                                                         <input id="am11" class="checkbox-custom" name="am11"
                                                             type="checkbox">
-                                                        <label for="am11" class="checkbox-custom-label">Staff wears
+                                                        <label for="am11" class="checkbox-custom-label">Staff
+                                                            wears
                                                             masks</label>
                                                     </li>
                                                     <li>
                                                         <input id="am12" class="checkbox-custom" name="am12"
                                                             type="checkbox">
-                                                        <label for="am12" class="checkbox-custom-label">Accepts Credit
+                                                        <label for="am12" class="checkbox-custom-label">Accepts
+                                                            Credit
                                                             Cards</label>
                                                     </li>
                                                     <li>
@@ -898,7 +925,8 @@
                                                     <li>
                                                         <input id="am20" class="checkbox-custom" name="am20"
                                                             type="checkbox">
-                                                        <label for="am20" class="checkbox-custom-label">Casual</label>
+                                                        <label for="am20"
+                                                            class="checkbox-custom-label">Casual</label>
                                                     </li>
                                                     <li>
                                                         <input id="am21" class="checkbox-custom" name="am21"
@@ -909,7 +937,8 @@
                                                     <li>
                                                         <input id="am22" class="checkbox-custom" name="am22"
                                                             type="checkbox">
-                                                        <label for="am22" class="checkbox-custom-label">Brunch, Lunch,
+                                                        <label for="am22" class="checkbox-custom-label">Brunch,
+                                                            Lunch,
                                                             Dinner</label>
                                                     </li>
                                                     <li>
@@ -950,40 +979,29 @@
                                     <div class="row">
                                         <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
                                             <div class="form-group">
-                                                <label class="mb-1"><i
-                                                        class="ti-facebook theme-cl me-1"></i>Facebook</label>
-                                                <input type="text" class="form-control rounded" name="facebook"
-                                                    placeholder="https://facebook.com/" />
+                                                <label class="mb-1">State</label>
+                                                <select id="state" class="form-control @error('state') is-invalid @enderror" name="state">
+                                                    <option value="" selected disabled>Select State</option>
+                                                </select>
+                                                @error('state')
+                                                    <div class="invalid-feedback d-block">{{ $message }}</div>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
                                             <div class="form-group">
-                                                <label class="mb-1"><i
-                                                        class="ti-twitter theme-cl me-1"></i>Twitter</label>
-                                                <input type="text" class="form-control rounded" name="twitter"
-                                                    placeholder="https://twitter.com/" />
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
-                                            <div class="form-group">
-                                                <label class="mb-1"><i
-                                                        class="ti-instagram theme-cl me-1"></i>Instagram</label>
-                                                <input type="text" class="form-control rounded" name="instagram"
-                                                    placeholder="https://instagram.com/" />
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
-                                            <div class="form-group">
-                                                <label class="mb-1"><i
-                                                        class="ti-linkedin theme-cl me-1"></i>Linkedin</label>
-                                                <input type="text" class="form-control rounded" name="linkedin"
-                                                    placeholder="https://linkedin.com/" />
+                                                <label class="mb-1">City</label>
+                                                <select id="city" class="form-control @error('city') is-invalid @enderror" name="city">
+                                                    <option value="" selected disabled>Select City</option>
+                                                </select>
+                                                @error('city')
+                                                    <div class="invalid-feedback d-block">{{ $message }}</div>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
                                             <div class="form-group">
-                                                <button type="submit" class="btn theme-bg rounded text-light">Submit &
-                                                    Preview</button>
+                                                <button type="submit" class="btn theme-bg rounded text-light">Add Listing</button>
                                             </div>
                                         </div>
                                     </div>
@@ -995,4 +1013,169 @@
             </div>
 
         </div>
+        <!-- Leaflet CSS/JS for interactive map -->
+          <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+          <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                // Initialize the interactive map and sync with lat/lng inputs
+                const latInput = document.getElementById('latitude');
+                const lngInput = document.getElementById('longitude');
+
+                const defaultLat = 20.5937; // India center fallback
+                const defaultLng = 78.9629;
+
+                const lat = parseFloat(latInput.value) || defaultLat;
+                const lng = parseFloat(lngInput.value) || defaultLng;
+
+                try {
+                    if (typeof L === 'undefined') throw new Error('Leaflet not loaded');
+
+                    const map = L.map('listing-map').setView([lat, lng], 13);
+
+                    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                        maxZoom: 19,
+                        attribution: '&copy; OpenStreetMap contributors'
+                    }).addTo(map);
+
+                    const marker = L.marker([lat, lng], { draggable: true }).addTo(map);
+
+                    // When marker dragged, update inputs
+                    marker.on('dragend', function () {
+                        const pos = marker.getLatLng();
+                        latInput.value = pos.lat.toFixed(6);
+                        lngInput.value = pos.lng.toFixed(6);
+                    });
+
+                    // Click on map to move marker
+                    map.on('click', function (e) {
+                        marker.setLatLng(e.latlng);
+                        latInput.value = e.latlng.lat.toFixed(6);
+                        lngInput.value = e.latlng.lng.toFixed(6);
+                    });
+
+                    // When inputs change, update marker
+                    function updateMarkerFromInputs() {
+                        const newLat = parseFloat(latInput.value);
+                        const newLng = parseFloat(lngInput.value);
+                        if (!isNaN(newLat) && !isNaN(newLng)) {
+                            marker.setLatLng([newLat, newLng]);
+                            map.setView([newLat, newLng]);
+                        }
+                    }
+
+                    latInput.addEventListener('change', updateMarkerFromInputs);
+                    lngInput.addEventListener('change', updateMarkerFromInputs);
+
+                    // Use browser geolocation
+                    const useBtn = document.getElementById('use-location-btn');
+                    useBtn.addEventListener('click', function () {
+                        if (!navigator.geolocation) {
+                            showMapError('Geolocation not supported');
+                            return;
+                        }
+                        navigator.geolocation.getCurrentPosition(function (pos) {
+                            const pLat = pos.coords.latitude;
+                            const pLng = pos.coords.longitude;
+                            marker.setLatLng([pLat, pLng]);
+                            map.setView([pLat, pLng], 13);
+                            latInput.value = pLat.toFixed(6);
+                            lngInput.value = pLng.toFixed(6);
+                        }, function (err) {
+                            showMapError('Unable to get location: ' + (err.message || err.code));
+                        });
+                    });
+                } catch (err) {
+                    console.error('Map init error', err);
+                    showMapError(err.message || 'Map initialization failed');
+                }
+
+                function showMapError(msg) {
+                    const el = document.getElementById('map-error');
+                    if (el) {
+                        el.style.display = 'block';
+                        el.textContent = 'Map failed to load: ' + msg;
+                    } else {
+                        alert('Map failed to load: ' + msg);
+                    }
+                }
+
+                // Existing state/city dropdown logic
+                const stateDropdown = document.getElementById('state');
+                const cityDropdown = document.getElementById('city');
+
+                // Get current selected state/city from server-side values (create page uses old() only)
+                const currentState = {!! json_encode(old('state')) !!};
+                const currentCity = {!! json_encode(old('city')) !!};
+
+                // Fetch states from GeoNames API and select current state (by iso2 or name)
+                fetch('https://api.countrystatecity.in/v1/countries/IN/states', {
+                        headers: {
+                            "X-CSCAPI-KEY": "demo"
+                        }
+                    })
+                    .then(response => response.json())
+                    .then(states => {
+                        let selectedStateIso = null;
+                        states.forEach(state => {
+                            const option = document.createElement('option');
+                            option.value = state.iso2;
+                            option.textContent = state.name;
+                            // detect match by iso2 or by full name
+                            if (currentState && (currentState.toString().toLowerCase() === state.iso2.toString().toLowerCase() || currentState.toString().toLowerCase() === state.name.toString().toLowerCase())) {
+                                option.selected = true;
+                                selectedStateIso = state.iso2;
+                            }
+                            stateDropdown.appendChild(option);
+                        });
+
+                        // If we found a selected state, fetch its cities and select current city
+                        if (selectedStateIso) {
+                            fetchCitiesAndSelect(selectedStateIso, currentCity);
+                        }
+                    });
+
+                // Helper: fetch cities for a state iso code and optionally select a city by name
+                function fetchCitiesAndSelect(stateIso, selectCityName = null) {
+                    // Clear previous cities
+                    cityDropdown.innerHTML = '<option value="" selected disabled>Select City</option>';
+
+                    fetch(`https://api.countrystatecity.in/v1/countries/IN/states/${stateIso}/cities`, {
+                            headers: {
+                                "X-CSCAPI-KEY": "demo"
+                            }
+                        })
+                        .then(response => response.json())
+                        .then(cities => {
+                            let found = false;
+                            cities.forEach(city => {
+                                const option = document.createElement('option');
+                                option.value = city.name;
+                                option.textContent = city.name;
+                                if (selectCityName && selectCityName.toString().toLowerCase() === city.name.toString().toLowerCase()) {
+                                    option.selected = true;
+                                    found = true;
+                                }
+                                cityDropdown.appendChild(option);
+                            });
+
+                            // If a city to select was provided but not found, still set a matching plain option
+                            if (selectCityName && !found) {
+                                const fallback = document.createElement('option');
+                                fallback.value = selectCityName;
+                                fallback.textContent = selectCityName + ' (not in list)';
+                                fallback.selected = true;
+                                cityDropdown.appendChild(fallback);
+                            }
+                        });
+                }
+
+                // Fetch cities when user changes state
+                stateDropdown.addEventListener('change', function () {
+                    const selectedState = this.value;
+                    fetchCitiesAndSelect(selectedState);
+                });
+            });
+        </script>
 </x-admin.layout>

@@ -7,22 +7,22 @@
                         <i class="lni lni-dashboard me-2"></i>Dashboard
                     </a>
                 </li>
-                <li class="@active('category_list')">
+                <li class="@active('category_list', 'category_form')">
                     <a href="{{ route('category_list') }}">
                         <i class="lni lni-files me-2"></i>Category
                     </a>
                 </li>
-                <li class="@active('listing-data.index')">
+                <li class="@active('listing-data.index', 'listing-data.create', 'listing-data.edit')">
                     <a href="{{ route('listing-data.index') }}">
                         <i class="lni lni-files me-2"></i>My Listings
                     </a>
                 </li>
-                <li class="@active('blog_list')">
+                <li class="@active('blog_list', 'blog_form')">
                     <a href="{{ route('blog_list') }}">
                         <i class="lni lni-files me-2"></i>Blogs
                     </a>
                 </li>
-                <li class="@active('seo_list')">
+                <li class="@active('seo_list', 'seo_form')">
                     <a href="{{ route('seo_list') }}">
                         <i class="lni lni-target me-2"></i>SEO
                     </a>
