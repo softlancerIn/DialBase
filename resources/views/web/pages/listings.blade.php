@@ -2,7 +2,7 @@
 
 @section('content')
     <!-- ======================= Breadcrumb ======================== -->
-    <div class="breadcrumb-wrap" style="background:#f41b3b url({{ asset('assets/img/banner-2.jpg') }}) no-repeat;" data-overlay="5">
+    <div class="breadcrumb-wrap" style="background:#f41b3b url({{ asset('assets/img/banner-2.jpg') }}) no-repeat; background-size: 100%;" data-overlay="5">
         <div class="container">
             <div class="row">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
@@ -93,20 +93,13 @@
                     </div>
 
                     <div class="row">
-                        <div class="row mt-5 mb-5">
-                            <div class="col-12">
-                                {{ $listings->links('pagination.custom') }}
-                            </div>
+                        <div class="col-12">
+                            {{ $listings->links('pagination.custom') }}
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    {{-- <div class="row mt-5 mb-5">
-        <div class="col-12">
-            {{ $listings->links('pagination.custom') }}
-        </div>
-    </div> --}}
     <!-- ======================= Category Section End ======================== -->
 @endsection

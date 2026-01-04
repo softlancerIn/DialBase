@@ -24,6 +24,7 @@ class Listing extends Model
         'mobile',
         'email',
         'website',
+        'is_featured',
         'is_247_open',
     ];
 

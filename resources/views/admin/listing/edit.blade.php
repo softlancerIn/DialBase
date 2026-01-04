@@ -244,7 +244,7 @@
                                                 @enderror
                                             </div>
                                         </div>
-                                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
                                             <div class="form-group">
                                                 <label class="mb-1">Website</label>
                                                 <input type="url"
@@ -256,17 +256,23 @@
                                                 @enderror
                                             </div>
                                         </div>
+                                        <!-- Is Featured Checkbox -->
+                                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                                            <div class="form-group mt-4">
+                                                <input id="is_featured" class="checkbox-custom" name="is_featured" type="checkbox" value="1" {{ $data['listing']->is_featured ? 'checked' : '' }}>
+                                                <label for="is_featured" class="checkbox-custom-label">Mark as Featured</label>
+                                                <small class="form-text text-muted">If checked, this listing will be marked as featured.</small>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-
                             <!-- Image & Gallery Option -->
                             <div class="dashboard-list-wraps bg-white rounded mb-4">
                                 <div class="dashboard-list-wraps-head br-bottom py-3 px-3">
                                     <div class="dashboard-list-wraps-flx">
                                         <h4 class="mb-0 ft-medium fs-md"><i
-                                                class="fa fa-camera me-2 theme-cl fs-sm"></i>Image & Gallery Option
-                                        </h4>
+                                                class="fa fa-camera me-2 theme-cl fs-sm"></i>Image & Gallery Option</h4>
                                     </div>
                                 </div>
 
