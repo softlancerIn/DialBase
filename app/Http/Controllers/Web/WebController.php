@@ -22,7 +22,8 @@ class WebController extends Controller
 
         $query = Listing::with(['images', 'workingHours', 'amenities', 'category', 'reviews.user']);
 
-        $data['listing'] = $query->where('is_featured', 1)->take(12)->get();
+        $data['listing'] = $query->take(12)->get();
+        // $data['listing'] = $query->where('is_featured', 1)->take(12)->get();
 
         foreach ($data['listing'] as $listing) {
             $listing->reviews_count = $listing->reviews->where('status', 1)->count();
