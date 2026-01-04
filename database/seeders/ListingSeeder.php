@@ -26,7 +26,12 @@ class ListingSeeder extends Seeder
         $categoryIds = Category::pluck('id')->all();
 
         // Create 50 listings
-        Listing::factory()->count(50)->create()->each(function (Listing $listing) use ($amenityIds, $categoryIds) {
+        Listing::factory()->count(50)->create()->each(function (Listing $listing, $index) use ($amenityIds, $categoryIds) {
+            // Mark first 10 listings as featured
+            if ($index < 10) {
+                $listing->is_featured = true;
+                $listing->save();
+            }
             // Optionally assign a category if available
             if (!empty($categoryIds)) {
                 $listing->category_id = fake()->randomElement($categoryIds);

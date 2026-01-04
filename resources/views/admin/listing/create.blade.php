@@ -163,11 +163,19 @@
                                                     placeholder="kumarsrikan@gmail.com" />
                                             </div>
                                         </div>
-                                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
                                             <div class="form-group">
                                                 <label class="mb-1">Website</label>
                                                 <input type="text" class="form-control rounded" name="webiste"
                                                     placeholder="https://www.kuamrsrikant.com/" />
+                                            </div>
+                                        </div>
+                                        <!-- Is Featured Checkbox -->
+                                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                                            <div class="form-group mt-4">
+                                                <input id="is_featured" class="checkbox-custom" name="is_featured" type="checkbox" value="1" {{ $data['listing']->is_featured ? 'checked' : '' }}>
+                                                <label for="is_featured" class="checkbox-custom-label">Mark as Featured</label>
+                                                <small class="form-text text-muted">If checked, this listing will be marked as featured.</small>
                                             </div>
                                         </div>
                                     </div>

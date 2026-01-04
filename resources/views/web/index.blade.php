@@ -1,7 +1,7 @@
 @extends('web.layout.main')
 @section('content')
     <!-- ======================= Home Banner ======================== -->
-    <div class="home-banner margin-bottom-0" style="background:#f41b3b url(assets/img/banner-2.jpg) no-repeat;"
+    <div class="home-banner margin-bottom-0" style="background:#f41b3b url(assets/img/banner-2.jpg) no-repeat; background-size: 100%;"
         data-overlay="5">
         <div class="container">
             <div class="row justify-content-center">
@@ -66,7 +66,7 @@
                         </div>
                         <div class="row justify-content-center md:mt-4">
                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 text-center">
-                                <a href="{{ route('all_listings') }}" class="btn btn-md theme-bg rounded text-light">More Listings</a>
+                                <a href="{{ route('all_listings') }}" class="btn btn-md theme-bg rounded text-light">All Listings</a>
                             </div>
                         </div>
                     </div>
