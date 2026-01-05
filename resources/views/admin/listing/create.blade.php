@@ -90,6 +90,18 @@
                                                 @enderror
                                             </div>
                                         </div>
+
+                                        <!-- Sort Order -->
+                                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                                            <div class="form-group">
+                                                <label class="mb-1">Sort Order</label>
+                                                <input type="number" class="form-control rounded" name="sort_order"
+                                                    placeholder="Sort Order (Higher goes first)" />
+                                                @error('sort_order')
+                                                    <div class="invalid-feedback d-block">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
