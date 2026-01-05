@@ -56,8 +56,8 @@
                             <div class="dashboard-list-wraps bg-white rounded mb-4">
                                 <div class="dashboard-list-wraps-head br-bottom py-3 px-3">
                                     <div class="dashboard-list-wraps-flx">
-                                        <h4 class="mb-0 ft-medium fs-md"><i
-                                                class="fa fa-file me-2 theme-cl fs-sm"></i>Listing Info</h4>
+                                        <h4 class="mb-0 ft-medium fs-md">
+                                            <i class="fa fa-file me-2 theme-cl fs-sm"></i>Listing Info</h4>
                                     </div>
                                 </div>
                                 <div class="dashboard-list-wraps-body py-3 px-3">
@@ -169,11 +169,9 @@
                                                 <select class="form-control @error('state') is-invalid @enderror"
                                                     id="state" name="state">
                                                     <option value="" disabled>Select State</option>
-                                                    @if (old('state', $data['listing']->state))
-                                                        <option value="{{ old('state', $data['listing']->state) }}"
-                                                            selected>{{ old('state', $data['listing']->state) }}
-                                                        </option>
-                                                    @endif
+                                                    @foreach ($data['states'] as $state)
+                                                        <option value="{{ $state }}" {{ old('state', $data['listing']->state) == $state ? 'selected' : '' }}>{{ $state }}</option>
+                                                    @endforeach
                                                 </select>
                                                 @error('state')
                                                     <div class="invalid-feedback d-block">{{ $message }}</div>
@@ -186,10 +184,9 @@
                                                 <select class="form-control @error('city') is-invalid @enderror"
                                                     id="city" name="city">
                                                     <option value="" disabled>Select City</option>
-                                                    @if (old('city', $data['listing']->city))
-                                                        <option value="{{ old('city', $data['listing']->city) }}"
-                                                            selected>{{ old('city', $data['listing']->city) }}</option>
-                                                    @endif
+                                                    @foreach ($data['cities'] as $city)
+                                                        <option value="{{ $city }}" {{ old('city', $data['listing']->city) == $city ? 'selected' : '' }}>{{ $city }}</option>
+                                                    @endforeach
                                                 </select>
                                                 @error('city')
                                                     <div class="invalid-feedback d-block">{{ $message }}</div>
@@ -338,112 +335,13 @@
                                 </div>
                             </div>
 
-                            <!-- Menu Items -->
-                            <div class="dashboard-list-wraps bg-white rounded mb-4">
-                                <div class="dashboard-list-wraps-head br-bottom py-3 px-3">
-                                    <div class="dashboard-list-wraps-flx">
-                                        <h4 class="mb-0 ft-medium fs-md"><i
-                                                class="fas fa-utensils me-2 theme-cl fs-sm"></i>Menu Items</h4>
-                                    </div>
-                                </div>
-
-                                <div class="dashboard-list-wraps-body py-3 px-3">
-                                    @php
-                                        $menuItems = $data['listing']->menuItems ?? collect();
-                                        if ($menuItems->isEmpty()) {
-                                            $menuItems = collect([null]);
-                                        }
-                                    @endphp
-
-                                    @foreach($menuItems as $mIndex => $mItem)
-                                        <div class="row menu-item-row mb-3">
-                                            <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
-                                                <div class="form-group">
-                                                    <label class="mb-1">Item Name</label>
-                                                    <input type="text"
-                                                        class="form-control rounded @error('menu_items.'. $mIndex .'.item_name') is-invalid @enderror"
-                                                        name="menu_items[{{ $mIndex }}][item_name]"
-                                                        value="{{ old('menu_items.'.$mIndex.'.item_name', optional($mItem)->item_name) }}"
-                                                        placeholder="Spicy Brunchi Burger" />
-                                                    @error('menu_items.'. $mIndex .'.item_name')
-                                                        <div class="invalid-feedback d-block">{{ $message }}</div>
-                                                    @enderror
-                                                </div>
-                                            </div>
-                                            <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
-                                                <div class="form-group">
-                                                    <label class="mb-1">Category</label>
-                                                    <input type="text"
-                                                        class="form-control rounded @error('menu_items.'. $mIndex .'.category') is-invalid @enderror"
-                                                        name="menu_items[{{ $mIndex }}][category]" 
-                                                        value="{{ old('menu_items.'.$mIndex.'.category', optional($mItem)->category) }}"
-                                                        placeholder="Fast Food" />
-                                                    @error('menu_items.'. $mIndex .'.category')
-                                                        <div class="invalid-feedback d-block">{{ $message }}</div>
-                                                    @enderror
-                                                </div>
-                                            </div>
-                                            <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
-                                                <div class="form-group">
-                                                    <label class="mb-1">Price</label>
-                                                    <input type="text"
-                                                        class="form-control rounded @error('menu_items.'. $mIndex .'.price') is-invalid @enderror"
-                                                        name="menu_items[{{ $mIndex }}][price]" 
-                                                        value="{{ old('menu_items.'.$mIndex.'.price', optional($mItem)->price) }}"
-                                                        placeholder="ex. 49 USD" />
-                                                    @error('menu_items.'. $mIndex .'.price')
-                                                        <div class="invalid-feedback d-block">{{ $message }}</div>
-                                                    @enderror
-                                                </div>
-                                            </div>
-                                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-                                                <div class="form-group">
-                                                    <label class="mb-1">About Item</label>
-                                                    <textarea class="form-control rounded ht-80 @error('menu_items.'. $mIndex .'.about') is-invalid @enderror"
-                                                        name="menu_items[{{ $mIndex }}][about]" 
-                                                        placeholder="Describe your Item">{{ old('menu_items.'.$mIndex.'.about', optional($mItem)->about_item) }}</textarea>
-                                                    @error('menu_items.'. $mIndex .'.about')
-                                                        <div class="invalid-feedback d-block">{{ $message }}</div>
-                                                    @enderror
-                                                </div>
-                                            </div>
-                                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-                                                <div class="form-group">
-                                                    <label for="formFileLg" class="form-label">Upload Item Image</label>
-                                                    @if(optional($mItem)->item_image)
-                                                        <div class="mb-2">
-                                                            <img src="{{ asset('storage/' . optional($mItem)->item_image) }}" alt="Item Image" style="max-width: 100px; max-height: 100px;">
-                                                        </div>
-                                                    @endif
-                                                    <input
-                                                        class="form-control rounded @error('menu_items.'. $mIndex .'.image') is-invalid @enderror"
-                                                        id="formFileLg" type="file" 
-                                                        name="menu_items[{{ $mIndex }}][image]"
-                                                        accept="image/*">
-                                                    @error('menu_items.'. $mIndex .'.image')
-                                                        <div class="invalid-feedback d-block">{{ $message }}</div>
-                                                    @enderror
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @endforeach
-                                        {{-- <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-                                            <div class="form-group">
-                                                <button type="button"
-                                                    class="btn theme-cl rounded theme-bg-light ft-medium">Add
-                                                    New</button>
-                                            </div>
-                                        </div> --}}
-                                    </div>
-                                </div>
-                            </div>
-
                             <!-- Working hours -->
                             <div class="dashboard-list-wraps bg-white rounded mb-4">
                                 <div class="dashboard-list-wraps-head br-bottom py-3 px-3">
                                     <div class="dashboard-list-wraps-flx">
-                                        <h4 class="mb-0 ft-medium fs-md"><i
-                                                class="fa fa-clock me-2 theme-cl fs-sm"></i>Working Hours</h4>
+                                        <h4 class="mb-0 ft-medium fs-md">
+                                            <i class="fa fa-clock me-2 theme-cl fs-sm"></i>Working Hours
+                                        </h4>
                                     </div>
                                 </div>
 
@@ -490,7 +388,8 @@
                                             'Closed',
                                         ];
                                     @endphp
-                                    <div class="row">
+
+                                    <div class="row gap-y-3">
                                         @foreach ($days as $dIndex => $day)
                                             <div class="form-group w-100">
                                                 <div class="row align-items-center">
@@ -528,9 +427,9 @@
                                             $close_times = $wh ? json_decode($wh->close_time, true) : [];
                                         @endphp
                                         <div class="form-group mt-4">
-                                            <input id="t24" class="checkbox-custom" name="t24"
+                                            <input id="t24" class="checkbox-custom" name="is_247_open"
                                                 type="checkbox" value="1"
-                                                {{ $data['listing']->t24 ? 'checked' : '' }}>
+                                                {{ $data['listing']->is_247_open ? 'checked' : '' }}>
                                             <label for="t24" class="checkbox-custom-label">This Business open
                                                 7x24</label>
                                         </div>
@@ -554,7 +453,7 @@
                                             <div class="Goodup-all-features-list">
                                                 <ul>
                                                     @php $selectedAmenityIds = $data['listing']->amenities->pluck('id')->toArray(); @endphp
-                                                    @foreach ($data['all_amenities'] as $amenity)
+                                                    @foreach($data['all_amenities'] as $amenity)
                                                         <li>
                                                             <input id="amenity-{{ $amenity->id }}"
                                                                 class="checkbox-custom" name="amenities[]"
@@ -572,57 +471,7 @@
                                                     name="new_amenities" placeholder="e.g. Free Parking, Live Music">
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
 
-                            <!-- Social Links -->
-                            <div class="dashboard-list-wraps bg-white rounded mb-4">
-                                <div class="dashboard-list-wraps-head br-bottom py-3 px-3">
-                                    <div class="dashboard-list-wraps-flx">
-                                        <h4 class="mb-0 ft-medium fs-md"><i
-                                                class="fa fa-user-friends me-2 theme-cl fs-sm"></i>Social Links</h4>
-                                    </div>
-                                </div>
-
-                                <div class="dashboard-list-wraps-body py-3 px-3">
-                                    <div class="row">
-                                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
-                                            <div class="form-group">
-                                                <label class="mb-1"><i
-                                                        class="ti-facebook theme-cl me-1"></i>Facebook</label>
-                                                <input type="text" class="form-control rounded" name="facebook"
-                                                    placeholder="https://facebook.com/"
-                                                    value="{{ old('facebook', optional($data['listing']->socialLink)->facebook) }}" />
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
-                                            <div class="form-group">
-                                                <label class="mb-1"><i
-                                                        class="ti-twitter theme-cl me-1"></i>Twitter</label>
-                                                <input type="text" class="form-control rounded" name="twitter"
-                                                    placeholder="https://twitter.com/"
-                                                    value="{{ old('twitter', optional($data['listing']->socialLink)->twitter) }}" />
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
-                                            <div class="form-group">
-                                                <label class="mb-1"><i
-                                                        class="ti-instagram theme-cl me-1"></i>Instagram</label>
-                                                <input type="text" class="form-control rounded" name="instagram"
-                                                    placeholder="https://instagram.com/"
-                                                    value="{{ old('instagram', optional($data['listing']->socialLink)->instagram) }}" />
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
-                                            <div class="form-group">
-                                                <label class="mb-1"><i
-                                                        class="ti-linkedin theme-cl me-1"></i>Linkedin</label>
-                                                <input type="text" class="form-control rounded" name="linkedin"
-                                                    placeholder="https://linkedin.com/"
-                                                    value="{{ old('linkedin', optional($data['listing']->socialLink)->linkedin) }}" />
-                                            </div>
-                                        </div>
                                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
                                             <div class="form-group">
                                                 <button type="submit"
@@ -725,82 +574,6 @@
                         alert('Map failed to load: ' + msg);
                     }
                 }
-
-                // Existing state/city dropdown logic
-                const stateDropdown = document.getElementById('state');
-                const cityDropdown = document.getElementById('city');
-
-                // Get current selected state/city from server-side values
-                const currentState = {!! json_encode(old('state', $data['listing']->state)) !!};
-                const currentCity = {!! json_encode(old('city', $data['listing']->city)) !!};
-
-                // Fetch states from GeoNames API and select current state (by iso2 or name)
-                fetch('https://api.countrystatecity.in/v1/countries/IN/states', {
-                        headers: {
-                            "X-CSCAPI-KEY": "demo"
-                        }
-                    })
-                    .then(response => response.json())
-                    .then(states => {
-                        let selectedStateIso = null;
-                        states.forEach(state => {
-                            const option = document.createElement('option');
-                            option.value = state.iso2;
-                            option.textContent = state.name;
-                            // detect match by iso2 or by full name
-                            if (currentState && (currentState.toString().toLowerCase() === state.iso2.toString().toLowerCase() || currentState.toString().toLowerCase() === state.name.toString().toLowerCase())) {
-                                option.selected = true;
-                                selectedStateIso = state.iso2;
-                            }
-                            stateDropdown.appendChild(option);
-                        });
-
-                        // If we found a selected state, fetch its cities and select current city
-                        if (selectedStateIso) {
-                            fetchCitiesAndSelect(selectedStateIso, currentCity);
-                        }
-                    });
-
-                // Helper: fetch cities for a state iso code and optionally select a city by name
-                function fetchCitiesAndSelect(stateIso, selectCityName = null) {
-                    // Clear previous cities
-                    cityDropdown.innerHTML = '<option value="" selected disabled>Select City</option>';
-
-                    fetch(`https://api.countrystatecity.in/v1/countries/IN/states/${stateIso}/cities`, {
-                            headers: {
-                                "X-CSCAPI-KEY": "demo"
-                            }
-                        })
-                        .then(response => response.json())
-                        .then(cities => {
-                            let found = false;
-                            cities.forEach(city => {
-                                const option = document.createElement('option');
-                                option.value = city.name;
-                                option.textContent = city.name;
-                                if (selectCityName && selectCityName.toString().toLowerCase() === city.name.toString().toLowerCase()) {
-                                    option.selected = true;
-                                    found = true;
-                                }
-                                cityDropdown.appendChild(option);
-                            });
-
-                            // If a city to select was provided but not found, still set a matching plain option
-                            if (selectCityName && !found) {
-                                const fallback = document.createElement('option');
-                                fallback.value = selectCityName;
-                                fallback.textContent = selectCityName + ' (not in list)';
-                                fallback.selected = true;
-                                cityDropdown.appendChild(fallback);
-                            }
-                        });
-                }
-
-                // Fetch cities when user changes state
-                stateDropdown.addEventListener('change', function () {
-                    const selectedState = this.value;
-                    fetchCitiesAndSelect(selectedState);
-                });
             });
         </script>
 </x-admin.layout>
