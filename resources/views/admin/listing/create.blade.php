@@ -65,13 +65,6 @@
                                                     @foreach ($data['category'] as $c_data)
                                                         <option value="{{ $c_data->id }}">{{ $c_data->name }}</option>
                                                     @endforeach
-                                                    {{-- <option>Hotel & Spa</option>
-                                                    <option>Education</option>
-                                                    <option>Wedding</option>
-                                                    <option>Restaurents</option>
-                                                    <option>Cafe & Bars</option>
-                                                    <option>Bankings</option>
-                                                    <option>Services</option> --}}
                                                 </select>
                                                 @error('category_id')
                                                     <div class="invalid-feedback d-block">{{ $message }}</div>
@@ -112,58 +105,69 @@
 
                                 <div class="dashboard-list-wraps-body py-3 px-3">
                                     <div class="row">
-                                            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
-                                                <div class="form-group">
-                                                    <label class="mb-1">Latitude</label>
-                                                    <input id="latitude" type="text" class="form-control rounded" name="latitude"
-                                                        placeholder="8054256" value="{{ old('latitude') }}" />
-                                                    @error('latitude')
-                                                        <div class="invalid-feedback d-block">{{ $message }}</div>
-                                                    @enderror
-                                                </div>
+                                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                                            <div class="form-group">
+                                                <label class="mb-1">Latitude</label>
+                                                <input id="latitude" type="text" class="form-control rounded" name="latitude"
+                                                    placeholder="8054256" value="{{ old('latitude') }}" />
+                                                @error('latitude')
+                                                    <div class="invalid-feedback d-block">{{ $message }}</div>
+                                                @enderror
                                             </div>
-                                            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
-                                                <div class="form-group">
-                                                    <label class="mb-1">Longitude</label>
-                                                    <input id="longitude" type="text" class="form-control rounded" name="longitude"
-                                                        placeholder="-7254625" value="{{ old('longitude') }}" />
-                                                    @error('longitude')
-                                                        <div class="invalid-feedback d-block">{{ $message }}</div>
-                                                    @enderror
-                                                </div>
+                                        </div>
+
+                                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                                            <div class="form-group">
+                                                <label class="mb-1">Longitude</label>
+                                                <input id="longitude" type="text" class="form-control rounded" name="longitude"
+                                                    placeholder="-7254625" value="{{ old('longitude') }}" />
+                                                @error('longitude')
+                                                    <div class="invalid-feedback d-block">{{ $message }}</div>
+                                                @enderror
                                             </div>
-                                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-                                                <div class="form-group">
-                                                    <label class="mb-1">Map location (drag pin to update coords)</label>
-                                                    <div class="d-flex mb-2 gap-2">
-                                                        <button type="button" id="use-location-btn" class="btn btn-sm btn-outline-primary">Use my location</button>
-                                                        <div id="map-error" class="alert alert-warning mb-0" style="display:none; padding: .35rem .5rem;">Map failed to load</div>
-                                                    </div>
-                                                    <div id="listing-map" style="width:100%;height:300px;border:1px solid #e6e6e6;border-radius:4px"></div>
+                                        </div>
+
+                                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                            <div class="form-group">
+                                                <label class="mb-1">Map location (drag pin to update coords)</label>
+                                                <div class="d-flex mb-2 gap-2">
+                                                    <button type="button" id="use-location-btn" class="btn btn-sm btn-outline-primary">Use my location</button>
+                                                    <div id="map-error" class="alert alert-warning mb-0" style="display:none; padding: .35rem .5rem;">Map failed to load</div>
                                                 </div>
+                                                <div id="listing-map" style="width:100%;height:300px;border:1px solid #e6e6e6;border-radius:4px"></div>
                                             </div>
-                                            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
-                                                <div class="form-group">
-                                                    <label class="mb-1">State</label>
-                                                    <select id="state" class="form-control @error('state') is-invalid @enderror" name="state">
-                                                        <option value="" selected disabled>Select State</option>
-                                                    </select>
-                                                    @error('state')
-                                                        <div class="invalid-feedback d-block">{{ $message }}</div>
-                                                    @enderror
-                                                </div>
+                                        </div>
+
+                                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                                            <div class="form-group">
+                                                <label class="mb-1">State</label>
+                                                <select id="state" class="form-control @error('state') is-invalid @enderror" name="state">
+                                                    <option value="" disabled>Select State</option>
+                                                    @foreach ($data['states'] as $state)
+                                                        <option value="{{ $state }}" {{ old('state') == $state ? 'selected' : '' }}>{{ $state }}</option>
+                                                    @endforeach
+                                                </select>
+                                                @error('state')
+                                                    <div class="invalid-feedback d-block">{{ $message }}</div>
+                                                @enderror
                                             </div>
-                                            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
-                                                <div class="form-group">
-                                                    <label class="mb-1">City</label>
-                                                    <select id="city" class="form-control @error('city') is-invalid @enderror" name="city">
-                                                        <option value="" selected disabled>Select City</option>
-                                                    </select>
-                                                    @error('city')
-                                                        <div class="invalid-feedback d-block">{{ $message }}</div>
-                                                    @enderror
-                                                </div>
+                                        </div>
+                                        
+                                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                                            <div class="form-group">
+                                                <label class="mb-1">City</label>
+                                                <select id="city" class="form-control @error('city') is-invalid @enderror" name="city">
+                                                    <option value="" disabled>Select City</option>
+                                                    @foreach ($data['cities'] as $city)
+                                                        <option value="{{ $city }}" {{ old('city') == $city ? 'selected' : '' }}>{{ $city }}</option>
+                                                    @endforeach
+                                                </select>
+                                                @error('city')
+                                                    <div class="invalid-feedback d-block">{{ $message }}</div>
+                                                @enderror
                                             </div>
+                                        </div>
+
                                         <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
                                             <div class="form-group">
                                                 <label class="mb-1">Address</label>
@@ -174,6 +178,7 @@
                                                 @enderror
                                             </div>
                                         </div>
+
                                         <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
                                             <div class="form-group">
                                                 <label class="mb-1">Zip Code</label>
@@ -184,6 +189,7 @@
                                                 @enderror
                                             </div>
                                         </div>
+
                                         <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
                                             <div class="form-group">
                                                 <label class="mb-1">Mobile</label>
@@ -194,6 +200,7 @@
                                                 @enderror
                                             </div>
                                         </div>
+
                                         <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
                                             <div class="form-group">
                                                 <label class="mb-1">Email</label>
@@ -204,6 +211,7 @@
                                                 @enderror
                                             </div>
                                         </div>
+
                                         <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
                                             <div class="form-group">
                                                 <label class="mb-1">Website</label>
@@ -214,10 +222,11 @@
                                                 @enderror
                                             </div>
                                         </div>
+
                                         <!-- Is Featured Checkbox -->
                                         <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
                                             <div class="form-group mt-4">
-                                                <input id="is_featured" class="checkbox-custom" name="is_featured" type="checkbox" value="1" {{ $data['listing']->is_featured ? 'checked' : '' }}>
+                                                <input id="is_featured" class="checkbox-custom" name="is_featured" type="checkbox" value="1">
                                                 <label for="is_featured" class="checkbox-custom-label">Mark as Featured</label>
                                                 <small class="form-text text-muted">If checked, this listing will be marked as featured.</small>
                                             </div>
@@ -252,108 +261,63 @@
                                         <div class="col-lg-4 col-md-6">
                                             <label class="mb-1">Featured Image</label>
                                             <input type="file" name="featured_image" class="form-control rounded">
-                                            {{-- <form action="https://shreethemes.net/file-upload" class="dropzone"
-                                                id="featured-image">
-                                                <input type="hidden" name="">
-                                                <i class="fas fa-upload"></i>
-                                            </form>
-                                            <label class="smart-text">Maximum file size: 2 MB.</label> --}}
                                         </div>
 
                                         <!-- Gallery -->
                                         <div class="col-lg-4 col-md-12">
                                             <label class="mb-1">logo</label>
                                             <input type="file" name="logo" class="form-control rounded">
-                                            {{-- <form action="https://shreethemes.net/file-upload" class="dropzone"
-                                                id="gallery">
-                                                <i class="fas fa-upload"></i>
-                                            </form>
-                                            <label class="smart-text">Maximum file size: 2 MB.</label> --}}
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- Menu Items -->
+                            <!-- Working hours -->
                             <div class="dashboard-list-wraps bg-white rounded mb-4">
                                 <div class="dashboard-list-wraps-head br-bottom py-3 px-3">
                                     <div class="dashboard-list-wraps-flx">
                                         <h4 class="mb-0 ft-medium fs-md"><i
-                                                class="fas fa-utensils me-2 theme-cl fs-sm"></i>Menu Items</h4>
+                                                class="fa fa-clock me-2 theme-cl fs-sm"></i>Working Hours</h4>
                                     </div>
                                 </div>
 
                                 <div class="dashboard-list-wraps-body py-3 px-3">
-                                    <div class="row">
-                                        <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
-                                            <div class="form-group">
-                                                <label class="mb-1">Item Name</label>
-                                                <input type="text" class="form-control rounded"
-                                                    name="menu_items[0][item_name]"
-                                                    placeholder="Spicy Brunchi Burger" />
-                                                @error('menu_items.0.item_name')
-                                                    <div class="invalid-feedback d-block">{{ $message }}</div>
-                                                @enderror
+                                    <div class="form-group">
+                                        <div class="row align-items-center">
+                                            <label class="control-label col-lg-2 col-md-2">Monday</label>
+                                            <div class="col-lg-5 col-md-5">
+                                                <select class="form-control chosen-select"
+                                                    name="working_hours[open_time][]">
+                                                    <option>Opening Time</option>
+                                                    <option>1 :00 AM</option>
+                                                    <option>2 :00 AM</option>
+                                                    <option>3 :00 AM</option>
+                                                    <option>4 :00 AM</option>
+                                                    <option>5 :00 AM</option>
+                                                    <option>6 :00 AM</option>
+                                                    <option>7 :00 AM</option>
+                                                    <option>8 :00 AM</option>
+                                                    <option>9 :00 AM</option>
+                                                    <option>10 :00 AM</option>
+                                                    <option>11 :00 AM</option>
+                                                    <option>12 :00 AM</option>
+                                                    <option>1 :00 PM</option>
+                                                    <option>2 :00 PM</option>
+                                                    <option>3 :00 PM</option>
+                                                    <option>4 :00 PM</option>
+                                                    <option>5 :00 PM</option>
+                                                    <option>6 :00 PM</option>
+                                                    <option>7 :00 PM</option>
+                                                    <option>8 :00 PM</option>
+                                                    <option>9 :00 PM</option>
+                                                    <option>10 :00 PM</option>
+                                                    <option>11 :00 PM</option>
+                                                    <option>12 :00 PM</option>
+                                                    <option>Closed</option>
+                                                </select>
                                             </div>
-                                        </div>
-                                        <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
-                                            <div class="form-group">
-                                                <label class="mb-1">Category</label>
-                                                <input type="text" class="form-control rounded"
-                                                    name="menu_items[0][category]" placeholder="Fast Food" />
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
-                                            <div class="form-group">
-                                                <label class="mb-1">Price</label>
-                                                <input type="text" class="form-control rounded"
-                                                    name="menu_items[0][price]" placeholder="ex. 49 USD" />
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-                                            <div class="form-group">
-                                                <label class="mb-1">About Item</label>
-                                                <textarea class="form-control rounded ht-80" name="menu_items[0][about]" placeholder="Describe your Item"></textarea>
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-                                            <div class="form-group">
-                                                <label for="formFileLg" class="form-label">Upload Item Image</label>
-                                                <input class="form-control rounded" id="formFileLg" type="file"
-                                                    name="menu_items[0][image]">
-                                            </div>
-                                        </div>
-                                        
-                                                        <option>Opening Time</option>
-                                                        <option>1 :00 AM</option>
-                                                        <option>2 :00 AM</option>
-                                                        <option>3 :00 AM</option>
-                                                        <option>4 :00 AM</option>
-                                                        <option>5 :00 AM</option>
-                                                        <option>6 :00 AM</option>
-                                                        <option>7 :00 AM</option>
-                                                        <option>8 :00 AM</option>
-                                                        <option>9 :00 AM</option>
-                                                        <option>10 :00 AM</option>
-                                                        <option>11 :00 AM</option>
-                                                        <option>12 :00 AM</option>
-                                                        <option>1 :00 PM</option>
-                                                        <option>2 :00 PM</option>
-                                                        <option>3 :00 PM</option>
-                                                        <option>4 :00 PM</option>
-                                                        <option>5 :00 PM</option>
-                                                        <option>6 :00 PM</option>
-                                                        <option>7 :00 PM</option>
-                                                        <option>8 :00 PM</option>
-                                                        <option>9 :00 PM</option>
-                                                        <option>10 :00 PM</option>
-                                                        <option>11 :00 PM</option>
-                                                        <option>12 :00 PM</option>
-                                                        <option>Closed</option>
-                                                    </select>
-                                                </div>
-                                                <div class="col-lg-5 col-md-5">
-                                                    <select class="form-control" name="working_hours[close_time][]">
+                                            <div class="col-lg-5 col-md-5">
+                                                <select class="form-control" name="working_hours[close_time][]">
                                                         <option>Closing Time</option>
                                                         <option>1 :00 AM</option>
                                                         <option>2 :00 AM</option>
@@ -787,8 +751,8 @@
                                         </div>
 
                                         <div class="form-group mt-4">
-                                            <input id="t24" class="checkbox-custom" name="24-1"
-                                                type="checkbox">
+                                            <input id="t24" class="checkbox-custom" name="is_247_open"
+                                                type="checkbox" value="1">
                                             <label for="t24" class="checkbox-custom-label">This Business open
                                                 7x24</label>
                                         </div>
@@ -970,43 +934,7 @@
                                                 </ul>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
 
-                            <!-- Social Links -->
-                            <div class="dashboard-list-wraps bg-white rounded mb-4">
-                                <div class="dashboard-list-wraps-head br-bottom py-3 px-3">
-                                    <div class="dashboard-list-wraps-flx">
-                                        <h4 class="mb-0 ft-medium fs-md"><i
-                                                class="fa fa-user-friends me-2 theme-cl fs-sm"></i>Social Links</h4>
-                                    </div>
-                                </div>
-
-                                <div class="dashboard-list-wraps-body py-3 px-3">
-                                    <div class="row">
-                                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
-                                            <div class="form-group">
-                                                <label class="mb-1">State</label>
-                                                <select id="state" class="form-control @error('state') is-invalid @enderror" name="state">
-                                                    <option value="" selected disabled>Select State</option>
-                                                </select>
-                                                @error('state')
-                                                    <div class="invalid-feedback d-block">{{ $message }}</div>
-                                                @enderror
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
-                                            <div class="form-group">
-                                                <label class="mb-1">City</label>
-                                                <select id="city" class="form-control @error('city') is-invalid @enderror" name="city">
-                                                    <option value="" selected disabled>Select City</option>
-                                                </select>
-                                                @error('city')
-                                                    <div class="invalid-feedback d-block">{{ $message }}</div>
-                                                @enderror
-                                            </div>
-                                        </div>
                                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
                                             <div class="form-group">
                                                 <button type="submit" class="btn theme-bg rounded text-light">Add Listing</button>
@@ -1019,7 +947,6 @@
                     </form>
                 </div>
             </div>
-
         </div>
         <!-- Leaflet CSS/JS for interactive map -->
           <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
@@ -1108,82 +1035,6 @@
                         alert('Map failed to load: ' + msg);
                     }
                 }
-
-                // Existing state/city dropdown logic
-                const stateDropdown = document.getElementById('state');
-                const cityDropdown = document.getElementById('city');
-
-                // Get current selected state/city from server-side values (create page uses old() only)
-                const currentState = {!! json_encode(old('state')) !!};
-                const currentCity = {!! json_encode(old('city')) !!};
-
-                // Fetch states from GeoNames API and select current state (by iso2 or name)
-                fetch('https://api.countrystatecity.in/v1/countries/IN/states', {
-                        headers: {
-                            "X-CSCAPI-KEY": "demo"
-                        }
-                    })
-                    .then(response => response.json())
-                    .then(states => {
-                        let selectedStateIso = null;
-                        states.forEach(state => {
-                            const option = document.createElement('option');
-                            option.value = state.iso2;
-                            option.textContent = state.name;
-                            // detect match by iso2 or by full name
-                            if (currentState && (currentState.toString().toLowerCase() === state.iso2.toString().toLowerCase() || currentState.toString().toLowerCase() === state.name.toString().toLowerCase())) {
-                                option.selected = true;
-                                selectedStateIso = state.iso2;
-                            }
-                            stateDropdown.appendChild(option);
-                        });
-
-                        // If we found a selected state, fetch its cities and select current city
-                        if (selectedStateIso) {
-                            fetchCitiesAndSelect(selectedStateIso, currentCity);
-                        }
-                    });
-
-                // Helper: fetch cities for a state iso code and optionally select a city by name
-                function fetchCitiesAndSelect(stateIso, selectCityName = null) {
-                    // Clear previous cities
-                    cityDropdown.innerHTML = '<option value="" selected disabled>Select City</option>';
-
-                    fetch(`https://api.countrystatecity.in/v1/countries/IN/states/${stateIso}/cities`, {
-                            headers: {
-                                "X-CSCAPI-KEY": "demo"
-                            }
-                        })
-                        .then(response => response.json())
-                        .then(cities => {
-                            let found = false;
-                            cities.forEach(city => {
-                                const option = document.createElement('option');
-                                option.value = city.name;
-                                option.textContent = city.name;
-                                if (selectCityName && selectCityName.toString().toLowerCase() === city.name.toString().toLowerCase()) {
-                                    option.selected = true;
-                                    found = true;
-                                }
-                                cityDropdown.appendChild(option);
-                            });
-
-                            // If a city to select was provided but not found, still set a matching plain option
-                            if (selectCityName && !found) {
-                                const fallback = document.createElement('option');
-                                fallback.value = selectCityName;
-                                fallback.textContent = selectCityName + ' (not in list)';
-                                fallback.selected = true;
-                                cityDropdown.appendChild(fallback);
-                            }
-                        });
-                }
-
-                // Fetch cities when user changes state
-                stateDropdown.addEventListener('change', function () {
-                    const selectedState = this.value;
-                    fetchCitiesAndSelect(selectedState);
-                });
             });
         </script>
 </x-admin.layout>

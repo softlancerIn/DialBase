@@ -70,7 +70,7 @@ class ListingController extends Controller
             'menu_items.*.image' => 'nullable|image|max:4096',
             'working_hours.open_time' => 'required|array',
             'working_hours.close_time' => 'required|array',
-            'is_open_24' => 'nullable|boolean',
+            'is_247_open' => 'nullable|boolean',
             'amenities' => 'nullable|array',
             'amenities.*' => 'integer|exists:amenities,id',
             'new_amenities' => 'nullable|string',
@@ -162,7 +162,7 @@ class ListingController extends Controller
                 'close_time' => json_encode($request->working_hours['close_time']),
             ]);
 
-            $listing->update(['is_open_24' => $request->is_open_24]);
+            $listing->update(['is_247_open' => $request->is_247_open]);
 
             $amenityIds = $request->amenities ? (array) $request->amenities : [];
             if ($request->filled('new_amenities')) {
@@ -243,6 +243,8 @@ class ListingController extends Controller
     {
         $data['category'] = Category::where('status', 1)->get();
         $data['all_amenities'] = Amenity::all();
+        $data['states'] = Listing::whereNotNull('state')->distinct()->pluck('state')->sort()->values();
+        $data['cities'] = Listing::whereNotNull('city')->distinct()->pluck('city')->sort()->values();
 
         return view('admin.listing.create', compact('data'));
     }
@@ -258,7 +260,9 @@ class ListingController extends Controller
             'socialLink'
         ])->findOrFail($id);
         $data['categories'] = Category::where('status', 1)->get();
-        $data['all_amenities'] = Amenity::all(); 
+        $data['all_amenities'] = Amenity::all();
+        $data['states'] = Listing::whereNotNull('state')->distinct()->pluck('state')->sort()->values();
+        $data['cities'] = Listing::whereNotNull('city')->distinct()->pluck('city')->sort()->values();
         
         return view('admin.listing.edit', compact('data'));
     }    
@@ -399,7 +403,7 @@ class ListingController extends Controller
                 'close_time' => json_encode($request->working_hours['close_time']),
             ]);
     
-            $listing->update(['is_open_24' => $request->is_open_24]);
+            $listing->update(['is_247_open' => $request->is_247_open]);
     
             $amenityIds = $request->amenities ? (array) $request->amenities : [];
             if ($request->filled('new_amenities')) {
