@@ -186,11 +186,18 @@
                                         <div class="row g-4">
                                             <div class="col-xl-6 col-lg-6 col-md-12">
                                                 <div class="list-map-lot">
-                                                    <iframe
-                                                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3559.0148908503734!2d80.97350361499701!3d26.871267983145383!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399bfd9a9f6d1727%3A0xb87eabf63f7e4cee!2sCafe%20Repertwahr!5e0!3m2!1sen!2sin!4v1649059491407!5m2!1sen!2sin"
-                                                        width="100%" height="250" style="border:0;"
-                                                        allowfullscreen="" loading="lazy"
-                                                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+                                                    @if ($data['listing']->latitude && $data['listing']->longitude)
+                                                        <iframe
+                                                            src="https://maps.google.com/maps?q={{ $data['listing']->latitude }},{{ $data['listing']->longitude }}&z=14&output=embed"
+                                                            width="100%" height="250" style="border:0;"
+                                                            allowfullscreen="" loading="lazy"
+                                                            referrerpolicy="no-referrer-when-downgrade"></iframe>
+                                                    @else
+                                                        <div class="d-flex align-items-center justify-content-center"
+                                                            style="height: 250px; background: #f4f4f4; color: #888;">
+                                                            Map not available
+                                                        </div>
+                                                    @endif
                                                 </div>
                                                 <div class="list-map-capt">
                                                     <div class="lio-pact">

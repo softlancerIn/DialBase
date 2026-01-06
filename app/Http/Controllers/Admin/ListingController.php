@@ -37,7 +37,7 @@ class ListingController extends Controller
             $query->where('city', 'like', '%' . request()->city . '%');
         }
 
-        $listings = $query->paginate(25);
+        $listings = $query->orderByDesc('created_at')->paginate(25);
 
         return view('admin.listing.index', compact('listings'));
     }
@@ -227,11 +227,11 @@ class ListingController extends Controller
 
             DB::commit();
 
-            return redirect()->back()->with('success', 'Data Added Successfully!');
+            return to_route('listing-data.edit', $listing->id)->with('success', 'Data Added Successfully!');
         } catch (\Exception $e) {
             DB::rollBack();
             // Return back with message and old input instead of raw dump/status code
-            return redirect()->back()->with(['message' => 'Failed to create listing', 'error' => $e->getMessage()])->withInput();
+            return redirect()->back()->with(['message' => 'Failed to create listing '.$e->getMessage(), 'error' => $e->getMessage()])->withInput();
         }
     }
 

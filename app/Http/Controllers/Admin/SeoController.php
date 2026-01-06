@@ -42,6 +42,9 @@ class SeoController extends Controller
             'keywords' => $request->keywords,
             'description' => $request->description,
             'script' => $request->script,
+            'page_title' => $request->page_title,
+            'page_sort_description' => $request->page_sort_description,
+            'page_description' => $request->page_description,
         ]);
 
         if (! empty($addSeo)) {

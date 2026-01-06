@@ -114,7 +114,11 @@
                     </div>
                 </div>
             </div>
-
+            <div class="row">
+                <div class="col-12">
+                    {{ $listings->links('pagination.custom') }}
+                </div>
+            </div>
         </div>
     </div>
 </x-admin.layout>

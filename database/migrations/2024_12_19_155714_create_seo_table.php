@@ -15,6 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('url')->unique();
             $table->string('title')->nullable();
+            $table->string('page_title')->nullable();
+            $table->longText('page_sort_description')->nullable();
+            $table->longText('page_description')->nullable();
             $table->string('keywords')->nullable();
             $table->longText('description')->nullable();
             $table->longText('script')->nullable();

@@ -39,15 +39,15 @@
                             <div class="col-12">
                                 <label for="inputTitle" class="form-label">Page Sort Description</label>
                                 <textarea id="mytextarea" name="page_sort_description" class="form-control"
-                                    value="{{ $data['seo']['page_sort_description'] ?? '' }}" placeholder="Page Sort Description..."
-                                    id="inputTitle"></textarea>
+                                    placeholder="Page Sort Description..."
+                                    id="inputTitle">{!! $data['seo']['page_sort_description'] ?? '' !!}</textarea>
                             </div>
 
                             <div class="col-12">
                                 <label for="inputTitle" class="form-label">Page Description</label>
                                 <textarea id="longtextarea" name="page_description" class="form-control"
-                                    value="{{ $data['seo']['page_description'] ?? '' }}" placeholder="Page Description..."
-                                    id="inputTitle"></textarea>
+                                    placeholder="Page Description..."
+                                    id="inputTitle">{!! $data['seo']['page_description'] ?? '' !!}</textarea>
                             </div>
 
                             <div class="col-12">
