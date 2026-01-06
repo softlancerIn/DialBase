@@ -153,8 +153,8 @@
                                         <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
                                             <div class="form-group">
                                                 <label class="mb-1">State</label>
-                                                <select id="state" class="form-control @error('state') is-invalid @enderror" name="state">
-                                                    <option value="" disabled>Select State</option>
+                                                <select id="state" class="form-control @error('state') is-invalid @enderror" name="state" onchange="updateCities()">
+                                                    <option value="" disabled selected>Select State</option>
                                                     @foreach ($data['states'] as $state)
                                                         <option value="{{ $state }}" {{ old('state') == $state ? 'selected' : '' }}>{{ $state }}</option>
                                                     @endforeach
@@ -169,10 +169,7 @@
                                             <div class="form-group">
                                                 <label class="mb-1">City</label>
                                                 <select id="city" class="form-control @error('city') is-invalid @enderror" name="city">
-                                                    <option value="" disabled>Select City</option>
-                                                    @foreach ($data['cities'] as $city)
-                                                        <option value="{{ $city }}" {{ old('city') == $city ? 'selected' : '' }}>{{ $city }}</option>
-                                                    @endforeach
+                                                    <option value="" disabled selected>Select City</option>
                                                 </select>
                                                 @error('city')
                                                     <div class="invalid-feedback d-block">{{ $message }}</div>
@@ -1046,6 +1043,35 @@
                     } else {
                         alert('Map failed to load: ' + msg);
                     }
+                }
+
+                // Cities data map from controller
+                const citiesMap = @json($data['cities']);
+
+                // Update cities dropdown based on selected state
+                function updateCities() {
+                    const stateSelect = document.getElementById('state');
+                    const citySelect = document.getElementById('city');
+                    const selectedState = stateSelect.value;
+
+                    // Clear cities dropdown
+                    citySelect.innerHTML = '<option value="" disabled selected>Select City</option>';
+
+                    if (selectedState && citiesMap[selectedState]) {
+                        citiesMap[selectedState].forEach(city => {
+                            const option = document.createElement('option');
+                            option.value = city;
+                            option.textContent = city;
+                            option.selected = city === '{{ old("city") }}' ? true : false;
+                            citySelect.appendChild(option);
+                        });
+                    }
+                }
+
+                // Initialize cities on page load if state is already selected
+                const stateSelect = document.getElementById('state');
+                if (stateSelect.value) {
+                    updateCities();
                 }
             });
         </script>
