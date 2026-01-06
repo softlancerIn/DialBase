@@ -453,6 +453,53 @@
                         </div>
                     </div>
 
+                    <div class="jb-apply-form bg-white rounded py-4 px-4 box-static mb-4">
+                        <div class="uli-list-info">
+                            <ul>
+
+                                <li>
+                                    <div class="list-uiyt">
+                                        <div class="list-iobk"><i class="fab fa-instagram"></i></div>
+                                        <div class="list-uiyt-capt">
+                                            <h5>instagram</h5>
+                                            <p>https://instagram.com/</p>
+                                        </div>
+                                    </div>
+                                </li>
+
+                                <li>
+                                    <div class="list-uiyt">
+                                        <div class="list-iobk"><i class="fab fa-facebook"></i></div>
+                                        <div class="list-uiyt-capt">
+                                            <h5>facebook</h5>
+                                            <p>https://www.facebook.com/</p>
+                                        </div>
+                                    </div>
+                                </li>
+
+                                <li>
+                                    <div class="list-uiyt">
+                                        <div class="list-iobk"><i class="fab fa-linkedin"></i></div>
+                                        <div class="list-uiyt-capt">
+                                            <h5>LinkedIn</h5>
+                                            <p>https://www.linkedin.com/</p>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="list-uiyt">
+                                        <div class="list-iobk"><i class="fab fa-youtube"></i></div>
+                                        <div class="list-uiyt-capt">
+                                            <h5>YouTube</h5>
+                                            <p>https://www.youtube.com/</p>
+                                        </div>
+                                    </div>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+
                     <div class="row g-3 mb-3">
                         <div class="col-4"><a href="javascript:void(0);" class="adv-btn full-width"><i
                                     class="fas fa-share"></i>Share</a></div>
