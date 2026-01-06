@@ -55,11 +55,7 @@
                                         <div class="list-lioe-single"><span class="ft-medium text-info"><i
                                                     class="fas fa-check-circle me-1"></i>Claimed</span></div>
                                         <div class="list-lioe-single ms-2 ps-3 seperate">
-                                            <a href="javascript:void(0);" class="text-light ft-medium">Chicken Wings</a>,<a
-                                                href="javascript:void(0);" class="text-light ft-medium ms-1">Sports
-                                                Bars</a>,<a href="javascript:void(0);"
-                                                class="text-light ft-medium ms-1">American (Traditional)</a>,<a
-                                                href="javascript:void(0);" class="text-light ft-medium ms-1">Seafood</a>
+                                            <span class="ft-medium text-light">{{ $data['listing']->address }}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -197,12 +193,13 @@
                                                         referrerpolicy="no-referrer-when-downgrade"></iframe>
                                                 </div>
                                                 <div class="list-map-capt">
-                                                    <div class="lio-pact"><span class="ft-medium text-info">2919 N Flores
-                                                            St</span></div>
-                                                    <div class="lio-pact"><span class="hkio-oilp ft-bold">San Antonio, TX
-                                                            78212</span></div>
                                                     <div class="lio-pact">
-                                                        <p class="ft-medium">Alta Vista</p>
+                                                        @php
+                                                            $addressParts = array_map('trim', explode(',', $data['listing']->address));
+                                                        @endphp
+                                                        @foreach ($addressParts as $part)
+                                                            <span class="hkio-oilp ft-bold">{{ $part }}</span><br>
+                                                        @endforeach
                                                     </div>
                                                 </div>
                                             </div>
@@ -448,6 +445,53 @@
                                         <div class="list-uiyt-capt">
                                             <h5>Get Directions</h5>
                                             <p>2919 N Flores St San Antonio, TX 78212</p>
+                                        </div>
+                                    </div>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="jb-apply-form bg-white rounded py-4 px-4 box-static mb-4">
+                        <div class="uli-list-info">
+                            <ul>
+
+                                <li>
+                                    <div class="list-uiyt">
+                                        <div class="list-iobk"><i class="fab fa-instagram"></i></div>
+                                        <div class="list-uiyt-capt">
+                                            <h5>instagram</h5>
+                                            <p>https://instagram.com/</p>
+                                        </div>
+                                    </div>
+                                </li>
+
+                                <li>
+                                    <div class="list-uiyt">
+                                        <div class="list-iobk"><i class="fab fa-facebook"></i></div>
+                                        <div class="list-uiyt-capt">
+                                            <h5>facebook</h5>
+                                            <p>https://www.facebook.com/</p>
+                                        </div>
+                                    </div>
+                                </li>
+
+                                <li>
+                                    <div class="list-uiyt">
+                                        <div class="list-iobk"><i class="fab fa-linkedin"></i></div>
+                                        <div class="list-uiyt-capt">
+                                            <h5>LinkedIn</h5>
+                                            <p>https://www.linkedin.com/</p>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="list-uiyt">
+                                        <div class="list-iobk"><i class="fab fa-youtube"></i></div>
+                                        <div class="list-uiyt-capt">
+                                            <h5>YouTube</h5>
+                                            <p>https://www.youtube.com/</p>
                                         </div>
                                     </div>
                                 </li>
