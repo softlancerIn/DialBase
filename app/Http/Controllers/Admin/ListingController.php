@@ -14,6 +14,7 @@ use App\Models\ListingImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Api\StateController;
 
 
 class ListingController extends Controller
@@ -243,10 +244,20 @@ class ListingController extends Controller
 
     public function create()
     {
+        $stateController = new StateController();
+        $statesResponse = $stateController->getAllStatesWithCities();
+        $statesData = json_decode($statesResponse->getContent(), true)['data'] ?? [];
+        
+        // Extract state names and prepare cities map
+        $states = collect($statesData)->pluck('name')->sort()->values();
+        $citiesMap = collect($statesData)->mapWithKeys(function($state) {
+            return [$state['name'] => $state['cities'] ?? []];
+        });
+        
         $data['category'] = Category::where('status', 1)->get();
         $data['all_amenities'] = Amenity::all();
-        $data['states'] = Listing::whereNotNull('state')->distinct()->pluck('state')->sort()->values();
-        $data['cities'] = Listing::whereNotNull('city')->distinct()->pluck('city')->sort()->values();
+        $data['states'] = $states;
+        $data['cities'] = $citiesMap;
 
         return view('admin.listing.create', compact('data'));
     }
@@ -261,10 +272,21 @@ class ListingController extends Controller
             'amenities',
             'socialLink'
         ])->findOrFail($id);
+        
+        $stateController = new StateController();
+        $statesResponse = $stateController->getAllStatesWithCities();
+        $statesData = json_decode($statesResponse->getContent(), true)['data'] ?? [];
+        
+        // Extract state names and prepare cities map
+        $states = collect($statesData)->pluck('name')->sort()->values();
+        $citiesMap = collect($statesData)->mapWithKeys(function($state) {
+            return [$state['name'] => $state['cities'] ?? []];
+        });
+        
         $data['categories'] = Category::where('status', 1)->get();
         $data['all_amenities'] = Amenity::all();
-        $data['states'] = Listing::whereNotNull('state')->distinct()->pluck('state')->sort()->values();
-        $data['cities'] = Listing::whereNotNull('city')->distinct()->pluck('city')->sort()->values();
+        $data['states'] = $states;
+        $data['cities'] = $citiesMap;
         
         return view('admin.listing.edit', compact('data'));
     }    

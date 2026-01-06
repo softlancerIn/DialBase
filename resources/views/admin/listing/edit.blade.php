@@ -179,7 +179,7 @@
                                             <div class="form-group">
                                                 <label class="mb-1">State</label>
                                                 <select class="form-control @error('state') is-invalid @enderror"
-                                                    id="state" name="state">
+                                                    id="state" name="state" onchange="updateCities()">
                                                     <option value="" disabled>Select State</option>
                                                     @foreach ($data['states'] as $state)
                                                         <option value="{{ $state }}" {{ old('state', $data['listing']->state) == $state ? 'selected' : '' }}>{{ $state }}</option>
@@ -196,9 +196,6 @@
                                                 <select class="form-control @error('city') is-invalid @enderror"
                                                     id="city" name="city">
                                                     <option value="" disabled>Select City</option>
-                                                    @foreach ($data['cities'] as $city)
-                                                        <option value="{{ $city }}" {{ old('city', $data['listing']->city) == $city ? 'selected' : '' }}>{{ $city }}</option>
-                                                    @endforeach
                                                 </select>
                                                 @error('city')
                                                     <div class="invalid-feedback d-block">{{ $message }}</div>
@@ -504,7 +501,35 @@
           <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
         <script>
+            // Cities data map - Global scope
+            const citiesMap = @json($data['cities']);
+
+            // Update cities dropdown based on selected state - Global scope
+            function updateCities() {
+                const stateSelect = document.getElementById('state');
+                const citySelect = document.getElementById('city');
+                const selectedState = stateSelect.value;
+
+                citySelect.innerHTML = '<option value="" disabled>Select City</option>';
+
+                if (selectedState && citiesMap[selectedState]) {
+                    citiesMap[selectedState].forEach(city => {
+                        const option = document.createElement('option');
+                        option.value = city;
+                        option.textContent = city;
+                        option.selected = city === '{{ old("city", $data["listing"]->city) }}' ? true : false;
+                        citySelect.appendChild(option);
+                    });
+                }
+            }
+
             document.addEventListener('DOMContentLoaded', function () {
+                // Initialize cities on page load if state is already selected
+                const stateSelect = document.getElementById('state');
+                if (stateSelect.value) {
+                    updateCities();
+                }
+
                 // Initialize the interactive map and sync with lat/lng inputs
                 const latInput = document.getElementById('latitude');
                 const lngInput = document.getElementById('longitude');
