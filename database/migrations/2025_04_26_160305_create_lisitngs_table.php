@@ -27,6 +27,7 @@ return new class extends Migration
             $table->string('mobile')->nullable();
             $table->string('email')->nullable();
             $table->string('website')->nullable();
+            $table->integer('sort_order')->default(0);
             $table->boolean('is_247_open')->default(false);
             $table->timestamps();
         });
