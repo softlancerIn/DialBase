@@ -39,6 +39,7 @@ Route::controller(WebController::class)->group(function () {
     Route::get('contact', 'contact')->name('contact');
     Route::post('save-enquiry', 'save_enquiry')->name('save_enquiry');
     Route::post('/listings/{slug}/reviews', [WebController::class, 'saveReview'])->name('listings.saveReview');
+    Route::post('/listings/{slug}/enquiry', [WebController::class, 'save_listing_enquiry'])->name('listings.saveEnquiry');
 
     Route::get('terms-and-condition', 'termsAndCondition')->name('terms_and_condition');
     Route::get('privacy-policy', 'privacyPolicy')->name('privacy_policy');

@@ -39,11 +39,13 @@
                                 <div class="Goodup-ft-first">
                                     <div class="Goodup-rating">
                                         <div class="Goodup-rates">
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
+                                            @foreach(range(1,5) as $i)
+                                                @if($i <= round($data['listing']?->average_rating))
+                                                    <i class="fas fa-star"></i>
+                                                @else
+                                                    <i class="fas fa-star text-gray"></i>
+                                                @endif
+                                            @endforeach
                                         </div>
                                     </div>
                                     <div style="font-size:12px; color: #989bb1;">
@@ -51,13 +53,8 @@
                                     </div>
                                 </div>
                                 <div class="d-block mt-3">
-                                    <div class="list-lioe">
-                                        <div class="list-lioe-single"><span class="ft-medium text-info"><i
-                                                    class="fas fa-check-circle me-1"></i>Claimed</span></div>
-                                        <div class="list-lioe-single ms-2 ps-3 seperate">
-                                            <span class="ft-medium text-light">{{ $data['listing']->address }}</span>
-                                        </div>
-                                    </div>
+                                        <span class="ft-medium text-light"><i
+                                            class="fas fa-location-arrow me-1"></i>{{ $data['listing']->address }}</span>
                                 </div>
                                 <div class="d-block mt-1">
                                     <div class="list-lioe">
@@ -71,9 +68,9 @@
                         </div>
                     </div>
 
-                    <div class="col-md-4 text-md-end mb-3 mt-md-0">
+                    <!-- <div class="col-md-4 text-md-end mb-3 mt-md-0">
                         <a href="#" class="btn bg-white text-dark ft-medium rounded">See 20+ Photos</a>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
@@ -378,43 +375,8 @@
 
                 <!-- Right: Order Food -->
                 <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
-                    <div class="bg-white rounded py-4 px-4 box-static mb-4">
-                        <h4 class="ft-bold mb-1">Order Food</h4>
-
-                        <div style="display: block; width: 100%; position: relative; padding: 2rem 0;">
-                            <ul style="display: inline-block; padding: 0; margin: 0;">
-                                <li
-                                    style="display: inline-block; list-style: none; padding: 1px 12px; font-weight: 500; color: #252525; border-right: 1px solid #eceef2;">
-                                    $0.99+<span>delivery fee</span></li>
-                                <li
-                                    style="display: inline-block; list-style: none; padding: 1px 12px; font-weight: 500; color: #252525; border-right: 1px solid #eceef2;">
-                                    $0<span>min</span></li>
-                                <li
-                                    style="display: inline-block; list-style: none; padding: 1px 12px; font-weight: 500; color: #252525; border-right: 1px solid #eceef2;">
-                                    35-45<span>mins</span></li>
-                            </ul>
-                        </div>
-
-                        <form class="_apply_form_form">
-                            <div class="form-group">
-                                <div class="side-search-item">
-                                    <span class="search-tag"><i class="lni lni-map-marker"></i></span>
-                                    <input type="text" class="form-control b-0 ps-2"
-                                        placeholder="Enter delivery address" fdprocessedid="bf6noq">
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <button type="button"
-                                    class="btn btn-md rounded theme-bg text-light ft-medium fs-sm full-width"
-                                    fdprocessedid="3341wf">Start Your Order</button>
-                            </div>
-                        </form>
-
-                    </div>
-
                     <div class="jb-apply-form bg-white rounded py-4 px-4 box-static mb-4">
-                        <div class="uli-list-info">
+                        <div class="uli-list-info mb-2">
                             <ul>
 
                                 <li>
@@ -422,7 +384,7 @@
                                         <div class="list-iobk"><i class="fas fa-globe"></i></div>
                                         <div class="list-uiyt-capt">
                                             <h5>Live Site</h5>
-                                            <p>https://www.Goodup.com/</p>
+                                            <p>{{ $data['listing']->website }}</p>
                                         </div>
                                     </div>
                                 </li>
@@ -432,7 +394,7 @@
                                         <div class="list-iobk"><i class="fas fa-envelope"></i></div>
                                         <div class="list-uiyt-capt">
                                             <h5>Drop a Mail</h5>
-                                            <p>support@Goodup.com</p>
+                                            <p>{{ $data['listing']->email }}</p>
                                         </div>
                                     </div>
                                 </li>
@@ -442,7 +404,7 @@
                                         <div class="list-iobk"><i class="fas fa-phone"></i></div>
                                         <div class="list-uiyt-capt">
                                             <h5>Call Us</h5>
-                                            <p>(210) 659 584 756</p>
+                                            <p>{{ $data['listing']->phone }}</p>
                                         </div>
                                     </div>
                                 </li>
@@ -451,12 +413,17 @@
                                         <div class="list-iobk"><i class="fas fa-map-marker-alt"></i></div>
                                         <div class="list-uiyt-capt">
                                             <h5>Get Directions</h5>
-                                            <p>2919 N Flores St San Antonio, TX 78212</p>
+                                            <p>{{ $data['listing']->address }}</p>
                                         </div>
                                     </div>
                                 </li>
 
                             </ul>
+                        </div>
+
+                        <div class="form-group">
+                            <button type="button" data-bs-toggle="modal" data-bs-target="#enquiryModal"
+                                class="btn btn-md rounded theme-bg text-light ft-medium fs-sm full-width">Enquiry</button>
                         </div>
                     </div>
 
@@ -469,7 +436,7 @@
                                         <div class="list-iobk"><i class="fab fa-instagram"></i></div>
                                         <div class="list-uiyt-capt">
                                             <h5>instagram</h5>
-                                            <p>https://instagram.com/</p>
+                                            <p>{{ optional($data['listing']->socialLink)->instagram }}</p>
                                         </div>
                                     </div>
                                 </li>
@@ -479,7 +446,7 @@
                                         <div class="list-iobk"><i class="fab fa-facebook"></i></div>
                                         <div class="list-uiyt-capt">
                                             <h5>facebook</h5>
-                                            <p>https://www.facebook.com/</p>
+                                            <p>{{ optional($data['listing']->socialLink)->facebook }}</p>
                                         </div>
                                     </div>
                                 </li>
@@ -489,7 +456,7 @@
                                         <div class="list-iobk"><i class="fab fa-linkedin"></i></div>
                                         <div class="list-uiyt-capt">
                                             <h5>LinkedIn</h5>
-                                            <p>https://www.linkedin.com/</p>
+                                            <p>{{ optional($data['listing']->socialLink)->linkedin }}</p>
                                         </div>
                                     </div>
                                 </li>
@@ -498,7 +465,7 @@
                                         <div class="list-iobk"><i class="fab fa-youtube"></i></div>
                                         <div class="list-uiyt-capt">
                                             <h5>YouTube</h5>
-                                            <p>https://www.youtube.com/</p>
+                                            <p>{{ optional($data['listing']->socialLink)->youtube ?? 'https://youtube.com' }}</p>
                                         </div>
                                     </div>
                                 </li>
@@ -516,4 +483,65 @@
         </div>
     </section>
     <!-- ======================= About & Order End ======================== -->
+
+    <!-- Enquiry Modal -->
+    <div class="modal fade" id="enquiryModal" tabindex="-1" aria-labelledby="enquiryModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title ft-bold" id="enquiryModalLabel">Send Enquiry</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul class="mb-0">
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+                    
+                    <form action="{{ route('listings.saveEnquiry', $data['listing']->slug) }}" method="POST">
+                        @csrf
+                        <div class="form-group mb-3">
+                            <label class="ft-medium small mb-1">Name <span class="text-danger">*</span></label>
+                            <input type="text" name="name" class="form-control rounded" placeholder="Your Name" value="{{ old('name') }}" required>
+                            @error('name')<span class="text-danger small">{{ $message }}</span>@enderror
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label class="ft-medium small mb-1">Email <span class="text-danger">*</span></label>
+                            <input type="email" name="email" class="form-control rounded" placeholder="Your Email" value="{{ old('email') }}" required>
+                            @error('email')<span class="text-danger small">{{ $message }}</span>@enderror
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label class="ft-medium small mb-1">Phone <span class="text-danger">*</span></label>
+                            <input type="text" name="phone" class="form-control rounded" placeholder="Your Phone" value="{{ old('phone') }}" required>
+                            @error('phone')<span class="text-danger small">{{ $message }}</span>@enderror
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label class="ft-medium small mb-1">Subject <span class="text-danger">*</span></label>
+                            <input type="text" name="subject" class="form-control rounded" placeholder="Subject" value="{{ old('subject') }}" required>
+                            @error('subject')<span class="text-danger small">{{ $message }}</span>@enderror
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label class="ft-medium small mb-1">Message <span class="text-danger">*</span></label>
+                            <textarea name="message" class="form-control rounded" placeholder="Your Message" rows="4" required>{{ old('message') }}</textarea>
+                            @error('message')<span class="text-danger small">{{ $message }}</span>@enderror
+                        </div>
+
+                        <div class="form-group">
+                            <button type="submit" class="btn theme-bg text-light rounded ft-medium full-width">Submit Enquiry</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ======================= Enquiry Modal End ======================== -->
 @endsection

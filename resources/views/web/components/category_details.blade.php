@@ -1,11 +1,6 @@
 <!-- Listing Card Component -->
 <div class="Goodup-grid-wrap">
     <div class="Goodup-grid-upper">
-        <div class="Goodup-bookmark-btn">
-            <button type="button" fdprocessedid="y3izb6">
-                <i class="lni lni-heart-filled position-absolute"></i>
-            </button>
-        </div>
         <div class="Goodup-pos ab-left">
             <div class="Goodup-status {{ $listing->is_247_open ? 'open' : 'close' }} me-2">
                 {{ $listing->is_247_open ? 'Open' : 'Close' }}

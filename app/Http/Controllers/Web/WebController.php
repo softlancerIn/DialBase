@@ -199,7 +199,12 @@ class WebController extends Controller
 
     public function listing_detail($slug)
     {
-        $data['listing'] = Listing::where('slug', $slug)->with('images', 'workingHours', 'amenities', 'socialLink', 'category', 'reviews.user')->first();
+        $data['listing'] = Listing::where('slug', $slug)->with(['images', 'workingHours', 'amenities', 'socialLink', 'category', 'reviews' => function ($query) {$query->where('status', 1);}, 'reviews.user'])->first();
+
+        if ($data['listing']) {
+            $data['listing']->reviews_count = $data['listing']->reviews->count();
+            $data['listing']->average_rating = $data['listing']->reviews->avg('rating');
+        }
 
         if (! $data['listing']) {
             return redirect()->route('index');
@@ -247,6 +252,30 @@ class WebController extends Controller
         } else {
             return ['error', ' -> Something went wrong!'];
         }
+    }
+
+    public function save_listing_enquiry(Request $request, $slug)
+    {
+        $request->validate([
+            'name' => 'required|string',
+            'email' => 'required|email',
+            'phone' => 'required|string',
+            'subject' => 'required|string',
+            'message' => 'required|string',
+        ]);
+
+        $listing = Listing::where('slug', $slug)->firstOrFail();
+
+        $enquiry = new Enquiry();
+        $enquiry->listing_id = $listing->id;
+        $enquiry->name = $request->name;
+        $enquiry->email = $request->email;
+        $enquiry->phone = $request->phone;
+        $enquiry->subject = $request->subject;
+        $enquiry->message = $request->message;
+        $enquiry->save();
+
+        return redirect()->back()->with('success', 'Enquiry submitted successfully! We will contact you soon.');
     }
 
     public function blogs()
