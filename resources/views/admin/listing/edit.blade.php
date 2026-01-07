@@ -480,11 +480,64 @@
                                                     name="new_amenities" placeholder="e.g. Free Parking, Live Music">
                                             </div>
                                         </div>
+                                    </div>
+                                </div>
+                            </div>
 
+                             <!-- Social Links -->
+                            <div class="dashboard-list-wraps bg-white rounded mb-4">
+                                <div class="dashboard-list-wraps-head br-bottom py-3 px-3">
+                                    <div class="dashboard-list-wraps-flx">
+                                        <h4 class="mb-0 ft-medium fs-md"><i
+                                                class="fa fa-user-friends me-2 theme-cl fs-sm"></i>Social Links</h4>
+                                    </div>
+                                </div>
+
+                                <div class="dashboard-list-wraps-body py-3 px-3">
+                                    <div class="row">
+                                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                                            <div class="form-group">
+                                                <label class="mb-1"><i
+                                                        class="ti-facebook theme-cl me-1"></i>Facebook</label>
+                                                <input type="text" class="form-control rounded" name="facebook"
+                                                    placeholder="https://facebook.com/"
+                                                    value="{{ old('facebook', optional($data['listing']->socialLink)->facebook) }}"
+                                                />
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                                            <div class="form-group">
+                                                <label class="mb-1"><i
+                                                        class="ti-twitter theme-cl me-1"></i>Twitter</label>
+                                                <input type="text" class="form-control rounded" name="twitter"
+                                                    placeholder="https://twitter.com/"
+                                                    value="{{ old('twitter', optional($data['listing']->socialLink)->twitter) }}"
+                                                />
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                                            <div class="form-group">
+                                                <label class="mb-1"><i
+                                                        class="ti-instagram theme-cl me-1"></i>Instagram</label>
+                                                <input type="text" class="form-control rounded" name="instagram"
+                                                    placeholder="https://instagram.com/"
+                                                    value="{{ old('instagram', optional($data['listing']->socialLink)->instagram) }}"
+                                                />
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                                            <div class="form-group">
+                                                <label class="mb-1"><i
+                                                        class="ti-linkedin theme-cl me-1"></i>Linkedin</label>
+                                                <input type="text" class="form-control rounded" name="linkedin"
+                                                    placeholder="https://linkedin.com/"
+                                                    value="{{ old('linkedin', optional($data['listing']->socialLink)->linkedin) }}"
+                                                />
+                                            </div>
+                                        </div>
                                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
                                             <div class="form-group">
-                                                <button type="submit"
-                                                    class="btn theme-bg rounded text-light">Update</button>
+                                                <button type="submit" class="btn theme-bg rounded text-light">Updtae</button>
                                             </div>
                                         </div>
                                     </div>
