@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\SeoController;
 use App\Http\Controllers\Admin\SubCategoryController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\ReviewController;
+use App\Http\Controllers\Admin\ScrapingController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth:admin', 'admin'])->group(function () {
@@ -30,6 +31,10 @@ Route::middleware(['auth:admin', 'admin'])->group(function () {
     // Route::controller(ListingController::class)->group(function () {
     // });
     Route::resource('listing-data', ListingController::class);
+    Route::controller(ScrapingController::class)->group(function () {
+        Route::get('scrape-website', 'index')->name('scrape_website');
+        Route::post('scrape-website', 'scrape_website')->name('scrape_website.post');
+    });
 
     // Profile
     Route::controller(ProfileController::class)->group(function () {

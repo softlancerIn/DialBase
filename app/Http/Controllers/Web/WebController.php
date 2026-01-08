@@ -211,8 +211,8 @@ class WebController extends Controller
         }
 
         $data['category'] = $data['listing']->category() ? $data['listing']->category()->first() : null;
-        $data['featured_image'] = $data['listing']->images->where('type', 'featured')->first();
-        $data['logo_image'] = $data['listing']->images->where('type', 'logo')->first();
+        $data['featured_image'] = $data['listing']->images->where('image_type', 'featured')->first();
+        $data['logo_image'] = $data['listing']->images->where('image_type', 'logo')->first();
 
         return view('web.pages.listing_details', compact('data'));
     }
@@ -412,8 +412,8 @@ class WebController extends Controller
 
         $data['listing'] = $listing;
         $data['category'] = $listing->category;
-        $data['featured_image'] = $listing->images->where('type', 'featured')->first();
-        $data['logo_image'] = $listing->images->where('type', 'logo')->first();
+        $data['featured_image'] = $listing->images->where('image_type', 'featured')->first();
+        $data['logo_image'] = $listing->images->where('image_type', 'logo')->first();
 
         return view('web.pages.listing_details', compact('data'));
     }

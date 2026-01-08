@@ -22,7 +22,7 @@ class ListingController extends Controller
     public function index()
     {
         // $listings = Listing::with(['logoImage', 'featuredImage', 'galleryImages', 'menuItems', 'workingHours', 'amenities', 'socialLinks'])->get();
-        $query = Listing::with(['menuItems', 'workingHours', 'socialLink', 'amenities']);
+        $query = Listing::with(['menuItems', 'workingHours', 'socialLink', 'amenities', 'images']);
 
         if (request()->has('category_id') && request()->category_id != '') {
             $query->where('category_id', request()->category_id);

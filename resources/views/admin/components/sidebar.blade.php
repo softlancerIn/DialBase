@@ -37,6 +37,11 @@
                         <i class="lni lni-files me-2"></i>Enquiry
                     </a>
                 </li>
+                <li class="@active('scrape_website')">
+                    <a href="{{ route('scrape_website') }}">
+                        <i class="lni lni-world me-2"></i>Scrape Website
+                    </a>
+                </li>
             </ul>
             <ul data-submenu-title="My Accounts">
                 <li class="@active('profile')">
