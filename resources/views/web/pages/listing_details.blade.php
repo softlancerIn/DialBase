@@ -8,7 +8,7 @@
     <!-- ======================= Listing Hero Section ======================== -->
     <div class="listing-hero" style="position: relative; height: 400px; overflow: hidden;">
         @if ($data['featured_image'])
-            <img src="{{ Storage::url($data['featured_image']->image_path) }}" alt="{{ $data['listing']->title }}"
+            <img src="{{ asset('storage/' . $data['featured_image']->image_path) }}" alt="{{ $data['listing']->title }}"
                 style="width: 100%; height: 100%; object-fit: cover;">
         @else
             <img src="{{ asset('assets/img/listing/l-5.jpg') }}" alt=""
@@ -25,7 +25,7 @@
                             <!-- Logo -->
                             <div style="flex-shrink: 0;">
                                 @if ($data['logo_image'])
-                                    <img src="{{ Storage::url($data['logo_image']->image_path) }}" alt="Logo"
+                                    <img src="{{ asset('storage/' . $data['logo_image']->image_path) }}" alt="Logo"
                                         style="width: 90px; height: 90px; border-radius: 8px; border: 3px solid white; object-fit: cover;">
                                 @else
                                     <img src="{{ asset('assets/img/t-1.png') }}" alt="Logo"
@@ -39,8 +39,8 @@
                                 <div class="Goodup-ft-first">
                                     <div class="Goodup-rating">
                                         <div class="Goodup-rates">
-                                            @foreach(range(1,5) as $i)
-                                                @if($i <= round($data['listing']?->average_rating))
+                                            @foreach (range(1, 5) as $i)
+                                                @if ($i <= round($data['listing']?->average_rating))
                                                     <i class="fas fa-star"></i>
                                                 @else
                                                     <i class="fas fa-star text-gray"></i>
@@ -53,7 +53,7 @@
                                     </div>
                                 </div>
                                 <div class="d-block mt-3">
-                                        <span class="ft-medium text-light"><i
+                                    <span class="ft-medium text-light"><i
                                             class="fas fa-location-arrow me-1"></i>{{ $data['listing']->address }}</span>
                                 </div>
                                 <div class="d-block mt-1">
@@ -69,8 +69,8 @@
                     </div>
 
                     <!-- <div class="col-md-4 text-md-end mb-3 mt-md-0">
-                        <a href="#" class="btn bg-white text-dark ft-medium rounded">See 20+ Photos</a>
-                    </div> -->
+                                            <a href="#" class="btn bg-white text-dark ft-medium rounded">See 20+ Photos</a>
+                                        </div> -->
                 </div>
             </div>
         </div>
@@ -126,7 +126,7 @@
                                                 <div class="reviews-comments-item">
                                                     <div class="review-comments-avatar">
                                                         @if ($review->user && $review->user->profile_image)
-                                                            <img src="{{ Storage::url($review->user->profile_image) }}"
+                                                            <img src="{{ asset('storage/' . $review->user->profile_image) }}"
                                                                 class="img-fluid" alt="{{ $review->user->name }}">
                                                         @else
                                                             <img src="{{ asset('assets/img/t-1.png') }}" class="img-fluid"
@@ -199,7 +199,10 @@
                                                 <div class="list-map-capt">
                                                     <div class="lio-pact">
                                                         @php
-                                                            $addressParts = array_map('trim', explode(',', $data['listing']->address));
+                                                            $addressParts = array_map(
+                                                                'trim',
+                                                                explode(',', $data['listing']->address),
+                                                            );
                                                         @endphp
                                                         @foreach ($addressParts as $part)
                                                             <span class="hkio-oilp ft-bold">{{ $part }}</span><br>
@@ -465,7 +468,8 @@
                                         <div class="list-iobk"><i class="fab fa-youtube"></i></div>
                                         <div class="list-uiyt-capt">
                                             <h5>YouTube</h5>
-                                            <p>{{ optional($data['listing']->socialLink)->youtube ?? 'https://youtube.com' }}</p>
+                                            <p>{{ optional($data['listing']->socialLink)->youtube ?? 'https://youtube.com' }}
+                                            </p>
                                         </div>
                                     </div>
                                 </li>
@@ -502,41 +506,56 @@
                             </ul>
                         </div>
                     @endif
-                    
+
                     <form action="{{ route('listings.saveEnquiry', $data['listing']->slug) }}" method="POST">
                         @csrf
                         <div class="form-group mb-3">
                             <label class="ft-medium small mb-1">Name <span class="text-danger">*</span></label>
-                            <input type="text" name="name" class="form-control rounded" placeholder="Your Name" value="{{ old('name') }}" required>
-                            @error('name')<span class="text-danger small">{{ $message }}</span>@enderror
+                            <input type="text" name="name" class="form-control rounded" placeholder="Your Name"
+                                value="{{ old('name') }}" required>
+                            @error('name')
+                                <span class="text-danger small">{{ $message }}</span>
+                            @enderror
                         </div>
 
                         <div class="form-group mb-3">
                             <label class="ft-medium small mb-1">Email <span class="text-danger">*</span></label>
-                            <input type="email" name="email" class="form-control rounded" placeholder="Your Email" value="{{ old('email') }}" required>
-                            @error('email')<span class="text-danger small">{{ $message }}</span>@enderror
+                            <input type="email" name="email" class="form-control rounded" placeholder="Your Email"
+                                value="{{ old('email') }}" required>
+                            @error('email')
+                                <span class="text-danger small">{{ $message }}</span>
+                            @enderror
                         </div>
 
                         <div class="form-group mb-3">
                             <label class="ft-medium small mb-1">Phone <span class="text-danger">*</span></label>
-                            <input type="text" name="phone" class="form-control rounded" placeholder="Your Phone" value="{{ old('phone') }}" required>
-                            @error('phone')<span class="text-danger small">{{ $message }}</span>@enderror
+                            <input type="text" name="phone" class="form-control rounded" placeholder="Your Phone"
+                                value="{{ old('phone') }}" required>
+                            @error('phone')
+                                <span class="text-danger small">{{ $message }}</span>
+                            @enderror
                         </div>
 
                         <div class="form-group mb-3">
                             <label class="ft-medium small mb-1">Subject <span class="text-danger">*</span></label>
-                            <input type="text" name="subject" class="form-control rounded" placeholder="Subject" value="{{ old('subject') }}" required>
-                            @error('subject')<span class="text-danger small">{{ $message }}</span>@enderror
+                            <input type="text" name="subject" class="form-control rounded" placeholder="Subject"
+                                value="{{ old('subject') }}" required>
+                            @error('subject')
+                                <span class="text-danger small">{{ $message }}</span>
+                            @enderror
                         </div>
 
                         <div class="form-group mb-3">
                             <label class="ft-medium small mb-1">Message <span class="text-danger">*</span></label>
                             <textarea name="message" class="form-control rounded" placeholder="Your Message" rows="4" required>{{ old('message') }}</textarea>
-                            @error('message')<span class="text-danger small">{{ $message }}</span>@enderror
+                            @error('message')
+                                <span class="text-danger small">{{ $message }}</span>
+                            @enderror
                         </div>
 
                         <div class="form-group">
-                            <button type="submit" class="btn theme-bg text-light rounded ft-medium full-width">Submit Enquiry</button>
+                            <button type="submit" class="btn theme-bg text-light rounded ft-medium full-width">Submit
+                                Enquiry</button>
                         </div>
                     </form>
                 </div>
