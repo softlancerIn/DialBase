@@ -2,7 +2,9 @@
 
 @section('content')
     <!-- ======================= Breadcrumb ======================== -->
-    <div class="breadcrumb-wrap" style="background:#f41b3b url({{ asset('assets/img/banner-2.jpg') }}) no-repeat; background-size: 100%;" data-overlay="5">
+    <div class="breadcrumb-wrap"
+        style="background:#f41b3b url({{ asset('assets/img/banner-2.jpg') }}) no-repeat; background-size: 100%;"
+        data-overlay="5">
         <div class="container">
             <div class="row">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
@@ -18,7 +20,8 @@
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb justify-content-center mt-2" style="color: white;">
                                 <li class=""><a href="{{ route('index') }}" style="color: white;">Home </a></li>
-                                <li class="active" aria-current="page" style="color: white;"> / {{ $data['category']->name ?? 'Category' }}</li>
+                                <li class="active" aria-current="page" style="color: white;"> /
+                                    {{ $data['category']->name ?? 'Category' }}</li>
                             </ol>
                         </nav>
                     </div>
@@ -34,73 +37,59 @@
             <div class="row">
                 <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12">
                     <div class="bg-white rounded mb-4">
-                    
+
                         <div class="sidebar_header d-flex align-items-center justify-content-between px-4 py-3 br-bottom">
                             <h4 class="ft-medium fs-lg mb-0">Search Filter</h4>
-                            <div class="ssh-header">
-                                <a href="{{ route('category.slug', $data['category']->slug) }}" class="clear_all ft-medium text-muted">Clear All</a>
-                                <a href="#search_open" data-bs-toggle="collapse" aria-expanded="false" role="button" class="collapsed _filter-ico ml-2"><i class="lni lni-text-align-right"></i></a>
-                            </div>
+                            <a href="{{ route('category.slug', $data['category']->slug) }}"
+                                class="ft-medium text-danger">Clear Filter</a>
                         </div>
-                        
-                        <!-- Filter Form -->
-                        <div class="sidebar-widgets collapse miz_show" id="search_open" data-bs-parent="#search_open">
-                            <div class="search-inner">
-                                <form method="GET" action="{{ route('category.slug', $data['category']->slug) }}" id="categoryFilterForm">
-                                    <div class="side-filter-box">
-                                        <div class="side-filter-box-body">
 
-                                            <!-- Open/Close -->
-                                            <div class="inner_widget_link">
-                                                <h6 class="ft-medium">Availability</h6>
-                                                <ul class="no-ul-list filter-list">
-                                                    <li>
-                                                        <input id="open_now_filter" class="checkbox-custom" name="open_now" type="checkbox" value="1" {{ request('open_now') ? 'checked' : '' }}>
-                                                        <label for="open_now_filter" class="checkbox-custom-label">Open Now</label>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            
-                                            <!-- Location -->
-                                            @if(!empty($data['locations']) && $data['locations']->count() > 0)
-                                            <div class="inner_widget_link">
-                                                <h6 class="ft-medium">Location</h6>
-                                                <select name="location" class="form-control">
-                                                    <option value="">All Locations</option>
-                                                    @foreach($data['locations'] as $location)
-                                                        <option value="{{ $location }}" {{ ($currentLocation == $location) ? 'selected' : '' }}>{{ $location }}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                            @endif
-                                            
-                                            <div class="form-group filter_button">
-                                                <button type="submit" class="btn theme-bg text-light rounded full-width">Apply Filter</button>
-                                            </div>
-                                            
-                                        </div>
+                        <!-- Filter Form -->
+                        <div class="sidebar-widgets">
+                            <form method="GET" action="{{ route('category.slug', $data['category']->slug) }}">
+                                <div class="side-filter-box-body px-3 py-3">
+                                    <div class="form-group mb-3">
+                                        <label class="small">Name</label>
+                                        <input name="name" value="{{ request('name') }}" class="form-control" />
                                     </div>
-                                </form>
-                            </div>							
+                                    <div class="form-group mb-3">
+                                        <label class="small">State</label>
+                                        <select name="state" id="state" class="form-control"
+                                            onchange="updateCities()">
+                                            <option value="">All States</option>
+                                            @if (!empty($data['states']) && $data['states']->count() > 0)
+                                                @foreach ($data['states'] as $state)
+                                                    <option value="{{ $state }}"
+                                                        {{ request('state') == $state ? 'selected' : '' }}>
+                                                        {{ $state }}</option>
+                                                @endforeach
+                                            @endif
+                                        </select>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label class="small">City</label>
+                                        <select name="city" id="city" class="form-control">
+                                            <option value="">All Cities</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <input id="open_now" class="checkbox-custom" name="open_now" type="checkbox"
+                                            value="1" {{ request('open_now') ? 'checked' : '' }}>
+                                        <label for="open_now" class="checkbox-custom-label">Open Now</label>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <input id="featured" class="checkbox-custom" name="featured" type="checkbox"
+                                            value="1" {{ request('featured') ? 'checked' : '' }}>
+                                        <label for="featured" class="checkbox-custom-label">Featured</label>
+                                    </div>
+                                    <div class="form-group">
+                                        <button class="btn theme-bg text-light full-width">Apply</button>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
-
-                {{-- Ensure form action uses path parameter for location when submitted --}}
-                <script>
-                    (function () {
-                        var form = document.getElementById('categoryFilterForm');
-                        if (!form) return;
-                        form.addEventListener('submit', function (e) {
-                            var select = form.querySelector('select[name="location"]');
-                            if (select && select.value) {
-                                // Append the selected location to the form action as a path param
-                                var action = form.action.replace(/\/+$/, '');
-                                form.action = action + '/' + encodeURIComponent(select.value);
-                            }
-                        });
-                    })();
-                </script>
 
                 <div class="col-xl-9 col-lg-8 col-md-12">
                     <div class="row">
@@ -121,10 +110,8 @@
                     </div>
 
                     <div class="row">
-                        <div class="row mt-5 mb-5">
-                            <div class="col-12">
-                                {{ $data['listings']->links('pagination.custom') }}
-                            </div>
+                        <div class="col-12">
+                            {{ $data['listings']->links('pagination.custom') }}
                         </div>
                     </div>
                 </div>
@@ -132,4 +119,42 @@
         </div>
     </section>
     <!-- ======================= Category Section End ======================== -->
+@endsection
+
+@section('scripts')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Cities data map from controller
+            const citiesMap = @json($data['cities'] ?? []);
+            const currentCity = "{{ request('city') }}";
+
+            // Update cities dropdown based on selected state
+            window.updateCities = function() {
+                const stateSelect = document.getElementById('state');
+                const citySelect = document.getElementById('city');
+                const selectedState = stateSelect.value;
+
+                // Clear cities dropdown
+                citySelect.innerHTML = '<option value="">All Cities</option>';
+
+                if (selectedState && citiesMap[selectedState]) {
+                    citiesMap[selectedState].forEach(city => {
+                        const option = document.createElement('option');
+                        option.value = city;
+                        option.textContent = city;
+                        if (city === currentCity) {
+                            option.selected = true;
+                        }
+                        citySelect.appendChild(option);
+                    });
+                }
+            }
+
+            // Initialize cities on page load if state is already selected
+            const stateSelect = document.getElementById('state');
+            if (stateSelect && stateSelect.value) {
+                updateCities();
+            }
+        });
+    </script>
 @endsection
