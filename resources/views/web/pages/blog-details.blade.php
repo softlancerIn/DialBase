@@ -13,14 +13,12 @@
                             <span class="ms-2 badge bg-primary">{{ $data['blog']->category->name }}</span>
                         @endif
                     </div>
-                    @if(!empty($data['blog']->image))
                         <img
                             src="{{ $data['blog']->image ? asset('upload_image/blog/'.$data['blog']->image) : asset('assets/img/b-4.jpg') }}"
                             class="img-fluid"
                             alt="{{ $data['blog']->name }}"
                             style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;"
                         >
-                    @endif
 
                     @if(!empty($data['blog']->description))
                         <div class="mt-2">
@@ -34,9 +32,7 @@
                         <ul class="list-group list-group-flush">
                             @foreach(($data['blogs'] ?? []) as $post)
                                 <li class="list-group-item d-flex">
-                                    @if($post->image)
-                                        <img src="{{ asset('upload_image/blog/' . $post->image) }}" alt="{{ $post->name }}" class="me-2 rounded" style="width:48px;height:48px;object-fit:cover;">
-                                    @endif
+                                    <img src="{{ $post->image ? asset('upload_image/blog/' . $post->image) : asset('assets/img/b-4.jpg') }}" alt="{{ $post->name }}" class="me-2 rounded" style="width:48px;height:48px;object-fit:cover;">
                                     <div>
                                         <a href="{{ route('web_blog_details', $post->slug) }}" class="fw-semibold d-block mb-1">{{ $post->name }}</a>
                                         <small class="text-muted">{{ \Illuminate\Support\Str::limit(strip_tags($post->description), 90) }}</small>

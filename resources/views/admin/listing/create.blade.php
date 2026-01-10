@@ -125,6 +125,15 @@
                                                 @enderror
                                             </div>
                                         </div>
+                                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                                            <div class="form-group mt-4">
+                                                <input id="status" class="checkbox-custom" name="status"
+                                                    type="checkbox" value="1" checked>
+                                                <label for="status" class="checkbox-custom-label">Status</label>
+                                                <small class="form-text text-muted">Enable to make listing
+                                                    active.</small>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -183,7 +192,9 @@
                                         <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
                                             <div class="form-group">
                                                 <label class="mb-1">State</label>
-                                                <select id="state" class="form-control @error('state') is-invalid @enderror" name="state" onchange="updateCities()">
+                                                <select id="state"
+                                                    class="form-control @error('state') is-invalid @enderror"
+                                                    name="state" onchange="updateCities()">
                                                     <option value="" disabled selected>Select State</option>
                                                     @foreach ($data['states'] as $state)
                                                         <option value="{{ $state }}"
@@ -199,7 +210,9 @@
                                         <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
                                             <div class="form-group">
                                                 <label class="mb-1">City</label>
-                                                <select id="city" class="form-control @error('city') is-invalid @enderror" name="city">
+                                                <select id="city"
+                                                    class="form-control @error('city') is-invalid @enderror"
+                                                    name="city">
                                                     <option value="" disabled selected>Select City</option>
                                                 </select>
                                                 @error('city')
@@ -481,8 +494,7 @@
                                                 <label class="mb-1"><i
                                                         class="ti-facebook theme-cl me-1"></i>Facebook</label>
                                                 <input type="text" class="form-control rounded" name="facebook"
-                                                    placeholder="https://facebook.com/"
-                                                />
+                                                    placeholder="https://facebook.com/" />
                                             </div>
                                         </div>
                                         <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
@@ -490,8 +502,7 @@
                                                 <label class="mb-1"><i
                                                         class="ti-twitter theme-cl me-1"></i>Twitter</label>
                                                 <input type="text" class="form-control rounded" name="twitter"
-                                                    placeholder="https://twitter.com/"
-                                                />
+                                                    placeholder="https://twitter.com/" />
                                             </div>
                                         </div>
                                         <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
@@ -499,8 +510,7 @@
                                                 <label class="mb-1"><i
                                                         class="ti-instagram theme-cl me-1"></i>Instagram</label>
                                                 <input type="text" class="form-control rounded" name="instagram"
-                                                    placeholder="https://instagram.com/"
-                                                />
+                                                    placeholder="https://instagram.com/" />
                                             </div>
                                         </div>
                                         <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
@@ -508,13 +518,13 @@
                                                 <label class="mb-1"><i
                                                         class="ti-linkedin theme-cl me-1"></i>Linkedin</label>
                                                 <input type="text" class="form-control rounded" name="linkedin"
-                                                    placeholder="https://linkedin.com/"
-                                                />
+                                                    placeholder="https://linkedin.com/" />
                                             </div>
                                         </div>
                                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
                                             <div class="form-group">
-                                                <button type="submit" class="btn theme-bg rounded text-light">Submit</button>
+                                                <button type="submit"
+                                                    class="btn theme-bg rounded text-light">Submit</button>
                                             </div>
                                         </div>
                                     </div>
@@ -633,7 +643,7 @@
                             const option = document.createElement('option');
                             option.value = city;
                             option.textContent = city;
-                            option.selected = city === '{{ old("city") }}' ? true : false;
+                            option.selected = city === '{{ old('city') }}' ? true : false;
                             citySelect.appendChild(option);
                         });
                     }

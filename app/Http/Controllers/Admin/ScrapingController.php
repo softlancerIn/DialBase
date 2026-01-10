@@ -35,14 +35,9 @@ class ScrapingController extends Controller
             return $data;
         }
 
-        try {
-            // Extract Zip Code from address first (fallback)
-            if (preg_match('/\b\d{6}\b/', $address, $matches)) {
-                $data['zip_code'] = $matches[0];
-            }
-
-            $url = "https://nominatim.openstreetmap.org/search?q=" . urlencode($address) . "&format=json&addressdetails=1&limit=1";
-            
+        // Helper to perform the request
+        $fetchGeoData = function($query) {
+            $url = "https://nominatim.openstreetmap.org/search?q=" . urlencode($query) . "&format=json&addressdetails=1&limit=1";
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_URL, $url);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -50,20 +45,47 @@ class ScrapingController extends Controller
             curl_setopt($ch, CURLOPT_TIMEOUT, 5);
             $response = curl_exec($ch);
             curl_close($ch);
+            return $response ? json_decode($response, true) : null;
+        };
 
-            if ($response) {
-                $json = json_decode($response, true);
-                if (!empty($json) && isset($json[0])) {
-                    $result = $json[0];
-                    $data['latitude'] = $result['lat'] ?? 0;
-                    $data['longitude'] = $result['lon'] ?? 0;
-                    
-                    if (isset($result['address'])) {
-                        $addr = $result['address'];
-                        $data['state'] = $addr['state'] ?? $addr['region'] ?? 'Unknown';
-                        $data['city'] = $addr['city'] ?? $addr['town'] ?? $addr['village'] ?? $addr['county'] ?? 'Unknown';
-                        $data['zip_code'] = $addr['postcode'] ?? $data['zip_code'];
+        try {
+            // Extract Zip Code from address first (fallback)
+            if (preg_match('/\b\d{6}\b/', $address, $matches)) {
+                $data['zip_code'] = $matches[0];
+            }
+
+            // 1. Try Full Address
+            $json = $fetchGeoData($address);
+
+            // 2. Fallback: Try City/Last Part if full address fails
+            if (empty($json)) {
+                $parts = explode(',', $address);
+                $lastPart = trim(end($parts));
+                
+                // Handle "City - Zip" format
+                if (strpos($lastPart, '-') !== false) {
+                    $subParts = explode('-', $lastPart);
+                    $potentialCity = trim($subParts[0]);
+                    if (!is_numeric($potentialCity)) {
+                        $lastPart = $potentialCity;
                     }
+                }
+
+                if ($lastPart !== $address && !empty($lastPart)) {
+                    $json = $fetchGeoData($lastPart);
+                }
+            }
+
+            if (!empty($json) && isset($json[0])) {
+                $result = $json[0];
+                $data['latitude'] = $result['lat'] ?? 0;
+                $data['longitude'] = $result['lon'] ?? 0;
+                
+                if (isset($result['address'])) {
+                    $addr = $result['address'];
+                    $data['state'] = $addr['state'] ?? $addr['region'] ?? 'Unknown';
+                    $data['city'] = $addr['city'] ?? $addr['town'] ?? $addr['village'] ?? $addr['county'] ?? 'Unknown';
+                    $data['zip_code'] = $addr['postcode'] ?? $data['zip_code'];
                 }
             }
         } catch (\Exception $e) {
@@ -179,7 +201,7 @@ class ScrapingController extends Controller
                     'category_id' => $categoryId,
                     'address' => $data['address'] ?? '',
                     'mobile' => $data['phone'] ?? '',
-                    'website' => $data['link'] ? 'https://www.justdial.com' . $data['link'] : '',
+                    'website' => '',
                     'description' => 'Scraped from JustDial',
                     'is_featured' => 0,
                     'status' => 1,

@@ -79,7 +79,8 @@ class ListingController extends Controller
             'twitter' => 'nullable|url',
             'instagram' => 'nullable|url',
             'linkedin' => 'nullable|url',
-            'sort_order' => 'nullable|integer'
+            'sort_order' => 'nullable|integer',
+            'status' => 'nullable|boolean'
         ]);
         DB::beginTransaction();
         try {
@@ -108,6 +109,7 @@ class ListingController extends Controller
                 'website' => $request->website ?? '',
                 'is_featured' => $request->has('is_featured') ? 1 : 0,
                 'sort_order' => $request->sort_order ?? 0,
+                'status' => $request->has('status') ? 1 : 0,
             ]);
 
             // Upload logo
@@ -327,7 +329,8 @@ class ListingController extends Controller
             'twitter' => 'nullable|url',
             'instagram' => 'nullable|url',
             'linkedin' => 'nullable|url',
-            'sort_order' => 'nullable|integer'
+            'sort_order' => 'nullable|integer',
+            'status' => 'nullable|boolean'
         ]);
         DB::beginTransaction();
     
@@ -361,6 +364,7 @@ class ListingController extends Controller
                 'website' => $request->website ?? '',
                 'is_featured' => $request->is_featured ? 1 : 0,
                 'sort_order' => $request->sort_order ?? 0,
+                'status' => $request->status ? 1 : 0,
             ]);
 
             // Upload logo

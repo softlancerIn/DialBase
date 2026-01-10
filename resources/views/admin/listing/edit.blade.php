@@ -17,7 +17,8 @@
         <div class="dashboard-widg-bar d-block">
             <div class="row">
                 <div class="col-xl-12 col-lg-2 col-md-12 col-sm-12">
-                    <form action="{{ route('listing-data.update', $data['listing']->id) }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('listing-data.update', $data['listing']->id) }}" method="POST"
+                        enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         @if (session('success'))
@@ -57,7 +58,8 @@
                                 <div class="dashboard-list-wraps-head br-bottom py-3 px-3">
                                     <div class="dashboard-list-wraps-flx">
                                         <h4 class="mb-0 ft-medium fs-md">
-                                            <i class="fa fa-file me-2 theme-cl fs-sm"></i>Listing Info</h4>
+                                            <i class="fa fa-file me-2 theme-cl fs-sm"></i>Listing Info
+                                        </h4>
                                     </div>
                                 </div>
                                 <div class="dashboard-list-wraps-body py-3 px-3">
@@ -114,15 +116,26 @@
                                             </div>
                                         </div>
 
-                                         <!-- Sort Order -->
+                                        <!-- Sort Order -->
                                         <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
                                             <div class="form-group">
                                                 <label class="mb-1">Sort Order</label>
                                                 <input type="number" class="form-control rounded" name="sort_order"
-                                                    placeholder="Sort Order (Higher goes first)" />
+                                                    placeholder="Sort Order (Higher goes first)"
+                                                    value="{{ old('sort_order', $data['listing']->sort_order) }}" />
                                                 @error('sort_order')
                                                     <div class="invalid-feedback d-block">{{ $message }}</div>
                                                 @enderror
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                                            <div class="form-group mt-4">
+                                                <input id="status" class="checkbox-custom" name="status"
+                                                    type="checkbox" value="1"
+                                                    {{ $data['listing']->status ? 'checked' : '' }}>
+                                                <label for="status" class="checkbox-custom-label">Status</label>
+                                                <small class="form-text text-muted">Enable to make listing
+                                                    active.</small>
                                             </div>
                                         </div>
                                     </div>
@@ -165,14 +178,19 @@
                                             </div>
                                         </div>
                                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-                                                <div class="form-group">
-                                                    <label class="mb-1">Map location (drag pin to update coords)</label>
-                                                    <div class="d-flex mb-2 gap-2">
-                                                        <button type="button" id="use-location-btn" class="btn btn-sm btn-outline-primary">Use my location</button>
-                                                        <div id="map-error" class="alert alert-warning mb-0" style="display:none; padding: .35rem .5rem;">Map failed to load</div>
+                                            <div class="form-group">
+                                                <label class="mb-1">Map location (drag pin to update coords)</label>
+                                                <div class="d-flex mb-2 gap-2">
+                                                    <button type="button" id="use-location-btn"
+                                                        class="btn btn-sm btn-outline-primary">Use my location</button>
+                                                    <div id="map-error" class="alert alert-warning mb-0"
+                                                        style="display:none; padding: .35rem .5rem;">Map failed to load
                                                     </div>
-                                                    <div id="listing-map" style="width:100%;height:300px;border:1px solid #e6e6e6;border-radius:4px"></div>
                                                 </div>
+                                                <div id="listing-map"
+                                                    style="width:100%;height:300px;border:1px solid #e6e6e6;border-radius:4px">
+                                                </div>
+                                            </div>
                                         </div>
 
                                         <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
@@ -182,7 +200,9 @@
                                                     id="state" name="state" onchange="updateCities()">
                                                     <option value="" disabled>Select State</option>
                                                     @foreach ($data['states'] as $state)
-                                                        <option value="{{ $state }}" {{ old('state', $data['listing']->state) == $state ? 'selected' : '' }}>{{ $state }}</option>
+                                                        <option value="{{ $state }}"
+                                                            {{ old('state', $data['listing']->state) == $state ? 'selected' : '' }}>
+                                                            {{ $state }}</option>
                                                     @endforeach
                                                 </select>
                                                 @error('state')
@@ -265,9 +285,13 @@
                                         <!-- Is Featured Checkbox -->
                                         <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
                                             <div class="form-group mt-4">
-                                                <input id="is_featured" class="checkbox-custom" name="is_featured" type="checkbox" value="1" {{ $data['listing']->is_featured ? 'checked' : '' }}>
-                                                <label for="is_featured" class="checkbox-custom-label">Mark as Featured</label>
-                                                <small class="form-text text-muted">If checked, this listing will be marked as featured.</small>
+                                                <input id="is_featured" class="checkbox-custom" name="is_featured"
+                                                    type="checkbox" value="1"
+                                                    {{ $data['listing']->is_featured ? 'checked' : '' }}>
+                                                <label for="is_featured" class="checkbox-custom-label">Mark as
+                                                    Featured</label>
+                                                <small class="form-text text-muted">If checked, this listing will be
+                                                    marked as featured.</small>
                                             </div>
                                         </div>
                                     </div>
@@ -278,7 +302,8 @@
                                 <div class="dashboard-list-wraps-head br-bottom py-3 px-3">
                                     <div class="dashboard-list-wraps-flx">
                                         <h4 class="mb-0 ft-medium fs-md"><i
-                                                class="fa fa-camera me-2 theme-cl fs-sm"></i>Image & Gallery Option</h4>
+                                                class="fa fa-camera me-2 theme-cl fs-sm"></i>Image & Gallery Option
+                                        </h4>
                                     </div>
                                 </div>
 
@@ -462,7 +487,7 @@
                                             <div class="Goodup-all-features-list">
                                                 <ul>
                                                     @php $selectedAmenityIds = $data['listing']->amenities->pluck('id')->toArray(); @endphp
-                                                    @foreach($data['all_amenities'] as $amenity)
+                                                    @foreach ($data['all_amenities'] as $amenity)
                                                         <li>
                                                             <input id="amenity-{{ $amenity->id }}"
                                                                 class="checkbox-custom" name="amenities[]"
@@ -484,7 +509,7 @@
                                 </div>
                             </div>
 
-                             <!-- Social Links -->
+                            <!-- Social Links -->
                             <div class="dashboard-list-wraps bg-white rounded mb-4">
                                 <div class="dashboard-list-wraps-head br-bottom py-3 px-3">
                                     <div class="dashboard-list-wraps-flx">
@@ -501,8 +526,7 @@
                                                         class="ti-facebook theme-cl me-1"></i>Facebook</label>
                                                 <input type="text" class="form-control rounded" name="facebook"
                                                     placeholder="https://facebook.com/"
-                                                    value="{{ old('facebook', optional($data['listing']->socialLink)->facebook) }}"
-                                                />
+                                                    value="{{ old('facebook', optional($data['listing']->socialLink)->facebook) }}" />
                                             </div>
                                         </div>
                                         <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
@@ -511,8 +535,7 @@
                                                         class="ti-twitter theme-cl me-1"></i>Twitter</label>
                                                 <input type="text" class="form-control rounded" name="twitter"
                                                     placeholder="https://twitter.com/"
-                                                    value="{{ old('twitter', optional($data['listing']->socialLink)->twitter) }}"
-                                                />
+                                                    value="{{ old('twitter', optional($data['listing']->socialLink)->twitter) }}" />
                                             </div>
                                         </div>
                                         <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
@@ -521,8 +544,7 @@
                                                         class="ti-instagram theme-cl me-1"></i>Instagram</label>
                                                 <input type="text" class="form-control rounded" name="instagram"
                                                     placeholder="https://instagram.com/"
-                                                    value="{{ old('instagram', optional($data['listing']->socialLink)->instagram) }}"
-                                                />
+                                                    value="{{ old('instagram', optional($data['listing']->socialLink)->instagram) }}" />
                                             </div>
                                         </div>
                                         <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
@@ -531,13 +553,13 @@
                                                         class="ti-linkedin theme-cl me-1"></i>Linkedin</label>
                                                 <input type="text" class="form-control rounded" name="linkedin"
                                                     placeholder="https://linkedin.com/"
-                                                    value="{{ old('linkedin', optional($data['listing']->socialLink)->linkedin) }}"
-                                                />
+                                                    value="{{ old('linkedin', optional($data['listing']->socialLink)->linkedin) }}" />
                                             </div>
                                         </div>
                                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
                                             <div class="form-group">
-                                                <button type="submit" class="btn theme-bg rounded text-light">Updtae</button>
+                                                <button type="submit"
+                                                    class="btn theme-bg rounded text-light">Updtae</button>
                                             </div>
                                         </div>
                                     </div>
@@ -550,8 +572,8 @@
 
         </div>
         <!-- Leaflet CSS/JS for interactive map -->
-          <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-          <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
         <script>
             // Cities data map - Global scope
@@ -570,13 +592,13 @@
                         const option = document.createElement('option');
                         option.value = city;
                         option.textContent = city;
-                        option.selected = city === '{{ old("city", $data["listing"]->city) }}' ? true : false;
+                        option.selected = city === '{{ old('city', $data['listing']->city) }}' ? true : false;
                         citySelect.appendChild(option);
                     });
                 }
             }
 
-            document.addEventListener('DOMContentLoaded', function () {
+            document.addEventListener('DOMContentLoaded', function() {
                 // Initialize cities on page load if state is already selected
                 const stateSelect = document.getElementById('state');
                 if (stateSelect.value) {
@@ -603,17 +625,19 @@
                         attribution: '&copy; OpenStreetMap contributors'
                     }).addTo(map);
 
-                    const marker = L.marker([lat, lng], { draggable: true }).addTo(map);
+                    const marker = L.marker([lat, lng], {
+                        draggable: true
+                    }).addTo(map);
 
                     // When marker dragged, update inputs
-                    marker.on('dragend', function () {
+                    marker.on('dragend', function() {
                         const pos = marker.getLatLng();
                         latInput.value = pos.lat.toFixed(6);
                         lngInput.value = pos.lng.toFixed(6);
                     });
 
                     // Click on map to move marker
-                    map.on('click', function (e) {
+                    map.on('click', function(e) {
                         marker.setLatLng(e.latlng);
                         latInput.value = e.latlng.lat.toFixed(6);
                         lngInput.value = e.latlng.lng.toFixed(6);
@@ -634,19 +658,19 @@
 
                     // Use browser geolocation
                     const useBtn = document.getElementById('use-location-btn');
-                    useBtn.addEventListener('click', function () {
+                    useBtn.addEventListener('click', function() {
                         if (!navigator.geolocation) {
                             showMapError('Geolocation not supported');
                             return;
                         }
-                        navigator.geolocation.getCurrentPosition(function (pos) {
+                        navigator.geolocation.getCurrentPosition(function(pos) {
                             const pLat = pos.coords.latitude;
                             const pLng = pos.coords.longitude;
                             marker.setLatLng([pLat, pLng]);
                             map.setView([pLat, pLng], 13);
                             latInput.value = pLat.toFixed(6);
                             lngInput.value = pLng.toFixed(6);
-                        }, function (err) {
+                        }, function(err) {
                             showMapError('Unable to get location: ' + (err.message || err.code));
                         });
                     });
