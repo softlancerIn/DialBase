@@ -22,7 +22,7 @@ class WebController extends Controller
 
         $query = Listing::with(['images', 'workingHours', 'amenities', 'category', 'reviews.user']);
 
-        $data['listing'] = $query->where('is_featured', 1)->take(12)->get();
+        $data['listing'] = $query->where('is_featured', 1)->where('status', '1')->take(12)->get();
 
         foreach ($data['listing'] as $listing) {
             $listing->reviews_count = $listing->reviews->where('status', 1)->count();
@@ -47,7 +47,7 @@ class WebController extends Controller
         $data['category'] = Category::where('status', '1')->get();
         $data['all_amenities'] = Amenity::all();
 
-        $query = Listing::with(['images', 'workingHours', 'amenities', 'category']);
+        $query = Listing::with(['images', 'workingHours', 'amenities', 'category'])->where('status', '1');
 
         if (! empty($name)) {
             $query->where('title', 'like', "%{$name}%");
@@ -103,7 +103,7 @@ class WebController extends Controller
         $data['all_categories'] = Category::where('status', '1')->get();
         $data['all_amenities'] = Amenity::all();
 
-        $query = Listing::where('category_id', $data['category']->id)->with('images');
+        $query = Listing::where('category_id', $data['category']->id)->where('status', '1')->with('images');
 
         if (! empty($address)) {
             $tokens = preg_split('/[\s,]+/', trim($address));
@@ -144,7 +144,7 @@ class WebController extends Controller
             $listing->average_rating = $listing->reviews->where('status', 1)->avg('rating');
         }
 
-        $all_listings_for_locations = Listing::where('category_id', $data['category']->id)->get();
+        $all_listings_for_locations = Listing::where('category_id', $data['category']->id)->where('status', '1')->get();
         $data['locations'] = $all_listings_for_locations->pluck('city')->unique()->sort()->values();
 
         return view('web.pages.category_details', compact('data'));
@@ -158,6 +158,7 @@ class WebController extends Controller
             return redirect()->route('index');
         }
         $data['city_listings'] = Listing::where('category_id', $data['category']->id)
+            ->where('status', '1')
             ->selectRaw('city, COUNT(*) as listing_count')
             ->groupBy('city')
             ->get();
@@ -191,7 +192,7 @@ class WebController extends Controller
     }
 
     public function all_listings() {
-        $listings = Listing::paginate(12);
+        $listings = Listing::where('status', '1')->paginate(12);
         $allLocations = Listing::whereNotNull('city')->pluck('city')->unique()->sort()->values();
 
         return view('web.pages.listings', compact('listings', 'allLocations'));
@@ -199,7 +200,7 @@ class WebController extends Controller
 
     public function listing_detail($slug)
     {
-        $data['listing'] = Listing::where('slug', $slug)->with(['images', 'workingHours', 'amenities', 'socialLink', 'category', 'reviews' => function ($query) {$query->where('status', 1);}, 'reviews.user'])->first();
+        $data['listing'] = Listing::where('slug', $slug)->where('status', '1')->with(['images', 'workingHours', 'amenities', 'socialLink', 'category', 'reviews' => function ($query) {$query->where('status', 1);}, 'reviews.user'])->first();
 
         if ($data['listing']) {
             $data['listing']->reviews_count = $data['listing']->reviews->count();
@@ -264,7 +265,7 @@ class WebController extends Controller
             'message' => 'required|string',
         ]);
 
-        $listing = Listing::where('slug', $slug)->firstOrFail();
+        $listing = Listing::where('slug', $slug)->where('status', '1')->firstOrFail();
 
         $enquiry = new Enquiry();
         $enquiry->listing_id = $listing->id;
@@ -360,7 +361,7 @@ class WebController extends Controller
             'name' => 'nullable|string',
         ]);
 
-        $listing = Listing::where('slug', $slug)->firstOrFail();
+        $listing = Listing::where('slug', $slug)->where('status', '1')->firstOrFail();
 
         $existing = ListingReview::where('listing_id', $listing->id)
             ->where('email', $request->email)
@@ -396,6 +397,7 @@ class WebController extends Controller
     public function seo_listing_detail($country, $category_slug, $city, $slug)
     {
         $listing = Listing::where('slug', $slug)
+            ->where('status', '1')
             ->where('country', $country)
             ->where('city', $city)
             ->with(['images', 'workingHours', 'amenities', 'socialLink', 'category', 'reviews.user'])
@@ -403,7 +405,7 @@ class WebController extends Controller
 
         if (!$listing) {
             // Fallback: try finding by slug only if strict path fails, or redirect
-            $listing = Listing::where('slug', $slug)->first();
+            $listing = Listing::where('slug', $slug)->where('status', '1')->first();
             if (!$listing) {
                 return redirect()->route('index');
             }
@@ -430,6 +432,7 @@ class WebController extends Controller
         $data['all_amenities'] = Amenity::all();
 
         $query = Listing::where('category_id', $category->id)
+            ->where('status', '1')
             ->where('country', $country)
             ->where('city', $city)
             ->with('images');
