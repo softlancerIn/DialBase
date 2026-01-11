@@ -26,6 +26,7 @@ class Listing extends Model
         'website',
         'is_featured',
         'is_247_open',
+        'status',
     ];
 
     public function images()

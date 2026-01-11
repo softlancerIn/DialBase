@@ -2,7 +2,9 @@
 
 @section('content')
     <!-- ======================= Breadcrumb ======================== -->
-    <div class="breadcrumb-wrap" style="background:#f41b3b url({{ asset('assets/img/banner-2.jpg') }}) no-repeat; background-size: 100%;" data-overlay="5">
+    <div class="breadcrumb-wrap"
+        style="background:#f41b3b url({{ asset('assets/img/banner-2.jpg') }}) no-repeat; background-size: 100%;"
+        data-overlay="5">
         <div class="container">
             <div class="row">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
@@ -30,15 +32,18 @@
                         <div class="cats-wrap text-center">
                             <a href="{{ route('city.slug', $c_data->slug) }}" class="Goodup-catg-wrap">
                                 @php
-                                    $listing_count = App\Models\Listing::where('category_id', $c_data->id)->groupBy('city')->get();
+                                    $listing_count = App\Models\Listing::where('category_id', $c_data->id)
+                                        ->where('status', '1')
+                                        ->groupBy('city')
+                                        ->get();
                                 @endphp
-                                <div class="Goodup-catg-city">{{$listing_count->count()}} Cities</div>
+                                <div class="Goodup-catg-city">{{ $listing_count->count() }} Cities</div>
                                 <div class="Goodup-catg-icon">
-                                    {!!$c_data->icon ?? '--' !!}
+                                    {!! $c_data->icon ?? '--' !!}
                                 </div>
                                 <div class="Goodup-catg-caption">
-                                    <h4 class="fs-md mb-0 ft-medium m-catrio">{{$c_data->name}}</h4>
-                                    <span class="text-muted">{{$c_data->listing_count}} Listings</span>
+                                    <h4 class="fs-md mb-0 ft-medium m-catrio">{{ $c_data->name }}</h4>
+                                    <span class="text-muted">{{ $c_data->listing_count }} Listings</span>
                                 </div>
                             </a>
                         </div>

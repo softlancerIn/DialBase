@@ -14,7 +14,7 @@
 
                 <div class="col-xl-2 col-lg-2 col-md-2">
                     <div class="btn-group float-end mt-2">
-                        <a href="{{route('listing-data.create')}}">
+                        <a href="{{ route('listing-data.create') }}">
                             <button type="button" class="btn btn-primary">
                                 Add Listing
                             </button>
@@ -32,16 +32,20 @@
                     <div class="col-md-4">
                         <select name="category_id" class="form-control">
                             <option value="">Select Category</option>
-                            @foreach(\App\Models\Category::where('status', '1')->get() as $cat)
-                                <option value="{{ $cat->id }}" {{ request('category_id') == $cat->id ? 'selected' : '' }}>{{ $cat->name }}</option>
+                            @foreach (\App\Models\Category::where('status', '1')->get() as $cat)
+                                <option value="{{ $cat->id }}"
+                                    {{ request('category_id') == $cat->id ? 'selected' : '' }}>{{ $cat->name }}
+                                </option>
                             @endforeach
                         </select>
                     </div>
                     <div class="col-md-4">
-                        <input type="text" name="state" class="form-control" placeholder="State" value="{{ request('state') }}">
+                        <input type="text" name="state" class="form-control" placeholder="State"
+                            value="{{ request('state') }}">
                     </div>
                     <div class="col-md-3">
-                        <input type="text" name="city" class="form-control" placeholder="City" value="{{ request('city') }}">
+                        <input type="text" name="city" class="form-control" placeholder="City"
+                            value="{{ request('city') }}">
                     </div>
                     <div class="col-md-1">
                         <button type="submit" class="btn btn-primary w-100">Filter</button>
@@ -67,16 +71,29 @@
                             <div class="dashboard-listing-wraps">
 
                                 <!-- Single Listing Item -->
-                                @foreach($listings as $key => $data)
+                                @foreach ($listings as $key => $data)
                                     <div class="dsd-single-listing-wraps">
-                                        <div class="dsd-single-lst-thumb"><img src="assets/img/listing/l-1.jpg"
-                                                class="img-fluid" alt="" /></div>
+                                        <div class="dsd-single-lst-thumb">
+                                            @php
+                                                $featuredImage = $data->images
+                                                    ->where('image_type', 'featured')
+                                                    ->first();
+                                            @endphp
+                                            @if ($featuredImage)
+                                                <img src="{{ asset('storage/' . $featuredImage->image_path) }}"
+                                                    class="img-fluid" alt="{{ $data->title }}"
+                                                    style="width: 100%; height: 100%; object-fit: cover;" />
+                                            @else
+                                                <img src="{{ asset('assets/img/listing/l-1.jpg') }}" class="img-fluid"
+                                                    alt="" />
+                                            @endif
+                                        </div>
                                         <div class="dsd-single-lst-caption">
                                             <div class="dsd-single-lst-title">
-                                                <h5>{{$data->title}}</h5>
+                                                <h5>{{ $data->title }}</h5>
                                             </div>
                                             <span class="agd-location"><i
-                                                    class="lni lni-map-marker me-1"></i>{{$data->address}}</span>
+                                                    class="lni lni-map-marker me-1"></i>{{ $data->address }}</span>
                                             <div class="ico-content">
                                                 <div class="Goodup-ft-first">
                                                     <div class="Goodup-rating">
@@ -94,14 +111,16 @@
                                                 </div>
                                             </div>
                                             <div class="dsd-single-lst-footer">
-                                                <a href="{{route('listing-data.edit', $data->id)}}"
+                                                <a href="{{ route('listing-data.edit', $data->id) }}"
                                                     class="btn btn-edit mr-1"><i class="fas fa-edit me-1"></i>Edit</a>
-                                                <a href="{{route('listing-data.show', $data->id)}}"
+                                                <a href="{{ route('listing-data.show', $data->id) }}"
                                                     class="btn btn-view mr-1"><i class="fas fa-eye me-1"></i>View</a>
-                                                <form action="{{ route('listing-data.destroy', $data->id) }}" method="POST" style="display:inline">
+                                                <form action="{{ route('listing-data.destroy', $data->id) }}"
+                                                    method="POST" style="display:inline">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-delete" onclick="return confirm('Are you sure you want to delete this listing?')">
+                                                    <button type="submit" class="btn btn-delete"
+                                                        onclick="return confirm('Are you sure you want to delete this listing?')">
                                                         <i class="fas fa-trash me-1"></i>Delete
                                                     </button>
                                                 </form>
