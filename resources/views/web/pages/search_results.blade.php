@@ -60,7 +60,10 @@
                 <div class="col-xl-9 col-lg-8 col-md-12">
                     <div class="row mb-4">
                         <div class="col-12">
-                            <h4 class="mb-0">Search Results</h4>
+                            <h4 class="mb-0">{{ $seoData->page_title ?? 'Search Results' }}</h4>
+                            @if (isset($seoData->page_sort_description))
+                                <p class="text-muted">{!! $seoData->page_sort_description !!}</p>
+                            @endif
                             @if (request()->has('name') && !empty(request('name')))
                                 @if (request()->has('address') && !empty(request('address')))
                                     <p class="text-muted">Showing results for {{ request('name') }} in

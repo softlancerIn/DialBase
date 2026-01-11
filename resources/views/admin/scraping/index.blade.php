@@ -1,5 +1,5 @@
-<x-admin.layout>
-    <div class="dashboard-widg-bar d-block">
+<x-admin.layout type="scraping">
+    <div class="dashboard-widg-bar d-block" id="app">
         <div class="row">
             <div class="col-xl-12 col-lg-12 col-md-12">
                 <div class="_dashboard_content bg-white rounded mb-4">
@@ -11,47 +11,9 @@
                     </div>
 
                     <div class="_dashboard_content_body py-3 px-3">
-                        <form action="{{ route('scrape_website.post') }}" method="POST">
-                            @csrf
-                            <div class="row">
-                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-                                    <div class="form-group">
-                                        <label class="mb-1">Select Category</label>
-                                        <select name="category_id" class="form-control rounded" required>
-                                            <option value="">-- Select Category --</option>
-                                            @foreach ($categories as $category)
-                                                <option value="{{ $category->id }}">{{ $category->name }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-                                    <div class="form-group">
-                                        <label class="mb-1">Website URL (JustDial Category URL)</label>
-                                        <input type="text" name="url" class="form-control rounded"
-                                            placeholder="https://www.justdial.com/..." required>
-                                    </div>
-                                </div>
-                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-                                    <div class="form-group">
-                                        <button type="submit" class="btn theme-bg text-light rounded">Scrape & Add
-                                            Listings</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-
-                        @if (session('success'))
-                            <div class="alert alert-success mt-3">
-                                {{ session('success') }}
-                            </div>
-                        @endif
-
-                        @if (session('error'))
-                            <div class="alert alert-danger mt-3">
-                                {{ session('error') }}
-                            </div>
-                        @endif
+                        <scraper-component :categories="{{ $categories->toJson() }}"
+                            store-url="{{ route('store_scraped_data') }}">
+                        </scraper-component>
                     </div>
                 </div>
             </div>

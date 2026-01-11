@@ -14,7 +14,7 @@
 
                 <div class="col-xl-2 col-lg-2 col-md-2">
                     <div class="btn-group float-end mt-2">
-                        <a href="{{route('seo_form',['type'=>'create','id'=>'0'])}}">
+                        <a href="{{ route('seo_form', ['type' => 'create', 'id' => '0']) }}">
                             <button type="button" class="btn btn-primary">
                                 Add Seo
                             </button>
@@ -55,7 +55,6 @@
                                             href="#">
                                             <i class="fas fa-trash me-1" data-feather="trash-2"></i>
                                         </a>
-                                        <x-admin.modal type="seo" id="{{ $seo->id }}" />
                                     </td>
                                 </tr>
                             @endforeach
@@ -66,4 +65,9 @@
         </div>
     </div>
 
+    @push('modals')
+        @foreach ($data['seo'] as $seo)
+            <x-admin.modal type="seo" id="{{ $seo->id }}" />
+        @endforeach
+    @endpush
 </x-admin.layout>

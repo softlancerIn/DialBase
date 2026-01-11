@@ -6,8 +6,8 @@
             <div class="row justify-content-center">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
                     <div class="sec_title position-relative text-center mb-5">
-                        <h6 class="theme-cl mb-0">Contact Us</h6>
-                        <h2 class="ft-bold">Get In Touch With Us</h2>
+                        <h6 class="theme-cl mb-0">{{ $seoData->page_title ?? 'Contact Us' }}</h6>
+                        <h2 class="ft-bold">{!! $seoData->page_sort_description ?? 'Get In Touch With Us' !!}</h2>
                     </div>
                 </div>
             </div>

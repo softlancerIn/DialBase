@@ -9,7 +9,11 @@
             <div class="row">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                     <div class="breadcrumb_caption text-center py-5">
-                        <h1 class="page_title fw-bold fs-1 fs-md-2 fs-lg-1">All Categories</h1>
+                        <h1 class="page_title fw-bold fs-1 fs-md-2 fs-lg-1">
+                            {{ $seoData->page_title ?? 'All Categories' }}</h1>
+                        @if (isset($seoData->page_sort_description))
+                            <p class="fs-lg ft-light">{!! $seoData->page_sort_description !!}</p>
+                        @endif
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb justify-content-center mt-2" style="color: white;">
                                 <li class=""><a href="{{ route('index') }}" style="color: white;">Home </a></li>

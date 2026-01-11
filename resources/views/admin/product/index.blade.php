@@ -62,10 +62,9 @@
                                             <i class="text-primary" data-feather="edit"></i>
                                         </a>
                                         <a data-bs-toggle="modal" data-bs-target="#deleteModal{{ $product->id }}"
-                                                href="#">
-                                                <i class="text-primary" data-feather="trash-2"></i>
-                                            </a>
-                                        <x-admin.modal type="product" id="{{ $product->id }}" />
+                                            href="#">
+                                            <i class="text-primary" data-feather="trash-2"></i>
+                                        </a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -76,4 +75,9 @@
         </div>
     </div>
 
+    @push('modals')
+        @foreach ($data['products'] as $product)
+            <x-admin.modal type="product" id="{{ $product->id }}" />
+        @endforeach
+    @endpush
 </x-admin.layout>

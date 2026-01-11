@@ -1,8 +1,10 @@
 @extends('web.layout.main')
 
 @section('title', 'Terms & Conditions | Aboutfirms')
-@section('meta_description', 'Read the Terms & Conditions governing the use of Aboutfirms, the B2B directory platform. Learn about eligibility, accounts, listings, subscriptions, and your rights.')
-@section('meta_keywords', 'Terms and Conditions, Terms, Aboutfirms terms, B2B directory terms, subscription terms, user agreement')
+@section('meta_description', 'Read the Terms & Conditions governing the use of Aboutfirms, the B2B directory platform.
+    Learn about eligibility, accounts, listings, subscriptions, and your rights.')
+@section('meta_keywords', 'Terms and Conditions, Terms, Aboutfirms terms, B2B directory terms, subscription terms, user
+    agreement')
 @section('meta_robots', 'index,follow')
 
 @section('content')
@@ -28,8 +30,9 @@
             <div class="row justify-content-center">
                 <div class="col-xl-10 col-lg-10 col-md-12">
                     <div class="text-center">
-                        <h1 class="ft-bold mb-3">Terms &amp; Conditions</h1>
-                        <p class="lead text-muted">Welcome to Aboutfirms. By accessing or using our B2B directory platform, you agree to be bound by these Terms and Conditions. Please read them carefully.</p>
+                        <h1 class="ft-bold mb-3">{{ $seoData->page_title ?? 'Terms & Conditions' }}</h1>
+                        <p class="lead text-muted">{!! $seoData->page_sort_description ??
+                            'Welcome to Aboutfirms. By accessing or using our B2B directory platform, you agree to be bound by these Terms and Conditions. Please read them carefully.' !!}</p>
                     </div>
                 </div>
             </div>
@@ -46,26 +49,33 @@
                         <!-- Section 1 -->
                         <div class="mb-5">
                             <h3 class="ft-bold mb-3">1. Acceptance of Terms</h3>
-                            <p>By creating an account, listing your company, or using any of our services, you acknowledge that you have read, understood, and agree to be bound by these Terms and Conditions, along with our Privacy Policy. If you do not agree, please discontinue use of our platform immediately.</p>
+                            <p>By creating an account, listing your company, or using any of our services, you acknowledge
+                                that you have read, understood, and agree to be bound by these Terms and Conditions, along
+                                with our Privacy Policy. If you do not agree, please discontinue use of our platform
+                                immediately.</p>
                         </div>
 
                         <!-- Section 2 -->
                         <div class="mb-5">
                             <h3 class="ft-bold mb-3">2. Eligibility</h3>
                             <ul>
-                                <li>You must be at least 18 years old and legally capable of entering into binding contracts.</li>
-                                <li>You represent that all information provided during registration is accurate, complete, and current.</li>
-                                <li>You must be authorized to represent the company you are listing or acting on behalf of.</li>
+                                <li>You must be at least 18 years old and legally capable of entering into binding
+                                    contracts.</li>
+                                <li>You represent that all information provided during registration is accurate, complete,
+                                    and current.</li>
+                                <li>You must be authorized to represent the company you are listing or acting on behalf of.
+                                </li>
                             </ul>
                         </div>
 
                         <!-- Section 3 -->
                         <div class="mb-5">
                             <h3 class="ft-bold mb-3">3. User Accounts</h3>
-                            
+
                             <h5 class="ft-medium mb-2">Registration</h5>
                             <ul class="mb-3">
-                                <li>You are responsible for maintaining the confidentiality of your account credentials.</li>
+                                <li>You are responsible for maintaining the confidentiality of your account credentials.
+                                </li>
                                 <li>You agree to notify us immediately of any unauthorized access or security breach.</li>
                                 <li>One account per company/business entity unless otherwise agreed.</li>
                             </ul>
@@ -107,7 +117,8 @@
                             <h3 class="ft-bold mb-3">5. Verification Process</h3>
                             <ul>
                                 <li>We may verify company information before approval.</li>
-                                <li>Verification does not guarantee the quality, reliability, or legitimacy of listed companies.</li>
+                                <li>Verification does not guarantee the quality, reliability, or legitimacy of listed
+                                    companies.</li>
                                 <li>We reserve the right to reject or remove any listing at our discretion.</li>
                                 <li>Verified badges indicate completion of our verification process only.</li>
                             </ul>
@@ -166,17 +177,19 @@
                         <!-- Section 8 -->
                         <div class="mb-5">
                             <h3 class="ft-bold mb-3">8. Intellectual Property</h3>
-                            
+
                             <h5 class="ft-medium mb-2">Our Content</h5>
                             <ul class="mb-3">
-                                <li>All platform design, logos, trademarks, and content are owned by [Your Company Name].</li>
+                                <li>All platform design, logos, trademarks, and content are owned by [Your Company Name].
+                                </li>
                                 <li>You may not copy, reproduce, or distribute our content without written permission.</li>
                             </ul>
 
                             <h5 class="ft-medium mb-2">Your Content</h5>
                             <ul>
                                 <li>You retain ownership of the content you upload (company info, logos, images).</li>
-                                <li>By uploading content, you grant us a worldwide, non-exclusive license to display, promote, and distribute it on our platform.</li>
+                                <li>By uploading content, you grant us a worldwide, non-exclusive license to display,
+                                    promote, and distribute it on our platform.</li>
                                 <li>You warrant that you have all necessary rights to the content you upload.</li>
                             </ul>
                         </div>
@@ -195,7 +208,8 @@
                         <!-- Section 10 -->
                         <div class="mb-5">
                             <h3 class="ft-bold mb-3">10. Disclaimer of Warranties</h3>
-                            <p class="mb-2">THE PLATFORM IS PROVIDED "AS IS" AND "AS AVAILABLE" WITHOUT WARRANTIES OF ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO:</p>
+                            <p class="mb-2">THE PLATFORM IS PROVIDED "AS IS" AND "AS AVAILABLE" WITHOUT WARRANTIES OF ANY
+                                KIND, EITHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO:</p>
                             <ul class="mb-3">
                                 <li>Accuracy or reliability of listings</li>
                                 <li>Uninterrupted or error-free service</li>
@@ -215,7 +229,7 @@
                         <!-- Section 11 -->
                         <div class="mb-5">
                             <h3 class="ft-bold mb-3">11. Limitation of Liability</h3>
-                            
+
                             <h5 class="ft-medium mb-2">TO THE MAXIMUM EXTENT PERMITTED BY LAW:</h5>
                             <ul class="mb-3">
                                 <li>We are not liable for any direct, indirect, incidental, or consequential damages.</li>
@@ -224,7 +238,8 @@
                                 <li>We are not liable for data loss, business interruption, or lost profits.</li>
                             </ul>
 
-                            <h5 class="ft-medium mb-2">You agree to indemnify and hold us harmless from any claims, damages, or expenses arising from:</h5>
+                            <h5 class="ft-medium mb-2">You agree to indemnify and hold us harmless from any claims, damages,
+                                or expenses arising from:</h5>
                             <ul>
                                 <li>Your use of the platform</li>
                                 <li>Your violation of these terms</li>
@@ -246,7 +261,7 @@
                         <!-- Section 13 -->
                         <div class="mb-5">
                             <h3 class="ft-bold mb-3">13. Termination</h3>
-                            
+
                             <h5 class="ft-medium mb-2">We may terminate or suspend your account if:</h5>
                             <ul class="mb-3">
                                 <li>You violate these Terms and Conditions</li>
@@ -267,7 +282,7 @@
                         <!-- Section 14 -->
                         <div class="mb-5">
                             <h3 class="ft-bold mb-3">14. Dispute Resolution</h3>
-                            
+
                             <h5 class="ft-medium mb-2">Governing Law</h5>
                             <p class="mb-3">These terms are governed by the laws of [Your Country/State].</p>
 
@@ -301,13 +316,15 @@
                             <h3 class="ft-bold mb-3">17. General Provisions</h3>
 
                             <h5 class="ft-medium mb-2">Severability</h5>
-                            <p class="mb-3">If any provision is found unenforceable, the remaining provisions remain in effect.</p>
+                            <p class="mb-3">If any provision is found unenforceable, the remaining provisions remain in
+                                effect.</p>
 
                             <h5 class="ft-medium mb-2">No Waiver</h5>
                             <p class="mb-3">Our failure to enforce any right does not waive that right.</p>
 
                             <h5 class="ft-medium mb-2">Assignment</h5>
-                            <p class="mb-3">You may not transfer your account. We may assign our rights without notice.</p>
+                            <p class="mb-3">You may not transfer your account. We may assign our rights without notice.
+                            </p>
 
                             <h5 class="ft-medium mb-2">Entire Agreement</h5>
                             <p class="mb-3">These Terms constitute the entire agreement between you and us.</p>
@@ -320,19 +337,23 @@
                         <div class="mb-5">
                             <h3 class="ft-bold mb-3">18. Contact Us</h3>
                             <p class="mb-3">For questions, concerns, or disputes regarding these Terms:</p>
-                            
+
                             <div class="p-4 bg-light rounded">
                                 <p class="mb-2"><strong>Email:</strong> contact@aboutfirms.com</p>
                                 <p class="mb-2"><strong>Phone:</strong> 9971123025</p>
-                                <p class="mb-2"><strong>Address:</strong> 1st Sector, HSR Layout, Bengaluru, Karnataka 560102</p>
-                                <p class="mb-0"><strong>Business Hours:</strong> Monday - Friday, 9 AM - 6 PM GMT+5:30</p>
+                                <p class="mb-2"><strong>Address:</strong> 1st Sector, HSR Layout, Bengaluru, Karnataka
+                                    560102</p>
+                                <p class="mb-0"><strong>Business Hours:</strong> Monday - Friday, 9 AM - 6 PM GMT+5:30
+                                </p>
                             </div>
                         </div>
 
                         <!-- Acknowledgment -->
-                        <div class="p-4 bg-light rounded border-left border-primary" style="border-left-width: 4px !important;">
+                        <div class="p-4 bg-light rounded border-left border-primary"
+                            style="border-left-width: 4px !important;">
                             <h5 class="ft-medium mb-2">Acknowledgment</h5>
-                            <p class="mb-0">By clicking "I Agree" or using our platform, you acknowledge that you have read, understood, and agree to be bound by these Terms and Conditions.</p>
+                            <p class="mb-0">By clicking "I Agree" or using our platform, you acknowledge that you have
+                                read, understood, and agree to be bound by these Terms and Conditions.</p>
                         </div>
 
                     </div>
@@ -359,12 +380,14 @@
                         <div class="row no-gutters">
                             <div class="col-xl-9 col-lg-9 col-md-8 col-sm-8 col-8">
                                 <div class="form-group mb-0 position-relative">
-                                    <input type="email" class="form-control b-0" placeholder="Enter Your Email Address">
+                                    <input type="email" class="form-control b-0"
+                                        placeholder="Enter Your Email Address">
                                 </div>
                             </div>
                             <div class="col-xl-3 col-lg-3 col-md-4 col-sm-4 col-4">
                                 <div class="form-group mb-0 position-relative">
-                                    <button class="btn full-width btn-height theme-bg text-light fs-md" type="submit">Subscribe</button>
+                                    <button class="btn full-width btn-height theme-bg text-light fs-md"
+                                        type="submit">Subscribe</button>
                                 </div>
                             </div>
                         </div>
