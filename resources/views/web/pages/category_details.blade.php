@@ -13,9 +13,12 @@
                             $currentLocation = request()->route('location') ?? request('location');
                         @endphp
                         <h1 class="page_title fw-bold fs-1 fs-md-2 fs-lg-1">
-                            {{ $data['category']->name ?? 'Category' }}
+                            {{ $seoData->page_title ?? ($data['category']->name ?? 'Category') }}
                             {{ !empty($currentLocation) ? 'In ' . $currentLocation : '' }}
                         </h1>
+                        @if (isset($seoData->page_sort_description))
+                            <p class="fs-lg ft-light">{!! $seoData->page_sort_description !!}</p>
+                        @endif
 
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb justify-content-center mt-2" style="color: white;">

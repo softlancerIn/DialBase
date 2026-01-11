@@ -35,7 +35,11 @@
 
                             <!-- Name & Status -->
                             <div class="ps-3">
-                                <h1 class="text-light mb-0 ft-bold">{{ $data['listing']->title }}</h1>
+                                <h1 class="text-light mb-0 ft-bold">{{ $seoData->page_title ?? $data['listing']->title }}
+                                </h1>
+                                @if (isset($seoData->page_sort_description))
+                                    <p class="text-light mb-0">{!! $seoData->page_sort_description !!}</p>
+                                @endif
                                 <div class="Goodup-ft-first">
                                     <div class="Goodup-rating">
                                         <div class="Goodup-rates">
@@ -69,8 +73,8 @@
                     </div>
 
                     <!-- <div class="col-md-4 text-md-end mb-3 mt-md-0">
-                                            <a href="#" class="btn bg-white text-dark ft-medium rounded">See 20+ Photos</a>
-                                        </div> -->
+                                                <a href="#" class="btn bg-white text-dark ft-medium rounded">See 20+ Photos</a>
+                                            </div> -->
                 </div>
             </div>
         </div>

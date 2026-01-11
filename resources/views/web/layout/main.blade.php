@@ -40,6 +40,18 @@
 
         @yield('content')
 
+        @if (isset($seoData->page_description))
+            <section class="seo-content py-5">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            {!! $seoData->page_description !!}
+                        </div>
+                    </div>
+                </div>
+            </section>
+        @endif
+
         @include('web.components.footer')
         <!-- Log In Modal -->
         <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="loginmodal"

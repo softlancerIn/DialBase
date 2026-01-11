@@ -115,15 +115,11 @@
                                                     class="btn btn-edit mr-1"><i class="fas fa-edit me-1"></i>Edit</a>
                                                 <a href="{{ route('listing-data.show', $data->id) }}"
                                                     class="btn btn-view mr-1"><i class="fas fa-eye me-1"></i>View</a>
-                                                <form action="{{ route('listing-data.destroy', $data->id) }}"
-                                                    method="POST" style="display:inline">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-delete"
-                                                        onclick="return confirm('Are you sure you want to delete this listing?')">
-                                                        <i class="fas fa-trash me-1"></i>Delete
-                                                    </button>
-                                                </form>
+                                                <a data-bs-toggle="modal"
+                                                    data-bs-target="#deleteModal{{ $data->id }}" href="#"
+                                                    class="btn btn-delete">
+                                                    <i class="fas fa-trash me-1"></i>Delete
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
@@ -140,4 +136,9 @@
             </div>
         </div>
     </div>
+    @push('modals')
+        @foreach ($listings as $data)
+            <x-admin.modal type="listing" id="{{ $data->id }}" />
+        @endforeach
+    @endpush
 </x-admin.layout>

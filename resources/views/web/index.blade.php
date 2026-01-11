@@ -1,15 +1,21 @@
 @extends('web.layout.main')
 @section('content')
+    @php
+        $currentUrl = url()->current();
+        $seoData = \App\Models\Seo::where('url', $currentUrl)->first();
+    @endphp
     <!-- ======================= Home Banner ======================== -->
-    <div class="home-banner margin-bottom-0" style="background:#f41b3b url(assets/img/banner-2.jpg) no-repeat; background-size: 100%;"
-        data-overlay="5">
+    <div class="home-banner margin-bottom-0"
+        style="background:#f41b3b url(assets/img/banner-2.jpg) no-repeat; background-size: 100%;" data-overlay="5">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-xl-11 col-lg-12 col-md-12 col-sm-12 col-12">
 
                     <div class="banner_caption text-center">
-                        <h1 class="banner_title ft-bold mb-1">Find & Connect with Verified B2B Companies Worldwide</h1>
-                        <p class="fs-lg ft-light">Connecting businesses across industries, globally</p>
+                        <h1 class="banner_title ft-bold mb-1">
+                            {{ $seoData->page_title ?? 'Find & Connect with Verified B2B Companies Worldwide' }}</h1>
+                        <p class="fs-lg ft-light">
+                            {!! $seoData->page_sort_description ?? 'Connecting businesses across industries, globally' !!}</p>
                     </div>
 
                     <form class="main-search-wrap fl-wrap half-column" method="GET" action="{{ route('search') }}">
@@ -20,7 +26,8 @@
                         </div>
                         <div class="main-search-item">
                             <span class="search-tag">Where</span>
-                            <input name="address" type="text" class="form-control" placeholder="San Francisco, CA" value="{{ request('address') }}" />
+                            <input name="address" type="text" class="form-control" placeholder="San Francisco, CA"
+                                value="{{ request('address') }}" />
                         </div>
                         <div class="main-search-button">
                             <button class="btn full-width theme-bg text-white" type="submit">Search<i
@@ -66,7 +73,8 @@
                         </div>
                         <div class="row justify-content-center md:mt-4">
                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 text-center">
-                                <a href="{{ route('all_listings') }}" class="btn btn-md theme-bg rounded text-light">All Listings</a>
+                                <a href="{{ route('all_listings') }}" class="btn btn-md theme-bg rounded text-light">All
+                                    Listings</a>
                             </div>
                         </div>
                     </div>
@@ -95,61 +103,61 @@
 
                 <div class="col-xl-2 col-lg-2 col-md-3 col-sm-4 col-6">
                     <div class="empl-thumb text-center px-3 py-4">
-                        <img src="{{asset('assets/img/l-9.png')}}" class="img-fluid mx-auto" alt="" />
+                        <img src="{{ asset('assets/img/l-9.png') }}" class="img-fluid mx-auto" alt="" />
                     </div>
                 </div>
 
                 <div class="col-xl-2 col-lg-2 col-md-3 col-sm-4 col-6">
                     <div class="empl-thumb text-center px-3 py-4">
-                        <img src="{{asset('assets/img/l-10.png')}}" class="img-fluid mx-auto" alt="" />
+                        <img src="{{ asset('assets/img/l-10.png') }}" class="img-fluid mx-auto" alt="" />
                     </div>
                 </div>
 
                 <div class="col-xl-2 col-lg-2 col-md-3 col-sm-4 col-6">
                     <div class="empl-thumb text-center px-3 py-4">
-                        <img src="{{asset('assets/img/l-11.png')}}" class="img-fluid mx-auto" alt="" />
+                        <img src="{{ asset('assets/img/l-11.png') }}" class="img-fluid mx-auto" alt="" />
                     </div>
                 </div>
 
                 <div class="col-xl-2 col-lg-2 col-md-3 col-sm-4 col-6">
                     <div class="empl-thumb text-center px-3 py-4">
-                        <img src="{{asset('assets/img/l-12.png')}}" class="img-fluid mx-auto" alt="" />
+                        <img src="{{ asset('assets/img/l-12.png') }}" class="img-fluid mx-auto" alt="" />
                     </div>
                 </div>
 
                 <div class="col-xl-2 col-lg-2 col-md-3 col-sm-4 col-6">
                     <div class="empl-thumb text-center px-3 py-4">
-                        <img src="{{asset('assets/img/l-13.png')}}" class="img-fluid mx-auto" alt="" />
+                        <img src="{{ asset('assets/img/l-13.png') }}" class="img-fluid mx-auto" alt="" />
                     </div>
                 </div>
 
                 <div class="col-xl-2 col-lg-2 col-md-3 col-sm-4 col-6">
                     <div class="empl-thumb text-center px-3 py-4">
-                        <img src="{{asset('assets/img/l-14.png')}}" class="img-fluid mx-auto" alt="" />
+                        <img src="{{ asset('assets/img/l-14.png') }}" class="img-fluid mx-auto" alt="" />
                     </div>
                 </div>
 
                 <div class="col-xl-2 col-lg-2 col-md-3 col-sm-4 col-6">
                     <div class="empl-thumb text-center px-3 py-4">
-                        <img src="{{asset('assets/img/l-15.png')}}" class="img-fluid mx-auto" alt="" />
+                        <img src="{{ asset('assets/img/l-15.png') }}" class="img-fluid mx-auto" alt="" />
                     </div>
                 </div>
 
                 <div class="col-xl-2 col-lg-2 col-md-3 col-sm-4 col-6">
                     <div class="empl-thumb text-center px-3 py-4">
-                        <img src="{{asset('assets/img/l-16.png')}}" class="img-fluid mx-auto" alt="" />
+                        <img src="{{ asset('assets/img/l-16.png') }}" class="img-fluid mx-auto" alt="" />
                     </div>
                 </div>
 
                 <div class="col-xl-2 col-lg-2 col-md-3 col-sm-4 col-6">
                     <div class="empl-thumb text-center px-3 py-4">
-                        <img src="{{asset('assets/img/l-17.png')}}" class="img-fluid mx-auto" alt="" />
+                        <img src="{{ asset('assets/img/l-17.png') }}" class="img-fluid mx-auto" alt="" />
                     </div>
                 </div>
 
                 <div class="col-xl-2 col-lg-2 col-md-3 col-sm-4 col-6">
                     <div class="empl-thumb text-center px-3 py-4">
-                        <img src="{{asset('assets/img/l-18.png')}}" class="img-fluid mx-auto" alt="" />
+                        <img src="{{ asset('assets/img/l-18.png') }}" class="img-fluid mx-auto" alt="" />
                     </div>
                 </div>
 
@@ -175,37 +183,47 @@
                 </div>
 
                 <div class="row justify-content-center">
-                    @foreach(($data['homeBlogs'] ?? []) as $blog)
+                    @foreach ($data['homeBlogs'] ?? [] as $blog)
                         <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
                             <div class="gup_blg_grid_box">
                                 <div class="gup_blg_grid_thumb">
                                     <a href="{{ route('web_blog_details', $blog->slug) }}">
-                                        <img src="{{ $blog->image ? asset('upload_image/blog/'.$blog->image) : asset('assets/img/b-4.jpg') }}" class="img-fluid"
-                                            alt="{{ $blog->name }}" style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;">
+                                        <img src="{{ $blog->image ? asset('upload_image/blog/' . $blog->image) : asset('assets/img/b-4.jpg') }}"
+                                            class="img-fluid" alt="{{ $blog->name }}"
+                                            style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;">
                                     </a>
                                 </div>
                                 <div class="gup_blg_grid_caption">
-                                    <div class="blg_tag"><span>{{ optional($blog->category)->name ?? 'Blog' }}</span></div>
+                                    <div class="blg_tag"><span>{{ optional($blog->category)->name ?? 'Blog' }}</span>
+                                    </div>
                                     <div class="blg_title">
-                                        <h4><a href="{{ route('web_blog_details', $blog->slug) }}">{{ $blog->name }}</a></h4>
+                                        <h4><a
+                                                href="{{ route('web_blog_details', $blog->slug) }}">{{ $blog->name }}</a>
+                                        </h4>
                                     </div>
                                     <div class="blg_desc">
                                         <p>{{ \Illuminate\Support\Str::limit(strip_tags($blog->description), 120) }}</p>
                                     </div>
                                 </div>
                                 <div class="crs_grid_foot">
-                                    <div class="crs_flex d-flex align-items-center justify-content-between br-top px-3 py-2">
+                                    <div
+                                        class="crs_flex d-flex align-items-center justify-content-between br-top px-3 py-2">
                                         <div class="crs_fl_first">
                                             <div class="crs_tutor">
-                                                <div class="crs_tutor_thumb"><a href="javascript:void(0);"><img src="{{ asset('assets/img/team-2.jpg') }}" class="img-fluid circle" width="35" alt="Admin"></a></div>
+                                                <div class="crs_tutor_thumb"><a href="javascript:void(0);"><img
+                                                            src="{{ asset('assets/img/team-2.jpg') }}"
+                                                            class="img-fluid circle" width="35" alt="Admin"></a>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="crs_fl_last">
                                             <div class="foot_list_info">
                                                 <ul>
                                                     <li>
-                                                        <div class="elsio_ic"><i class="fa fa-clock text-warning"></i></div>
-                                                        <div class="elsio_tx">{{ optional($blog->created_at)->format('d M Y') }}</div>
+                                                        <div class="elsio_ic"><i class="fa fa-clock text-warning"></i>
+                                                        </div>
+                                                        <div class="elsio_tx">
+                                                            {{ optional($blog->created_at)->format('d M Y') }}</div>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -269,7 +287,8 @@
                             </ul>
                         </div>
                         <div class="Goodup-price-bottom">
-                            <a class="Goodup-price-btn" href="#"><i class="fas fa-shopping-basket"></i> Purchase Now</a>
+                            <a class="Goodup-price-btn" href="#"><i class="fas fa-shopping-basket"></i> Purchase
+                                Now</a>
                         </div>
                     </div>
                 </div>
@@ -305,7 +324,8 @@
                             </ul>
                         </div>
                         <div class="Goodup-price-bottom">
-                            <a class="Goodup-price-btn active" href="#"><i class="fas fa-shopping-basket"></i> Purchase
+                            <a class="Goodup-price-btn active" href="#"><i class="fas fa-shopping-basket"></i>
+                                Purchase
                                 Now</a>
                         </div>
                     </div>
@@ -344,7 +364,8 @@
                             </ul>
                         </div>
                         <div class="Goodup-price-bottom">
-                            <a class="Goodup-price-btn" href="#"><i class="fas fa-shopping-basket"></i> Purchase Now</a>
+                            <a class="Goodup-price-btn" href="#"><i class="fas fa-shopping-basket"></i> Purchase
+                                Now</a>
                         </div>
                     </div>
                 </div>
@@ -369,35 +390,40 @@
                                 <h2 class="ft-bold">About Us</h2>
                             </div>
                             <div class="text fw-2 mb-3">
-                                <p>We connect companies around the world through our extensive B2B directory. With more than 10,000 verified businesses across all sectors We make it easier for businesses to locate reliable partners, suppliers or service suppliers. Our platform facilitates global trade by offering transparent listings, trusted connections as well as growth possibilities for businesses of all sizes.</p>
+                                <p>We connect companies around the world through our extensive B2B directory. With more than
+                                    10,000 verified businesses across all sectors We make it easier for businesses to locate
+                                    reliable partners, suppliers or service suppliers. Our platform facilitates global trade
+                                    by offering transparent listings, trusted connections as well as growth possibilities
+                                    for businesses of all sizes.</p>
                             </div>
                             <!-- <div class="position-relative row">
-                                <div class="col-lg-4 col-md-4 col-4">
-                                    <h3 class="ft-bold theme-cl mb-0"><span class="count">10</span>k+</h3>
-                                    <p class="ft-medium">Active Jobs</p>
-                                </div>
-                                <div class="col-lg-4 col-md-4 col-4">
-                                    <h3 class="ft-bold theme-cl mb-0"><span class="count">12</span>k+</h3>
-                                    <p class="ft-medium">Resumes</p>
-                                </div>
-                                <div class="col-lg-4 col-md-4 col-4">
-                                    <h3 class="ft-bold theme-cl mb-0"><span class="count">07</span>k+</h3>
-                                    <p class="ft-medium">Employers</p>
-                                </div>
-                            </div> -->
+                                                        <div class="col-lg-4 col-md-4 col-4">
+                                                            <h3 class="ft-bold theme-cl mb-0"><span class="count">10</span>k+</h3>
+                                                            <p class="ft-medium">Active Jobs</p>
+                                                        </div>
+                                                        <div class="col-lg-4 col-md-4 col-4">
+                                                            <h3 class="ft-bold theme-cl mb-0"><span class="count">12</span>k+</h3>
+                                                            <p class="ft-medium">Resumes</p>
+                                                        </div>
+                                                        <div class="col-lg-4 col-md-4 col-4">
+                                                            <h3 class="ft-bold theme-cl mb-0"><span class="count">07</span>k+</h3>
+                                                            <p class="ft-medium">Employers</p>
+                                                        </div>
+                                                    </div> -->
                             <!-- <div class="btn-box clearfix mt-5">
-                                <a href="index.html" class="download-btn play-store me-1 d-inline-flex"><img
-                                        src="{{asset('assets/img/ios.png')}}" width="200" alt="" /></a>
-                                <a href="index.html" class="download-btn play-store ms-2 mb-1 d-inline-flex"><img
-                                        src="{{asset('assets/img/and.png')}}" width="200" alt="" /></a>
-                            </div> -->
+                                                        <a href="index.html" class="download-btn play-store me-1 d-inline-flex"><img
+                                                                src="{{ asset('assets/img/ios.png') }}" width="200" alt="" /></a>
+                                                        <a href="index.html" class="download-btn play-store ms-2 mb-1 d-inline-flex"><img
+                                                                src="{{ asset('assets/img/and.png') }}" width="200" alt="" /></a>
+                                                    </div> -->
                         </div>
                     </div>
                 </div>
 
                 <div class="col-lg-5 col-md-12 col-sm-12 image-column">
                     <div class="image-box">
-                        <figure class="image"><img src="{{asset('assets/img/app.png')}}" class="img-fluid" alt=""></figure>
+                        <figure class="image"><img src="{{ asset('assets/img/app.png') }}" class="img-fluid"
+                                alt=""></figure>
                     </div>
                 </div>
             </div>
@@ -425,7 +451,8 @@
                         <div class="row no-gutters">
                             <div class="col-xl-9 col-lg-9 col-md-8 col-sm-8 col-8">
                                 <div class="form-group mb-0 position-relative">
-                                    <input type="text" class="form-control b-0" placeholder="Enter Your Email Address">
+                                    <input type="text" class="form-control b-0"
+                                        placeholder="Enter Your Email Address">
                                 </div>
                             </div>
                             <div class="col-xl-3 col-lg-3 col-md-4 col-sm-4 col-4">

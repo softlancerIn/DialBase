@@ -23,8 +23,9 @@
             <div class="row justify-content-center">
                 <div class="col-xl-10 col-lg-10 col-md-12">
                     <div class="text-center mb-4">
-                        <h1 class="ft-bold mb-3">About Us</h1>
-                        <p class="lead text-muted">Connecting businesses globally since 2018</p>
+                        <h1 class="ft-bold mb-3">{{ $seoData->page_title ?? 'About Us' }}</h1>
+                        <p class="lead text-muted">
+                            {!! $seoData->page_sort_description ?? 'Connecting businesses globally since 2018' !!}</p>
                     </div>
                 </div>
             </div>
@@ -39,10 +40,15 @@
                     <div class="mb-5">
                         <h2 class="ft-bold mb-4">Who We Are</h2>
                         <p class="mb-3">
-                            Established in 2018, we are a top B2B directory that connects businesses across sectors and boundaries. Over the last 6 years we've evolved from a basic listing platform to a trusted marketplace that helps more than 10,000 verified companies find opportunities, form partnerships, and accelerate growth.
+                            Established in 2018, we are a top B2B directory that connects businesses across sectors and
+                            boundaries. Over the last 6 years we've evolved from a basic listing platform to a trusted
+                            marketplace that helps more than 10,000 verified companies find opportunities, form
+                            partnerships, and accelerate growth.
                         </p>
                         <p>
-                            Our aim is to make business networking easy and accessible to businesses across the world. Whether you're a start-up looking for suppliers or a business expanding into new markets, we provide the connections and tools you need to succeed.
+                            Our aim is to make business networking easy and accessible to businesses across the world.
+                            Whether you're a start-up looking for suppliers or a business expanding into new markets, we
+                            provide the connections and tools you need to succeed.
                         </p>
                     </div>
                 </div>
@@ -56,8 +62,9 @@
             <div class="row justify-content-center">
                 <div class="col-xl-10 col-lg-10 col-md-12">
                     <h2 class="ft-bold mb-4">Our Journey</h2>
-                    <p class="mb-4">What began as a plan to streamline B2B networking has grown into a vibrant global community. Since 2018, we have focused on:</p>
-                    
+                    <p class="mb-4">What began as a plan to streamline B2B networking has grown into a vibrant global
+                        community. Since 2018, we have focused on:</p>
+
                     <div class="row mb-4">
                         <div class="col-md-4 mb-3">
                             <div class="p-4 bg-white rounded shadow-sm">
@@ -65,7 +72,8 @@
                                     <i class="ti-check-box text-success" style="font-size: 2.5rem;"></i>
                                 </div>
                                 <h5 class="ft-medium mb-2">Building Trust</h5>
-                                <p class="mb-0">Every business on our site is verified to ensure you connect with trustworthy, legitimate companies.</p>
+                                <p class="mb-0">Every business on our site is verified to ensure you connect with
+                                    trustworthy, legitimate companies.</p>
                             </div>
                         </div>
                         <div class="col-md-4 mb-3">
@@ -74,7 +82,8 @@
                                     <i class="ti-rocket text-primary" style="font-size: 2.5rem;"></i>
                                 </div>
                                 <h5 class="ft-medium mb-2">Enabling Growth</h5>
-                                <p class="mb-0">We have facilitated thousands of business alliances across continents, helping companies expand into new markets.</p>
+                                <p class="mb-0">We have facilitated thousands of business alliances across continents,
+                                    helping companies expand into new markets.</p>
                             </div>
                         </div>
                         <div class="col-md-4 mb-3">
@@ -83,13 +92,15 @@
                                     <i class="ti-light-bulb text-warning" style="font-size: 2.5rem;"></i>
                                 </div>
                                 <h5 class="ft-medium mb-2">Always Innovating</h5>
-                                <p class="mb-0">Our platform continuously improves with features that help you find and connect with the right partners faster.</p>
+                                <p class="mb-0">Our platform continuously improves with features that help you find and
+                                    connect with the right partners faster.</p>
                             </div>
                         </div>
                     </div>
 
                     <p>
-                        Today, we serve companies across major industries—from manufacturing and engineering to logistics and professional services—creating an ecosystem where diverse opportunities flourish.
+                        Today, we serve companies across major industries—from manufacturing and engineering to logistics
+                        and professional services—creating an ecosystem where diverse opportunities flourish.
                     </p>
                 </div>
             </div>
@@ -107,7 +118,7 @@
                     </div>
                 </div>
             </div>
-        
+
             <div class="row justify-content-center">
                 <div class="col-xl-10 col-lg-10">
                     <div class="row">
@@ -120,7 +131,7 @@
                                 <p class="text-muted">Global exposure with localized understanding of industry needs.</p>
                             </div>
                         </div>
-                        
+
                         <div class="col-lg-4 col-md-6 mb-4">
                             <div class="text-center p-4">
                                 <div class="mb-3">
@@ -130,7 +141,7 @@
                                 <p class="text-muted">Rigorous screening of listed companies.</p>
                             </div>
                         </div>
-                        
+
                         <div class="col-lg-4 col-md-6 mb-4">
                             <div class="text-center p-4">
                                 <div class="mb-3">
@@ -172,7 +183,7 @@
             <div class="row justify-content-center">
                 <div class="col-xl-10 col-lg-10 col-md-12">
                     <h2 class="ft-bold mb-4 text-center">Our Impact in Numbers</h2>
-                    
+
                     <div class="row text-center">
                         <div class="col-md-4 mb-4">
                             <div class="p-4">
@@ -220,8 +231,10 @@
                 <div class="col-xl-8 col-lg-10 col-md-12">
                     <div class="text-center">
                         <h2 class="ft-bold mb-4">Our Vision</h2>
-                        <p class="lead mb-3">We imagine a world where geographic boundaries do not limit business potential.</p>
-                        <p class="text-muted">We're more than a directory—we're building a global business ecosystem where trust, transparency, and potential drive every interaction.</p>
+                        <p class="lead mb-3">We imagine a world where geographic boundaries do not limit business
+                            potential.</p>
+                        <p class="text-muted">We're more than a directory—we're building a global business ecosystem where
+                            trust, transparency, and potential drive every interaction.</p>
                     </div>
                 </div>
             </div>
@@ -234,7 +247,7 @@
             <div class="row justify-content-center">
                 <div class="col-xl-10 col-lg-10 col-md-12">
                     <h2 class="ft-bold mb-4">Why Businesses Choose Us</h2>
-                    
+
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <div class="d-flex">
@@ -242,7 +255,8 @@
                                     <i class="ti-check text-success" style="font-size: 1.5rem;"></i>
                                 </div>
                                 <div>
-                                    <p class="mb-0">Complete listings with comprehensive company profiles and contact details</p>
+                                    <p class="mb-0">Complete listings with comprehensive company profiles and contact
+                                        details</p>
                                 </div>
                             </div>
                         </div>
@@ -313,7 +327,7 @@
                     </div>
                 </div>
             </div>
-        
+
             <div class="row justify-content-center">
                 <div class="col-xl-10 col-lg-10">
                     <div class="row">
@@ -326,7 +340,7 @@
                                 <p class="text-muted mb-0">Transparency and honesty in all interactions.</p>
                             </div>
                         </div>
-                        
+
                         <div class="col-lg-4 col-md-6 mb-4">
                             <div class="text-center p-4 bg-white rounded shadow-sm">
                                 <div class="mb-3">
@@ -336,7 +350,7 @@
                                 <p class="text-muted mb-0">Continuous platform improvements.</p>
                             </div>
                         </div>
-                        
+
                         <div class="col-lg-4 col-md-6 mb-4">
                             <div class="text-center p-4 bg-white rounded shadow-sm">
                                 <div class="mb-3">
@@ -379,7 +393,8 @@
                 <div class="col-xl-8 col-lg-10 col-md-12">
                     <div class="text-center">
                         <h2 class="ft-bold mb-3">Join Our Growing Community</h2>
-                        <p class="lead mb-4">Whether you want to expand your supplier base, find potential customers, or explore partnerships, we're here to help you achieve your goals.</p>
+                        <p class="lead mb-4">Whether you want to expand your supplier base, find potential customers, or
+                            explore partnerships, we're here to help you achieve your goals.</p>
                         <p class="text-muted mb-4">Join thousands of businesses using our platform to grow globally.</p>
                         <a href="#" class="btn btn-md theme-bg text-light">Get Started Today</a>
                     </div>
@@ -406,12 +421,14 @@
                         <div class="row no-gutters">
                             <div class="col-xl-9 col-lg-9 col-md-8 col-sm-8 col-8">
                                 <div class="form-group mb-0 position-relative">
-                                    <input type="email" class="form-control b-0" placeholder="Enter Your Email Address">
+                                    <input type="email" class="form-control b-0"
+                                        placeholder="Enter Your Email Address">
                                 </div>
                             </div>
                             <div class="col-xl-3 col-lg-3 col-md-4 col-sm-4 col-4">
                                 <div class="form-group mb-0 position-relative">
-                                    <button class="btn full-width btn-height theme-bg text-light fs-md" type="submit">Subscribe</button>
+                                    <button class="btn full-width btn-height theme-bg text-light fs-md"
+                                        type="submit">Subscribe</button>
                                 </div>
                             </div>
                         </div>

@@ -46,7 +46,8 @@
                                     <td>{!! $category->description !!}</td>
                                     <td>{{ daysAgo($category->created_at) }}</td>
                                     <td>
-                                        <a href="{{ route('category_form', ['type' => 'edit', 'id' => $category->id]) }}">
+                                        <a
+                                            href="{{ route('category_form', ['type' => 'edit', 'id' => $category->id]) }}">
                                             <i class="fas fa-edit me-1" data-feather="edit"></i>
                                         </a>
 
@@ -54,7 +55,6 @@
                                             href="#">
                                             <i class="fas fa-trash me-1" data-feather="trash-2"></i>
                                         </a>
-                                        <x-admin.modal type="category" id="{{ $category->id }}" />
                                     </td>
                                 </tr>
                             @endforeach
@@ -65,4 +65,9 @@
         </div>
     </div>
 
+    @push('modals')
+        @foreach ($data['category'] as $category)
+            <x-admin.modal type="category" id="{{ $category->id }}" />
+        @endforeach
+    @endpush
 </x-admin.layout>

@@ -11,13 +11,17 @@
     <title>Goodup - Business Directory & Listing HTML Template</title>
 
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="{{asset('admin/assets/img/favicon.png')}}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('admin/assets/img/favicon.png') }}">
 
     <!-- Morris Charts CSS -->
-    <link href="{{asset('admin/assets/js/plugins/morris.js/morris.css')}}" rel="stylesheet">
+    <link href="{{ asset('admin/assets/js/plugins/morris.js/morris.css') }}" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="{{asset('admin/assets/css/styles.css')}}" rel="stylesheet">
+    <link href="{{ asset('admin/assets/css/styles.css') }}" rel="stylesheet">
+
+    @if (isset($type) && $type == 'scraping')
+        @vite(['resources/js/app.js'])
+    @endif
 
 </head>
 
@@ -39,7 +43,7 @@
                 <nav id="navigation" class="navigation navigation-landscape">
                     <div class="nav-header">
                         <a class="nav-brand" href="#">
-                            <img src="{{asset('admin/assets/img/logo.png')}}" class="logo" alt="" />
+                            <img src="{{ asset('admin/assets/img/logo.png') }}" class="logo" alt="" />
                         </a>
                         <div class="nav-toggle"></div>
                         <div class="mobile_nav">
@@ -56,7 +60,7 @@
                     <div class="nav-menus-wrapper" style="transition-property: none;">
                         <ul class="nav-menu nav-menu-social align-to-right">
                             <li class="add-listing gray">
-                                <a href="{{route('logout')}}">
+                                <a href="{{ route('logout') }}">
                                     <i class="lni lni-power-switch mr-1"></i> Logout
                                 </a>
                             </li>
@@ -97,41 +101,35 @@
 
         <a id="tops-button" class="top-scroll" title="Back to top" href="#"><i class="ti-arrow-up"></i></a>
 
-		<script>
-			setTimeout(function () {
-				$('.alert-success,.alert-danger').addClass('d-none');
-			}, 3000);
-		</script>
         <!-- ============================================================== -->
         <!-- All Jquery -->
         <!-- ============================================================== -->
-        <script src="{{asset('admin/assets/js/jquery.min.js')}}"></script>
-        <script src="{{asset('admin/assets/js/popper.min.js')}}"></script>
-        <script src="{{asset('admin/assets/js/bootstrap.min.js')}}"></script>
-        <script src="{{asset('admin/assets/js/slick.js')}}"></script>
-        <script src="{{asset('admin/assets/js/jquery.magnific-popup.min.js')}}"></script>
-        <script src="{{asset('admin/assets/js/dropzone.js')}}"></script>
-        <script src="{{asset('admin/assets/js/counterup.js')}}"></script>
-        <script src="{{asset('admin/assets/js/lightbox.js')}}"></script>
-        <script src="{{asset('admin/assets/js/moment.min.js')}}"></script>
-        <script src="{{asset('admin/assets/js/daterangepicker.js')}}"></script>
-        <script src="{{asset('admin/assets/js/lightbox.js')}}"></script>
-        <script src="{{asset('admin/assets/js/jQuery.style.switcher.js')}}"></script>
-        <script src="{{asset('admin/assets/js/custom.js')}}"></script>
+        <script src="{{ asset('admin/assets/js/jquery.min.js') }}"></script>
+        <script src="{{ asset('admin/assets/js/popper.min.js') }}"></script>
+        <script src="{{ asset('admin/assets/js/bootstrap.min.js') }}"></script>
+        <script src="{{ asset('admin/assets/js/slick.js') }}"></script>
+        <script src="{{ asset('admin/assets/js/jquery.magnific-popup.min.js') }}"></script>
+        <script src="{{ asset('admin/assets/js/dropzone.js') }}"></script>
+        <script src="{{ asset('admin/assets/js/counterup.js') }}"></script>
+        <script src="{{ asset('admin/assets/js/lightbox.js') }}"></script>
+        <script src="{{ asset('admin/assets/js/moment.min.js') }}"></script>
+        <script src="{{ asset('admin/assets/js/daterangepicker.js') }}"></script>
+        <script src="{{ asset('admin/assets/js/lightbox.js') }}"></script>
+        <script src="{{ asset('admin/assets/js/jQuery.style.switcher.js') }}"></script>
+        <script src="{{ asset('admin/assets/js/custom.js') }}"></script>
 
         <!-- Morris.js charts -->
-        <script src="{{asset('admin/assets/js/plugins/raphael/raphael.min.js')}}"></script>
-        <script src="{{asset('admin/assets/js/plugins/morris.js/morris.min.js')}}"></script>
+        <script src="{{ asset('admin/assets/js/plugins/raphael/raphael.min.js') }}"></script>
+        <script src="{{ asset('admin/assets/js/plugins/morris.js/morris.min.js') }}"></script>
 
         <!-- Custom Chart JavaScript -->
-        <script src="{{asset('admin/assets/js/plugins/dashboard-2.js')}}"></script>
+        <script src="{{ asset('admin/assets/js/plugins/dashboard-2.js') }}"></script>
         <!-- ============================================================== -->
         <!-- This page plugins -->
         <!-- ============================================================== -->
 
         <!-- TinyMCE Editor -->
-        <script src='https://cdn.jsdelivr.net/npm/tinymce@5/tinymce.min.js' referrerpolicy="origin">
-        </script>
+        <script src='https://cdn.jsdelivr.net/npm/tinymce@5/tinymce.min.js' referrerpolicy="origin"></script>
         <script src="https://unpkg.com/feather-icons"></script>
         <script>
             setTimeout(function() {
@@ -143,7 +141,8 @@
                 height: 400,
                 plugins: [
                     'advlist', 'autolink', 'link', 'image', 'lists', 'charmap', 'preview', 'anchor', 'pagebreak',
-                    'searchreplace', 'wordcount', 'visualblocks', 'visualchars', 'code', 'fullscreen', 'insertdatetime',
+                    'searchreplace', 'wordcount', 'visualblocks', 'visualchars', 'code', 'fullscreen',
+                    'insertdatetime',
                     'media', 'table', 'emoticons', 'help'
                 ],
                 menubar: true,
@@ -155,18 +154,21 @@
                 entity_encoding: 'raw',
                 remove_trailing_brs: false,
                 valid_children: '+body[style|i]',
-                style_formats: [
-                    {
+                style_formats: [{
                         title: 'Custom Table Styles',
-                        items: [
-                            { title: 'Table Striped', selector: 'table', classes: 'table mt-3 table-striped table-hover table-bordered' }
-                        ]
+                        items: [{
+                            title: 'Table Striped',
+                            selector: 'table',
+                            classes: 'table mt-3 table-striped table-hover table-bordered'
+                        }]
                     },
                     {
                         title: 'Custom Heading Styles',
-                        items: [
-                            { title: 'Product Title', selector: 'h1,h2,h3,h4,h5,h6', classes: 'product-details__description__title' }
-                        ]
+                        items: [{
+                            title: 'Product Title',
+                            selector: 'h1,h2,h3,h4,h5,h6',
+                            classes: 'product-details__description__title'
+                        }]
                     }
                 ]
             });
@@ -174,6 +176,7 @@
             feather.replace()
         </script>
 
+        @stack('modals')
 </body>
 
 <!-- Mirrored from shreethemes.net/goodup-live-2/goodup/dashboard.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 21 Feb 2025 18:57:00 GMT -->
