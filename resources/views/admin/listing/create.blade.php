@@ -626,16 +626,17 @@
                     }
                 }
 
-                // Cities data map from controller
+                // Cities data map from controller (global scope)
                 const citiesMap = @json($data['cities']);
 
-                // Update cities dropdown based on selected state
+                // Update cities dropdown based on selected state (global scope)
                 function updateCities() {
                     const stateSelect = document.getElementById('state');
                     const citySelect = document.getElementById('city');
-                    const selectedState = stateSelect.value;
+                    const selectedState = stateSelect ? stateSelect.value : null;
 
                     // Clear cities dropdown
+                    if (!citySelect) return;
                     citySelect.innerHTML = '<option value="" disabled selected>Select City</option>';
 
                     if (selectedState && citiesMap[selectedState]) {
@@ -649,11 +650,15 @@
                     }
                 }
 
+                // Expose updater globally so inline handlers work
+                window.updateCities = updateCities;
+
                 // Initialize cities on page load if state is already selected
                 const stateSelect = document.getElementById('state');
-                if (stateSelect.value) {
+                if (stateSelect && stateSelect.value) {
                     updateCities();
                 }
+                if (stateSelect) stateSelect.addEventListener('change', updateCities);
             });
         </script>
 </x-admin.layout>

@@ -15,6 +15,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Api\StateController;
+use App\Models\State as StateModel;
+use App\Helpers\StateData;
 
 
 class ListingController extends Controller
@@ -246,15 +248,25 @@ class ListingController extends Controller
 
     public function create()
     {
-        $stateController = new StateController();
-        $statesResponse = $stateController->getAllStatesWithCities();
-        $statesData = json_decode($statesResponse->getContent(), true)['data'] ?? [];
-        
+        // Prefer loading states/cities from DB; fallback to helper data
+        $statesCollection = StateModel::with('cities')->orderBy('name')->get();
+        if ($statesCollection->isNotEmpty()) {
+            $statesData = $statesCollection->map(function($s) {
+                return [
+                    'id' => $s->id,
+                    'name' => $s->name,
+                    'cities' => $s->cities->pluck('name')->toArray()
+                ];
+            })->toArray();
+        } else {
+            $statesData = StateData::get();
+        }
+
         // Extract state names and prepare cities map
         $states = collect($statesData)->pluck('name')->sort()->values();
         $citiesMap = collect($statesData)->mapWithKeys(function($state) {
             return [$state['name'] => $state['cities'] ?? []];
-        });
+        })->toArray();
         
         $data['category'] = Category::where('status', 1)->get();
         $data['all_amenities'] = Amenity::all();
@@ -275,15 +287,25 @@ class ListingController extends Controller
             'socialLink'
         ])->findOrFail($id);
         
-        $stateController = new StateController();
-        $statesResponse = $stateController->getAllStatesWithCities();
-        $statesData = json_decode($statesResponse->getContent(), true)['data'] ?? [];
-        
+        // Prefer loading states/cities from DB; fallback to helper data
+        $statesCollection = StateModel::with('cities')->orderBy('name')->get();
+        if ($statesCollection->isNotEmpty()) {
+            $statesData = $statesCollection->map(function($s) {
+                return [
+                    'id' => $s->id,
+                    'name' => $s->name,
+                    'cities' => $s->cities->pluck('name')->toArray()
+                ];
+            })->toArray();
+        } else {
+            $statesData = StateData::get();
+        }
+
         // Extract state names and prepare cities map
         $states = collect($statesData)->pluck('name')->sort()->values();
         $citiesMap = collect($statesData)->mapWithKeys(function($state) {
             return [$state['name'] => $state['cities'] ?? []];
-        });
+        })->toArray();
         
         $data['categories'] = Category::where('status', 1)->get();
         $data['all_amenities'] = Amenity::all();
