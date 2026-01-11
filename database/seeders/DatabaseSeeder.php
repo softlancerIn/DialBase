@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
             ListingSeeder::class,
             SeoSeeder::class,
             EnquirySeeder::class,
+            StatesCitiesSeeder::class,
         ]);
     }
 }

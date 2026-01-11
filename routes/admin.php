@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\SeoController;
 use App\Http\Controllers\Admin\SubCategoryController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\ReviewController;
+use App\Http\Controllers\Admin\SettingsController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth:admin', 'admin'])->group(function () {
@@ -98,5 +99,12 @@ Route::middleware(['auth:admin', 'admin'])->group(function () {
     Route::controller(ReviewController::class)->group(function () {
         Route::get('reviews', 'index')->name('reviews.index');
         Route::post('reviews/{id}/status', 'updateStatus')->name('reviews.update_status');
+    });
+
+    // settings - states & cities
+    Route::controller(SettingsController::class)->group(function () {
+        Route::get('settings', 'index')->name('settings');
+        Route::post('settings/save-state', 'saveState')->name('settings.save_state');
+        Route::post('settings/save-city', 'saveCity')->name('settings.save_city');
     });
 });

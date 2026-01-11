@@ -27,6 +27,11 @@
                         <i class="lni lni-target me-2"></i>SEO
                     </a>
                 </li>
+                <li class="@active('settings')">
+                    <a href="{{ route('settings') }}">
+                        <i class="lni lni-cog me-2"></i>Settings
+                    </a>
+                </li>
                 <li class="@active('reviews.index')">
                     <a href="{{ route('reviews.index') }}">
                         <i class="lni lni-star me-2"></i>Reviews
