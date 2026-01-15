@@ -17,6 +17,7 @@ class SocialLinkFactory extends Factory
             'twitter' => 'https://twitter.com/' . $this->faker->userName(),
             'instagram' => 'https://instagram.com/' . $this->faker->userName(),
             'linkedin' => 'https://linkedin.com/in/' . $this->faker->userName(),
+            'youtube' => 'https://youtube.com/' . $this->faker->userName(),
         ];
     }
 }

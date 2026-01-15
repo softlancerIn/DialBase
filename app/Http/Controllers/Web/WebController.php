@@ -107,7 +107,7 @@ class WebController extends Controller
 
         if ($open_now) {
             $collection = $data['listings']->getCollection()->filter(function ($listing) {
-                return ! empty($listing->is_247_open);
+                return $listing->isOpenNow();
             });
             $data['listings']->setCollection($collection->values());
         }
@@ -321,7 +321,7 @@ class WebController extends Controller
 
         if ($open_now) {
             $collection = $listings->getCollection()->filter(function ($listing) {
-                return ! empty($listing->is_247_open);
+                return $listing->isOpenNow();
             });
             $listings->setCollection($collection->values());
         }

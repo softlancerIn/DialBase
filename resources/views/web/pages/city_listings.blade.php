@@ -3,7 +3,7 @@
 @section('content')
     <!-- ======================= Breadcrumb ======================== -->
     <div class="breadcrumb-wrap"
-        style="background:#f41b3b url({{ asset('assets/img/banner-2.jpg') }}) no-repeat; background-size: 100%;"
+        style="background:#f36479 url({{ $data['category']->image ? asset('upload_image/category/' . $data['category']->image) : asset('assets/img/banner-2.jpg') }}) no-repeat; background-size: 100%;"
         data-overlay="5">
         <div class="container">
             <div class="row">
@@ -32,6 +32,9 @@
     <section class="gray py-5">
         <div class="container">
             <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                    {!! $data['category']->description !!}
+                </div>
                 @if (isset($data['city_listings']) && count($data['city_listings']) > 0)
                     @foreach ($data['city_listings'] as $city)
                         <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6">

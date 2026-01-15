@@ -16,6 +16,7 @@ class SocialLink extends Model
         'twitter',
         'instagram',
         'linkedin',
+        'youtube',
     ];
 
     public function listing()

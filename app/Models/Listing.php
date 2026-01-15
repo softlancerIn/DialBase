@@ -73,6 +73,10 @@ class Listing extends Model
         $now = Carbon::now();
         $todayShort = $now->format('D'); // Mon, Tue, ...
 
+        if ($this->is_247_open) {
+            return true;
+        }
+
         $hours = $this->relationLoaded('workingHours') ? $this->workingHours : $this->workingHours()->get();
         foreach ($hours as $h) {
             $dayKey = ucfirst(substr($h->day_of_week ?? 'All', 0, 3));
@@ -117,6 +121,10 @@ class Listing extends Model
                 }
 
                 try {
+                    // Sanitize time strings (remove spaces around colon)
+                    $openVal = str_replace(' :', ':', $openVal);
+                    $closeVal = str_replace(' :', ':', $closeVal);
+                    
                     $start = Carbon::parse($openVal)->setDate($now->year, $now->month, $now->day);
                     $end = Carbon::parse($closeVal)->setDate($now->year, $now->month, $now->day);
                     if ($end->lessThanOrEqualTo($start)) {
@@ -136,16 +144,4 @@ class Listing extends Model
         return false;
     }
 
-    /**
-     * Accessor to override `is_247_open` when workingHours are loaded.
-     * This allows views to reference $listing->is_247_open and get computed result.
-     */
-    public function getIs247OpenAttribute($value)
-    {
-        if ($this->relationLoaded('workingHours')) {
-            return $this->isOpenNow() ? 1 : 0;
-        }
-
-        return (int) ($value ?? 0);
-    }
 }

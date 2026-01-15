@@ -381,9 +381,6 @@
 
                                 <div class="dashboard-list-wraps-body py-3 px-3">
                                     @php
-                                        $wh = $data['listing']->workingHours->first();
-                                        $open_times = $wh ? json_decode($wh->open_time, true) : [];
-                                        $close_times = $wh ? json_decode($wh->close_time, true) : [];
                                         $days = [
                                             'Monday',
                                             'Tuesday',
@@ -393,8 +390,21 @@
                                             'Saturday',
                                             'Sunday',
                                         ];
+
+                                        $db_open_times = [];
+                                        $db_close_times = [];
+                                        foreach ($days as $day) {
+                                            $entry = $data['listing']->workingHours
+                                                ->where('day_of_week', $day)
+                                                ->first();
+                                            $db_open_times[] = $entry ? $entry->open_time : '';
+                                            $db_close_times[] = $entry ? $entry->close_time : '';
+                                        }
+
+                                        $open_times = old('working_hours.open_time', $db_open_times);
+                                        $close_times = old('working_hours.close_time', $db_close_times);
+
                                         $times = [
-                                            '',
                                             '1 :00 AM',
                                             '2 :00 AM',
                                             '3 :00 AM',
@@ -455,11 +465,6 @@
                                             </div>
                                         @endforeach
 
-                                        @php
-                                            $wh = $data['listing']->workingHours->first();
-                                            $open_times = $wh ? json_decode($wh->open_time, true) : [];
-                                            $close_times = $wh ? json_decode($wh->close_time, true) : [];
-                                        @endphp
                                         <div class="form-group mt-4">
                                             <input id="t24" class="checkbox-custom" name="is_247_open"
                                                 type="checkbox" value="1"
@@ -529,7 +534,7 @@
                                                     value="{{ old('facebook', optional($data['listing']->socialLink)->facebook) }}" />
                                             </div>
                                         </div>
-                                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                                        {{-- <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
                                             <div class="form-group">
                                                 <label class="mb-1"><i
                                                         class="ti-twitter theme-cl me-1"></i>Twitter</label>
@@ -537,7 +542,7 @@
                                                     placeholder="https://twitter.com/"
                                                     value="{{ old('twitter', optional($data['listing']->socialLink)->twitter) }}" />
                                             </div>
-                                        </div>
+                                        </div> --}}
                                         <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
                                             <div class="form-group">
                                                 <label class="mb-1"><i
@@ -554,6 +559,15 @@
                                                 <input type="text" class="form-control rounded" name="linkedin"
                                                     placeholder="https://linkedin.com/"
                                                     value="{{ old('linkedin', optional($data['listing']->socialLink)->linkedin) }}" />
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                                            <div class="form-group">
+                                                <label class="mb-1"><i
+                                                        class="ti-youtube theme-cl me-1"></i>Youtube</label>
+                                                <input type="text" class="form-control rounded" name="youtube"
+                                                    placeholder="https://youtube.com/"
+                                                    value="{{ old('youtube', optional($data['listing']->socialLink)->youtube) }}" />
                                             </div>
                                         </div>
                                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
