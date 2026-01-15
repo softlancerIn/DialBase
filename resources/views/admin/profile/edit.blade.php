@@ -45,32 +45,32 @@
 
                             <div class="dashboard-list-wraps-body py-3 px-3">
                                 <div class="row">
-                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
                                         <div class="form-group">
                                             <label class="mb-1">User ID</label>
                                             <input type="text" class="form-control rounded" value="{{ $data['user']->id }}" readonly />
                                         </div>
                                     </div>
-                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
                                         <div class="form-group">
                                             <label class="mb-1">Name</label>
                                             <input type="text" class="form-control rounded" name="name" value="{{ $data['user']->name }}" />
                                         </div>
                                     </div>
-                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
                                         <div class="form-group">
                                             <label class="mb-1">Email ID</label>
                                             <input type="email" class="form-control rounded" name="email" value="{{ $data['user']->email }}" />
                                         </div>
                                     </div>
-                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
                                         <div class="form-group">
                                             <label class="mb-1">Mobile</label>
                                             <input type="text" class="form-control rounded"
                                                 placeholder="91 256 584 7895" />
                                         </div>
                                     </div>
-                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
                                         <div class="form-group">
                                             <label class="mb-1">State</label>
                                             <select class="form-control">
@@ -84,7 +84,7 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
                                         <div class="form-group">
                                             <label class="mb-1">City</label>
                                             <select class="form-control">
@@ -98,20 +98,20 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
                                         <div class="form-group">
                                             <label class="mb-1">Address</label>
                                             <input type="text" class="form-control rounded"
                                                 placeholder="USA 20TH Berlin Market NY" />
                                         </div>
                                     </div>
-                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
                                         <div class="form-group">
                                             <label class="mb-1">Zip Code</label>
                                             <input type="text" class="form-control rounded" placeholder="HQ125478" />
                                         </div>
                                     </div>
-                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
                                         <div class="form-group">
                                             <label class="mb-1">About Notes</label>
                                             <textarea class="form-control rounded ht-150"
@@ -131,7 +131,7 @@
 
                             <div class="dashboard-list-wraps-body py-3 px-3">
                                 <div class="row">
-                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
                                         <div class="form-group">
                                             <label class="mb-1"><i
                                                     class="ti-facebook theme-cl me-1"></i>Facebook</label>
@@ -139,14 +139,14 @@
                                                 placeholder="https://facebook.com/" />
                                         </div>
                                     </div>
-                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
                                         <div class="form-group">
                                             <label class="mb-1"><i class="ti-twitter theme-cl me-1"></i>Twitter</label>
                                             <input type="text" class="form-control rounded"
                                                 placeholder="https://twitter.com/" />
                                         </div>
                                     </div>
-                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
                                         <div class="form-group">
                                             <label class="mb-1"><i
                                                     class="ti-instagram theme-cl me-1"></i>Instagram</label>
@@ -154,7 +154,7 @@
                                                 placeholder="https://instagram.com/" />
                                         </div>
                                     </div>
-                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
                                         <div class="form-group">
                                             <label class="mb-1"><i
                                                     class="ti-linkedin theme-cl me-1"></i>Linkedin</label>
@@ -162,7 +162,7 @@
                                                 placeholder="https://linkedin.com/" />
                                         </div>
                                     </div>
-                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
                                         <div class="form-group">
                                             <button class="btn theme-bg rounded text-light">Save Changes</button>
                                         </div>
@@ -185,25 +185,25 @@
 
                             <div class="dashboard-list-wraps-body py-3 px-3">
                                 <div class="row">
-                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
                                         <div class="form-group">
                                             <label class="mb-1">Old Password</label>
                                             <input type="password" class="form-control rounded" name="old_password" placeholder="Current Password" />
                                         </div>
                                     </div>
-                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
                                         <div class="form-group">
                                             <label class="mb-1">New Password</label>
                                             <input type="password" class="form-control rounded" name="new_password" placeholder="New Password" />
                                         </div>
                                     </div>
-                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
                                         <div class="form-group">
                                             <label class="mb-1">Confirm Password</label>
                                             <input type="password" class="form-control rounded" name="password_confirmation" placeholder="Confirm New Password" />
                                         </div>
                                     </div>
-                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
                                         <div class="form-group">
                                             <button type="submit" class="btn theme-bg rounded text-light">Update Password</button>
                                         </div>

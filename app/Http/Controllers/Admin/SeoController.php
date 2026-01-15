@@ -31,7 +31,6 @@ class SeoController extends Controller
 
     public function save_seo(Request $request)
     {
-
         $validate = $request->validate([
             'url' => 'required',
         ]);

@@ -22,54 +22,76 @@
                             enctype="multipart/form-data">
                             @csrf
                             <div class="col-12">
-                                <label for="inputFirstName" class="form-label">Page Url</label>
-                                <input type="url" name="url" class="form-control"
-                                    value="{{ $data['seo']['url'] ?? '' }}" placeholder="Page Url..."
-                                    id="inputFirstName">
+                                <label for="inputUrl" class="form-label">Page Url</label>
+                                <input type="url" name="url" class="form-control @error('url') is-invalid @enderror placeholder-gray-400"
+                                    value="{{ $data['seo']['url'] ?? '' }}" placeholder="www.example.com/page"
+                                    id="inputUrl">
                                 <input type="hidden" name="id" value="{{ $data['seo']['id'] ?? '0' }}">
+                                @error('url')
+                                    <div class="invalid-feedback d-block">{{ $message }}</div>
+                                @enderror
                             </div>
 
                             <div class="col-12">
-                                <label for="inputTitle" class="form-label">Page Title (H1)</label>
-                                <input type="text" name="page_title" class="form-control"
+                                <label for="inputPageTitle" class="form-label">Page Title (H1)</label>
+                                <input type="text" name="page_title" class="form-control @error('page_title') is-invalid @enderror"
                                     value="{{ $data['seo']['page_title'] ?? '' }}" placeholder="Page Title..."
-                                    id="inputTitle">
+                                    id="inputPageTitle">
+                                @error('page_title')
+                                    <div class="invalid-feedback d-block">{{ $message }}</div>
+                                @enderror
                             </div>
 
                             <div class="col-12">
-                                <label for="inputTitle" class="form-label">Page Sort Description</label>
-                                <textarea id="mytextarea" name="page_sort_description" class="form-control"
-                                    placeholder="Page Sort Description..."
-                                    id="inputTitle">{!! $data['seo']['page_sort_description'] ?? '' !!}</textarea>
+                                <label for="mytextarea" class="form-label">Page Sort Description</label>
+                                <textarea id="mytextarea" name="page_sort_description" class="form-control @error('page_sort_description') is-invalid @enderror"
+                                    placeholder="Page Sort Description...">{!! $data['seo']['page_sort_description'] ?? '' !!}</textarea>
+                                @error('page_sort_description')
+                                    <div class="invalid-feedback d-block">{{ $message }}</div>
+                                @enderror
                             </div>
 
                             <div class="col-12">
-                                <label for="inputTitle" class="form-label">Page Description</label>
-                                <textarea id="longtextarea" name="page_description" class="form-control"
-                                    placeholder="Page Description..."
-                                    id="inputTitle">{!! $data['seo']['page_description'] ?? '' !!}</textarea>
+                                <label for="longtextarea" class="form-label">Page Description</label>
+                                <textarea id="longtextarea" name="page_description" class="form-control @error('page_description') is-invalid @enderror"
+                                    placeholder="Page Description...">{!! $data['seo']['page_description'] ?? '' !!}</textarea>
+                                @error('page_description')
+                                    <div class="invalid-feedback d-block">{{ $message }}</div>
+                                @enderror
                             </div>
 
                             <div class="col-12">
-                                <label for="inputTitle" class="form-label">Meta Title</label>
-                                <input type="text" name="title" class="form-control"
+                                <label for="inputMetaTitle" class="form-label">Meta Title</label>
+                                <input type="text" name="title" class="form-control @error('title') is-invalid @enderror"
                                     value="{{ $data['seo']['title'] ?? '' }}" placeholder="Meta Title..."
-                                    id="inputTitle">
+                                    id="inputMetaTitle">
+                                @error('title')
+                                    <div class="invalid-feedback d-block">{{ $message }}</div>
+                                @enderror
                             </div>
-                            
+
                             <div class="col-12">
                                 <label for="inputKeyword" class="form-label">Meta Keyword</label>
-                                <textarea name="keywords" class="form-control" id="inputKeyword" placeholder="Meta Keyword..." rows="3">{{ $data['seo']['keywords'] ?? '' }}</textarea>
+                                <textarea name="keywords" class="form-control @error('keywords') is-invalid @enderror" id="inputKeyword" placeholder="Meta Keyword..." rows="3">{{ $data['seo']['keywords'] ?? '' }}</textarea>
+                                @error('keywords')
+                                    <div class="invalid-feedback d-block">{{ $message }}</div>
+                                @enderror
                             </div>
 
                             <div class="col-12">
                                 <label for="inputDescription" class="form-label">Meta Description</label>
-                                <textarea name="description" class="form-control" id="inputDescription" placeholder="Meta Description..." rows="4">{{ $data['seo']['description'] ?? '' }}</textarea>
+                                <textarea name="description" class="form-control @error('description') is-invalid @enderror" id="inputDescription" placeholder="Meta Description..." rows="4">{{ $data['seo']['description'] ?? '' }}</textarea>
+                                @error('description')
+                                    <div class="invalid-feedback d-block">{{ $message }}</div>
+                                @enderror
                             </div>
 
                             <div class="col-12">
                                 <label for="inputScript" class="form-label">Meta Script</label>
-                                <textarea name="script" class="form-control" id="inputScript" placeholder="Meta Script..." rows="5">{{ $data['seo']['script'] ?? '' }}</textarea>
+                                <textarea name="script" class="form-control @error('script') is-invalid @enderror" id="inputScript" placeholder="Meta Script..." rows="5">{{ $data['seo']['script'] ?? '' }}</textarea>
+                                @error('script')
+                                    <div class="invalid-feedback d-block">{{ $message }}</div>
+                                @enderror
                             </div>
 
                             <div class="col-2">
