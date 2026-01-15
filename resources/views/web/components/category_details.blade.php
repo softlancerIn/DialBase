@@ -2,8 +2,8 @@
 <div class="Goodup-grid-wrap">
     <div class="Goodup-grid-upper">
         <div class="Goodup-pos ab-left">
-            <div class="Goodup-status {{ $listing->is_247_open ? 'open' : 'close' }} me-2">
-                {{ $listing->is_247_open ? 'Open' : 'Close' }}
+            <div class="Goodup-status {{ $listing->isOpenNow() ? 'open' : 'close' }} me-2">
+                {{ $listing->isOpenNow() ? 'Open' : 'Close' }}
             </div>
         </div>
         <div class="Goodup-grid-thumb">
