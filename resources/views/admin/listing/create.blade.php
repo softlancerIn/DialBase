@@ -25,31 +25,6 @@
                         @if (session('message') || session('error'))
                             <div class="alert alert-warning">{{ session('message') ?? session('error') }}</div>
                         @endif
-                        @if ($errors->any())
-                            <div class="alert alert-danger">
-                                <ul class="mb-0">
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                            <script>
-                                document.addEventListener('DOMContentLoaded', function() {
-                                    // Scroll to the validation errors and focus the first invalid input
-                                    const alertEl = document.querySelector('.alert.alert-danger');
-                                    if (alertEl) {
-                                        alertEl.scrollIntoView({
-                                            behavior: 'smooth',
-                                            block: 'center'
-                                        });
-                                    }
-                                    const firstInvalid = document.querySelector('.is-invalid');
-                                    if (firstInvalid && typeof firstInvalid.focus === 'function') {
-                                        firstInvalid.focus();
-                                    }
-                                });
-                            </script>
-                        @endif
                         <div class="submit-form">
                             <!-- Listing Info -->
                             <div class="dashboard-list-wraps bg-white rounded mb-4">

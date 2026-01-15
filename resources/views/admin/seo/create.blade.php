@@ -24,24 +24,33 @@
                             @csrf
                             <div class="col-12">
                                 <label for="inputFirstName" class="form-label">Page Url</label>
-                                <input type="url" name="url" class="form-control"
-                                    value="{{ old('url', '') }}" placeholder="Page Url..."
+                                <input type="text" name="url" class="form-control @error('url') is-invalid @enderror"
+                                    value="{{ old('url', '') }}" placeholder="http://localhost/DialBas"
                                     id="inputFirstName">
                                 <input type="hidden" name="id" value="0">
+                                @error('url')
+                                    <div class="invalid-feedback d-block">{{ $message }}</div>
+                                @enderror
                             </div>
 
                             <div class="col-12">
                                 <label for="inputTitle" class="form-label">Page Title (H1)</label>
-                                <input type="text" name="page_title" class="form-control"
+                                <input type="text" name="page_title" class="form-control @error('page_title') is-invalid @enderror"
                                     value="{{ old('page_title', '') }}" placeholder="Page Title..."
                                     id="inputTitle">
+                                @error('page_title')
+                                    <div class="invalid-feedback d-block">{{ $message }}</div>
+                                @enderror
                             </div>
 
                             <div class="col-12">
                                 <label for="inputTitle" class="form-label">Page Sort Description</label>
-                                <textarea id="mytextarea" name="page_sort_description" class="form-control"
+                                <textarea id="mytextarea" name="page_sort_description" class="form-control @error('page_sort_description') is-invalid @enderror"
                                     value="{{ old('page_sort_description', '') }}" placeholder="Page Sort Description..."
                                     id="inputTitle"></textarea>
+                                @error('page_sort_description')
+                                    <div class="invalid-feedback d-block">{{ $message }}</div>
+                                @enderror
                             </div>
 
                             <div class="col-12">
@@ -49,6 +58,9 @@
                                 <textarea id="longtextarea" name="page_description" class="form-control"
                                     value="{{ old('page_description', '') }}" placeholder="Page Description..."
                                     id="inputTitle"></textarea>
+                                    @error('page_description')
+                                        <div class="invalid-feedback d-block">{{ $message }}</div>
+                                    @enderror
                             </div>
 
                             <div class="col-12">
@@ -56,16 +68,25 @@
                                 <input type="text" name="title" class="form-control"
                                     value="{{ old('title', '') }}" placeholder="Meta Title..."
                                     id="inputTitle">
+                                @error('title')
+                                    <div class="invalid-feedback d-block">{{ $message }}</div>
+                                @enderror
                             </div>
                             
                             <div class="col-12">
-                                <label for="inputKeyword" class="form-label">Meta Keyword</label>
-                                <textarea name="keywords" class="form-control" id="inputKeyword" placeholder="Meta Keyword..." rows="3">{{ old('keywords', '') }}</textarea>
+                                <label for="inputKeyword" class="form-label">Meta Keywords</label>
+                                <textarea name="keywords" class="form-control" id="inputKeyword" placeholder="Meta Keywords..." rows="3">{{ old('keywords', '') }}</textarea>
+                                @error('keywords')
+                                    <div class="invalid-feedback d-block">{{ $message }}</div>
+                                @enderror
                             </div>
 
                             <div class="col-12">
                                 <label for="inputDescription" class="form-label">Meta Description</label>
                                 <textarea name="description" class="form-control" id="inputDescription" placeholder="Meta Description..." rows="5">{{ old('description', '') }}</textarea>
+x                                @error('description')
+                                    <div class="invalid-feedback d-block">{{ $message }}</div>
+                                @enderror
                             </div>
 
                             <div class="col-12">
