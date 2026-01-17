@@ -2,7 +2,7 @@
     <div class="page-content">
         <div class="dashboard-tlbar d-block mb-3">
             <div class="row">
-                <div class="col-xl-12 col-lg-12 col-md-12">
+                <div class="col-xl-9 col-lg-9 col-md-9">
                     <h1 class="ft-medium">{{ $data ? 'Edit Category' : 'Add Category' }}</h1>
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
@@ -11,6 +11,14 @@
                                     class="theme-cl">{{ $data ? 'Edit Category' : 'Add Category' }}</a></li>
                         </ol>
                     </nav>
+                </div>
+
+                <div class="col-xl-3 col-lg-3 col-md-3">
+                    <div class="btn-group float-end mt-2">
+                        <div class="form-group">
+                            <button class="btn btn-primary rounded text-light">Submit</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -45,9 +53,6 @@
                             <div class="col-12">
                                 <label for="inputAddress2" class="form-label">Description</label>
                                 <textarea name="description" class="form-control" id="mytextarea" placeholder="Description..." rows="5">{{ $data['description'] ?? (old('description') ?? '') }}</textarea>
-                            </div>
-                            <div class="col-2">
-                                <button type="submit" class="btn btn-primary px-5">Submit</button>
                             </div>
                         </form>
                     </div>

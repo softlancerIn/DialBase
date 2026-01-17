@@ -2,7 +2,7 @@
     <div class="page-content">
         <div class="dashboard-tlbar d-block mb-3">
             <div class="row">
-                <div class="colxl-12 col-lg-12 col-md-12">
+                <div class="colxl-9 col-lg-9 col-md-9">
                     <h1 class="ft-medium">Create Seo</h1>
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
@@ -10,6 +10,14 @@
                             <li class="breadcrumb-item"><a href="#" class="theme-cl">Create Seo</a></li>
                         </ol>
                     </nav>
+                </div>
+
+                <div class="col-xl-3 col-lg-3 col-md-3">
+                    <div class="btn-group float-end mt-2">
+                        <div class="form-group">
+                            <button class="btn btn-primary rounded text-light">Submit</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -84,7 +92,7 @@
                             <div class="col-12">
                                 <label for="inputDescription" class="form-label">Meta Description</label>
                                 <textarea name="description" class="form-control" id="inputDescription" placeholder="Meta Description..." rows="5">{{ old('description', '') }}</textarea>
-x                                @error('description')
+                                @error('description')
                                     <div class="invalid-feedback d-block">{{ $message }}</div>
                                 @enderror
                             </div>
@@ -92,10 +100,6 @@ x                                @error('description')
                             <div class="col-12">
                                 <label for="inputScript" class="form-label">Meta Script</label>
                                 <textarea name="script" class="form-control" id="inputScript" placeholder="Meta Script..." rows="5">{{ old('script', '') }}</textarea>
-                            </div>
-
-                            <div class="col-2">
-                                <button type="submit" class="btn btn-primary px-5">Submit</button>
                             </div>
                         </form>
                     </div>
