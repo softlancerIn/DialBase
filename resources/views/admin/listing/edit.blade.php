@@ -12,6 +12,14 @@
                         </ol>
                     </nav>
                 </div>
+
+                <div class="col-xl-3 col-lg-3 col-md-3">
+                    <div class="btn-group float-end mt-2">
+                        <div class="form-group">
+                            <button class="btn btn-primary rounded text-light">Update</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="dashboard-widg-bar d-block">
@@ -568,12 +576,6 @@
                                                 <input type="text" class="form-control rounded" name="youtube"
                                                     placeholder="https://youtube.com/"
                                                     value="{{ old('youtube', optional($data['listing']->socialLink)->youtube) }}" />
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-                                            <div class="form-group">
-                                                <button type="submit"
-                                                    class="btn theme-bg rounded text-light">Updtae</button>
                                             </div>
                                         </div>
                                     </div>
