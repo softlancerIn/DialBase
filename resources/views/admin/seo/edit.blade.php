@@ -2,7 +2,7 @@
     <div class="page-content">
         <div class="dashboard-tlbar d-block mb-3">
             <div class="row">
-                <div class="colxl-12 col-lg-12 col-md-12">
+                <div class="col-xl-9 col-lg-9 col-md-9">
                     <h1 class="ft-medium">Edit Seo</h1>
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
@@ -10,6 +10,14 @@
                             <li class="breadcrumb-item"><a href="#" class="theme-cl">Edit Seo</a></li>
                         </ol>
                     </nav>
+                </div>
+
+                <div class="col-xl-3 col-lg-3 col-md-3">
+                    <div class="btn-group float-end mt-2">
+                        <div class="form-group">
+                            <button class="btn btn-primary rounded text-light">Submit</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

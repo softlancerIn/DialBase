@@ -2,7 +2,7 @@
     <div class="goodup-dashboard-content p-0">
         <div class="dashboard-tlbar d-block mb-5">
             <div class="row">
-                <div class="colxl-12 col-lg-12 col-md-12">
+                <div class="col-xl-9 col-lg-9 col-md-9">
                     <h1 class="ft-medium">Add Listing</h1>
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
@@ -11,6 +11,14 @@
                             <li class="breadcrumb-item"><a href="#" class="theme-cl">Add Listing</a></li>
                         </ol>
                     </nav>
+                </div>
+
+                <div class="col-xl-3 col-lg-3 col-md-3">
+                    <div class="btn-group float-end mt-2">
+                        <div class="form-group">
+                            <button class="btn btn-primary rounded text-light">Submit</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -494,12 +502,6 @@
                                                         class="ti-linkedin theme-cl me-1"></i>Linkedin</label>
                                                 <input type="text" class="form-control rounded" name="linkedin"
                                                     placeholder="https://linkedin.com/" />
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-                                            <div class="form-group">
-                                                <button type="submit"
-                                                    class="btn theme-bg rounded text-light">Submit</button>
                                             </div>
                                         </div>
                                     </div>

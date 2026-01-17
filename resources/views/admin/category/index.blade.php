@@ -33,7 +33,7 @@
                             <tr>
                                 <th>Id</th>
                                 <th>Category Name</th>
-                                <th>Description</th>
+                                <th>Image</th>
                                 <th>Created Date</th>
                                 <th>Action</th>
                             </tr>
@@ -43,7 +43,14 @@
                                 <tr>
                                     <td>{{ $key + 1 }}</td>
                                     <td>{{ $category->name }}</td>
-                                    <td>{!! $category->description !!}</td>
+                                    <td>
+                                        @if ($category->image)
+                                            <img src="{{ asset('upload_image/category/' . $category->image) }}"
+                                                alt="{{ $category->name }}" class="rounded-circle p-1 border" width="45" height="45">
+                                        @else
+                                            N/A
+                                        @endif
+                                    </td>
                                     <td>{{ daysAgo($category->created_at) }}</td>
                                     <td>
                                         <a href="{{ route('category_form', ['type' => 'edit', 'id' => $category->id]) }}">

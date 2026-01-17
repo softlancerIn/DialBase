@@ -14,7 +14,7 @@
                         <form action="{{ route('scrape_website.post') }}" method="POST">
                             @csrf
                             <div class="row">
-                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
                                     <div class="form-group">
                                         <label class="mb-1">Select Category</label>
                                         <select name="category_id" class="form-control rounded" required>
@@ -25,7 +25,7 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
                                     <div class="form-group">
                                         <label class="mb-1">Website URL (JustDial Category URL)</label>
                                         <input type="text" name="url" class="form-control rounded"

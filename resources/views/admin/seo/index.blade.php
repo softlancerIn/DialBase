@@ -45,7 +45,7 @@
                                     <td>{{ $key + 1 }}</td>
                                     <td>{{ $seo->url }}</td>
                                     <td>{{ $seo->title }}</td>
-                                    <td>{{ $seo->keywords }}</td>
+                                    <td>{{ Str::limit(strip_tags($seo->keywords), 50) }}</td>
                                     <td>{{ daysAgo($seo->updated_at) }}</td>
                                     <td>
                                         <a href="{{ route('seo_form', ['type' => 'edit', 'id' => $seo->id]) }}">
