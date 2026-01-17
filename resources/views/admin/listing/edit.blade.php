@@ -2,7 +2,7 @@
     <div class="goodup-dashboard-content p-0">
         <div class="dashboard-tlbar d-block mb-5">
             <div class="row">
-                <div class="colxl-12 col-lg-12 col-md-12">
+                <div class="col-xl-9 col-lg-9 col-md-9">
                     <h1 class="ft-medium">Edit Listing</h1>
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
