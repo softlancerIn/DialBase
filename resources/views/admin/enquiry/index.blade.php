@@ -114,7 +114,6 @@
                                             href="#">
                                             <i class="fas fa-trash me-1" data-feather="trash-2"></i>
                                         </a>
-                                        <x-admin.modal type="enquiry" id="{{ $enquiry->id }}" />
                                     </td>
                                 </tr>
                             @endforeach
@@ -131,4 +130,9 @@
         </div>
     </div>
 
+    @push('modals')
+        @foreach ($enquiries as $enquiry)
+            <x-admin.modal type="enquiry" id="{{ $enquiry->id }}" />
+        @endforeach
+    @endpush
 </x-admin.layout>

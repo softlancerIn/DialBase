@@ -1,7 +1,8 @@
 @extends('web.layout.main')
 
 @section('title', 'Privacy Policy | Aboutfirms')
-@section('meta_description', 'Read the Privacy Policy for Aboutfirms to learn how we collect, use, share, and protect your information on our B2B directory platform.')
+@section('meta_description', 'Read the Privacy Policy for Aboutfirms to learn how we collect, use, share, and protect
+    your information on our B2B directory platform.')
 @section('meta_keywords', 'Privacy Policy, Data Protection, GDPR, CCPA, Aboutfirms privacy, cookies, data security')
 @section('meta_robots', 'index,follow')
 
@@ -28,8 +29,9 @@
             <div class="row justify-content-center">
                 <div class="col-xl-10 col-lg-10 col-md-12">
                     <div class="text-center">
-                        <h1 class="ft-bold mb-3">Privacy Policy</h1>
-                        <p class="lead text-muted">At Aboutfirms, we are committed to protecting your privacy and ensuring the security of your personal information. This Privacy Policy explains how we collect, use, store, and protect your data when you use our B2B directory platform.</p>
+                        <h1 class="ft-bold mb-3">{{ $seoData->page_title ?? 'Privacy Policy' }}</h1>
+                        <p class="lead text-muted">{!! $seoData->page_sort_description ??
+                            'At Aboutfirms, we are committed to protecting your privacy and ensuring the security of your personal information. This Privacy Policy explains how we collect, use, store, and protect your data when you use our B2B directory platform.' !!}</p>
                     </div>
                 </div>
             </div>
@@ -46,9 +48,9 @@
                         <!-- Section 1 -->
                         <div class="mb-5">
                             <h3 class="ft-bold mb-3">1. Information We Collect</h3>
-                            
+
                             <h5 class="ft-medium mb-2">A. Information You Provide Directly</h5>
-                            
+
                             <h6 class="ft-medium mb-2">Account Registration:</h6>
                             <ul class="mb-3">
                                 <li>Company name and business details</li>
@@ -78,7 +80,7 @@
                             </ul>
 
                             <h5 class="ft-medium mb-2">B. Information Collected Automatically</h5>
-                            
+
                             <h6 class="ft-medium mb-2">Technical Data:</h6>
                             <ul class="mb-3">
                                 <li>IP address and device information</li>
@@ -113,7 +115,7 @@
                         <div class="mb-5">
                             <h3 class="ft-bold mb-3">2. How We Use Your Information</h3>
                             <p class="mb-3">We use collected information for the following purposes:</p>
-                            
+
                             <h5 class="ft-medium mb-2">Platform Operations:</h5>
                             <ul class="mb-3">
                                 <li>Create and manage your account</li>
@@ -175,7 +177,7 @@
                         <!-- Section 4 -->
                         <div class="mb-5">
                             <h3 class="ft-bold mb-3">4. How We Share Your Information</h3>
-                            
+
                             <h5 class="ft-medium mb-2">A. Public Information</h5>
                             <p class="mb-2">The following information is publicly visible on our platform:</p>
                             <ul class="mb-3">
@@ -197,10 +199,12 @@
                                 <li>Customer support tools</li>
                                 <li>Verification services</li>
                             </ul>
-                            <p class="mb-3 text-muted"><em>Note: These providers are contractually bound to protect your data and use it only for specified purposes.</em></p>
+                            <p class="mb-3 text-muted"><em>Note: These providers are contractually bound to protect your
+                                    data and use it only for specified purposes.</em></p>
 
                             <h5 class="ft-medium mb-2">C. Business Transfers</h5>
-                            <p class="mb-3">In case of merger, acquisition, or sale of assets, your information may be transferred to the new entity. You will be notified of any such change.</p>
+                            <p class="mb-3">In case of merger, acquisition, or sale of assets, your information may be
+                                transferred to the new entity. You will be notified of any such change.</p>
 
                             <h5 class="ft-medium mb-2">D. Legal Requirements</h5>
                             <p class="mb-2">We may disclose information when required by law:</p>
@@ -219,8 +223,9 @@
                         <!-- Section 5 -->
                         <div class="mb-5">
                             <h3 class="ft-bold mb-3">5. Data Security</h3>
-                            <p class="mb-3">We implement industry-standard security measures to protect your information:</p>
-                            
+                            <p class="mb-3">We implement industry-standard security measures to protect your information:
+                            </p>
+
                             <h5 class="ft-medium mb-2">Technical Safeguards:</h5>
                             <ul class="mb-3">
                                 <li>SSL/TLS encryption for data transmission</li>
@@ -245,13 +250,15 @@
                                 <li>Tokenization for recurring payments</li>
                             </ul>
 
-                            <p class="text-muted"><em>However, please note: No method of transmission over the internet is 100% secure. While we strive to protect your data, we cannot guarantee absolute security.</em></p>
+                            <p class="text-muted"><em>However, please note: No method of transmission over the internet is
+                                    100% secure. While we strive to protect your data, we cannot guarantee absolute
+                                    security.</em></p>
                         </div>
 
                         <!-- Section 6 -->
                         <div class="mb-5">
                             <h3 class="ft-bold mb-3">6. Data Retention</h3>
-                            
+
                             <h5 class="ft-medium mb-2">Active Accounts:</h5>
                             <p class="mb-3">We retain your data as long as your account is active</p>
 
@@ -265,13 +272,14 @@
                             <h5 class="ft-medium mb-2">Marketing Data:</h5>
                             <p class="mb-3">Retained until you unsubscribe or request deletion</p>
 
-                            <p>You can request data deletion anytime by contacting us at <a href="mailto:contact@aboutfirms.com">contact@aboutfirms.com</a></p>
+                            <p>You can request data deletion anytime by contacting us at <a
+                                    href="mailto:contact@aboutfirms.com">contact@aboutfirms.com</a></p>
                         </div>
 
                         <!-- Section 7 -->
                         <div class="mb-5">
                             <h3 class="ft-bold mb-3">7. Your Rights & Choices</h3>
-                            
+
                             <h5 class="ft-medium mb-2">A. Access & Portability</h5>
                             <ul class="mb-3">
                                 <li>Request a copy of your personal data</li>
@@ -309,15 +317,16 @@
                                 <li>Revoke marketing consent anytime</li>
                             </ul>
 
-                            <p>To exercise these rights, contact us at: <a href="mailto:contact@aboutfirms.com">contact@aboutfirms.com</a></p>
+                            <p>To exercise these rights, contact us at: <a
+                                    href="mailto:contact@aboutfirms.com">contact@aboutfirms.com</a></p>
                         </div>
 
                         <!-- Section 8 -->
                         <div class="mb-5">
                             <h3 class="ft-bold mb-3">8. Cookies & Tracking Technologies</h3>
-                            
+
                             <h5 class="ft-medium mb-2">What We Use:</h5>
-                            
+
                             <h6 class="ft-medium mb-2">Essential Cookies: Required for platform functionality</h6>
                             <ul class="mb-3">
                                 <li>Session management</li>
@@ -351,7 +360,8 @@
                         <!-- Section 9 -->
                         <div class="mb-5">
                             <h3 class="ft-bold mb-3">9. Third-Party Links</h3>
-                            <p class="mb-2">Our platform contains links to external websites and listed companies. We are NOT responsible for:</p>
+                            <p class="mb-2">Our platform contains links to external websites and listed companies. We are
+                                NOT responsible for:</p>
                             <ul class="mb-3">
                                 <li>Privacy practices of third-party sites</li>
                                 <li>Content on external websites</li>
@@ -370,7 +380,8 @@
                                 <li>We ensure adequate protection through standard contractual clauses</li>
                                 <li>By using our platform, you consent to these transfers</li>
                             </ul>
-                            <p class="text-muted"><em>For EU/EEA users: We comply with GDPR requirements for international transfers.</em></p>
+                            <p class="text-muted"><em>For EU/EEA users: We comply with GDPR requirements for international
+                                    transfers.</em></p>
                         </div>
 
                         <!-- Section 11 -->
@@ -391,10 +402,13 @@
                             <ul class="mb-3">
                                 <li><strong>Right to Know:</strong> What personal data we collect and how we use it</li>
                                 <li><strong>Right to Delete:</strong> Request deletion of your data</li>
-                                <li><strong>Right to Opt-Out:</strong> From sale of personal information (Note: We do NOT sell personal data)</li>
-                                <li><strong>Non-Discrimination:</strong> We won't discriminate for exercising your rights</li>
+                                <li><strong>Right to Opt-Out:</strong> From sale of personal information (Note: We do NOT
+                                    sell personal data)</li>
+                                <li><strong>Non-Discrimination:</strong> We won't discriminate for exercising your rights
+                                </li>
                             </ul>
-                            <p>California Contact: <a href="mailto:contact@aboutfirms.com">contact@aboutfirms.com</a> with subject "California Privacy Request"</p>
+                            <p>California Contact: <a href="mailto:contact@aboutfirms.com">contact@aboutfirms.com</a> with
+                                subject "California Privacy Request"</p>
                         </div>
 
                         <!-- Section 13 -->
@@ -404,15 +418,17 @@
                             <ul>
                                 <li><strong>Data Controller:</strong> Aboutfirms</li>
                                 <li><strong>Legal Basis:</strong> As outlined in Section 3</li>
-                                <li><strong>Data Protection Officer:</strong> <a href="mailto:contact@aboutfirms.com">contact@aboutfirms.com</a></li>
-                                <li><strong>Supervisory Authority:</strong> You can lodge complaints with your local data protection authority</li>
+                                <li><strong>Data Protection Officer:</strong> <a
+                                        href="mailto:contact@aboutfirms.com">contact@aboutfirms.com</a></li>
+                                <li><strong>Supervisory Authority:</strong> You can lodge complaints with your local data
+                                    protection authority</li>
                             </ul>
                         </div>
 
                         <!-- Section 14 -->
                         <div class="mb-5">
                             <h3 class="ft-bold mb-3">14. Email Communications</h3>
-                            
+
                             <h5 class="ft-medium mb-2">Transactional Emails (Cannot opt-out):</h5>
                             <ul class="mb-3">
                                 <li>Account verification</li>
@@ -429,7 +445,8 @@
                                 <li>Industry insights</li>
                             </ul>
 
-                            <p><strong>Unsubscribe:</strong> Click the link at the bottom of any marketing email or email us at <a href="mailto:contact@aboutfirms.com">contact@aboutfirms.com</a></p>
+                            <p><strong>Unsubscribe:</strong> Click the link at the bottom of any marketing email or email us
+                                at <a href="mailto:contact@aboutfirms.com">contact@aboutfirms.com</a></p>
                         </div>
 
                         <!-- Section 15 -->
@@ -460,25 +477,31 @@
                         <div class="mb-5">
                             <h3 class="ft-bold mb-3">17. Contact Us</h3>
                             <p class="mb-3">For privacy-related questions, concerns, or requests:</p>
-                            
+
                             <div class="p-4 bg-light rounded">
                                 <h5 class="ft-medium mb-3">Privacy Team:</h5>
-                                <p class="mb-2"><strong>Email:</strong> <a href="mailto:contact@aboutfirms.com">contact@aboutfirms.com</a></p>
+                                <p class="mb-2"><strong>Email:</strong> <a
+                                        href="mailto:contact@aboutfirms.com">contact@aboutfirms.com</a></p>
                                 <p class="mb-2"><strong>Phone:</strong> 9971123025</p>
-                                <p class="mb-4"><strong>Address:</strong> 1st Sector, HSR Layout, Bengaluru, Karnataka 560102</p>
+                                <p class="mb-4"><strong>Address:</strong> 1st Sector, HSR Layout, Bengaluru, Karnataka
+                                    560102</p>
 
                                 <h5 class="ft-medium mb-3">Data Protection Officer:</h5>
-                                <p class="mb-4"><strong>Email:</strong> <a href="mailto:contact@aboutfirms.com">contact@aboutfirms.com</a></p>
+                                <p class="mb-4"><strong>Email:</strong> <a
+                                        href="mailto:contact@aboutfirms.com">contact@aboutfirms.com</a></p>
 
                                 <h5 class="ft-medium mb-3">General Support:</h5>
-                                <p class="mb-2"><strong>Email:</strong> <a href="mailto:contact@aboutfirms.com">contact@aboutfirms.com</a></p>
+                                <p class="mb-2"><strong>Email:</strong> <a
+                                        href="mailto:contact@aboutfirms.com">contact@aboutfirms.com</a></p>
                                 <p class="mb-2"><strong>Hours:</strong> Monday - Friday, 9 AM - 6 PM</p>
-                                <p class="mb-0"><strong>Response Time:</strong> We aim to respond within 48 business hours.</p>
+                                <p class="mb-0"><strong>Response Time:</strong> We aim to respond within 48 business
+                                    hours.</p>
                             </div>
                         </div>
 
                         <!-- Section 18 -->
-                        <div class="p-4 bg-light rounded border-left border-success" style="border-left-width: 4px !important;">
+                        <div class="p-4 bg-light rounded border-left border-success"
+                            style="border-left-width: 4px !important;">
                             <h3 class="ft-bold mb-3">18. Quick Summary</h3>
                             <ul class="mb-0">
                                 <li>✓ We collect information you provide and usage data</li>
@@ -516,12 +539,14 @@
                         <div class="row no-gutters">
                             <div class="col-xl-9 col-lg-9 col-md-8 col-sm-8 col-8">
                                 <div class="form-group mb-0 position-relative">
-                                    <input type="email" class="form-control b-0" placeholder="Enter Your Email Address">
+                                    <input type="email" class="form-control b-0"
+                                        placeholder="Enter Your Email Address">
                                 </div>
                             </div>
                             <div class="col-xl-3 col-lg-3 col-md-4 col-sm-4 col-4">
                                 <div class="form-group mb-0 position-relative">
-                                    <button class="btn full-width btn-height theme-bg text-light fs-md" type="submit">Subscribe</button>
+                                    <button class="btn full-width btn-height theme-bg text-light fs-md"
+                                        type="submit">Subscribe</button>
                                 </div>
                             </div>
                         </div>

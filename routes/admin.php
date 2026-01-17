@@ -35,6 +35,7 @@ Route::middleware(['auth:admin', 'admin'])->group(function () {
     Route::controller(ScrapingController::class)->group(function () {
         Route::get('scrape-website', 'index')->name('scrape_website');
         Route::post('scrape-website', 'scrape_website')->name('scrape_website.post');
+        Route::post('store-scraped-data', 'store_scraped_data')->name('store_scraped_data');
     });
 
     // Profile

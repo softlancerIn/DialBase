@@ -93,6 +93,15 @@ class GlobalController
             } else {
                 return redirect()->back()->with('error', 'Something went wrong!');
             }
+        } elseif ($type == 'listing') {
+            $delete_data = \App\Models\Listing::where('id', $id)->first();
+            if (! empty($delete_data)) {
+                $delete_data->delete();
+
+                return redirect()->route('listing-data.index')->with('success', 'Listing Deleted Successfully!');
+            } else {
+                return redirect()->back()->with('error', 'Something went wrong!');
+            }
         }
     }
 }

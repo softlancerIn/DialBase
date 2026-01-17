@@ -263,5 +263,101 @@ class ScrapingController extends Controller
             return redirect()->back()->with('error', 'Failed to save listings: ' . $e->getMessage());
         }
     }
+    public function store_scraped_data(Request $request)
+    {
+        $categoryId = $request->input('category_id');
+        $scrapedData = $request->input('listings');
+
+        if (empty($scrapedData)) {
+            return response()->json(['success' => false, 'message' => 'No data received.']);
+        }
+
+        $count = 0;
+        DB::beginTransaction();
+        try {
+            foreach ($scrapedData as $data) {
+                if (!$data['title']) continue;
+
+                // Generate Unique Slug
+                $slug = Str::slug($data['title']);
+                $slugCount = Listing::where('slug', 'LIKE', "{$slug}%")->count();
+                if ($slugCount > 0) {
+                    $slug = $slug . '-' . ($slugCount + 1);
+                }
+
+                // Geocode Address
+                $geoData = $this->geocodeAddress($data['address']);
+                // Sleep to respect rate limits
+                sleep(1);
+
+                // Create Listing
+                $listing = Listing::create([
+                    'title' => $data['title'],
+                    'slug' => $slug,
+                    'category_id' => $categoryId,
+                    'address' => $data['address'] ?? '',
+                    'mobile' => $data['phone'] ?? '',
+                    'website' => '',
+                    'description' => 'Scraped from JustDial',
+                    'is_featured' => 0,
+                    'status' => 1,
+                    // Geocoded fields
+                    'latitude' => $geoData['latitude'],
+                    'longitude' => $geoData['longitude'],
+                    'state' => $geoData['state'],
+                    'city' => $geoData['city'],
+                    'zip_code' => $geoData['zip_code'],
+                    'email' => 'scraped@example.com',
+                    'about' => 'Scraped Listing',
+                ]);
+
+                // Save Image
+                if ($data['image']) {
+                    try {
+                        $imageContent = file_get_contents($data['image']);
+                        if ($imageContent) {
+                            $imageName = Str::random(10) . '.jpg';
+                            $path = 'listing_featured/' . $listing->id . '/' . $imageName;
+                            Storage::disk('public')->put($path, $imageContent);
+
+                            $listing->images()->create([
+                                'image_path' => $path,
+                                'image_type' => 'featured'
+                            ]);
+                        }
+                    } catch (\Exception $e) {
+                        // Ignore image download errors
+                    }
+                }
+
+                // Save Amenities
+                if (!empty($data['amenities'])) {
+                    $amenityIds = [];
+                    foreach ($data['amenities'] as $amenityName) {
+                        $amenity = Amenity::firstOrCreate(['name' => trim($amenityName)]);
+                        $amenityIds[] = $amenity->id;
+                    }
+                    $listing->amenities()->sync($amenityIds);
+                }
+                
+                // Create default working hours
+                $listing->workingHours()->create([
+                    'day_of_week' => 'All',
+                    'open_time' => json_encode(['09:00']),
+                    'close_time' => json_encode(['18:00']),
+                ]);
+                
+                // Create empty social link
+                $listing->socialLink()->create([]);
+
+                $count++;
+            }
+            DB::commit();
+            return response()->json(['success' => true, 'message' => "Successfully added $count listings."]);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json(['success' => false, 'message' => 'Failed to save listings: ' . $e->getMessage()]);
+        }
+    }
 }
 

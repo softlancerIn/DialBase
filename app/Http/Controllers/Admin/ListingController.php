@@ -81,6 +81,7 @@ class ListingController extends Controller
             'twitter' => 'nullable|url',
             'instagram' => 'nullable|url',
             'linkedin' => 'nullable|url',
+            'youtube' => 'nullable|url',
             'sort_order' => 'nullable|integer',
             'status' => 'nullable|boolean'
         ]);
@@ -163,13 +164,16 @@ class ListingController extends Controller
             }
 
             // Save Working Hours
-            $listing->workingHours()->create([
-                'day_of_week' => 'All',
-                'open_time' => json_encode($request->working_hours['open_time']),
-                'close_time' => json_encode($request->working_hours['close_time']),
-            ]);
+            $days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+            foreach ($days as $index => $day) {
+                $listing->workingHours()->create([
+                    'day_of_week' => $day,
+                    'open_time' => $request->working_hours['open_time'][$index] ?? null,
+                    'close_time' => $request->working_hours['close_time'][$index] ?? null,
+                ]);
+            }
 
-            $listing->update(['is_247_open' => $request->is_247_open]);
+            $listing->update(['is_247_open' => $request->is_247_open ?? 0]);
 
             $amenityIds = $request->amenities ? (array) $request->amenities : [];
             if ($request->filled('new_amenities')) {
@@ -227,6 +231,7 @@ class ListingController extends Controller
                 'twitter' => $request->twitter ?? '',
                 'instagram' => $request->instagram ?? '',
                 'linkedin' => $request->linkedin ?? '',
+                'youtube' => $request->youtube ?? '',
             ]);
 
             DB::commit();
@@ -351,6 +356,7 @@ class ListingController extends Controller
             'twitter' => 'nullable|url',
             'instagram' => 'nullable|url',
             'linkedin' => 'nullable|url',
+            'youtube' => 'nullable|url',
             'sort_order' => 'nullable|integer',
             'status' => 'nullable|boolean'
         ]);
@@ -449,13 +455,16 @@ class ListingController extends Controller
     
             // Update Working Hours
             $listing->workingHours()->delete();
-            $listing->workingHours()->create([
-                'day_of_week' => 'All',
-                'open_time' => json_encode($request->working_hours['open_time']),
-                'close_time' => json_encode($request->working_hours['close_time']),
-            ]);
+            $days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+            foreach ($days as $index => $day) {
+                $listing->workingHours()->create([
+                    'day_of_week' => $day,
+                    'open_time' => $request->working_hours['open_time'][$index] ?? null,
+                    'close_time' => $request->working_hours['close_time'][$index] ?? null,
+                ]);
+            }
     
-            $listing->update(['is_247_open' => $request->is_247_open]);
+            $listing->update(['is_247_open' => $request->is_247_open ?? 0]);
     
             $amenityIds = $request->amenities ? (array) $request->amenities : [];
             if ($request->filled('new_amenities')) {
@@ -478,6 +487,7 @@ class ListingController extends Controller
                     'twitter' => $request->twitter ?? '',
                     'instagram' => $request->instagram ?? '',
                     'linkedin' => $request->linkedin ?? '',
+                    'youtube' => $request->youtube ?? '',
                 ]);
             } else {
                 $listing->socialLink()->create([
@@ -485,6 +495,7 @@ class ListingController extends Controller
                     'twitter' => $request->twitter ?? '',
                     'instagram' => $request->instagram ?? '',
                     'linkedin' => $request->linkedin ?? '',
+                    'youtube' => $request->youtube ?? '',
                 ]);
             }
     

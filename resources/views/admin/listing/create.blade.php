@@ -350,7 +350,6 @@
                                             'Sunday',
                                         ];
                                         $times = [
-                                            '',
                                             '1 :00 AM',
                                             '2 :00 AM',
                                             '3 :00 AM',
@@ -483,14 +482,6 @@
                                         <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
                                             <div class="form-group">
                                                 <label class="mb-1"><i
-                                                        class="ti-twitter theme-cl me-1"></i>Twitter</label>
-                                                <input type="text" class="form-control rounded" name="twitter"
-                                                    placeholder="https://twitter.com/" />
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
-                                            <div class="form-group">
-                                                <label class="mb-1"><i
                                                         class="ti-instagram theme-cl me-1"></i>Instagram</label>
                                                 <input type="text" class="form-control rounded" name="instagram"
                                                     placeholder="https://instagram.com/" />
@@ -502,6 +493,14 @@
                                                         class="ti-linkedin theme-cl me-1"></i>Linkedin</label>
                                                 <input type="text" class="form-control rounded" name="linkedin"
                                                     placeholder="https://linkedin.com/" />
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                                            <div class="form-group">
+                                                <label class="mb-1"><i
+                                                        class="ti-youtube theme-cl me-1"></i>Youtube</label>
+                                                <input type="text" class="form-control rounded" name="youtube"
+                                                    placeholder="https://youtube.com/" />
                                             </div>
                                         </div>
                                     </div>
