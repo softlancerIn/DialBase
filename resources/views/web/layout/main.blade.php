@@ -14,6 +14,8 @@
     <title>{{ $seoData->title ?? 'DialBase' }}</title>
     <meta name="description" content="{{ $seoData->description ?? '' }}">
     <meta name="keywords" content="{{ $seoData->keywords ?? '' }}">
+    <meta name="robots" content="follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large"/>
+    <link rel="canonical" href="{{$currentUrl}}" />
     {!! $seoData->script ?? '' !!}
 
     <!-- Favicon -->

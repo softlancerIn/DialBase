@@ -14,28 +14,28 @@ class SeoSeeder extends Seeder
     {
         $rows = [
             [
-                'url' => '/',
+                'url' => 'https://www.aboutfirms.com',
                 'title' => 'DialBase - Home',
                 'keywords' => 'dialbase, directory, listings',
                 'description' => 'Welcome to DialBase, discover and list top local businesses.',
                 'script' => '',
             ],
             [
-                'url' => 'about',
+                'url' => 'https://www.aboutfirms.com/about',
                 'title' => 'About Us - DialBase',
                 'keywords' => 'about, dialbase',
                 'description' => 'Learn more about DialBase and our mission.',
                 'script' => '',
             ],
             [
-                'url' => 'blogs',
+                'url' => 'https://www.aboutfirms.com/blogs',
                 'title' => 'Blogs - DialBase',
                 'keywords' => 'blogs, news, updates',
                 'description' => 'Read the latest blogs and updates on DialBase.',
                 'script' => '',
             ],
             [
-                'url' => 'listing/sample-listing',
+                'url' => 'https://www.aboutfirms.com/listing/sample-listing',
                 'title' => 'Sample Listing - DialBase',
                 'keywords' => 'listing, sample',
                 'description' => 'Sample listing SEO data placeholder. Update via Admin when creating a listing.',
