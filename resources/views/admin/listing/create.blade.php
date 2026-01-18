@@ -12,20 +12,12 @@
                         </ol>
                     </nav>
                 </div>
-
-                <div class="col-xl-3 col-lg-3 col-md-3">
-                    <div class="btn-group float-end mt-2">
-                        <div class="form-group">
-                            <button class="btn btn-primary rounded text-light">Submit</button>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
         <div class="dashboard-widg-bar d-block">
             <div class="row">
                 <div class="col-xl-12 col-lg-2 col-md-12 col-sm-12">
-                    <form action="{{ route('listing-data.store') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('listing-data.store') }}" method="POST" enctype="multipart/form-data" id="listing-form">
                         @csrf
                         @if (session('success'))
                             <div class="alert alert-success">{{ session('success') }}</div>
@@ -501,6 +493,13 @@
                                                         class="ti-youtube theme-cl me-1"></i>Youtube</label>
                                                 <input type="text" class="form-control rounded" name="youtube"
                                                     placeholder="https://youtube.com/" />
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <button type="submit" form="listing-form"
+                                                    class="btn btn-primary rounded text-light me-2">Submit</button>
                                             </div>
                                         </div>
                                     </div>
