@@ -9,12 +9,12 @@ class StateData
         return [
             [
                 'id' => 1,
-                'name' => 'Andhra Pradesh',
+                'name' => 'Andhra-Pradesh',
                 'cities' => ['Visakhapatnam', 'Vijayawada', 'Hyderabad', 'Nellore', 'Tirupati', 'Rajahmundry', 'Guntur', 'Kadapa', 'Warangal', 'Khammam', 'Kurnool', 'Anantapur']
             ],
             [
                 'id' => 2,
-                'name' => 'Arunachal Pradesh',
+                'name' => 'Arunachal-Pradesh',
                 'cities' => ['Itanagar', 'Naharlagun', 'Pasighat', 'Tezu', 'Roing', 'Bomdila', 'Changlang', 'Tawang']
             ],
             [
@@ -35,7 +35,7 @@ class StateData
             [
                 'id' => 6,
                 'name' => 'Goa',
-                'cities' => ['Panaji', 'Margao', 'Vasco da Gama', 'Pernem', 'Ponda', 'Sattari', 'Bicholim', 'Sanquelim', 'Curchorem', 'Quepem']
+                'cities' => ['Panaji', 'Margao', 'Vasco-da-Gama', 'Pernem', 'Ponda', 'Sattari', 'Bicholim', 'Sanquelim', 'Curchorem', 'Quepem']
             ],
             [
                 'id' => 7,
@@ -49,7 +49,7 @@ class StateData
             ],
             [
                 'id' => 9,
-                'name' => 'Himachal Pradesh',
+                'name' => 'Himachal-Pradesh',
                 'cities' => ['Shimla', 'Solan', 'Mandi', 'Kangra', 'Kullu', 'Chamba', 'Bilaspur', 'Palampur', 'Dharamshala', 'Baddi', 'Kinnaur']
             ],
             [
@@ -69,13 +69,13 @@ class StateData
             ],
             [
                 'id' => 13,
-                'name' => 'Madhya Pradesh',
+                'name' => 'Madhya-Pradesh',
                 'cities' => ['Indore', 'Bhopal', 'Jabalpur', 'Gwalior', 'Ujjain', 'Sager', 'Rewa', 'Khandwa', 'Khimti', 'Burhanpur', 'Dewas', 'Itarsi', 'Dhar', 'Betul', 'Chhindwara']
             ],
             [
                 'id' => 14,
                 'name' => 'Maharashtra',
-                'cities' => ['Mumbai', 'Pune', 'Nagpur', 'Ahmedabad', 'Thane', 'Amanora Park Town', 'Kolhapur', 'Nashik', 'Aurangabad', 'Solapur', 'Latur', 'Sangli', 'Nandurbar', 'Jalgaon', 'Parbhani', 'Buldhana', 'Yavatmal', 'Amravati', 'Chandrapur', 'Akola', 'Washim', 'Gondia']
+                'cities' => ['Mumbai', 'Pune', 'Nagpur', 'Ahmedabad', 'Thane', 'Amanora-Park-Town', 'Kolhapur', 'Nashik', 'Aurangabad', 'Solapur', 'Latur', 'Sangli', 'Nandurbar', 'Jalgaon', 'Parbhani', 'Buldhana', 'Yavatmal', 'Amravati', 'Chandrapur', 'Akola', 'Washim', 'Gondia']
             ],
             [
                 'id' => 15,
@@ -119,7 +119,7 @@ class StateData
             ],
             [
                 'id' => 23,
-                'name' => 'Tamil Nadu',
+                'name' => 'Tamil-Nadu',
                 'cities' => ['Chennai', 'Coimbatore', 'Madurai', 'Salem', 'Tiruchirappalli', 'Tirunelveli', 'Erode', 'Tirupur', 'Kanchipuram', 'Cuddalore', 'Villupuram', 'Ranipet', 'Tiruvannamalai', 'Nandyal', 'Chengalpattu', 'Perambalur', 'Pudukkottai', 'Sivaganga', 'Ramanathapuram']
             ],
             [
@@ -134,23 +134,23 @@ class StateData
             ],
             [
                 'id' => 26,
-                'name' => 'Uttar Pradesh',
-                'cities' => ['Lucknow', 'Kanpur', 'Ghaziabad', 'Agra', 'Varanasi', 'Meerut', 'Allahabad', 'Bareilly', 'Noida', 'Greater Noida', 'Aligarh', 'Saharanpur', 'Mathura', 'Firozabad', 'Rampur', 'Moradabad', 'Azamgarh', 'Gorakhpur', 'Jhansi', 'Gwalior', 'Sultanpur', 'Banda', 'Fatehpur', 'Hardoi', 'Lucknow', 'Badaun', 'Bulandshahr', 'Etah']
+                'name' => 'Uttar-Pradesh',
+                'cities' => ['Lucknow', 'Kanpur', 'Ghaziabad', 'Agra', 'Varanasi', 'Meerut', 'Mirzapur', 'Allahabad', 'Bareilly', 'Bhadohi', 'Noida', 'Greater-Noida', 'Aligarh', 'Saharanpur', 'Mathura', 'Firozabad', 'Rampur', 'Moradabad', 'Azamgarh', 'Gorakhpur', 'Jhansi', 'Gwalior', 'Sultanpur', 'Banda', 'Fatehpur', 'Hardoi', 'Lucknow', 'Badaun', 'Bulandshahr', 'Etah']
             ],
             [
                 'id' => 27,
                 'name' => 'Uttarakhand',
-                'cities' => ['Dehradun', 'Roorkee', 'Haridwar', 'Nainital', 'Almora', 'Bageshwar', 'Chamoli', 'Champawat', 'Pauri', 'Pithoragarh', 'Rudraprayag', 'Tehri', 'Udham Singh Nagar', 'Uttarkashi']
+                'cities' => ['Dehradun', 'Roorkee', 'Haridwar', 'Nainital', 'Almora', 'Bageshwar', 'Chamoli', 'Champawat', 'Pauri', 'Pithoragarh', 'Rudraprayag', 'Tehri', 'Udham-Singh-Nagar', 'Uttarkashi']
             ],
             [
                 'id' => 28,
-                'name' => 'West Bengal',
-                'cities' => ['Kolkata', 'Howrah', 'Durgapur', 'Asansol', 'Siliguri', 'Belgaum', 'Kharagpur', 'Midnapore', 'Jalpaiguri', 'Malda', 'Cooch Behar', 'Darjeeling', 'Kalimpong', 'Alipurduar', 'Nadia', 'Birbhum', 'Bankura']
+                'name' => 'West-Bengal',
+                'cities' => ['Kolkata', 'Howrah', 'Durgapur', 'Asansol', 'Siliguri', 'Belgaum', 'Kharagpur', 'Midnapore', 'Jalpaiguri', 'Malda', 'Cooch-Behar', 'Darjeeling', 'Kalimpong', 'Alipurduar', 'Nadia', 'Birbhum', 'Bankura']
             ],
             [
                 'id' => 29,
                 'name' => 'Delhi',
-                'cities' => ['New Delhi', 'Central Delhi', 'East Delhi', 'South Delhi', 'West Delhi', 'North Delhi']
+                'cities' => ['New-Delhi', 'Central-Delhi', 'East-Delhi', 'South-Delhi', 'West-Delhi', 'North-Delhi']
             ],
             [
                 'id' => 30,
@@ -164,13 +164,13 @@ class StateData
             ],
             [
                 'id' => 32,
-                'name' => 'Jammu and Kashmir',
+                'name' => 'Jammu-and-Kashmir',
                 'cities' => ['Srinagar', 'Jammu', 'Leh', 'Kargil', 'Anantnag', 'Baramulla', 'Kupwara', 'Ganderbal', 'Budgam', 'Kulgam', 'Pulwama', 'Shopian', 'Samba', 'Kathua', 'Doda', 'Kishtwar', 'Ramban', 'Reasi', 'Poonch', 'Rajouri']
             ],
             [
                 'id' => 33,
-                'name' => 'Andaman and Nicobar Islands',
-                'cities' => ['Port Blair', 'Andaman', 'Nicobar']
+                'name' => 'Andaman-and-Nicobar-Islands',
+                'cities' => ['Port-Blair', 'Andaman', 'Nicobar']
             ],
             [
                 'id' => 34,
@@ -179,7 +179,7 @@ class StateData
             ],
             [
                 'id' => 35,
-                'name' => 'Dadar and Nagar Haveli and Daman and Diu',
+                'name' => 'Dadar-and-Nagar-Haveli-and-Daman-and-Diu',
                 'cities' => ['Daman', 'Diu', 'Silvassa']
             ],
             [
