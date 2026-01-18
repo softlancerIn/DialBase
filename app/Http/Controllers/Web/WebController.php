@@ -23,7 +23,7 @@ class WebController extends Controller
 
         $query = Listing::with(['images', 'workingHours', 'amenities', 'category', 'reviews.user']);
 
-        $data['listing'] = $query->where('is_featured', 1)->where('status', '1')->take(12)->get();
+        $data['listing'] = $query->where('is_featured', 1)->where('status', '1')->take(12)->orderByDesc('sort_order')->get();
 
         foreach ($data['listing'] as $listing) {
             $listing->reviews_count = $listing->reviews->where('status', 1)->count();
@@ -317,7 +317,7 @@ class WebController extends Controller
             $query->where('is_featured', 1);
         }
 
-        $listings = $query->paginate(12)->withQueryString();
+        $listings = $query->orderByDesc('sort_order')->paginate(12)->withQueryString();
 
         if ($open_now) {
             $collection = $listings->getCollection()->filter(function ($listing) {
