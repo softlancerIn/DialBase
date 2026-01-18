@@ -2,7 +2,7 @@
     <div class="goodup-dashboard-content p-0">
         <div class="dashboard-tlbar d-block mb-3">
             <div class="row">
-                <div class="col-xl-9 col-lg-9 col-md-9">
+                <div class="col-xl-12 col-lg-12 col-md-12">
                     <h1 class="ft-medium">{{ isset($data['blog']) && !empty($data['blog']) && !empty($data['blog']['id']) ? 'Edit Blog' : 'Create Blog' }}</h1>
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
@@ -10,14 +10,6 @@
                             <li class="breadcrumb-item"><a href="#" class="theme-cl">{{ isset($data['blog']) && !empty($data['blog']) && !empty($data['blog']['id']) ? 'Edit Blog' : 'Create Blog' }}</a></li>
                         </ol>
                     </nav>
-                </div>
-
-                <div class="col-xl-3 col-lg-3 col-md-3">
-                    <div class="btn-group float-end mt-2">
-                        <div class="form-group">
-                            <button class="btn btn-primary rounded text-light">Submit</button>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -27,7 +19,7 @@
                 <div class="col-xl-12 col-lg-12">
                     <div class="card">
                         <div class="card-body">
-                            <form action="{{ route('save_blog') }}" method="POST" class="row g-3" enctype="multipart/form-data">
+                            <form action="{{ route('save_blog') }}" method="POST" class="row g-3" enctype="multipart/form-data" id="blog-form">
                                 @csrf
                                 <div class="col-12">
                                     <label for="inputFirstName" class="form-label">Blog Name</label>
@@ -54,6 +46,9 @@
                                 <div class="col-12">
                                     <label for="longtextarea" class="form-label">Description</label>
                                     <textarea name="description" class="form-control" id="longtextarea" placeholder="Description..." rows="5">{{ $data['blog']['description'] ?? '' }}</textarea>
+                                </div>
+                                <div class="col-12">
+                                    <button type="submit" form="blog-form" class="btn btn-primary rounded text-light me-2">Submit</button>
                                 </div>
                             </form>
                         </div>

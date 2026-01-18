@@ -14,19 +14,13 @@
                 </div>
 
                 <div class="col-xl-3 col-lg-3 col-md-3">
-                    <div class="btn-group float-end mt-2">
-                        <div class="form-group">
-                            <button class="btn btn-primary rounded text-light">Update</button>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
         <div class="dashboard-widg-bar d-block">
             <div class="row">
                 <div class="col-xl-12 col-lg-2 col-md-12 col-sm-12">
                     <form action="{{ route('listing-data.update', $data['listing']->id) }}" method="POST"
-                        enctype="multipart/form-data">
+                        enctype="multipart/form-data" id="listing-form">
                         @csrf
                         @method('PUT')
                         @if (session('success'))
@@ -577,6 +571,10 @@
                                                     placeholder="https://youtube.com/"
                                                     value="{{ old('youtube', optional($data['listing']->socialLink)->youtube) }}" />
                                             </div>
+                                        </div>
+
+                                        <div class="col-12">
+                                            <button type="submit" form="listing-form" class="btn btn-primary rounded text-light me-2">Update</button>
                                         </div>
                                     </div>
                                 </div>

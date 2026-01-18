@@ -13,12 +13,6 @@
                 </div>
 
                 <div class="col-xl-3 col-lg-3 col-md-3">
-                    <div class="btn-group float-end mt-2">
-                        <div class="form-group">
-                            <button class="btn btn-primary rounded text-light">Submit</button>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
         <hr />
