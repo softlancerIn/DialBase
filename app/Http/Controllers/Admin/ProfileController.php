@@ -24,6 +24,10 @@ class ProfileController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => 'required',
+            'facebook' => 'nullable|url',
+            'twitter' => 'nullable|url',
+            'instagram' => 'nullable|url',
+            'linkedin' => 'nullable|url',
         ]);
 
         $userData = User::where('id', $request->user_id)->first();
@@ -31,6 +35,10 @@ class ProfileController extends Controller
         $update_data = User::where('id', $request->user_id)->update([
             'name' => $request->name,
             'email' => $request->email,
+            'facebook' => $request->facebook,
+            'twitter' => $request->twitter,
+            'instagram' => $request->instagram,
+            'linkedin' => $request->linkedin,
         ]);
 
         if (! empty($update_data)) {
