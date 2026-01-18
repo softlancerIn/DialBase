@@ -11,14 +11,6 @@
                         </ol>
                     </nav>
                 </div>
-
-                <div class="col-xl-3 col-lg-3 col-md-3">
-                    <div class="btn-group float-end mt-2">
-                        <div class="form-group">
-                            <button class="btn btn-primary rounded text-light">Submit</button>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
 
@@ -100,6 +92,10 @@
                             <div class="col-12">
                                 <label for="inputScript" class="form-label">Meta Script</label>
                                 <textarea name="script" class="form-control" id="inputScript" placeholder="Meta Script..." rows="5">{{ old('script', '') }}</textarea>
+                            </div>
+
+                            <div class="col-2">
+                                <button type="submit" class="btn btn-primary px-5">Submit</button>
                             </div>
                         </form>
                     </div>
