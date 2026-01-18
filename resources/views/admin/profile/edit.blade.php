@@ -15,7 +15,7 @@
                 <div class="col-xl-3 col-lg-3 col-md-3">
                     <div class="btn-group float-end mt-2">
                         <div class="form-group">
-                            <button class="btn theme-bg rounded text-light">Save Changes</button>
+                            <button type="submit" form="profileForm" class="btn theme-bg rounded text-light">Save Changes</button>
                         </div>
                     </div>
                 </div>
@@ -40,31 +40,31 @@
                                         <div class="form-group">
                                             <label class="mb-1"><i
                                                     class="ti-facebook theme-cl me-1"></i>Facebook</label>
-                                            <input type="text" class="form-control rounded"
-                                                placeholder="https://facebook.com/" />
+                                            <input type="text" class="form-control rounded" name="facebook" form="profileForm"
+                                                placeholder="https://facebook.com/" value="{{ old('facebook', $data['user']->facebook ?? '') }}" />
                                         </div>
                                     </div>
                                     <div class="col-12 mb-3">
                                         <div class="form-group">
                                             <label class="mb-1"><i class="ti-twitter theme-cl me-1"></i>Twitter</label>
-                                            <input type="text" class="form-control rounded"
-                                                placeholder="https://twitter.com/" />
+                                            <input type="text" class="form-control rounded" name="twitter" form="profileForm"
+                                                placeholder="https://twitter.com/" value="{{ old('twitter', $data['user']->twitter ?? '') }}" />
                                         </div>
                                     </div>
                                     <div class="col-12 mb-3">
                                         <div class="form-group">
                                             <label class="mb-1"><i
                                                     class="ti-instagram theme-cl me-1"></i>Instagram</label>
-                                            <input type="text" class="form-control rounded"
-                                                placeholder="https://instagram.com/" />
+                                            <input type="text" class="form-control rounded" name="instagram" form="profileForm"
+                                                placeholder="https://instagram.com/" value="{{ old('instagram', $data['user']->instagram ?? '') }}" />
                                         </div>
                                     </div>
                                     <div class="col-12 mb-3">
                                         <div class="form-group">
                                             <label class="mb-1"><i
                                                     class="ti-linkedin theme-cl me-1"></i>Linkedin</label>
-                                            <input type="text" class="form-control rounded"
-                                                placeholder="https://linkedin.com/" />
+                                            <input type="text" class="form-control rounded" name="linkedin" form="profileForm"
+                                                placeholder="https://linkedin.com/" value="{{ old('linkedin', $data['user']->linkedin ?? '') }}" />
                                         </div>
                                     </div>
                                 </div>
@@ -73,7 +73,7 @@
                     </div>
                 </div>
                 <div class="col-xl-9 col-lg-9 col-md-8 col-sm-12">
-                    <form action="{{ route('update_profile') }}" method="POST" enctype="multipart/form-data">
+                    <form id="profileForm" action="{{ route('update_profile') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <input type="hidden" name="user_id" value="{{ $data['user']->id }}">
                         <div class="dashboard-list-wraps bg-white rounded mb-4">
