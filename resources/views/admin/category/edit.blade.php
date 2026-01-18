@@ -13,13 +13,6 @@
                     </nav>
                 </div>
 
-                <div class="col-xl-3 col-lg-3 col-md-3">
-                    <div class="btn-group float-end mt-2">
-                        <div class="form-group">
-                            <button class="btn btn-primary rounded text-light">Submit</button>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
 
@@ -53,6 +46,9 @@
                             <div class="col-12">
                                 <label for="inputAddress2" class="form-label">Description</label>
                                 <textarea name="description" class="form-control" id="mytextarea" placeholder="Description..." rows="5">{{ $data['description'] ?? (old('description') ?? '') }}</textarea>
+                            </div>
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-primary rounded text-light">Submit</button>
                             </div>
                         </form>
                     </div>
