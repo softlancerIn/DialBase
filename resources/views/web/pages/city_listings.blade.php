@@ -1,6 +1,10 @@
 @extends('web.layout.main')
 
 @section('content')
+    @php
+        $currentUrl = url()->current();
+        $seoData = \App\Models\Seo::where('url', $currentUrl)->first();
+    @endphp
     <!-- ======================= Breadcrumb ======================== -->
     <div class="breadcrumb-wrap"
         style="background:#f36479 url({{ $data['category']->image ? asset('upload_image/category/' . $data['category']->image) : asset('assets/img/banner-2.jpg') }}) no-repeat; background-size: 100%;"
@@ -11,14 +15,11 @@
                     <div class="breadcrumb_caption text-center py-5">
                         <h1 class="page_title fw-bold fs-1 fs-md-2 fs-lg-1">
                             {{ $seoData->page_title ?? ($data['category']->name ?? 'Cities') }}</h1>
-                        @if (isset($seoData->page_sort_description))
-                            <p class="fs-lg ft-light">{!! $seoData->page_sort_description !!}</p>
-                        @endif
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb justify-content-center mt-2" style="color: white;">
                                 <li class=""><a href="{{ route('index') }}" style="color: white;">Home </a></li>
                                 <li class="active" aria-current="page" style="color: white;"> /
-                                    {{ $data['category']->name ?? 'Cities' }}</li>
+                                    {{ $seoData->page_title ?? ($data['category']->name ?? 'Cities') }}</li>
                             </ol>
                         </nav>
                     </div>
@@ -33,7 +34,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-                    {!! $data['category']->description !!}
+                    {!! $seoData->page_sort_description ?? $data['category']->description !!}
                 </div>
                 @if (isset($data['city_listings']) && count($data['city_listings']) > 0)
                     @foreach ($data['city_listings'] as $city)

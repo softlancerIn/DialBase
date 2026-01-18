@@ -182,6 +182,11 @@ class ScrapingController extends Controller
             foreach ($scrapedData as $data) {
                 if (!$data['title']) continue;
 
+                // Skip if listing already exists based on title
+                if (Listing::where('title', $data['title'])->exists()) {
+                    continue;
+                }
+
                 // Generate Unique Slug
                 $slug = Str::slug($data['title']);
                 $slugCount = Listing::where('slug', 'LIKE', "{$slug}%")->count();
@@ -277,6 +282,11 @@ class ScrapingController extends Controller
         try {
             foreach ($scrapedData as $data) {
                 if (!$data['title']) continue;
+
+                // Skip if listing already exists based on title
+                if (Listing::where('title', $data['title'])->exists()) {
+                    continue;
+                }
 
                 // Generate Unique Slug
                 $slug = Str::slug($data['title']);

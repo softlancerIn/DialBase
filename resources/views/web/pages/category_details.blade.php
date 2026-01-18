@@ -1,6 +1,10 @@
 @extends('web.layout.main')
 
 @section('content')
+    @php
+        $currentUrl = url()->current();
+        $seoData = \App\Models\Seo::where('url', $currentUrl)->first();
+    @endphp
     <!-- ======================= Breadcrumb ======================== -->
     <div class="breadcrumb-wrap"
         style="background:#f36479 url({{ $data['category']->image ? asset('upload_image/category/' . $data['category']->image) : asset('assets/img/banner-2.jpg') }}) no-repeat; background-size: cover; background-position: center;"
@@ -16,15 +20,11 @@
                             {{ $seoData->page_title ?? ($data['category']->name ?? 'Category') }}
                             {{ !empty($currentLocation) ? 'In ' . $currentLocation : '' }}
                         </h1>
-                        @if (isset($seoData->page_sort_description))
-                            <p class="fs-lg ft-light">{!! $seoData->page_sort_description !!}</p>
-                        @endif
-
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb justify-content-center mt-2" style="color: white;">
                                 <li class=""><a href="{{ route('index') }}" style="color: white;">Home </a></li>
                                 <li class="active" aria-current="page" style="color: white;"> /
-                                    {{ $data['category']->name ?? 'Category' }}</li>
+                                    {{ $seoData->page_title ?? ($data['category']->name ?? 'Category') }}</li>
                             </ol>
                         </nav>
                     </div>
@@ -97,7 +97,7 @@
                 <div class="col-xl-9 col-lg-8 col-md-12">
                     <div class="row">
                         <div>
-                            <p class="text-dark fs-md">{!! $data['category']->description ?? '' !!}</p>
+                            <p class="text-dark fs-md">{!! $seoData->page_sort_description ?? $data['category']->description ?? '' !!}</p>
                         </div>
                         @if ($data['listings'] && $data['listings']->count() > 0)
                             @foreach ($data['listings'] as $listing)

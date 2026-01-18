@@ -1,6 +1,10 @@
 @extends('web.layout.main')
 
 @section('content')
+    @php
+        $currentUrl = url()->current();
+        $seoData = \App\Models\Seo::where('url', $currentUrl)->first();
+    @endphp
     <!-- ======================= Search Results ======================== -->
     <section class="gray py-5">
         <div class="container">
