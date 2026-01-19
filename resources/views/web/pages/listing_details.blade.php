@@ -639,7 +639,7 @@
                 shareBtn.addEventListener('click', async () => {
                     const shareData = {
                         title: '{{ $data['listing']->title }}',
-                        text: 'Check out this listing on DialBase!',
+                        text: 'Check out this listing on Aboutfirms!',
                         url: window.location.href
                     };
 
