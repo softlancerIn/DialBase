@@ -273,7 +273,7 @@
                             <p class="mb-3">Retained until you unsubscribe or request deletion</p>
 
                             <p>You can request data deletion anytime by contacting us at <a
-                                    href="mailto:contact@aboutfirms.com">contact@aboutfirms.com</a></p>
+                                    href="mailto:sales@aboutfirms.com">sales@aboutfirms.com</a></p>
                         </div>
 
                         <!-- Section 7 -->
@@ -318,7 +318,7 @@
                             </ul>
 
                             <p>To exercise these rights, contact us at: <a
-                                    href="mailto:contact@aboutfirms.com">contact@aboutfirms.com</a></p>
+                                    href="mailto:sales@aboutfirms.com">sales@aboutfirms.com</a></p>
                         </div>
 
                         <!-- Section 8 -->
@@ -407,7 +407,7 @@
                                 <li><strong>Non-Discrimination:</strong> We won't discriminate for exercising your rights
                                 </li>
                             </ul>
-                            <p>California Contact: <a href="mailto:contact@aboutfirms.com">contact@aboutfirms.com</a> with
+                            <p>California Contact: <a href="mailto:sales@aboutfirms.com">sales@aboutfirms.com</a> with
                                 subject "California Privacy Request"</p>
                         </div>
 
@@ -419,7 +419,7 @@
                                 <li><strong>Data Controller:</strong> Aboutfirms</li>
                                 <li><strong>Legal Basis:</strong> As outlined in Section 3</li>
                                 <li><strong>Data Protection Officer:</strong> <a
-                                        href="mailto:contact@aboutfirms.com">contact@aboutfirms.com</a></li>
+                                        href="mailto:sales@aboutfirms.com">sales@aboutfirms.com</a></li>
                                 <li><strong>Supervisory Authority:</strong> You can lodge complaints with your local data
                                     protection authority</li>
                             </ul>
@@ -446,7 +446,7 @@
                             </ul>
 
                             <p><strong>Unsubscribe:</strong> Click the link at the bottom of any marketing email or email us
-                                at <a href="mailto:contact@aboutfirms.com">contact@aboutfirms.com</a></p>
+                                at <a href="mailto:sales@aboutfirms.com">sales@aboutfirms.com</a></p>
                         </div>
 
                         <!-- Section 15 -->
@@ -481,18 +481,18 @@
                             <div class="p-4 bg-light rounded">
                                 <h5 class="ft-medium mb-3">Privacy Team:</h5>
                                 <p class="mb-2"><strong>Email:</strong> <a
-                                        href="mailto:contact@aboutfirms.com">contact@aboutfirms.com</a></p>
+                                        href="mailto:sales@aboutfirms.com">sales@aboutfirms.com</a></p>
                                 <p class="mb-2"><strong>Phone:</strong> 9971123025</p>
                                 <p class="mb-4"><strong>Address:</strong> 1st Sector, HSR Layout, Bengaluru, Karnataka
                                     560102</p>
 
                                 <h5 class="ft-medium mb-3">Data Protection Officer:</h5>
                                 <p class="mb-4"><strong>Email:</strong> <a
-                                        href="mailto:contact@aboutfirms.com">contact@aboutfirms.com</a></p>
+                                        href="mailto:sales@aboutfirms.com">sales@aboutfirms.com</a></p>
 
                                 <h5 class="ft-medium mb-3">General Support:</h5>
                                 <p class="mb-2"><strong>Email:</strong> <a
-                                        href="mailto:contact@aboutfirms.com">contact@aboutfirms.com</a></p>
+                                        href="mailto:sales@aboutfirms.com">sales@aboutfirms.com</a></p>
                                 <p class="mb-2"><strong>Hours:</strong> Monday - Friday, 9 AM - 6 PM</p>
                                 <p class="mb-0"><strong>Response Time:</strong> We aim to respond within 48 business
                                     hours.</p>
