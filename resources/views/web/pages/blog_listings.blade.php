@@ -33,7 +33,7 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-                    {!! $seoData->page_sort_description ?? $data['category']->description !!}
+                    {!! $seoData->page_sort_description ?? '' !!}
                 </div>
                 @foreach ($all_blogs ?? [] as $blog)
                     <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">

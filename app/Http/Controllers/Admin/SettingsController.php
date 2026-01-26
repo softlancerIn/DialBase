@@ -17,21 +17,27 @@ class SettingsController extends Controller
 
     public function saveState(Request $request)
     {
+        $name = str_replace(' ', '-', $request->name);
+        $request->merge(['name' => $name]);
+
         $request->validate(['name' => 'required|string|max:255|unique:states,name']);
 
-        State::create(['name' => $request->name]);
+        State::firstOrCreate(['name' => $request->name]);
 
         return redirect()->back()->with('success', 'State created successfully');
     }
 
     public function saveCity(Request $request)
     {
+        $name = str_replace(' ', '-', $request->name);
+        $request->merge(['name' => $name]);
+
         $request->validate([
             'state_id' => 'required|exists:states,id',
             'name' => 'required|string|max:255'
         ]);
 
-        City::create([
+        City::firstOrCreate([
             'state_id' => $request->state_id,
             'name' => $request->name
         ]);

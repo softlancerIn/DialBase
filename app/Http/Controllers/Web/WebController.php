@@ -529,6 +529,22 @@ class WebController extends Controller
         return view('web.pages.privacy_policy');
     }
 
+    public function faq()
+    {
+        return view('web.pages.faq');
+    }
+
+    public function sitemap()
+    {
+        $data['categories'] = Category::where('status', 1)->where('cat_id', 0)->orderBy('name')->get();
+        $data['cities'] = Listing::where('status', 1)->whereNotNull('city')->distinct()->pluck('city')->sort();
+        $data['listings'] = Listing::where('status', 1)->orderBy('title')->get();
+        $data['blogs'] = Blog::where('status', 1)->latest()->get();
+        $data['products'] = Product::all();
+
+        return view('web.pages.sitemap', compact('data'));
+    }
+
     public function seo_listing_detail($country, $category_slug, $city, $slug)
     {
         $listing = Listing::where('slug', $slug)

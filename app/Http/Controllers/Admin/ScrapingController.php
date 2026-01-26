@@ -8,6 +8,8 @@ use Symfony\Component\DomCrawler\Crawler;
 use App\Models\Category;
 use App\Models\Listing;
 use App\Models\Amenity;
+use App\Models\State;
+use App\Models\City;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
@@ -199,6 +201,17 @@ class ScrapingController extends Controller
                 // Sleep to respect rate limits
                 sleep(1);
 
+                // Hyphenate State and City
+                $stateName = str_replace(' ', '-', $geoData['state'] ?? 'Unknown');
+                $cityName = str_replace(' ', '-', $geoData['city'] ?? 'Unknown');
+
+                // Save State and City to tables
+                $state = State::firstOrCreate(['name' => $stateName]);
+                $city = City::firstOrCreate([
+                    'name' => $cityName,
+                    'state_id' => $state->id
+                ]);
+
                 // Create Listing
                 $listing = Listing::create([
                     'title' => $data['title'],
@@ -213,8 +226,8 @@ class ScrapingController extends Controller
                     // Geocoded fields
                     'latitude' => $geoData['latitude'],
                     'longitude' => $geoData['longitude'],
-                    'state' => $geoData['state'],
-                    'city' => $geoData['city'],
+                    'state' => $stateName,
+                    'city' => $cityName,
                     'zip_code' => $geoData['zip_code'],
                     'email' => 'scraped@example.com',
                     'about' => 'Scraped Listing',
@@ -300,6 +313,17 @@ class ScrapingController extends Controller
                 // Sleep to respect rate limits
                 sleep(1);
 
+                // Hyphenate State and City
+                $stateName = str_replace(' ', '-', $geoData['state'] ?? 'Unknown');
+                $cityName = str_replace(' ', '-', $geoData['city'] ?? 'Unknown');
+
+                // Save State and City to tables
+                $state = State::firstOrCreate(['name' => $stateName]);
+                $city = City::firstOrCreate([
+                    'name' => $cityName,
+                    'state_id' => $state->id
+                ]);
+
                 // Create Listing
                 $listing = Listing::create([
                     'title' => $data['title'],
@@ -314,8 +338,8 @@ class ScrapingController extends Controller
                     // Geocoded fields
                     'latitude' => $geoData['latitude'],
                     'longitude' => $geoData['longitude'],
-                    'state' => $geoData['state'],
-                    'city' => $geoData['city'],
+                    'state' => $stateName,
+                    'city' => $cityName,
                     'zip_code' => $geoData['zip_code'],
                     'email' => 'scraped@example.com',
                     'about' => 'Scraped Listing',
