@@ -76,7 +76,7 @@
         <!-- ============================================================== -->
 
         <!-- ======================= dashboard Detail ======================== -->
-        <div class="goodup-dashboard-wrap gray px-4 py-5">
+        <div class="goodup-dashboard-wrap px-4 py-5">
             <a class="mobNavigation" data-bs-toggle="collapse" href="#MobNav" role="button" aria-expanded="false"
                 aria-controls="MobNav">
                 <i class="fas fa-bars me-2"></i>Dashboard Navigation
