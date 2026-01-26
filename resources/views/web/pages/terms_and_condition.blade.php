@@ -339,7 +339,7 @@
                             <p class="mb-3">For questions, concerns, or disputes regarding these Terms:</p>
 
                             <div class="p-4 bg-light rounded">
-                                <p class="mb-2"><strong>Email:</strong> contact@aboutfirms.com</p>
+                                <p class="mb-2"><strong>Email:</strong> sales@aboutfirms.com</p>
                                 <p class="mb-2"><strong>Phone:</strong> 9971123025</p>
                                 <p class="mb-2"><strong>Address:</strong> 1st Sector, HSR Layout, Bengaluru, Karnataka
                                     560102</p>

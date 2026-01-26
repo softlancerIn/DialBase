@@ -3,7 +3,7 @@
         <div class="container">
             <div class="row">
 
-                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12">
                     <div class="footer_widget">
                         <img src="{{asset('assets/img/logo.png')}}" class="img-footer small mb-2" alt="" />
 
@@ -15,30 +15,24 @@
                         </div>
                         <div class="address mt-2">
                             <ul class="list-inline">
-                                <li class="list-inline-item"><a href="#" class="theme-cl"><i
-                                            class="lni lni-facebook-filled"></i></a></li>
-                                <li class="list-inline-item"><a href="#" class="theme-cl"><i
+                                <li class="list-inline-item">
+                                    <a
+                                        href="https://www.facebook.com/aboutfirms/"
+                                        class="theme-cl"
+                                    >
+                                        <i class="lni lni-facebook-filled"></i>
+                                    </a>
+                                </li>
+                                <li class="list-inline-item"><a href="https://x.com/aboutfirms" class="theme-cl"><i
                                             class="lni lni-twitter-filled"></i></a></li>
-                                <li class="list-inline-item"><a href="#" class="theme-cl"><i
+                                <li class="list-inline-item"><a href="https://www.youtube.com/@aboutfirms" class="theme-cl"><i
                                             class="lni lni-youtube"></i></a></li>
-                                <li class="list-inline-item"><a href="#" class="theme-cl"><i
+                                <li class="list-inline-item"><a href="https://www.instagram.com/aboutfirms_/" class="theme-cl"><i
                                             class="lni lni-instagram-filled"></i></a></li>
-                                <li class="list-inline-item"><a href="#" class="theme-cl"><i
+                                <li class="list-inline-item"><a href="https://www.linkedin.com/company/aboutfirms" class="theme-cl"><i
                                             class="lni lni-linkedin-original"></i></a></li>
                             </ul>
                         </div>
-                    </div>
-                </div>
-
-                <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12">
-                    <div class="footer_widget">
-                        <h4 class="widget_title">Business Owners</h4>
-                        <ul class="footer-menu">
-                            <li><a href="#">Browse Categories</a></li>
-                            <li><a href="#">Payment Links</a></li>
-                            <li><a href="#">Saved Places</a></li>
-                            <li><a href="#">Dashboard</a></li>
-                        </ul>
                     </div>
                 </div>
 
@@ -60,7 +54,6 @@
                         <h4 class="widget_title">Helpful Topics</h4>
                         <ul class="footer-menu">
                             <li><a href="#">Site Map</a></li>
-                            <li><a href="#">Security</a></li>
                             <li><a href="{{ route('contact') }}">Contact</a></li>
                             <li><a href="#">FAQ's Page</a></li>
                             <li><a href="#">Privacy</a></li>
