@@ -100,66 +100,33 @@
             </div>
 
             <div class="row justify-content-center">
+                @php
+                    $partners = [
+                        ['name' => 'Google', 'logo' => 'assets/img/partners/google.png'],
+                        ['name' => 'Microsoft', 'logo' => 'assets/img/partners/microsoft.png'],
+                        ['name' => 'Apple', 'logo' => 'assets/img/partners/apple.png'],
+                        ['name' => 'IBM', 'logo' => 'assets/img/partners/ibm.png'],
+                        ['name' => 'Meta', 'logo' => 'assets/img/partners/meta.png'],
+                        ['name' => 'HubSpot', 'logo' => 'assets/img/partners/hubspot.png'],
+                        ['name' => 'Forbes', 'logo' => 'assets/img/partners/forbes.png'],
+                        ['name' => 'Marketwatch', 'logo' => 'assets/img/partners/marketwatch.png'],
+                        ['name' => 'Hello Fresh', 'logo' => 'assets/img/partners/hellofresh.png'],
+                        ['name' => 'Ebay', 'logo' => 'assets/img/partners/ebay.png'],
+                        ['name' => 'Delta', 'logo' => 'assets/img/partners/delta.png'],
+                        ['name' => 'TCS', 'logo' => 'assets/img/partners/tcs.png'],
+                    ];
+                @endphp
 
-                <div class="col-xl-2 col-lg-2 col-md-3 col-sm-4 col-6">
-                    <div class="empl-thumb text-center px-3 py-4">
-                        <img src="{{ asset('assets/img/l-9.png') }}" class="img-fluid mx-auto" alt="" />
+                @foreach ($partners as $partner)
+                    <div class="col-xl-2 col-lg-2 col-md-3 col-sm-4 col-6">
+                        <div class="empl-thumb text-center px-3 py-4">
+                            <img src="{{ $partner['logo'] }}" class="img-fluid mx-auto" alt="{{ $partner['name'] }}"
+                                style="max-height: 50px; filter: grayscale(100%); opacity: 0.7;"
+                                onmouseover="this.style.filter='none'; this.style.opacity='1'"
+                                onmouseout="this.style.filter='grayscale(100%)'; this.style.opacity='0.7'" />
+                        </div>
                     </div>
-                </div>
-
-                <div class="col-xl-2 col-lg-2 col-md-3 col-sm-4 col-6">
-                    <div class="empl-thumb text-center px-3 py-4">
-                        <img src="{{ asset('assets/img/l-10.png') }}" class="img-fluid mx-auto" alt="" />
-                    </div>
-                </div>
-
-                <div class="col-xl-2 col-lg-2 col-md-3 col-sm-4 col-6">
-                    <div class="empl-thumb text-center px-3 py-4">
-                        <img src="{{ asset('assets/img/l-11.png') }}" class="img-fluid mx-auto" alt="" />
-                    </div>
-                </div>
-
-                <div class="col-xl-2 col-lg-2 col-md-3 col-sm-4 col-6">
-                    <div class="empl-thumb text-center px-3 py-4">
-                        <img src="{{ asset('assets/img/l-12.png') }}" class="img-fluid mx-auto" alt="" />
-                    </div>
-                </div>
-
-                <div class="col-xl-2 col-lg-2 col-md-3 col-sm-4 col-6">
-                    <div class="empl-thumb text-center px-3 py-4">
-                        <img src="{{ asset('assets/img/l-13.png') }}" class="img-fluid mx-auto" alt="" />
-                    </div>
-                </div>
-
-                <div class="col-xl-2 col-lg-2 col-md-3 col-sm-4 col-6">
-                    <div class="empl-thumb text-center px-3 py-4">
-                        <img src="{{ asset('assets/img/l-14.png') }}" class="img-fluid mx-auto" alt="" />
-                    </div>
-                </div>
-
-                <div class="col-xl-2 col-lg-2 col-md-3 col-sm-4 col-6">
-                    <div class="empl-thumb text-center px-3 py-4">
-                        <img src="{{ asset('assets/img/l-15.png') }}" class="img-fluid mx-auto" alt="" />
-                    </div>
-                </div>
-
-                <div class="col-xl-2 col-lg-2 col-md-3 col-sm-4 col-6">
-                    <div class="empl-thumb text-center px-3 py-4">
-                        <img src="{{ asset('assets/img/l-16.png') }}" class="img-fluid mx-auto" alt="" />
-                    </div>
-                </div>
-
-                <div class="col-xl-2 col-lg-2 col-md-3 col-sm-4 col-6">
-                    <div class="empl-thumb text-center px-3 py-4">
-                        <img src="{{ asset('assets/img/l-17.png') }}" class="img-fluid mx-auto" alt="" />
-                    </div>
-                </div>
-
-                <div class="col-xl-2 col-lg-2 col-md-3 col-sm-4 col-6">
-                    <div class="empl-thumb text-center px-3 py-4">
-                        <img src="{{ asset('assets/img/l-18.png') }}" class="img-fluid mx-auto" alt="" />
-                    </div>
-                </div>
+                @endforeach
 
             </div>
 
@@ -197,8 +164,7 @@
                                     <div class="blg_tag"><span>{{ optional($blog->category)->name ?? 'Blog' }}</span>
                                     </div>
                                     <div class="blg_title">
-                                        <h4><a
-                                                href="{{ route('web_blog_details', $blog->slug) }}">{{ $blog->name }}</a>
+                                        <h4><a href="{{ route('web_blog_details', $blog->slug) }}">{{ $blog->name }}</a>
                                         </h4>
                                     </div>
                                     <div class="blg_desc">
@@ -397,25 +363,25 @@
                                     for businesses of all sizes.</p>
                             </div>
                             <!-- <div class="position-relative row">
-                                                        <div class="col-lg-4 col-md-4 col-4">
-                                                            <h3 class="ft-bold theme-cl mb-0"><span class="count">10</span>k+</h3>
-                                                            <p class="ft-medium">Active Jobs</p>
-                                                        </div>
-                                                        <div class="col-lg-4 col-md-4 col-4">
-                                                            <h3 class="ft-bold theme-cl mb-0"><span class="count">12</span>k+</h3>
-                                                            <p class="ft-medium">Resumes</p>
-                                                        </div>
-                                                        <div class="col-lg-4 col-md-4 col-4">
-                                                            <h3 class="ft-bold theme-cl mb-0"><span class="count">07</span>k+</h3>
-                                                            <p class="ft-medium">Employers</p>
-                                                        </div>
-                                                    </div> -->
+                                                                <div class="col-lg-4 col-md-4 col-4">
+                                                                    <h3 class="ft-bold theme-cl mb-0"><span class="count">10</span>k+</h3>
+                                                                    <p class="ft-medium">Active Jobs</p>
+                                                                </div>
+                                                                <div class="col-lg-4 col-md-4 col-4">
+                                                                    <h3 class="ft-bold theme-cl mb-0"><span class="count">12</span>k+</h3>
+                                                                    <p class="ft-medium">Resumes</p>
+                                                                </div>
+                                                                <div class="col-lg-4 col-md-4 col-4">
+                                                                    <h3 class="ft-bold theme-cl mb-0"><span class="count">07</span>k+</h3>
+                                                                    <p class="ft-medium">Employers</p>
+                                                                </div>
+                                                            </div> -->
                             <!-- <div class="btn-box clearfix mt-5">
-                                                        <a href="index.html" class="download-btn play-store me-1 d-inline-flex"><img
-                                                                src="{{ asset('assets/img/ios.png') }}" width="200" alt="" /></a>
-                                                        <a href="index.html" class="download-btn play-store ms-2 mb-1 d-inline-flex"><img
-                                                                src="{{ asset('assets/img/and.png') }}" width="200" alt="" /></a>
-                                                    </div> -->
+                                                                <a href="index.html" class="download-btn play-store me-1 d-inline-flex"><img
+                                                                        src="{{ asset('assets/img/ios.png') }}" width="200" alt="" /></a>
+                                                                <a href="index.html" class="download-btn play-store ms-2 mb-1 d-inline-flex"><img
+                                                                        src="{{ asset('assets/img/and.png') }}" width="200" alt="" /></a>
+                                                            </div> -->
                         </div>
                     </div>
                 </div>
