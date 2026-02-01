@@ -112,5 +112,6 @@ Route::middleware(['auth:admin', 'admin'])->group(function () {
         Route::get('settings', 'index')->name('settings');
         Route::post('settings/save-state', 'saveState')->name('settings.save_state');
         Route::post('settings/save-city', 'saveCity')->name('settings.save_city');
+        Route::post('settings/generate-sitemap', 'generateSitemap')->name('settings.generate_sitemap');
     });
 });

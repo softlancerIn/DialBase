@@ -21,7 +21,7 @@
                             </div>
                             <div class="contact-info-text">
                                 <h5 class="ft-medium mb-1">Our Address</h5>
-                                <p class="mb-0 text-muted">123 Main Street, Anytown, USA</p>
+                                <p class="mb-0 text-muted">1st Sector, HSR Layout, Bengaluru, Karnataka 560102</p>
                             </div>
                         </div>
 
@@ -31,7 +31,7 @@
                             </div>
                             <div class="contact-info-text">
                                 <h5 class="ft-medium mb-1">Call Us</h5>
-                                <p class="mb-0 text-muted">+1 (555) 123-4567</p>
+                                <p class="mb-0 text-muted">9971123025</p>
                             </div>
                         </div>
 
@@ -41,7 +41,7 @@
                             </div>
                             <div class="contact-info-text">
                                 <h5 class="ft-medium mb-1">Email Us</h5>
-                                <p class="mb-0 text-muted">contact@example.com</p>
+                                <p class="mb-0 text-muted">sales@aboutfirms.com</p>
                             </div>
                         </div>
                     </div>

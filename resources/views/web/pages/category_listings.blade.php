@@ -18,7 +18,8 @@
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb justify-content-center mt-2" style="color: white;">
                                 <li class=""><a href="{{ route('index') }}" style="color: white;">Home </a></li>
-                                <li class="active" aria-current="page" style="color: white;"> / {{ $seoData->page_title ?? 'All Categories' }}</li>
+                                <li class="active" aria-current="page" style="color: white;"> /
+                                    {{ $seoData->page_title ?? 'All Categories' }}</li>
                             </ol>
                         </nav>
                     </div>
@@ -39,13 +40,7 @@
                     <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6">
                         <div class="cats-wrap text-center">
                             <a href="{{ route('city.slug', $c_data->slug) }}" class="Goodup-catg-wrap">
-                                @php
-                                    $listing_count = App\Models\Listing::where('category_id', $c_data->id)
-                                        ->where('status', '1')
-                                        ->groupBy('city')
-                                        ->get();
-                                @endphp
-                                <div class="Goodup-catg-city">{{ $listing_count->count() }} Cities</div>
+                                <div class="Goodup-catg-city">{{ $c_data->city_count ?? 0 }} Cities</div>
                                 <div class="Goodup-catg-icon">
                                     {!! $c_data->icon ?? '--' !!}
                                 </div>
