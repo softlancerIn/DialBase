@@ -19,7 +19,14 @@ class WebController extends Controller
 {
     public function index(Request $request)
     {
-        $data['category'] = Category::where('status', '1')->withCount('listing')->take(12)->get();
+        $data['category'] = Category::where('status', '1')
+            ->withCount('listing')
+            ->addSelect(['city_count' => Listing::selectRaw('count(distinct city_id)')
+                ->whereColumn('category_id', 'categories.id')
+                ->where('status', '1')
+            ])
+            ->take(12)
+            ->get();
 
         $query = Listing::with(['images', 'workingHours', 'amenities', 'category', 'reviews.user']);
 
@@ -221,9 +228,12 @@ class WebController extends Controller
         }
         $data['city_listings'] = Listing::where('category_id', $data['category']->id)
             ->where('status', '1')
-            ->selectRaw('city, COUNT(*) as listing_count')
-            ->groupBy('city')
+            ->selectRaw('city_id, COUNT(*) as listing_count')
+            ->groupBy('city_id')
+            ->with('city_rel')
             ->get();
+
+            // dd($data);
 
         return view('web.pages.city_listings', compact('data'));
     }
@@ -431,7 +441,14 @@ class WebController extends Controller
 
     public function all_categories()
     {
-        $all_category = Category::where('cat_id', '0')->withCount('listing')->get();
+        $all_category = Category::where('cat_id', '0')
+            ->withCount('listing')
+            ->addSelect(['city_count' => Listing::selectRaw('count(distinct city_id)')
+                ->whereColumn('category_id', 'categories.id')
+                ->where('status', '1')
+            ])
+            ->where('status', '1')
+            ->get();
 
         return view('web.pages.category_listings', compact('all_category'));
     }

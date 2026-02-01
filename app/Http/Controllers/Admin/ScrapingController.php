@@ -202,8 +202,8 @@ class ScrapingController extends Controller
                 sleep(1);
 
                 // Hyphenate State and City
-                $stateName = str_replace(' ', '-', $geoData['state'] ?? 'Unknown');
-                $cityName = str_replace(' ', '-', $geoData['city'] ?? 'Unknown');
+                $stateName = preg_replace('/[\s-]+/', '-', trim($geoData['state'] ?? 'Unknown'));
+                $cityName = preg_replace('/[\s-]+/', '-', trim($geoData['city'] ?? 'Unknown'));
 
                 // Save State and City to tables
                 $state = State::firstOrCreate(['name' => $stateName]);
@@ -226,6 +226,8 @@ class ScrapingController extends Controller
                     // Geocoded fields
                     'latitude' => $geoData['latitude'],
                     'longitude' => $geoData['longitude'],
+                    'state_id' => $state->id,
+                    'city_id' => $city->id,
                     'state' => $stateName,
                     'city' => $cityName,
                     'zip_code' => $geoData['zip_code'],
@@ -314,8 +316,8 @@ class ScrapingController extends Controller
                 sleep(1);
 
                 // Hyphenate State and City
-                $stateName = str_replace(' ', '-', $geoData['state'] ?? 'Unknown');
-                $cityName = str_replace(' ', '-', $geoData['city'] ?? 'Unknown');
+                $stateName = preg_replace('/[\s-]+/', '-', trim($geoData['state'] ?? 'Unknown'));
+                $cityName = preg_replace('/[\s-]+/', '-', trim($geoData['city'] ?? 'Unknown'));
 
                 // Save State and City to tables
                 $state = State::firstOrCreate(['name' => $stateName]);
@@ -338,6 +340,8 @@ class ScrapingController extends Controller
                     // Geocoded fields
                     'latitude' => $geoData['latitude'],
                     'longitude' => $geoData['longitude'],
+                    'state_id' => $state->id,
+                    'city_id' => $city->id,
                     'state' => $stateName,
                     'city' => $cityName,
                     'zip_code' => $geoData['zip_code'],

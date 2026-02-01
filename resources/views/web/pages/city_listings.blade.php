@@ -41,13 +41,13 @@
                         <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6">
                             <div class="cats-wrap text-center">
                                 {{-- Link to category with location as path parameter --}}
-                                <a href="{{ route('category.slug', [$data['category']->slug, $city->city]) }}"
+                                <a href="{{ route('category.slug', [$data['category']->slug, optional($city->city_rel)->name]) }}"
                                     class="Goodup-catg-wrap">
                                     <div class="Goodup-catg-icon">
                                         <i class="fas fa-building"></i>
                                     </div>
                                     <div class="Goodup-catg-caption">
-                                        <h4 class="fs-md mb-0 ft-medium m-catrio">{{ $city->city }}</h4>
+                                        <h4 class="fs-md mb-0 ft-medium m-catrio">{{ optional($city->city_rel)->name }}</h4>
                                         <span class="text-muted">{{ $city->listing_count }} Listings</span>
                                     </div>
                                 </a>

@@ -94,6 +94,17 @@ class ListingController extends Controller
                 $slug = $slug . '-' . ($count + 1);
             }
 
+            // Hyphenate State and City
+            $stateName = preg_replace('/[\s-]+/', '-', trim($request->state ?? ''));
+            $cityName = preg_replace('/[\s-]+/', '-', trim($request->city ?? ''));
+
+            // Find or create State and City relationships
+            $stateModel = \App\Models\State::firstOrCreate(['name' => $stateName]);
+            $cityModel = \App\Models\City::firstOrCreate([
+                'name' => $cityName,
+                'state_id' => $stateModel->id
+            ]);
+
             // Save Basic Listing Info
             $listing = Listing::create([
                 'title' => $request->title ?? '',
@@ -103,8 +114,10 @@ class ListingController extends Controller
                 'about' => $request->about ?? '',
                 'latitude' => $request->latitude ?? '',
                 'longitude' => $request->longitude ?? '',
-                'state' => $request->state ?? '',
-                'city' => $request->city ?? '',
+                'state_id' => $stateModel->id,
+                'city_id' => $cityModel->id,
+                'state' => $stateName,
+                'city' => $cityName,
                 'address' => $request->address  ?? '',
                 'zip_code' => $request->zip_code ?? '',
                 'mobile' => $request->mobile ?? '',
@@ -375,6 +388,17 @@ class ListingController extends Controller
                 }
             }
 
+            // Hyphenate State and City
+            $stateName = preg_replace('/[\s-]+/', '-', trim($request->state ?? ''));
+            $cityName = preg_replace('/[\s-]+/', '-', trim($request->city ?? ''));
+
+            // Find or create State and City relationships
+            $stateModel = \App\Models\State::firstOrCreate(['name' => $stateName]);
+            $cityModel = \App\Models\City::firstOrCreate([
+                'name' => $cityName,
+                'state_id' => $stateModel->id
+            ]);
+
             $listing->update([
                 'title' => $request->title ?? '',
                 'slug' => $slug,
@@ -383,8 +407,10 @@ class ListingController extends Controller
                 'about' => $request->about ?? '',
                 'latitude' => $request->latitude ?? '',
                 'longitude' => $request->longitude ?? '',
-                'state' => $request->state ?? '',
-                'city' => $request->city ?? '',
+                'state_id' => $stateModel->id,
+                'city_id' => $cityModel->id,
+                'state' => $stateName,
+                'city' => $cityName,
                 'address' => $request->address  ?? '',
                 'zip_code' => $request->zip_code ?? '',
                 'mobile' => $request->mobile ?? '',
