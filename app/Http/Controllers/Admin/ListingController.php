@@ -14,6 +14,9 @@ use App\Models\ListingImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Api\StateController;
+use App\Models\State as StateModel;
+use App\Helpers\StateData;
 
 
 class ListingController extends Controller
@@ -21,7 +24,7 @@ class ListingController extends Controller
     public function index()
     {
         // $listings = Listing::with(['logoImage', 'featuredImage', 'galleryImages', 'menuItems', 'workingHours', 'amenities', 'socialLinks'])->get();
-        $query = Listing::with(['menuItems', 'workingHours', 'socialLink', 'amenities']);
+        $query = Listing::with(['menuItems', 'workingHours', 'socialLink', 'amenities', 'images']);
 
         if (request()->has('category_id') && request()->category_id != '') {
             $query->where('category_id', request()->category_id);
@@ -36,31 +39,93 @@ class ListingController extends Controller
             $query->where('city', 'like', '%' . request()->city . '%');
         }
 
-        $listings = $query->paginate(25);
+        $listings = $query->orderByDesc('created_at')->paginate(25);
 
         return view('admin.listing.index', compact('listings'));
     }
 
     public function store(Request $request)
     {
+        // Validate incoming request
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'category_id' => 'required|integer|exists:categories,id',
+            'keywords' => 'nullable|string|max:255',
+            'about' => 'required|string',
+            'latitude' => 'required|numeric',
+            'longitude' => 'required|numeric',
+            'state' => 'required|string|max:255',
+            'city' => 'required|string|max:255',
+            'address' => 'required|string|max:500',
+            'zip_code' => 'required|string|max:50',
+            'mobile' => 'required|string|max:50',
+            'email' => 'required|email|max:255',
+            'website' => 'nullable|url|max:255',
+            'logo' => 'nullable|image|max:2048',
+            'featured_image' => 'nullable|image|max:4096',
+            'featured' => 'nullable|image|max:4096',
+            'gallery' => 'nullable|image|max:4096',
+            'menu_items' => 'nullable|array',
+            'menu_items.*.item_name' => 'nullable|string|max:255',
+            'menu_items.*.category' => 'nullable|string|max:255',
+            'menu_items.*.price' => 'nullable|string|max:100',
+            'menu_items.*.about' => 'nullable|string',
+            'menu_items.*.image' => 'nullable|image|max:4096',
+            'working_hours.open_time' => 'required|array',
+            'working_hours.close_time' => 'required|array',
+            'is_247_open' => 'nullable|boolean',
+            'amenities' => 'nullable|array',
+            'amenities.*' => 'integer|exists:amenities,id',
+            'new_amenities' => 'nullable|string',
+            'facebook' => 'nullable|url',
+            'twitter' => 'nullable|url',
+            'instagram' => 'nullable|url',
+            'linkedin' => 'nullable|url',
+            'youtube' => 'nullable|url',
+            'sort_order' => 'nullable|integer',
+            'status' => 'nullable|boolean'
+        ]);
         DB::beginTransaction();
         try {
+            // Generate Unique Slug
+            $slug = Str::slug($request->title);
+            $count = Listing::where('slug', 'LIKE', "{$slug}%")->count();
+            if ($count > 0) {
+                $slug = $slug . '-' . ($count + 1);
+            }
+
+            // Hyphenate State and City
+            $stateName = preg_replace('/[\s-]+/', '-', trim($request->state ?? ''));
+            $cityName = preg_replace('/[\s-]+/', '-', trim($request->city ?? ''));
+
+            // Find or create State and City relationships
+            $stateModel = \App\Models\State::firstOrCreate(['name' => $stateName]);
+            $cityModel = \App\Models\City::firstOrCreate([
+                'name' => $cityName,
+                'state_id' => $stateModel->id
+            ]);
+
             // Save Basic Listing Info
             $listing = Listing::create([
                 'title' => $request->title ?? '',
-                'slug' => Str::slug($request->title),
+                'slug' => $slug,
                 'category_id' => $request->category_id ?? '',
                 'keywords' => $request->keywords ?? '',
                 'about' => $request->about ?? '',
                 'latitude' => $request->latitude ?? '',
                 'longitude' => $request->longitude ?? '',
-                'state' => $request->state ?? '',
-                'city' => $request->city ?? '',
+                'state_id' => $stateModel->id,
+                'city_id' => $cityModel->id,
+                'state' => $stateName,
+                'city' => $cityName,
                 'address' => $request->address  ?? '',
                 'zip_code' => $request->zip_code ?? '',
                 'mobile' => $request->mobile ?? '',
                 'email' => $request->email ?? '',
                 'website' => $request->website ?? '',
+                'is_featured' => $request->has('is_featured') ? 1 : 0,
+                'sort_order' => $request->sort_order ?? 0,
+                'status' => $request->has('status') ? 1 : 0,
             ]);
 
             // Upload logo
@@ -72,9 +137,15 @@ class ListingController extends Controller
                 ]);
             }
 
-            // Upload featured image
+            // Upload featured image (accept both 'featured_image' and 'featured')
             if ($request->hasFile('featured_image')) {
                 $featuredPath = $request->file('featured_image')->store('listing_featured', 'public');
+                $listing->images()->create([
+                    'image_path' => $featuredPath,
+                    'image_type' => 'featured'
+                ]);
+            } elseif ($request->hasFile('featured')) {
+                $featuredPath = $request->file('featured')->store('listing_featured', 'public');
                 $listing->images()->create([
                     'image_path' => $featuredPath,
                     'image_type' => 'featured'
@@ -93,24 +164,29 @@ class ListingController extends Controller
             // Save Menu Items
             if ($request->menu_items) {
                 foreach ($request->menu_items as $menuItem) {
-                    $listing->menuItems()->create([
-                        'item_name' => $menuItem['item_name'],
-                        'category' => $menuItem['category'],
-                        'price' => $menuItem['price'],
-                        'about' => $menuItem['about'],
-                        'image' => isset($menuItem['image']) ? $menuItem['image']->store('menu_items', 'public') : null,
-                    ]);
+                    if (!empty($menuItem['item_name'])) {
+                        $listing->menuItems()->create([
+                            'item_name' => $menuItem['item_name'],
+                            'category' => $menuItem['category'] ?? null,
+                            'price' => $menuItem['price'] ?? null,
+                            'about' => $menuItem['about'] ?? null,
+                            'image' => isset($menuItem['image']) ? $menuItem['image']->store('menu_items', 'public') : null,
+                        ]);
+                    }
                 }
             }
 
             // Save Working Hours
-            $listing->workingHours()->create([
-                'day_of_week' => 'All',
-                'open_time' => json_encode($request->working_hours['open_time']),
-                'close_time' => json_encode($request->working_hours['close_time']),
-            ]);
+            $days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+            foreach ($days as $index => $day) {
+                $listing->workingHours()->create([
+                    'day_of_week' => $day,
+                    'open_time' => $request->working_hours['open_time'][$index] ?? null,
+                    'close_time' => $request->working_hours['close_time'][$index] ?? null,
+                ]);
+            }
 
-            $listing->update(['is_open_24' => $request->is_open_24]);
+            $listing->update(['is_247_open' => $request->is_247_open ?? 0]);
 
             $amenityIds = $request->amenities ? (array) $request->amenities : [];
             if ($request->filled('new_amenities')) {
@@ -168,16 +244,16 @@ class ListingController extends Controller
                 'twitter' => $request->twitter ?? '',
                 'instagram' => $request->instagram ?? '',
                 'linkedin' => $request->linkedin ?? '',
+                'youtube' => $request->youtube ?? '',
             ]);
 
             DB::commit();
 
-            return redirect()->back()->with('success', 'Data Added Successfully!');
+            return to_route('listing-data.edit', $listing->id)->with('success', 'Data Added Successfully!');
         } catch (\Exception $e) {
-            dd($e->getMessage());
             DB::rollBack();
-
-            return response()->json(['message' => 'Failed to create listing', 'error' => $e->getMessage()], 500);
+            // Return back with message and old input instead of raw dump/status code
+            return redirect()->back()->with(['message' => 'Failed to create listing '.$e->getMessage(), 'error' => $e->getMessage()])->withInput();
         }
     }
 
@@ -185,13 +261,35 @@ class ListingController extends Controller
     {
         $listing = Listing::with(['images', 'menuItems', 'workingHours', 'amenities', 'socialLink'])->findOrFail($id);
 
-        return response()->json($listing);
+        return to_route('listing.slug', $listing->slug)->send();
     }
 
     public function create()
     {
+        // Prefer loading states/cities from DB; fallback to helper data
+        $statesCollection = StateModel::with('cities')->orderBy('name')->get();
+        if ($statesCollection->isNotEmpty()) {
+            $statesData = $statesCollection->map(function($s) {
+                return [
+                    'id' => $s->id,
+                    'name' => $s->name,
+                    'cities' => $s->cities->pluck('name')->toArray()
+                ];
+            })->toArray();
+        } else {
+            $statesData = StateData::get();
+        }
+
+        // Extract state names and prepare cities map
+        $states = collect($statesData)->pluck('name')->sort()->values();
+        $citiesMap = collect($statesData)->mapWithKeys(function($state) {
+            return [$state['name'] => $state['cities'] ?? []];
+        })->toArray();
+        
         $data['category'] = Category::where('status', 1)->get();
         $data['all_amenities'] = Amenity::all();
+        $data['states'] = $states;
+        $data['cities'] = $citiesMap;
 
         return view('admin.listing.create', compact('data'));
     }
@@ -206,37 +304,123 @@ class ListingController extends Controller
             'amenities',
             'socialLink'
         ])->findOrFail($id);
-    
+        
+        // Prefer loading states/cities from DB; fallback to helper data
+        $statesCollection = StateModel::with('cities')->orderBy('name')->get();
+        if ($statesCollection->isNotEmpty()) {
+            $statesData = $statesCollection->map(function($s) {
+                return [
+                    'id' => $s->id,
+                    'name' => $s->name,
+                    'cities' => $s->cities->pluck('name')->toArray()
+                ];
+            })->toArray();
+        } else {
+            $statesData = StateData::get();
+        }
+
+        // Extract state names and prepare cities map
+        $states = collect($statesData)->pluck('name')->sort()->values();
+        $citiesMap = collect($statesData)->mapWithKeys(function($state) {
+            return [$state['name'] => $state['cities'] ?? []];
+        })->toArray();
+        
         $data['categories'] = Category::where('status', 1)->get();
-        $data['all_amenities'] = Amenity::all(); 
+        $data['all_amenities'] = Amenity::all();
+        $data['states'] = $states;
+        $data['cities'] = $citiesMap;
+        
         return view('admin.listing.edit', compact('data'));
     }    
 
     public function update(Request $request, $id)
     {
+        // Validate incoming request for update
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'category_id' => 'required|integer|exists:categories,id',
+            'keywords' => 'nullable|string|max:255',
+            'about' => 'required|string',
+            'latitude' => 'required|numeric',
+            'longitude' => 'required|numeric',
+            'state' => 'required|string|max:255',
+            'city' => 'required|string|max:255',
+            'address' => 'required|string|max:500',
+            'zip_code' => 'required|string|max:50',
+            'mobile' => 'required|string|max:50',
+            'email' => 'required|email|max:255',
+            'website' => 'nullable|url|max:255',
+            'logo' => 'nullable|image|max:2048',
+            'featured' => 'nullable|image|max:4096',
+            'gallery' => 'nullable|image|max:4096',
+            'menu_items' => 'nullable|array',
+            'menu_items.*.item_name' => 'nullable|string|max:255',
+            'menu_items.*.category' => 'nullable|string|max:255',
+            'menu_items.*.price' => 'nullable|string|max:100',
+            'menu_items.*.about' => 'nullable|string',
+            'menu_items.*.image' => 'nullable|image|max:4096',
+            'working_hours.open_time' => 'required|array',
+            'working_hours.close_time' => 'required|array',
+            'is_open_24' => 'nullable|boolean',
+            'amenities' => 'nullable|array',
+            'amenities.*' => 'integer|exists:amenities,id',
+            'new_amenities' => 'nullable|string',
+            'facebook' => 'nullable|url',
+            'twitter' => 'nullable|url',
+            'instagram' => 'nullable|url',
+            'linkedin' => 'nullable|url',
+            'youtube' => 'nullable|url',
+            'sort_order' => 'nullable|integer',
+            'status' => 'nullable|boolean'
+        ]);
         DB::beginTransaction();
     
         try {
             $listing = Listing::findOrFail($id);
 
             // Update Basic Info
+            // Update Basic Info
+            $slug = Str::slug($request->title);
+            if ($listing->slug !== $slug) {
+                $count = Listing::where('slug', 'LIKE', "{$slug}%")->where('id', '!=', $id)->count();
+                if ($count > 0) {
+                    $slug = $slug . '-' . ($count + 1);
+                }
+            }
+
+            // Hyphenate State and City
+            $stateName = preg_replace('/[\s-]+/', '-', trim($request->state ?? ''));
+            $cityName = preg_replace('/[\s-]+/', '-', trim($request->city ?? ''));
+
+            // Find or create State and City relationships
+            $stateModel = \App\Models\State::firstOrCreate(['name' => $stateName]);
+            $cityModel = \App\Models\City::firstOrCreate([
+                'name' => $cityName,
+                'state_id' => $stateModel->id
+            ]);
+
             $listing->update([
                 'title' => $request->title ?? '',
-                'slug' => Str::slug($request->title),
+                'slug' => $slug,
                 'category_id' => $request->category_id ?? '',
                 'keywords' => $request->keywords ?? '',
                 'about' => $request->about ?? '',
                 'latitude' => $request->latitude ?? '',
                 'longitude' => $request->longitude ?? '',
-                'state' => $request->state ?? '',
-                'city' => $request->city ?? '',
+                'state_id' => $stateModel->id,
+                'city_id' => $cityModel->id,
+                'state' => $stateName,
+                'city' => $cityName,
                 'address' => $request->address  ?? '',
                 'zip_code' => $request->zip_code ?? '',
                 'mobile' => $request->mobile ?? '',
                 'email' => $request->email ?? '',
                 'website' => $request->website ?? '',
+                'is_featured' => $request->is_featured ? 1 : 0,
+                'sort_order' => $request->sort_order ?? 0,
+                'status' => $request->status ? 1 : 0,
             ]);
-    
+
             // Upload logo
             if ($request->hasFile('logo')) {
                 $listing->images()->where('image_type', 'logo')->delete();
@@ -248,11 +432,19 @@ class ListingController extends Controller
                 ]);
             }
     
-            // Upload featured image
+            // Upload featured image (accept both 'featured' and 'featured_image')
             if ($request->hasFile('featured')) {
                 $listing->images()->where('image_type', 'featured')->delete();
 
                 $featuredPath = $request->file('featured')->store("listing_featured/".$listing->id, 'public');
+                $listing->images()->create([
+                    'image_path' => $featuredPath,
+                    'image_type' => 'featured'
+                ]);
+            } elseif ($request->hasFile('featured_image')) {
+                $listing->images()->where('image_type', 'featured')->delete();
+
+                $featuredPath = $request->file('featured_image')->store("listing_featured/".$listing->id, 'public');
                 $listing->images()->create([
                     'image_path' => $featuredPath,
                     'image_type' => 'featured'
@@ -269,31 +461,36 @@ class ListingController extends Controller
                     'image_type' => 'gallery'
                 ]);
             }
-    
+
             // Update Menu Items
             if ($request->menu_items) {
                 $listing->menuItems()->delete();
     
                 foreach ($request->menu_items as $menuItem) {
-                    $listing->menuItems()->create([
-                        'item_name' => $menuItem['item_name'],
-                        'category' => $menuItem['category'],
-                        'price' => $menuItem['price'],
-                        'about' => $menuItem['about'],
-                        'image' => isset($menuItem['image']) ? $menuItem['image']->store('menu_items', 'public') : null,
-                    ]);
+                    if (!empty($menuItem['item_name'])) {
+                        $listing->menuItems()->create([
+                            'item_name' => $menuItem['item_name'],
+                            'category' => $menuItem['category'] ?? null,
+                            'price' => $menuItem['price'] ?? null,
+                            'about' => $menuItem['about'] ?? null,
+                            'image' => isset($menuItem['image']) ? $menuItem['image']->store('menu_items', 'public') : null,
+                        ]);
+                    }
                 }
             }
     
             // Update Working Hours
             $listing->workingHours()->delete();
-            $listing->workingHours()->create([
-                'day_of_week' => 'All',
-                'open_time' => json_encode($request->working_hours['open_time']),
-                'close_time' => json_encode($request->working_hours['close_time']),
-            ]);
+            $days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+            foreach ($days as $index => $day) {
+                $listing->workingHours()->create([
+                    'day_of_week' => $day,
+                    'open_time' => $request->working_hours['open_time'][$index] ?? null,
+                    'close_time' => $request->working_hours['close_time'][$index] ?? null,
+                ]);
+            }
     
-            $listing->update(['is_open_24' => $request->is_open_24]);
+            $listing->update(['is_247_open' => $request->is_247_open ?? 0]);
     
             $amenityIds = $request->amenities ? (array) $request->amenities : [];
             if ($request->filled('new_amenities')) {
@@ -316,6 +513,7 @@ class ListingController extends Controller
                     'twitter' => $request->twitter ?? '',
                     'instagram' => $request->instagram ?? '',
                     'linkedin' => $request->linkedin ?? '',
+                    'youtube' => $request->youtube ?? '',
                 ]);
             } else {
                 $listing->socialLink()->create([
@@ -323,6 +521,7 @@ class ListingController extends Controller
                     'twitter' => $request->twitter ?? '',
                     'instagram' => $request->instagram ?? '',
                     'linkedin' => $request->linkedin ?? '',
+                    'youtube' => $request->youtube ?? '',
                 ]);
             }
     
@@ -331,8 +530,9 @@ class ListingController extends Controller
             return redirect()->back()->with('success', 'Listing updated successfully!');
         } catch (\Exception $e) {
             DB::rollBack();
-            dd($e->getMessage());
-            return response()->json(['message' => 'Failed to update listing', 'error' => $e->getMessage()], 500);
+
+            // Log error and return friendly response (avoid dd in production)
+            return redirect()->back()->with(['message' => 'Failed to update listing', 'error' => $e->getMessage()])->withInput();
         }
     }    
 
@@ -340,9 +540,9 @@ class ListingController extends Controller
     {
         $listing = Listing::findOrFail($id);
 
-        $listing->logoImage()->delete();
-        $listing->featuredImage()->delete();
-        $listing->galleryImages()->delete();
+        // $listing->logoImage()->delete();
+        // $listing->featuredImage()->delete();
+        // $listing->galleryImages()->delete();
         $listing->menuItems()->delete();
         $listing->workingHours()->delete();
         $listing->socialLink()->delete();
@@ -350,6 +550,6 @@ class ListingController extends Controller
 
         $listing->delete();
 
-        return response()->json(['message' => 'Listing deleted successfully']);
+        return redirect()->back()->with('success', 'Listing deleted successfully!');
     }
 }

@@ -17,6 +17,8 @@ class Listing extends Model
         'about',
         'latitude',
         'longitude',
+        'state_id',
+        'city_id',
         'state',
         'city',
         'address',
@@ -24,7 +26,10 @@ class Listing extends Model
         'mobile',
         'email',
         'website',
+        'is_featured',
         'is_247_open',
+        'sort_order',
+        'status',
     ];
 
     public function images()
@@ -62,6 +67,16 @@ class Listing extends Model
         return $this->hasMany(ListingReview::class);
     }
 
+    public function state_rel()
+    {
+        return $this->belongsTo(State::class, 'state_id');
+    }
+
+    public function city_rel()
+    {
+        return $this->belongsTo(City::class, 'city_id');
+    }
+
     /**
      * Determine whether the listing is open now based on working hours.
      * Returns boolean.
@@ -70,6 +85,10 @@ class Listing extends Model
     {
         $now = Carbon::now();
         $todayShort = $now->format('D'); // Mon, Tue, ...
+
+        if ($this->is_247_open) {
+            return true;
+        }
 
         $hours = $this->relationLoaded('workingHours') ? $this->workingHours : $this->workingHours()->get();
         foreach ($hours as $h) {
@@ -115,6 +134,10 @@ class Listing extends Model
                 }
 
                 try {
+                    // Sanitize time strings (remove spaces around colon)
+                    $openVal = str_replace(' :', ':', $openVal);
+                    $closeVal = str_replace(' :', ':', $closeVal);
+                    
                     $start = Carbon::parse($openVal)->setDate($now->year, $now->month, $now->day);
                     $end = Carbon::parse($closeVal)->setDate($now->year, $now->month, $now->day);
                     if ($end->lessThanOrEqualTo($start)) {
@@ -134,16 +157,4 @@ class Listing extends Model
         return false;
     }
 
-    /**
-     * Accessor to override `is_247_open` when workingHours are loaded.
-     * This allows views to reference $listing->is_247_open and get computed result.
-     */
-    public function getIs247OpenAttribute($value)
-    {
-        if ($this->relationLoaded('workingHours')) {
-            return $this->isOpenNow() ? 1 : 0;
-        }
-
-        return (int) ($value ?? 0);
-    }
 }

@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('slug', '255')->unique()->index();
             $table->unsignedBigInteger('category_id')->nullable();
+            $table->boolean('status')->default(0)->comment(comment: 'Indicates listing status: 0 = Inactive, 1 = Active');
             $table->text('keywords')->nullable();
             $table->longText('about')->nullable();
             $table->string('latitude')->nullable();
@@ -27,6 +28,8 @@ return new class extends Migration
             $table->string('mobile')->nullable();
             $table->string('email')->nullable();
             $table->string('website')->nullable();
+            $table->boolean('is_featured')->default(0)->comment('Indicates if the listing is featured');
+            $table->integer('sort_order')->default(0);
             $table->boolean('is_247_open')->default(false);
             $table->timestamps();
         });

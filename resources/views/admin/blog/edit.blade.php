@@ -19,7 +19,7 @@
                 <div class="col-xl-12 col-lg-12">
                     <div class="card">
                         <div class="card-body">
-                            <form action="{{ route('save_blog') }}" method="POST" class="row g-3" enctype="multipart/form-data">
+                            <form action="{{ route('save_blog') }}" method="POST" class="row g-3" enctype="multipart/form-data" id="blog-form">
                                 @csrf
                                 <div class="col-12">
                                     <label for="inputFirstName" class="form-label">Blog Name</label>
@@ -47,9 +47,8 @@
                                     <label for="longtextarea" class="form-label">Description</label>
                                     <textarea name="description" class="form-control" id="longtextarea" placeholder="Description..." rows="5">{{ $data['blog']['description'] ?? '' }}</textarea>
                                 </div>
-
                                 <div class="col-12">
-                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                    <button type="submit" form="blog-form" class="btn btn-primary rounded text-light me-2">Submit</button>
                                 </div>
                             </form>
                         </div>

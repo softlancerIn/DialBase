@@ -26,7 +26,13 @@ class ListingSeeder extends Seeder
         $categoryIds = Category::pluck('id')->all();
 
         // Create 50 listings
-        Listing::factory()->count(50)->create()->each(function (Listing $listing) use ($amenityIds, $categoryIds) {
+        Listing::factory()->count(50)->create()->each(function (Listing $listing, $index) use ($amenityIds, $categoryIds) {
+            // Mark first 10 listings as featured
+            if ($index < 10) {
+                $listing->status = true;
+                $listing->is_featured = true;
+                $listing->save();
+            }
             // Optionally assign a category if available
             if (!empty($categoryIds)) {
                 $listing->category_id = fake()->randomElement($categoryIds);
@@ -34,18 +40,18 @@ class ListingSeeder extends Seeder
             }
 
             // Images: 1 logo, 1 featured, 3-6 gallery
-            ListingImage::factory()->for($listing, 'listing')->state([
-                'image_type' => 'logo',
-            ])->create();
+            // ListingImage::factory()->for($listing, 'listing')->state([
+            //     'image_type' => 'logo',
+            // ])->create();
 
-            ListingImage::factory()->for($listing, 'listing')->state([
-                'image_type' => 'featured',
-            ])->create();
+            // ListingImage::factory()->for($listing, 'listing')->state([
+            //     'image_type' => 'featured',
+            // ])->create();
 
-            ListingImage::factory()->count(fake()->numberBetween(3, 6))
-                ->for($listing, 'listing')->state([
-                    'image_type' => 'gallery',
-                ])->create();
+            // ListingImage::factory()->count(fake()->numberBetween(3, 6))
+            //     ->for($listing, 'listing')->state([
+            //         'image_type' => 'gallery',
+            //     ])->create();
 
             // Social links
             SocialLink::factory()->for($listing, 'listing')->create();

@@ -1,22 +1,15 @@
 <x-admin.layout type="subCategory">
     <div class="page-content">
         <!--breadcrumb-->
-        <div
-            class="page-breadcrumb d-none d-sm-flex align-items-center mb-3"
-        >
+        <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
             <div class="breadcrumb-title pe-3">Sub Category</div>
             <div class="ps-3">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0 p-0">
                         <li class="breadcrumb-item">
-                            <a href="{{route('dashboard')}}"
-                                ><i class="bx bx-home-alt"></i
-                            ></a>
+                            <a href="{{ route('dashboard') }}"><i class="bx bx-home-alt"></i></a>
                         </li>
-                        <li
-                            class="breadcrumb-item active"
-                            aria-current="page"
-                        >
+                        <li class="breadcrumb-item active" aria-current="page">
                             Sub Category
                         </li>
                     </ol>
@@ -24,7 +17,7 @@
             </div>
             <div class="ms-auto">
                 <div class="btn-group">
-                    <a href="{{route('subcategory_form',['type' => 'create', 'id' => '0'])}}">
+                    <a href="{{ route('subcategory_form', ['type' => 'create', 'id' => '0']) }}">
                         <button type="button" class="btn btn-primary">
                             Add Sub Category
                         </button>
@@ -37,11 +30,7 @@
         <div class="card">
             <div class="card-body">
                 <div class="table-responsive">
-                    <table
-                        id="example"
-                        class="table table-striped table-bordered"
-                        style="width: 100%"
-                    >
+                    <table id="example" class="table table-striped table-bordered" style="width: 100%">
                         <thead>
                             <tr>
                                 <th>Id</th>
@@ -56,22 +45,24 @@
                         <tbody>
                             @foreach ($data['subcategory'] as $key => $category)
                                 <tr>
-                                    <td>{{$key+1}}</td>
-                                    <td>{{$category->category}}</td>
-                                    <td>{{$category->name}}</td>
+                                    <td>{{ $key + 1 }}</td>
+                                    <td>{{ $category->category }}</td>
+                                    <td>{{ $category->name }}</td>
                                     <td>
-                                        <img src="{{asset('upload_image/category/'.$category->image)}}" class="rounded-circle p-1 border" width="45" height="45" alt="...">
+                                        <img src="{{ asset('upload_image/category/' . $category->image) }}"
+                                            class="rounded-circle p-1 border" width="45" height="45"
+                                            alt="...">
                                     </td>
-                                    <td>{!!$category->description!!}</td>
-                                    <td>{{$category->created_at}}</td>
+                                    <td>{!! $category->description !!}</td>
+                                    <td>{{ $category->created_at }}</td>
                                     <td>
-                                        <a href="{{route('subcategory_form',['type'=>'edit','id'=>$category->id])}}">
+                                        <a href="{{ route('subcategory_form', ['type' => 'edit', 'id' => $category->id]) }}">
                                             <i class="text-primary" data-feather="edit"></i>
                                         </a>
-                                        <a  data-bs-toggle="modal" data-bs-target="#deleteModal{{ $category->id }}" href="#">
+                                        <a data-bs-toggle="modal" data-bs-target="#deleteModal{{ $category->id }}"
+                                            href="#">
                                             <i class="text-primary" data-feather="trash-2"></i>
                                         </a>
-                                        <x-admin.modal type="category" id="{{ $category->id }}" />
                                     </td>
                                 </tr>
                             @endforeach
@@ -82,4 +73,9 @@
         </div>
     </div>
 
+    @push('modals')
+        @foreach ($data['subcategory'] as $category)
+            <x-admin.modal type="category" id="{{ $category->id }}" />
+        @endforeach
+    @endpush
 </x-admin.layout>

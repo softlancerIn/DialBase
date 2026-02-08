@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <!-- Meta Data -->
     <meta charset="UTF-8">
@@ -10,9 +11,19 @@
         $seoData = \App\Models\Seo::where('url', $currentUrl)->first();
     @endphp
 
-    <title>{{ $seoData->title ?? 'DialBase' }}</title>
+    <title>{{ $seoData->title ?? 'Aboutfirms' }}</title>
     <meta name="description" content="{{ $seoData->description ?? '' }}">
     <meta name="keywords" content="{{ $seoData->keywords ?? '' }}">
+    <meta name="robots" content="follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large"/>
+    <link rel="canonical" href="{{$currentUrl}}" />
+    <meta property="og:title" content="{{ $seoData->title ?? 'Aboutfirms' }}">
+    <meta property="og:description" content="{{ $seoData->description ?? '' }}">
+    <meta property="og:url" content="{{ $currentUrl }}">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Aboutfirms">
+    <meta property="twitter:site" content="@aboutfirms">
+    <meta property="twitter:title" content="{{ $seoData->title ?? 'Aboutfirms' }}">
+    <meta property="twitter:description" content="{{ $seoData->description ?? '' }}">
     {!! $seoData->script ?? '' !!}
 
     <!-- Favicon -->
@@ -38,6 +49,18 @@
         <div class="clearfix"></div>
 
         @yield('content')
+
+        @if (isset($seoData->page_description))
+            <section class="seo-content py-5">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            {!! $seoData->page_description !!}
+                        </div>
+                    </div>
+                </div>
+            </section>
+        @endif
 
         @include('web.components.footer')
         <!-- Log In Modal -->
@@ -130,6 +153,7 @@
     <!-- ============================================================== -->
     <!-- This page plugins -->
     <!-- ============================================================== -->
+    @yield('scripts')
 
 </body>
 

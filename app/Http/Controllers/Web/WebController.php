@@ -13,16 +13,24 @@ use App\Models\Product;
 use DB;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Api\StateController;
 
 class WebController extends Controller
 {
     public function index(Request $request)
     {
-        $data['category'] = Category::where('status', '1')->withCount('listing')->take(12)->get();
+        $data['category'] = Category::where('status', '1')
+            ->withCount('listing')
+            ->addSelect(['city_count' => Listing::selectRaw('count(distinct city_id)')
+                ->whereColumn('category_id', 'categories.id')
+                ->where('status', '1')
+            ])
+            ->take(12)
+            ->get();
 
         $query = Listing::with(['images', 'workingHours', 'amenities', 'category', 'reviews.user']);
 
-        $data['listing'] = $query->take(12)->get();
+        $data['listing'] = $query->where('is_featured', 1)->where('status', '1')->take(12)->orderByDesc('sort_order')->get();
 
         foreach ($data['listing'] as $listing) {
             $listing->reviews_count = $listing->reviews->where('status', 1)->count();
@@ -44,10 +52,26 @@ class WebController extends Controller
         $open_now = $request->boolean('open_now');
         $featured = $request->boolean('featured');
 
+        $state = $request->query('state');
+        $city = $request->query('city');
+        $amenities = $request->query('amenities');
+
         $data['category'] = Category::where('status', '1')->get();
         $data['all_amenities'] = Amenity::all();
+        $stateController = new StateController();
+        $statesResponse = $stateController->getAllStatesWithCities();
+        $statesData = json_decode($statesResponse->getContent(), true)['data'] ?? [];
+        
+        // Extract state names and prepare cities map
+        $states = collect($statesData)->pluck('name')->sort()->values();
+        $citiesMap = collect($statesData)->mapWithKeys(function($state) {
+            return [$state['name'] => $state['cities'] ?? []];
+        });
 
-        $query = Listing::with(['images', 'workingHours', 'amenities', 'category']);
+        $data['states'] = $states;
+        $data['cities'] = $citiesMap;
+
+        $query = Listing::with(['images', 'workingHours', 'amenities', 'category'])->where('status', '1');
 
         if (! empty($name)) {
             $query->where('title', 'like', "%{$name}%");
@@ -67,6 +91,21 @@ class WebController extends Controller
             });
         }
 
+        if (! empty($state)) {
+            $query->where('state', $state);
+        }
+
+        if (! empty($city)) {
+            $query->where('city', $city);
+        }
+
+        if (! empty($amenities)) {
+            $amenitiesList = is_array($amenities) ? $amenities : [$amenities];
+            $query->whereHas('amenities', function ($q) use ($amenitiesList) {
+                $q->whereIn('amenities.id', $amenitiesList);
+            });
+        }
+
         if ($featured) {
             $query->where('is_featured', 1);
         }
@@ -75,7 +114,7 @@ class WebController extends Controller
 
         if ($open_now) {
             $collection = $data['listings']->getCollection()->filter(function ($listing) {
-                return ! empty($listing->is_247_open);
+                return $listing->isOpenNow();
             });
             $data['listings']->setCollection($collection->values());
         }
@@ -87,10 +126,14 @@ class WebController extends Controller
 
     public function category_detail(Request $request, $slug, $location = null)
     {
+        $name = $request->query('name');
         $address = $request->query('address');
-        $amenities = $request->query('amenities', []);
         $open_now = $request->boolean('open_now');
         $featured = $request->boolean('featured');
+
+        $state = $request->query('state');
+        $city = $request->query('city');
+        $amenities = $request->query('amenities');
         // Support location coming from query string (old style) or path parameter (new style)
         $location = $location ?? $request->query('location');
 
@@ -103,7 +146,24 @@ class WebController extends Controller
         $data['all_categories'] = Category::where('status', '1')->get();
         $data['all_amenities'] = Amenity::all();
 
-        $query = Listing::where('category_id', $data['category']->id)->with('images');
+        $stateController = new StateController();
+        $statesResponse = $stateController->getAllStatesWithCities();
+        $statesData = json_decode($statesResponse->getContent(), true)['data'] ?? [];
+        
+        // Extract state names and prepare cities map
+        $states = collect($statesData)->pluck('name')->sort()->values();
+        $citiesMap = collect($statesData)->mapWithKeys(function($state) {
+            return [$state['name'] => $state['cities'] ?? []];
+        });
+
+        $data['states'] = $states;
+        $data['cities'] = $citiesMap;
+
+        $query = Listing::where('category_id', $data['category']->id)->where('status', '1')->with(['images', 'workingHours', 'amenities', 'category']);
+
+        if (! empty($name)) {
+            $query->where('title', 'like', "%{$name}%");
+        }
 
         if (! empty($address)) {
             $tokens = preg_split('/[\s,]+/', trim($address));
@@ -119,9 +179,22 @@ class WebController extends Controller
             });
         }
 
-        if (! empty($amenities) && is_array($amenities)) {
-            $query->whereHas('amenities', function ($q) use ($amenities) {
-                $q->whereIn('amenities.id', $amenities);
+        if (! empty($state)) {
+            $query->where('state', $state);
+        }
+
+        if (! empty($city)) {
+            $query->where('city', $city);
+        }
+
+        if (! empty($location)) {
+            $query->where('city', $location);
+        }
+
+        if (! empty($amenities)) {
+            $amenitiesList = is_array($amenities) ? $amenities : [$amenities];
+            $query->whereHas('amenities', function ($q) use ($amenitiesList) {
+                $q->whereIn('amenities.id', $amenitiesList);
             });
         }
 
@@ -133,10 +206,6 @@ class WebController extends Controller
             $query->where('is_featured', 1);
         }
 
-        if (! empty($location)) {
-            $query->where('city', $location);
-        }
-
         $data['listings'] = $query->paginate(12)->withQueryString();
 
         foreach ($data['listings'] as $listing) {
@@ -144,7 +213,7 @@ class WebController extends Controller
             $listing->average_rating = $listing->reviews->where('status', 1)->avg('rating');
         }
 
-        $all_listings_for_locations = Listing::where('category_id', $data['category']->id)->get();
+        $all_listings_for_locations = Listing::where('category_id', $data['category']->id)->where('status', '1')->get();
         $data['locations'] = $all_listings_for_locations->pluck('city')->unique()->sort()->values();
 
         return view('web.pages.category_details', compact('data'));
@@ -158,9 +227,13 @@ class WebController extends Controller
             return redirect()->route('index');
         }
         $data['city_listings'] = Listing::where('category_id', $data['category']->id)
-            ->selectRaw('city, COUNT(*) as listing_count')
-            ->groupBy('city')
+            ->where('status', '1')
+            ->selectRaw('city_id, COUNT(*) as listing_count')
+            ->groupBy('city_id')
+            ->with('city_rel')
             ->get();
+
+            // dd($data);
 
         return view('web.pages.city_listings', compact('data'));
     }
@@ -190,23 +263,100 @@ class WebController extends Controller
         return view('web.pages.promoters');
     }
 
-    public function all_listings() {
-        $listings = Listing::paginate(12);
+    public function all_listings(Request $request) {
+        $name = $request->query('name');
+        $address = $request->query('address');
+        $open_now = $request->boolean('open_now');
+        $featured = $request->boolean('featured');
 
-        return view('web.pages.listings', compact('listings'));
+        $state = $request->query('state');
+        $city = $request->query('city');
+        $amenities = $request->query('amenities');
+
+        $data['category'] = Category::where('status', '1')->get();
+        $data['all_amenities'] = Amenity::all();
+        $stateController = new StateController();
+        $statesResponse = $stateController->getAllStatesWithCities();
+        $statesData = json_decode($statesResponse->getContent(), true)['data'] ?? [];
+        
+        // Extract state names and prepare cities map
+        $states = collect($statesData)->pluck('name')->sort()->values();
+        $citiesMap = collect($statesData)->mapWithKeys(function($state) {
+            return [$state['name'] => $state['cities'] ?? []];
+        });
+
+        $data['states'] = $states;
+        $data['cities'] = $citiesMap;
+
+        $query = Listing::with(['images', 'workingHours', 'amenities', 'category'])->where('status', '1');
+
+        if (! empty($name)) {
+            $query->where('title', 'like', "%{$name}%");
+        }
+
+        if (! empty($address)) {
+            $tokens = preg_split('/[\s,]+/', trim($address));
+            $query->where(function ($q) use ($tokens) {
+                foreach ($tokens as $token) {
+                    $token = trim($token);
+                    if ($token === '') {
+                        continue;
+                    }
+                    $t = mb_strtolower($token);
+                    $q->orWhereRaw('LOWER(city) LIKE ?', ["%{$t}%"]) ->orWhereRaw('LOWER(state) LIKE ?', ["%{$t}%"]);
+                }
+            });
+        }
+
+        if (! empty($state)) {
+            $query->where('state', $state);
+        }
+
+        if (! empty($city)) {
+            $query->where('city', $city);
+        }
+
+        if (! empty($amenities)) {
+            $amenitiesList = is_array($amenities) ? $amenities : [$amenities];
+            $query->whereHas('amenities', function ($q) use ($amenitiesList) {
+                $q->whereIn('amenities.id', $amenitiesList);
+            });
+        }
+
+        if ($featured) {
+            $query->where('is_featured', 1);
+        }
+
+        $listings = $query->orderByDesc('sort_order')->paginate(12)->withQueryString();
+
+        if ($open_now) {
+            $collection = $listings->getCollection()->filter(function ($listing) {
+                return $listing->isOpenNow();
+            });
+            $listings->setCollection($collection->values());
+        }
+
+        $allLocations = Listing::whereNotNull('city')->pluck('city')->unique()->sort()->values();
+
+        return view('web.pages.listings', compact('listings', 'allLocations', 'data'));
     }
 
     public function listing_detail($slug)
     {
-        $data['listing'] = Listing::where('slug', $slug)->with('images', 'workingHours', 'amenities', 'socialLink', 'category', 'reviews.user')->first();
+        $data['listing'] = Listing::where('slug', $slug)->where('status', '1')->with(['images', 'workingHours', 'amenities', 'socialLink', 'category', 'reviews' => function ($query) {$query->where('status', 1);}, 'reviews.user'])->first();
+
+        if ($data['listing']) {
+            $data['listing']->reviews_count = $data['listing']->reviews->count();
+            $data['listing']->average_rating = $data['listing']->reviews->avg('rating');
+        }
 
         if (! $data['listing']) {
             return redirect()->route('index');
         }
 
         $data['category'] = $data['listing']->category() ? $data['listing']->category()->first() : null;
-        $data['featured_image'] = $data['listing']->images->where('type', 'featured')->first();
-        $data['logo_image'] = $data['listing']->images->where('type', 'logo')->first();
+        $data['featured_image'] = $data['listing']->images->where('image_type', 'featured')->first();
+        $data['logo_image'] = $data['listing']->images->where('image_type', 'logo')->first();
 
         return view('web.pages.listing_details', compact('data'));
     }
@@ -223,7 +373,7 @@ class WebController extends Controller
 
     public function save_enquiry(Request $request)
     {
-        $validate = $request->validate([
+        $request->validate([
             'name' => 'required',
             'email' => 'required',
             'phone' => 'required',
@@ -232,6 +382,7 @@ class WebController extends Controller
             'state' => 'required',
             'message' => 'required',
         ]);
+
         $save_data = Enquiry::create([
             'name' => $request->name,
             'email' => $request->email,
@@ -241,11 +392,36 @@ class WebController extends Controller
             'subject' => $request->subject,
             'message' => $request->message,
         ]);
-        if (! empty($save_data)) {
-            return ['success', ' -> Enquiry Send Successfully!'];
+
+        if ($save_data) {
+            return redirect()->back()->with('success', 'Enquiry sent successfully!');
         } else {
-            return ['error', ' -> Something went wrong!'];
+            return redirect()->back()->with('error', 'Something went wrong!');
         }
+    }
+
+    public function save_listing_enquiry(Request $request, $slug)
+    {
+        $request->validate([
+            'name' => 'required|string',
+            'email' => 'required|email',
+            'phone' => 'required|string',
+            'subject' => 'required|string',
+            'message' => 'required|string',
+        ]);
+
+        $listing = Listing::where('slug', $slug)->where('status', '1')->firstOrFail();
+
+        $enquiry = new Enquiry();
+        $enquiry->listing_id = $listing->id;
+        $enquiry->name = $request->name;
+        $enquiry->email = $request->email;
+        $enquiry->phone = $request->phone;
+        $enquiry->subject = $request->subject;
+        $enquiry->message = $request->message;
+        $enquiry->save();
+
+        return redirect()->back()->with('success', 'Enquiry submitted successfully! We will contact you soon.');
     }
 
     public function blogs()
@@ -265,7 +441,14 @@ class WebController extends Controller
 
     public function all_categories()
     {
-        $all_category = Category::where('cat_id', '0')->withCount('listing')->get();
+        $all_category = Category::where('cat_id', '0')
+            ->withCount('listing')
+            ->addSelect(['city_count' => Listing::selectRaw('count(distinct city_id)')
+                ->whereColumn('category_id', 'categories.id')
+                ->where('status', '1')
+            ])
+            ->where('status', '1')
+            ->get();
 
         return view('web.pages.category_listings', compact('all_category'));
     }
@@ -330,7 +513,7 @@ class WebController extends Controller
             'name' => 'nullable|string',
         ]);
 
-        $listing = Listing::where('slug', $slug)->firstOrFail();
+        $listing = Listing::where('slug', $slug)->where('status', '1')->firstOrFail();
 
         $existing = ListingReview::where('listing_id', $listing->id)
             ->where('email', $request->email)
@@ -363,9 +546,26 @@ class WebController extends Controller
         return view('web.pages.privacy_policy');
     }
 
+    public function faq()
+    {
+        return view('web.pages.faq');
+    }
+
+    public function sitemap()
+    {
+        $data['categories'] = Category::where('status', 1)->where('cat_id', 0)->orderBy('name')->get();
+        $data['cities'] = Listing::where('status', 1)->whereNotNull('city')->distinct()->pluck('city')->sort();
+        $data['listings'] = Listing::where('status', 1)->orderBy('title')->get();
+        $data['blogs'] = Blog::where('status', 1)->latest()->get();
+        $data['products'] = Product::all();
+
+        return view('web.pages.sitemap', compact('data'));
+    }
+
     public function seo_listing_detail($country, $category_slug, $city, $slug)
     {
         $listing = Listing::where('slug', $slug)
+            ->where('status', '1')
             ->where('country', $country)
             ->where('city', $city)
             ->with(['images', 'workingHours', 'amenities', 'socialLink', 'category', 'reviews.user'])
@@ -373,7 +573,7 @@ class WebController extends Controller
 
         if (!$listing) {
             // Fallback: try finding by slug only if strict path fails, or redirect
-            $listing = Listing::where('slug', $slug)->first();
+            $listing = Listing::where('slug', $slug)->where('status', '1')->first();
             if (!$listing) {
                 return redirect()->route('index');
             }
@@ -382,8 +582,8 @@ class WebController extends Controller
 
         $data['listing'] = $listing;
         $data['category'] = $listing->category;
-        $data['featured_image'] = $listing->images->where('type', 'featured')->first();
-        $data['logo_image'] = $listing->images->where('type', 'logo')->first();
+        $data['featured_image'] = $listing->images->where('image_type', 'featured')->first();
+        $data['logo_image'] = $listing->images->where('image_type', 'logo')->first();
 
         return view('web.pages.listing_details', compact('data'));
     }
@@ -400,6 +600,7 @@ class WebController extends Controller
         $data['all_amenities'] = Amenity::all();
 
         $query = Listing::where('category_id', $category->id)
+            ->where('status', '1')
             ->where('country', $country)
             ->where('city', $city)
             ->with('images');

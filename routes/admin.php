@@ -12,6 +12,8 @@ use App\Http\Controllers\Admin\SeoController;
 use App\Http\Controllers\Admin\SubCategoryController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\ReviewController;
+use App\Http\Controllers\Admin\ScrapingController;
+use App\Http\Controllers\Admin\SettingsController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth:admin', 'admin'])->group(function () {
@@ -30,6 +32,11 @@ Route::middleware(['auth:admin', 'admin'])->group(function () {
     // Route::controller(ListingController::class)->group(function () {
     // });
     Route::resource('listing-data', ListingController::class);
+    Route::controller(ScrapingController::class)->group(function () {
+        Route::get('scrape-website', 'index')->name('scrape_website');
+        Route::post('scrape-website', 'scrape_website')->name('scrape_website.post');
+        Route::post('store-scraped-data', 'store_scraped_data')->name('store_scraped_data');
+    });
 
     // Profile
     Route::controller(ProfileController::class)->group(function () {
@@ -41,7 +48,7 @@ Route::middleware(['auth:admin', 'admin'])->group(function () {
     // category
     Route::controller(CategoryController::class)->group(function () {
         Route::match(['get', 'post'], 'category', 'category_list')->name('category_list');
-        Route::match(['get', 'post'], 'category/{type}/{id}', 'category_form')->name('category_form');
+        Route::match(['get', 'post'], 'category/{type}/{id?}', 'category_form')->name('category_form');
         Route::match(['get', 'post'], 'save-category', 'save_category')->name('save_category');
     });
 
@@ -98,5 +105,13 @@ Route::middleware(['auth:admin', 'admin'])->group(function () {
     Route::controller(ReviewController::class)->group(function () {
         Route::get('reviews', 'index')->name('reviews.index');
         Route::post('reviews/{id}/status', 'updateStatus')->name('reviews.update_status');
+    });
+
+    // settings - states & cities
+    Route::controller(SettingsController::class)->group(function () {
+        Route::get('settings', 'index')->name('settings');
+        Route::post('settings/save-state', 'saveState')->name('settings.save_state');
+        Route::post('settings/save-city', 'saveCity')->name('settings.save_city');
+        Route::post('settings/generate-sitemap', 'generateSitemap')->name('settings.generate_sitemap');
     });
 });

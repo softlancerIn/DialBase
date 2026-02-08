@@ -13,7 +13,7 @@
                 </div>
 
                 <div class="col-xl-2 col-lg-2 col-md-2">
-                    <div class="btn-group">
+                    <div class="btn-group float-end mt-2">
                         <a href="{{ route('blog_form', ['type' => 'create', 'id' => '0']) }}">
                             <button type="button" class="btn btn-primary">
                                 Add Blog
@@ -63,7 +63,6 @@
                                                         data-bs-target="#deleteModal{{ $blog->id }}" href="#">
                                                         <i class="fas fa-trash me-1" data-feather="trash-2"></i>
                                                     </a>
-                                                    <x-admin.modal type="blog" id="{{ $blog->id }}" />
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -77,4 +76,9 @@
         </div>
     </div>
 
+    @push('modals')
+        @foreach ($data['blogs'] as $blog)
+            <x-admin.modal type="blog" id="{{ $blog->id }}" />
+        @endforeach
+    @endpush
 </x-admin.layout>

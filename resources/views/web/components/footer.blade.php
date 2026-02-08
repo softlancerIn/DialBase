@@ -3,9 +3,9 @@
         <div class="container">
             <div class="row">
 
-                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
+                <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12">
                     <div class="footer_widget">
-                        <img src="{{asset('assets/img/logo.png')}}" class="img-footer small mb-2" alt="" />
+                        <img src="{{ asset('assets/img/logo.png') }}" class="img-footer small mb-2" alt="" />
 
                         <div class="address mt-2">
                             1st Sector, HSR Layout, Bengaluru, Karnataka 560102
@@ -15,43 +15,21 @@
                         </div>
                         <div class="address mt-2">
                             <ul class="list-inline">
-                                <li class="list-inline-item"><a href="#" class="theme-cl"><i
-                                            class="lni lni-facebook-filled"></i></a></li>
-                                <li class="list-inline-item"><a href="#" class="theme-cl"><i
+                                <li class="list-inline-item">
+                                    <a href="https://www.facebook.com/aboutfirms/" class="theme-cl">
+                                        <i class="lni lni-facebook-filled"></i>
+                                    </a>
+                                </li>
+                                <li class="list-inline-item"><a href="https://x.com/aboutfirms" class="theme-cl"><i
                                             class="lni lni-twitter-filled"></i></a></li>
-                                <li class="list-inline-item"><a href="#" class="theme-cl"><i
-                                            class="lni lni-youtube"></i></a></li>
-                                <li class="list-inline-item"><a href="#" class="theme-cl"><i
-                                            class="lni lni-instagram-filled"></i></a></li>
-                                <li class="list-inline-item"><a href="#" class="theme-cl"><i
-                                            class="lni lni-linkedin-original"></i></a></li>
+                                <li class="list-inline-item"><a href="https://www.youtube.com/@aboutfirms"
+                                        class="theme-cl"><i class="lni lni-youtube"></i></a></li>
+                                <li class="list-inline-item"><a href="https://www.instagram.com/aboutfirms_/"
+                                        class="theme-cl"><i class="lni lni-instagram-filled"></i></a></li>
+                                <li class="list-inline-item"><a href="https://www.linkedin.com/company/aboutfirms"
+                                        class="theme-cl"><i class="lni lni-linkedin-original"></i></a></li>
                             </ul>
                         </div>
-                    </div>
-                </div>
-
-                <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12">
-                    <div class="footer_widget">
-                        <h4 class="widget_title">Main Navigation</h4>
-                        <ul class="footer-menu">
-                            <li><a href="#">Explore Listings</a></li>
-                            <li><a href="#">Browse Authors</a></li>
-                            <li><a href="#">Submit Listings</a></li>
-                            <li><a href="#">Shortlisted</a></li>
-                            <li><a href="#">Dashboard</a></li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12">
-                    <div class="footer_widget">
-                        <h4 class="widget_title">Business Owners</h4>
-                        <ul class="footer-menu">
-                            <li><a href="#">Browse Categories</a></li>
-                            <li><a href="#">Payment Links</a></li>
-                            <li><a href="#">Saved Places</a></li>
-                            <li><a href="#">Dashboard</a></li>
-                        </ul>
                     </div>
                 </div>
 
@@ -60,6 +38,8 @@
                         <h4 class="widget_title">Quick Links</h4>
                         <ul class="footer-menu">
                             <li><a href="{{ route('about') }}">About Us</a></li>
+                            <li><a href="{{ route('all_blogs') }}">All Blog</a></li>
+                            <li><a href="{{ route('all_listings') }}">All Listings</a></li>
                             <li><a href="{{ route('terms_and_condition') }}">Terms & Conditions</a></li>
                             <li><a href="{{ route('privacy_policy') }}">Privacy Policy</a></li>
                         </ul>
@@ -70,11 +50,9 @@
                     <div class="footer_widget">
                         <h4 class="widget_title">Helpful Topics</h4>
                         <ul class="footer-menu">
-                            <li><a href="#">Site Map</a></li>
-                            <li><a href="#">Security</a></li>
+                            <li><a href="{{ route('sitemap') }}">Site Map</a></li>
                             <li><a href="{{ route('contact') }}">Contact</a></li>
-                            <li><a href="#">FAQ's Page</a></li>
-                            <li><a href="#">Privacy</a></li>
+                            <li><a href="{{ route('faq') }}">FAQ's Page</a></li>
                         </ul>
                     </div>
                 </div>
@@ -87,7 +65,7 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-12 col-md-12 text-center">
-                    <p class="mb-0">© 2022 Goodup. Designd By <a href="https://themezhub.com/">ThemezHub</a>.</p>
+                    <p class="mb-0">© 2025 Goodup. Designd By <a href="https://themezhub.com/">About Firms</a>.</p>
                 </div>
             </div>
         </div>

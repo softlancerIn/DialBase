@@ -7,24 +7,29 @@
                         <i class="lni lni-dashboard me-2"></i>Dashboard
                     </a>
                 </li>
-                <li class="@active('category_list')">
+                <li class="@active('category_list', 'category_form')">
                     <a href="{{ route('category_list') }}">
                         <i class="lni lni-files me-2"></i>Category
                     </a>
                 </li>
-                <li class="@active('listing-data.index')">
+                <li class="@active('listing-data.index', 'listing-data.create', 'listing-data.edit')">
                     <a href="{{ route('listing-data.index') }}">
                         <i class="lni lni-files me-2"></i>My Listings
                     </a>
                 </li>
-                <li class="@active('blog_list')">
+                <li class="@active('blog_list', 'blog_form')">
                     <a href="{{ route('blog_list') }}">
                         <i class="lni lni-files me-2"></i>Blogs
                     </a>
                 </li>
-                <li class="@active('seo_list')">
+                <li class="@active('seo_list', 'seo_form')">
                     <a href="{{ route('seo_list') }}">
                         <i class="lni lni-target me-2"></i>SEO
+                    </a>
+                </li>
+                <li class="@active('settings')">
+                    <a href="{{ route('settings') }}">
+                        <i class="lni lni-cog me-2"></i>Settings
                     </a>
                 </li>
                 <li class="@active('reviews.index')">
@@ -35,6 +40,11 @@
                 <li class="@active('enquiry_list')">
                     <a href="{{ route('enquiry_list') }}">
                         <i class="lni lni-files me-2"></i>Enquiry
+                    </a>
+                </li>
+                <li class="@active('scrape_website')">
+                    <a href="{{ route('scrape_website') }}">
+                        <i class="lni lni-world me-2"></i>Scrape Website
                     </a>
                 </li>
             </ul>

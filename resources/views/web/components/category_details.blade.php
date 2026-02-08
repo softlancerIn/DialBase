@@ -1,24 +1,20 @@
 <!-- Listing Card Component -->
 <div class="Goodup-grid-wrap">
     <div class="Goodup-grid-upper">
-        <div class="Goodup-bookmark-btn">
-            <button type="button" fdprocessedid="y3izb6">
-                <i class="lni lni-heart-filled position-absolute"></i>
-            </button>
-        </div>
         <div class="Goodup-pos ab-left">
-            <div class="Goodup-status {{ $listing->is_247_open ? 'open' : 'close' }} me-2">
-                {{ $listing->is_247_open ? 'Open' : 'Close' }}
+            <div class="Goodup-status {{ $listing->isOpenNow() ? 'open' : 'close' }} me-2">
+                {{ $listing->isOpenNow() ? 'Open' : 'Close' }}
             </div>
         </div>
         <div class="Goodup-grid-thumb">
             @php
-                $featuredImage = $listing->images->where('type', 'featured')->first();
-                $logoImage = $listing->images->where('type', 'logo')->first();
+                $featuredImage = $listing->images->where('image_type', 'featured')->first();
+                $logoImage = $listing->images->where('image_type', 'logo')->first();
             @endphp
             <a href="{{ route('listing.slug', $listing->slug) }}" class="d-block text-center m-auto">
-                @if($featuredImage)
-                    <img src="{{ Storage::url($featuredImage->image_path) }}" class="img-fluid" alt="{{ $listing->title }}">
+                @if ($featuredImage)
+                    <img src="{{ asset('storage/' . $featuredImage->image_path) }}" class="img-fluid"
+                        alt="{{ $listing->title }}">
                 @else
                     <img src="{{ asset('assets/img/listing/l-5.jpg') }}" class="img-fluid" alt="">
                 @endif
@@ -27,8 +23,8 @@
         <div class="Goodup-rating overlay">
             <div class="Goodup-aldeio">
                 <div class="Goodup-rates">
-                    @foreach(range(1,5) as $i)
-                        @if($i <= round($listing?->average_rating))
+                    @foreach (range(1, 5) as $i)
+                        @if ($i <= round($listing?->average_rating))
                             <i class="fas fa-star"></i>
                         @else
                             <i class="fas fa-star text-gray"></i>
@@ -43,7 +39,7 @@
         <div class="Goodup-caption px-3 py-2">
             <div class="Goodup-author">
                 @if ($logoImage)
-                    <img src="{{ Storage::url($logoImage->image_path) }}" class="img-fluid circle" alt="">
+                    <img src="{{ asset('storage/' . $logoImage->image_path) }}" class="img-fluid circle" alt="">
                 @else
                     <img src="{{ asset('assets/img/t-1.png') }}" class="img-fluid circle" alt="">
                 @endif
@@ -62,8 +58,8 @@
             <div class="Goodup-ft-first">
                 <div class="Goodup-rating">
                     <div class="Goodup-rates">
-                        @foreach(range(1,5) as $i)
-                            @if($i <= round($listing?->average_rating))
+                        @foreach (range(1, 5) as $i)
+                            @if ($i <= round($listing?->average_rating))
                                 <i class="fas fa-star"></i>
                             @else
                                 <i class="fas fa-star text-gray"></i>
