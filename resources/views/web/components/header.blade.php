@@ -8,9 +8,6 @@
                 <div class="nav-toggle"></div>
             </div>
             <div class="nav-menus-wrapper" style="transition-property: none;">
-                <a class="nav-brand" href="{{route('index')}}">
-                    <img src="{{asset('assets/img/logo.png')}}" class="logo" alt="" />
-                </a>
                 <ul class="nav-menu nav-menu-social align-to-right">
                     <li>
                         <a href="{{route('login')}}" data-bs-toggle="modal" data-bs-target="#login" class="ft-bold">
