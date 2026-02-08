@@ -58,6 +58,9 @@
                         </div>
                     </div>
                     <div class="nav-menus-wrapper" style="transition-property: none;">
+                        <a class="nav-brand" href="{{route('index')}}">
+                            <img src="{{asset('assets/img/logo.png')}}" class="logo" alt="" />
+                        </a>
                         <ul class="nav-menu nav-menu-social align-to-right">
                             <li class="add-listing gray">
                                 <a href="{{ route('logout') }}">
