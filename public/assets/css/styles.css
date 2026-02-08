@@ -2812,9 +2812,6 @@ li._my_prt_list a span {
     position: relative;
     top: 3px;
 }
-.navigation-portrait .nav-menu.nav-menu-social {
-    display: none;
-}
 .mobile_nav .account-drop .btn.btn-order-by-filt img.avater-img {
     width: 25px;
     border-radius: 50%;
