@@ -5,7 +5,6 @@
                 <a class="nav-brand" href="{{route('index')}}">
                     <img src="{{asset('assets/img/logo.png')}}" class="logo" alt="" />
                 </a>
-                <div class="nav-toggle"></div>
             </div>
             <div class="nav-menus-wrapper" style="transition-property: none;">
                 <ul class="nav-menu nav-menu-social align-to-right">
