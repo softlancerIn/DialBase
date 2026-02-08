@@ -48,6 +48,7 @@
                 </div>
 
                 <div class="col-xl-8 col-lg-8 col-md-12">
+                <div class="col-xl-12 col-lg-12 col-md-12">
                     <div class="bg-white rounded p-4 shadow-sm">
                         @if (session('success'))
                             <div class="alert alert-success">
@@ -131,6 +132,40 @@
                                     Message</button>
                             </div>
                         </form>
+                    </div>
+                </div>
+
+                <div class="col-xl-12 col-lg-12 col-md-12">
+                    <div class="contact-info-wrap flex w-full gap-5">
+                        <div class="contact-info-box shadow-sm w-full bg-white rounded p-4">
+                            <div class="contact-info-icon theme-cl mb-3 fs-xl">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="contact-info-text">
+                                <h5 class="ft-medium mb-1">Our Address</h5>
+                                <p class="mb-0 text-muted">123 Main Street, Anytown, USA</p>
+                            </div>
+                        </div>
+
+                        <div class="contact-info-box shadow-sm w-full bg-white rounded p-4">
+                            <div class="contact-info-icon theme-cl mb-3 fs-xl">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div class="contact-info-text">
+                                <h5 class="ft-medium mb-1">Call Us</h5>
+                                <p class="mb-0 text-muted">+1 (555) 123-4567</p>
+                            </div>
+                        </div>
+
+                        <div class="contact-info-box shadow-sm w-full bg-white rounded p-4">
+                            <div class="contact-info-icon theme-cl mb-3 fs-xl">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="contact-info-text">
+                                <h5 class="ft-medium mb-1">Email Us</h5>
+                                <p class="mb-0 text-muted">contact@example.com</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
