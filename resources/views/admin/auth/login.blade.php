@@ -41,7 +41,6 @@
 							<a class="nav-brand" href="{{route('index')}}">
 								<img src="{{asset('admin/assets/img/logo.png')}}" class="logo" alt="" />
 							</a>
-							<div class="nav-toggle"></div>
 							<div class="mobile_nav">
 								<ul>
 								<li>
