@@ -101,7 +101,7 @@
                 </div>
 
                 <div class="col-xl-12 col-lg-12 col-md-12">
-                    <div class="contact-info-wrap d-flex flex-md-column w-100 gap-5">
+                    <div class="contact-info-wrap d-flex w-100 gap-5">
                         <div class="contact-info-box shadow-sm w-100 bg-white rounded p-4">
                             <div class="contact-info-icon theme-cl mb-3 fs-xl">
                                 <i class="fas fa-map-marker-alt"></i>
@@ -136,5 +136,17 @@
             </div>
         </div>
     </section>
+
+    <style>
+        .contact-info-wrap {
+            flex-direction: row;
+        }
+
+        @media (min-width: 768px) and (max-width: 991.98px) {
+            .contact-info-wrap {
+                flex-direction: column !important;
+            }
+        }
+    </style>
 
 @endsection
