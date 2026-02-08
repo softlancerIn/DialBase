@@ -58,7 +58,7 @@
                         </div>
                     </div>
                     <div class="nav-menus-wrapper" style="transition-property: none;">
-                        <a class="nav-brand-1" href="{{route('index')}}">
+                        <a class="nav-brand" href="{{route('index')}}">
                             <img src="{{asset('assets/img/logo.png')}}" class="logo" alt="" />
                         </a>
                         <ul class="nav-menu nav-menu-social align-to-right">
