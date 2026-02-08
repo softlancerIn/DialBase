@@ -13,41 +13,6 @@
             </div>
 
             <div class="row align-items-start">
-                <div class="col-xl-4 col-lg-4 col-md-12">
-                    <div class="contact-info-wrap">
-                        <div class="contact-info-box shadow-sm mb-4 bg-white rounded p-4">
-                            <div class="contact-info-icon theme-cl mb-3 fs-xl">
-                                <i class="fas fa-map-marker-alt"></i>
-                            </div>
-                            <div class="contact-info-text">
-                                <h5 class="ft-medium mb-1">Our Address</h5>
-                                <p class="mb-0 text-muted">1st Sector, HSR Layout, Bengaluru, Karnataka 560102</p>
-                            </div>
-                        </div>
-
-                        <div class="contact-info-box shadow-sm mb-4 bg-white rounded p-4">
-                            <div class="contact-info-icon theme-cl mb-3 fs-xl">
-                                <i class="fas fa-phone"></i>
-                            </div>
-                            <div class="contact-info-text">
-                                <h5 class="ft-medium mb-1">Call Us</h5>
-                                <p class="mb-0 text-muted">9971123025</p>
-                            </div>
-                        </div>
-
-                        <div class="contact-info-box shadow-sm mb-4 bg-white rounded p-4">
-                            <div class="contact-info-icon theme-cl mb-3 fs-xl">
-                                <i class="fas fa-envelope"></i>
-                            </div>
-                            <div class="contact-info-text">
-                                <h5 class="ft-medium mb-1">Email Us</h5>
-                                <p class="mb-0 text-muted">sales@aboutfirms.com</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-xl-8 col-lg-8 col-md-12">
                 <div class="col-xl-12 col-lg-12 col-md-12">
                     <div class="bg-white rounded p-4 shadow-sm">
                         @if (session('success'))
