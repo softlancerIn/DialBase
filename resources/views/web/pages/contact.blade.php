@@ -142,7 +142,7 @@
             flex-direction: row;
         }
 
-        @media (min-width: 768px) and (max-width: 991.98px) {
+        @media (max-width: 768px) {
             .contact-info-wrap {
                 flex-direction: column !important;
             }
