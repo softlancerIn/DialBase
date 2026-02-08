@@ -12,7 +12,7 @@
                 </div>
             </div>
 
-            <div class="row align-items-start">
+            <div class="row align-items-start gap-4">
                 <div class="col-xl-12 col-lg-12 col-md-12">
                     <div class="bg-white rounded p-4 shadow-sm">
                         @if (session('success'))
@@ -101,8 +101,8 @@
                 </div>
 
                 <div class="col-xl-12 col-lg-12 col-md-12">
-                    <div class="contact-info-wrap flex w-full gap-5">
-                        <div class="contact-info-box shadow-sm w-full bg-white rounded p-4">
+                    <div class="contact-info-wrap d-flex w-100 gap-5">
+                        <div class="contact-info-box shadow-sm w-100 bg-white rounded p-4">
                             <div class="contact-info-icon theme-cl mb-3 fs-xl">
                                 <i class="fas fa-map-marker-alt"></i>
                             </div>
@@ -112,7 +112,7 @@
                             </div>
                         </div>
 
-                        <div class="contact-info-box shadow-sm w-full bg-white rounded p-4">
+                        <div class="contact-info-box shadow-sm w-100 bg-white rounded p-4">
                             <div class="contact-info-icon theme-cl mb-3 fs-xl">
                                 <i class="fas fa-phone"></i>
                             </div>
@@ -122,7 +122,7 @@
                             </div>
                         </div>
 
-                        <div class="contact-info-box shadow-sm w-full bg-white rounded p-4">
+                        <div class="contact-info-box shadow-sm w-100 bg-white rounded p-4">
                             <div class="contact-info-icon theme-cl mb-3 fs-xl">
                                 <i class="fas fa-envelope"></i>
                             </div>
