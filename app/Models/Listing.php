@@ -17,6 +17,8 @@ class Listing extends Model
         'about',
         'latitude',
         'longitude',
+        'state_id',
+        'city_id',
         'state',
         'city',
         'address',
@@ -63,6 +65,16 @@ class Listing extends Model
     public function reviews()
     {
         return $this->hasMany(ListingReview::class);
+    }
+
+    public function state_rel()
+    {
+        return $this->belongsTo(State::class, 'state_id');
+    }
+
+    public function city_rel()
+    {
+        return $this->belongsTo(City::class, 'city_id');
     }
 
     /**

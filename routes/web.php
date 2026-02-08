@@ -43,6 +43,8 @@ Route::controller(WebController::class)->group(function () {
 
     Route::get('terms-and-condition', 'termsAndCondition')->name('terms_and_condition');
     Route::get('privacy-policy', 'privacyPolicy')->name('privacy_policy');
+    Route::get('faq', 'faq')->name('faq');
+    Route::get('sitemap', 'sitemap')->name('sitemap');
 
     // SEO Friendly Routes (Place at the end to avoid conflicts)
     // Route::get('{country}/{category}/{city}/{slug}', 'seo_listing_detail')->name('seo.listing.detail');

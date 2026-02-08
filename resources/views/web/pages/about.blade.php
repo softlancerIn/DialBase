@@ -396,7 +396,7 @@
                         <p class="lead mb-4">Whether you want to expand your supplier base, find potential customers, or
                             explore partnerships, we're here to help you achieve your goals.</p>
                         <p class="text-muted mb-4">Join thousands of businesses using our platform to grow globally.</p>
-                        <a href="#" class="btn btn-md theme-bg text-light">Get Started Today</a>
+                        <a href="{{ route('contact') }}" class="btn btn-md theme-bg text-light">Get Started Today</a>
                     </div>
                 </div>
             </div>
