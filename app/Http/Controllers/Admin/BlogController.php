@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Blog;
 use App\Models\Category;
 use App\Traits\UploadFileTrait;
+use App\Helpers\StringHelper;
 use Illuminate\Http\Request;
 
 class BlogController extends Controller
@@ -32,7 +33,7 @@ class BlogController extends Controller
         $id = ($request->id == 0) ? null : $request->id;
 
         $validate = $request->validate([
-            'name' => 'required|unique:blogs,name,'.$id,
+            'name' => 'required|unique:blogs,name,' . $id,
             'description' => 'required',
             'category_id' => 'nullable|exists:categories,id',
         ]);
@@ -43,8 +44,7 @@ class BlogController extends Controller
             $filename = $this->fileupload($request->image, 'blog');
         }
 
-        $string = strtolower($request->name);
-        $string = preg_replace('/[^a-z0-9]+/', '-', $string);
+        $string = StringHelper::generateSlug($request->name);
 
         $addBlog = Blog::updateOrCreate(['id' => $request->id], [
             'name' => $request->name,
@@ -55,7 +55,7 @@ class BlogController extends Controller
             'category_id' => $request->category_id,
         ]);
 
-        if (! empty($addBlog)) {
+        if (!empty($addBlog)) {
             return redirect()->route('blog_list')->with('success', 'Data Added Successfully!');
         } else {
             return back()->with('error', 'Something went wrong!');

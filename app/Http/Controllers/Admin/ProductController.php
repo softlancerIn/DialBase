@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Traits\UploadFileTrait;
 use DB;
+use App\Helpers\StringHelper;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -46,12 +47,11 @@ class ProductController extends Controller
         $id = ($request->id == 0) ? null : $request->id;
         $validation = $request->validate([
             'sub_cat_id' => 'required',
-            'name' => 'required|unique:products|unique:categories,name,'.$id,
+            'name' => 'required|unique:products|unique:categories,name,' . $id,
             'description' => 'required',
         ]);
 
-        $string = strtolower($request->name);
-        $string = preg_replace('/[^a-z0-9]+/', '-', $string);
+        $string = StringHelper::generateSlug($request->name);
         $subCatId = implode(',', $request->sub_cat_id);
         $add_data = Product::updateOrCreate(['id' => $request->id], [
             'sub_cat_id' => $subCatId,
@@ -66,7 +66,7 @@ class ProductController extends Controller
                 $images = $request->file('images');
                 $getImages = DB::table('images')->where('product_id', $add_data->id)->get();
                 foreach ($getImages as $val) {
-                    if (! empty($val)) {
+                    if (!empty($val)) {
                         DB::table('images')->where('id', $val->id)->delete();
                     }
                 }
@@ -77,14 +77,14 @@ class ProductController extends Controller
                 $images = DB::table('images')->where('product_id', $add_data->id)->get();
                 $old_image = json_decode($request->old_file);
                 foreach ($images as $val) {
-                    if (! in_array($val->name, $old_image)) {
+                    if (!in_array($val->name, $old_image)) {
                         DB::table('images')->where('id', $val->id)->delete();
                     }
                 }
             }
         }
 
-        if (! empty($add_data)) {
+        if (!empty($add_data)) {
             return redirect()->route('product_list')->with('success', 'Data Added Successfully!');
         } else {
             return redirect()->back()->with('error', 'Somthing went wrong!');

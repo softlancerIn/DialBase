@@ -11,6 +11,7 @@ use App\Models\Amenity;
 use App\Models\State;
 use App\Models\City;
 use Illuminate\Http\Request;
+use App\Helpers\StringHelper;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -38,7 +39,7 @@ class ScrapingController extends Controller
         }
 
         // Helper to perform the request
-        $fetchGeoData = function($query) {
+        $fetchGeoData = function ($query) {
             $url = "https://nominatim.openstreetmap.org/search?q=" . urlencode($query) . "&format=json&addressdetails=1&limit=1";
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_URL, $url);
@@ -63,7 +64,7 @@ class ScrapingController extends Controller
             if (empty($json)) {
                 $parts = explode(',', $address);
                 $lastPart = trim(end($parts));
-                
+
                 // Handle "City - Zip" format
                 if (strpos($lastPart, '-') !== false) {
                     $subParts = explode('-', $lastPart);
@@ -82,7 +83,7 @@ class ScrapingController extends Controller
                 $result = $json[0];
                 $data['latitude'] = $result['lat'] ?? 0;
                 $data['longitude'] = $result['lon'] ?? 0;
-                
+
                 if (isset($result['address'])) {
                     $addr = $result['address'];
                     $data['state'] = $addr['state'] ?? $addr['region'] ?? 'Unknown';
@@ -125,11 +126,11 @@ class ScrapingController extends Controller
         curl_setopt($ch, CURLOPT_TIMEOUT, 60);
 
         $response = curl_exec($ch);
-        
+
         if (curl_errno($ch)) {
             return redirect()->back()->with('error', 'Curl Error: ' . curl_error($ch));
         }
-        
+
         curl_close($ch);
 
         $crawler = new Crawler($response);
@@ -182,7 +183,8 @@ class ScrapingController extends Controller
         DB::beginTransaction();
         try {
             foreach ($scrapedData as $data) {
-                if (!$data['title']) continue;
+                if (!$data['title'])
+                    continue;
 
                 // Skip if listing already exists based on title
                 if (Listing::where('title', $data['title'])->exists()) {
@@ -190,7 +192,7 @@ class ScrapingController extends Controller
                 }
 
                 // Generate Unique Slug
-                $slug = Str::slug($data['title']);
+                $slug = StringHelper::generateSlug($data['title']);
                 $slugCount = Listing::where('slug', 'LIKE', "{$slug}%")->count();
                 if ($slugCount > 0) {
                     $slug = $slug . '-' . ($slugCount + 1);
@@ -263,14 +265,14 @@ class ScrapingController extends Controller
                     }
                     $listing->amenities()->sync($amenityIds);
                 }
-                
+
                 // Create default working hours
                 $listing->workingHours()->create([
                     'day_of_week' => 'All',
                     'open_time' => json_encode(['09:00']),
                     'close_time' => json_encode(['18:00']),
                 ]);
-                
+
                 // Create empty social link
                 $listing->socialLink()->create([]);
 
@@ -296,7 +298,8 @@ class ScrapingController extends Controller
         DB::beginTransaction();
         try {
             foreach ($scrapedData as $data) {
-                if (!$data['title']) continue;
+                if (!$data['title'])
+                    continue;
 
                 // Skip if listing already exists based on title
                 if (Listing::where('title', $data['title'])->exists()) {
@@ -304,7 +307,7 @@ class ScrapingController extends Controller
                 }
 
                 // Generate Unique Slug
-                $slug = Str::slug($data['title']);
+                $slug = StringHelper::generateSlug($data['title']);
                 $slugCount = Listing::where('slug', 'LIKE', "{$slug}%")->count();
                 if ($slugCount > 0) {
                     $slug = $slug . '-' . ($slugCount + 1);
@@ -377,14 +380,14 @@ class ScrapingController extends Controller
                     }
                     $listing->amenities()->sync($amenityIds);
                 }
-                
+
                 // Create default working hours
                 $listing->workingHours()->create([
                     'day_of_week' => 'All',
                     'open_time' => json_encode(['09:00']),
                     'close_time' => json_encode(['18:00']),
                 ]);
-                
+
                 // Create empty social link
                 $listing->socialLink()->create([]);
 

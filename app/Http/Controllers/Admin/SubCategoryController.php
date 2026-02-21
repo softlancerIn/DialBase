@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Traits\UploadFileTrait;
+use App\Helpers\StringHelper;
 use Illuminate\Http\Request;
 
 class SubCategoryController extends Controller
@@ -42,18 +43,17 @@ class SubCategoryController extends Controller
 
         $id = ($request->id == 0) ? null : $request->id;
         $validate = $request->validate([
-            'name' => 'required|unique:categories,name'.$id,
+            'name' => 'required|unique:categories,name' . $id,
             'description' => 'required',
             'cat_id' => 'required',
         ]);
 
-        if (! empty($request->image)) {
+        if (!empty($request->image)) {
             $image = $this->fileupload($request->image, 'category');
         } else {
             $image = $request->old_image;
         }
-        $string = strtolower($request->name);
-        $string = preg_replace('/[^a-z0-9]+/', '-', $string);
+        $string = StringHelper::generateSlug($request->name);
         $subCatId = implode(',', $request->cat_id);
 
         $add_data = Category::updateOrCreate(['id' => $request->id], [
@@ -63,7 +63,7 @@ class SubCategoryController extends Controller
             'cat_id' => $subCatId,
             'slug' => $string,
         ]);
-        if (! empty($add_data)) {
+        if (!empty($add_data)) {
             return redirect()->route('subcategory_list')->with('success', 'Category Added Successfully!');
         } else {
             return redirect()->back()->with('error', 'Something went erong!');

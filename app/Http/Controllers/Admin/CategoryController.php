@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Traits\UploadFileTrait;
 use Illuminate\Http\Request;
+use App\Helpers\StringHelper;
 use Illuminate\Support\Str;
 
 class CategoryController extends Controller
@@ -51,15 +52,15 @@ class CategoryController extends Controller
             $image = $request->old_image;
         }
 
-        $slug = Str::slug($request->name, '-');
-        
+        $slug = StringHelper::generateSlug($request->name);
+
         $category->name = $request->name;
         $category->slug = $slug;
         $category->icon = $request->icon;
         $category->image = $image;
         $category->description = $request->description;
         $category->cat_id = $request->cat_id ?? '0';
-        
+
         $category->save();
 
         if ($category) {

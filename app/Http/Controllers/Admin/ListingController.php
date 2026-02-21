@@ -6,6 +6,7 @@ use App\Models\Amenity;
 use App\Models\Listing;
 
 use App\Models\Category;
+use App\Helpers\StringHelper;
 use Illuminate\Support\Str;
 use App\Models\MenuItem;
 use App\Models\SocialLink;
@@ -88,7 +89,7 @@ class ListingController extends Controller
         DB::beginTransaction();
         try {
             // Generate Unique Slug
-            $slug = Str::slug($request->title);
+            $slug = StringHelper::generateSlug($request->title);
             $count = Listing::where('slug', 'LIKE', "{$slug}%")->count();
             if ($count > 0) {
                 $slug = $slug . '-' . ($count + 1);
@@ -118,7 +119,7 @@ class ListingController extends Controller
                 'city_id' => $cityModel->id,
                 'state' => $stateName,
                 'city' => $cityName,
-                'address' => $request->address  ?? '',
+                'address' => $request->address ?? '',
                 'zip_code' => $request->zip_code ?? '',
                 'mobile' => $request->mobile ?? '',
                 'email' => $request->email ?? '',
@@ -154,7 +155,7 @@ class ListingController extends Controller
 
             // Upload gallery image
             if ($request->hasFile('gallery')) {
-                $galleryPath = $request->file('gallery')->store('listing_gallery/'.$listing->id, 'public');
+                $galleryPath = $request->file('gallery')->store('listing_gallery/' . $listing->id, 'public');
                 $listing->images()->create([
                     'image_path' => $galleryPath,
                     'image_type' => 'gallery'
@@ -253,7 +254,7 @@ class ListingController extends Controller
         } catch (\Exception $e) {
             DB::rollBack();
             // Return back with message and old input instead of raw dump/status code
-            return redirect()->back()->with(['message' => 'Failed to create listing '.$e->getMessage(), 'error' => $e->getMessage()])->withInput();
+            return redirect()->back()->with(['message' => 'Failed to create listing ' . $e->getMessage(), 'error' => $e->getMessage()])->withInput();
         }
     }
 
@@ -269,7 +270,7 @@ class ListingController extends Controller
         // Prefer loading states/cities from DB; fallback to helper data
         $statesCollection = StateModel::with('cities')->orderBy('name')->get();
         if ($statesCollection->isNotEmpty()) {
-            $statesData = $statesCollection->map(function($s) {
+            $statesData = $statesCollection->map(function ($s) {
                 return [
                     'id' => $s->id,
                     'name' => $s->name,
@@ -282,10 +283,10 @@ class ListingController extends Controller
 
         // Extract state names and prepare cities map
         $states = collect($statesData)->pluck('name')->sort()->values();
-        $citiesMap = collect($statesData)->mapWithKeys(function($state) {
+        $citiesMap = collect($statesData)->mapWithKeys(function ($state) {
             return [$state['name'] => $state['cities'] ?? []];
         })->toArray();
-        
+
         $data['category'] = Category::where('status', 1)->get();
         $data['all_amenities'] = Amenity::all();
         $data['states'] = $states;
@@ -304,11 +305,11 @@ class ListingController extends Controller
             'amenities',
             'socialLink'
         ])->findOrFail($id);
-        
+
         // Prefer loading states/cities from DB; fallback to helper data
         $statesCollection = StateModel::with('cities')->orderBy('name')->get();
         if ($statesCollection->isNotEmpty()) {
-            $statesData = $statesCollection->map(function($s) {
+            $statesData = $statesCollection->map(function ($s) {
                 return [
                     'id' => $s->id,
                     'name' => $s->name,
@@ -321,17 +322,17 @@ class ListingController extends Controller
 
         // Extract state names and prepare cities map
         $states = collect($statesData)->pluck('name')->sort()->values();
-        $citiesMap = collect($statesData)->mapWithKeys(function($state) {
+        $citiesMap = collect($statesData)->mapWithKeys(function ($state) {
             return [$state['name'] => $state['cities'] ?? []];
         })->toArray();
-        
+
         $data['categories'] = Category::where('status', 1)->get();
         $data['all_amenities'] = Amenity::all();
         $data['states'] = $states;
         $data['cities'] = $citiesMap;
-        
+
         return view('admin.listing.edit', compact('data'));
-    }    
+    }
 
     public function update(Request $request, $id)
     {
@@ -374,13 +375,13 @@ class ListingController extends Controller
             'status' => 'nullable|boolean'
         ]);
         DB::beginTransaction();
-    
+
         try {
             $listing = Listing::findOrFail($id);
 
             // Update Basic Info
             // Update Basic Info
-            $slug = Str::slug($request->title);
+            $slug = StringHelper::generateSlug($request->title);
             if ($listing->slug !== $slug) {
                 $count = Listing::where('slug', 'LIKE', "{$slug}%")->where('id', '!=', $id)->count();
                 if ($count > 0) {
@@ -411,7 +412,7 @@ class ListingController extends Controller
                 'city_id' => $cityModel->id,
                 'state' => $stateName,
                 'city' => $cityName,
-                'address' => $request->address  ?? '',
+                'address' => $request->address ?? '',
                 'zip_code' => $request->zip_code ?? '',
                 'mobile' => $request->mobile ?? '',
                 'email' => $request->email ?? '',
@@ -425,18 +426,18 @@ class ListingController extends Controller
             if ($request->hasFile('logo')) {
                 $listing->images()->where('image_type', 'logo')->delete();
 
-                $logoPath = $request->file('logo')->store("listing_logos/".$listing->id, 'public');
+                $logoPath = $request->file('logo')->store("listing_logos/" . $listing->id, 'public');
                 $listing->images()->create([
                     'image_path' => $logoPath,
                     'image_type' => 'logo'
                 ]);
             }
-    
+
             // Upload featured image (accept both 'featured' and 'featured_image')
             if ($request->hasFile('featured')) {
                 $listing->images()->where('image_type', 'featured')->delete();
 
-                $featuredPath = $request->file('featured')->store("listing_featured/".$listing->id, 'public');
+                $featuredPath = $request->file('featured')->store("listing_featured/" . $listing->id, 'public');
                 $listing->images()->create([
                     'image_path' => $featuredPath,
                     'image_type' => 'featured'
@@ -444,7 +445,7 @@ class ListingController extends Controller
             } elseif ($request->hasFile('featured_image')) {
                 $listing->images()->where('image_type', 'featured')->delete();
 
-                $featuredPath = $request->file('featured_image')->store("listing_featured/".$listing->id, 'public');
+                $featuredPath = $request->file('featured_image')->store("listing_featured/" . $listing->id, 'public');
                 $listing->images()->create([
                     'image_path' => $featuredPath,
                     'image_type' => 'featured'
@@ -454,8 +455,8 @@ class ListingController extends Controller
             // Update gallery
             if ($request->hasFile('gallery')) {
                 $listing->images()->where('image_type', 'gallery')->delete();
-    
-                $galleryPath = $request->file('gallery')->store('listing_gallery/'.$listing->id, 'public');
+
+                $galleryPath = $request->file('gallery')->store('listing_gallery/' . $listing->id, 'public');
                 $listing->images()->create([
                     'image_path' => $galleryPath,
                     'image_type' => 'gallery'
@@ -465,7 +466,7 @@ class ListingController extends Controller
             // Update Menu Items
             if ($request->menu_items) {
                 $listing->menuItems()->delete();
-    
+
                 foreach ($request->menu_items as $menuItem) {
                     if (!empty($menuItem['item_name'])) {
                         $listing->menuItems()->create([
@@ -478,7 +479,7 @@ class ListingController extends Controller
                     }
                 }
             }
-    
+
             // Update Working Hours
             $listing->workingHours()->delete();
             $days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
@@ -489,9 +490,9 @@ class ListingController extends Controller
                     'close_time' => $request->working_hours['close_time'][$index] ?? null,
                 ]);
             }
-    
+
             $listing->update(['is_247_open' => $request->is_247_open ?? 0]);
-    
+
             $amenityIds = $request->amenities ? (array) $request->amenities : [];
             if ($request->filled('new_amenities')) {
                 $names = array_filter(array_map(fn($n) => trim($n), explode(',', $request->input('new_amenities'))));
@@ -505,7 +506,7 @@ class ListingController extends Controller
             if (!empty($amenityIds)) {
                 $listing->amenities()->sync($amenityIds);
             }
-    
+
             // Update or Create Social Links
             if ($listing->socialLink) {
                 $listing->socialLink()->update([
@@ -524,9 +525,9 @@ class ListingController extends Controller
                     'youtube' => $request->youtube ?? '',
                 ]);
             }
-    
+
             DB::commit();
-    
+
             return redirect()->back()->with('success', 'Listing updated successfully!');
         } catch (\Exception $e) {
             DB::rollBack();
@@ -534,7 +535,7 @@ class ListingController extends Controller
             // Log error and return friendly response (avoid dd in production)
             return redirect()->back()->with(['message' => 'Failed to update listing', 'error' => $e->getMessage()])->withInput();
         }
-    }    
+    }
 
     public function destroy($id)
     {

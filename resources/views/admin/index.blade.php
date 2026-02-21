@@ -71,7 +71,10 @@
                     <div class="ground-list ground-hover-list">
                         <div class="ground ground-list-single">
                             <a href="#">
-                                <img class="ground-avatar" src="{{asset('admin/assets/img/t-1.png')}}" alt="...">
+                                <div class="ground-avatar d-flex align-items-center justify-content-center text-white ft-bold"
+                                    style="background-color: #007bff; border-radius: 50%; width: 45px; height: 45px;">
+                                    {{ \App\Helpers\StringHelper::getInitials($data['user']->name) }}
+                                </div>
                                 <span class="profile-status bg-online pull-right"></span>
                             </a>
 
@@ -84,7 +87,10 @@
 
                         <div class="ground ground-list-single">
                             <a href="#">
-                                <img class="ground-avatar" src="{{asset('admin/assets/img/t-2.png')}}" alt="...">
+                                <div class="ground-avatar d-flex align-items-center justify-content-center text-white ft-bold"
+                                    style="background-color: #6c757d; border-radius: 50%; width: 45px; height: 45px;">
+                                    {{ \App\Helpers\StringHelper::getInitials($data['user']->name) }}
+                                </div>
                                 <span class="profile-status bg-offline pull-right"></span>
                             </a>
 
@@ -97,7 +103,10 @@
 
                         <div class="ground ground-list-single">
                             <a href="#">
-                                <img class="ground-avatar" src="{{asset('admin/assets/img/t-3.png')}}" alt="...">
+                                <div class="ground-avatar d-flex align-items-center justify-content-center text-white ft-bold"
+                                    style="background-color: #17a2b8; border-radius: 50%; width: 45px; height: 45px;">
+                                    {{ \App\Helpers\StringHelper::getInitials($data['user']->name) }}
+                                </div>
                                 <span class="profile-status bg-working pull-right"></span>
                             </a>
 
@@ -110,27 +119,31 @@
 
                         <div class="ground ground-list-single">
                             <a href="#">
-                                <img class="ground-avatar" src="{{asset('admin/assets/img/t-4.png')}}" alt="...">
+                                <div class="ground-avatar d-flex align-items-center justify-content-center text-white ft-bold"
+                                    style="background-color: #dc3545; border-radius: 50%; width: 45px; height: 45px;">
+                                    {{ \App\Helpers\StringHelper::getInitials($data['user']->name) }}
+                                </div>
                                 <span class="profile-status bg-busy pull-right"></span>
                             </a>
 
                             <div class="ground-content">
                                 <h6><a href="#">Maryam Amiri</a></h6>
-                                <small class="text-fade"><i
-                                        class="fas fa-map-marker-alt me-1"></i>Liverpool, UK</small>
+                                <small class="text-fade"><i class="fas fa-map-marker-alt me-1"></i>Liverpool, UK</small>
                             </div>
                         </div>
 
                         <div class="ground ground-list-single">
                             <a href="#">
-                                <img class="ground-avatar" src="{{asset('admin/assets/img/t-5.png')}}" alt="...">
+                                <div class="ground-avatar d-flex align-items-center justify-content-center text-white ft-bold"
+                                    style="background-color: #28a745; border-radius: 50%; width: 45px; height: 45px;">
+                                    {{ \App\Helpers\StringHelper::getInitials($data['user']->name) }}
+                                </div>
                                 <span class="profile-status bg-online pull-right"></span>
                             </a>
 
                             <div class="ground-content">
                                 <h6><a href="#">Maryam Amiri</a></h6>
-                                <small class="text-fade"><i
-                                        class="fas fa-map-marker-alt me-1"></i>California</small>
+                                <small class="text-fade"><i class="fas fa-map-marker-alt me-1"></i>California</small>
                             </div>
                         </div>
                     </div>
