@@ -181,7 +181,7 @@
                                                         class="img-fluid circle" alt="">
                                                 @else
                                                     <div class="d-flex align-items-center justify-content-center text-white ft-bold circle img-fluid"
-                                                        style="width: 45px; height: 45px; background-color: #fca901; font-size: 18px;">
+                                                        style="width: 45px; height: 45px; background-color: #0194fc; font-size: 18px;">
                                                         {{ \App\Helpers\StringHelper::getInitials($data['user']->name) }}
                                                     </div>
                                                 @endif

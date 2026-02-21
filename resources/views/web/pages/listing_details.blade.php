@@ -29,7 +29,7 @@
                                         style="width: 90px; height: 90px; border-radius: 8px; border: 3px solid white; object-fit: cover;">
                                 @else
                                     <div class="d-flex align-items-center justify-content-center text-white ft-bold circle img-fluid"
-                                        style="width: 90px; height: 90px; border-radius: 8px; border: 2px solid #fca901; background-color: #dfa739ff; font-size: 48px;">
+                                        style="width: 90px; height: 90px; border-radius: 8px; border: 2px solid #49a2e2ff; background-color: ##0194fc; font-size: 48px;">
                                         {{ \App\Helpers\StringHelper::getInitials($data['user']->name) }}
                                     </div>
                                 @endif
@@ -165,7 +165,7 @@
                                                                 class="img-fluid" alt="{{ $review->user->name }}">
                                                         @else
                                                             <div class="d-flex align-items-center justify-content-center text-white ft-bold"
-                                                                style="width: 50px; height: 50px; border-radius: 50%; background-color: #fca901; font-size: 20px;">
+                                                                style="width: 50px; height: 50px; border-radius: 50%; background-color: #0194fc; font-size: 20px;">
                                                                 {{ \App\Helpers\StringHelper::getInitials($review->user->name ?? 'User') }}
                                                             </div>
                                                         @endif
