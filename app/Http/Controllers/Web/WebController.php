@@ -344,6 +344,8 @@ class WebController extends Controller
 
         $allLocations = Listing::whereNotNull('city')->pluck('city')->unique()->sort()->values();
 
+        $data['user'] = User::first();
+
         return view('web.pages.listings', compact('listings', 'allLocations', 'data'));
     }
 
