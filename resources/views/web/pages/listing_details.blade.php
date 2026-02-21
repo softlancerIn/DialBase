@@ -30,7 +30,7 @@
                                 @else
                                     <div class="d-flex align-items-center justify-content-center text-white ft-bold circle img-fluid"
                                         style="width: 90px; height: 90px; border-radius: 8px; border: 3px solid white; object-fit: cover;">
-                                        {{ \App\Helpers\StringHelper::getInitials($data['listing']->user->name) }}
+                                        {{ \App\Helpers\StringHelper::getInitials($data['user']->name) }}
                                     </div>
                                 @endif
                             </div>
