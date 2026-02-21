@@ -28,8 +28,10 @@
                                     <img src="{{ asset('storage/' . $data['logo_image']->image_path) }}" alt="Logo"
                                         style="width: 90px; height: 90px; border-radius: 8px; border: 3px solid white; object-fit: cover;">
                                 @else
-                                    <img src="{{ asset('assets/img/t-1.png') }}" alt="Logo"
+                                    <div class="d-flex align-items-center justify-content-center text-white ft-bold circle img-fluid"
                                         style="width: 90px; height: 90px; border-radius: 8px; border: 3px solid white; object-fit: cover;">
+                                        {{ \App\Helpers\StringHelper::getInitials($data['listing']->user->name) }}
+                                    </div>
                                 @endif
                             </div>
 
@@ -44,7 +46,7 @@
                                     <div class="Goodup-rating">
                                         <div class="Goodup-rates">
                                             @foreach (range(1, 5) as $i)
-                                                @if ($i <= round($data['listing']?->average_rating))
+                                                @if ($i <= round($data['listing']->average_rating))
                                                     <i class="fas fa-star"></i>
                                                 @else
                                                     <i class="fas fa-star text-gray"></i>

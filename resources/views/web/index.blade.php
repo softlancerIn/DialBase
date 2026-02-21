@@ -176,10 +176,15 @@
                                         class="crs_flex d-flex align-items-center justify-content-between br-top px-3 py-2">
                                         <div class="crs_fl_first">
                                             <div class="crs_tutor">
-                                                <div class="crs_tutor_thumb"><a href="javascript:void(0);"><img
-                                                            src="{{ asset('assets/img/team-2.jpg') }}"
-                                                            class="img-fluid circle" width="35" alt="Admin"></a>
-                                                </div>
+                                                @if ($data['user']->logoImage)
+                                                    <img src="{{ asset('storage/' . $data['user']->logoImage->image_path) }}"
+                                                        class="img-fluid circle" alt="">
+                                                @else
+                                                    <div class="d-flex align-items-center justify-content-center text-white ft-bold circle img-fluid"
+                                                        style="width: 45px; height: 45px; background-color: #fca901; font-size: 18px;">
+                                                        {{ \App\Helpers\StringHelper::getInitials($data['user']->name) }}
+                                                    </div>
+                                                @endif
                                             </div>
                                         </div>
                                         <div class="crs_fl_last">
