@@ -15,7 +15,7 @@
             @foreach ($data['category'] as $c_data)
                 <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6">
                     <div class="cats-wrap text-center">
-                        <a href="{{ route('city.slug', $c_data->slug) }}" class="Goodup-catg-wrap">
+                        <a href="{{ route('city.slug', strtolower($c_data->slug)) }}" class="Goodup-catg-wrap">
                             <div class="Goodup-catg-city">{{ $c_data->city_count ?? 0 }} Cities</div>
                             <div class="Goodup-catg-icon">
                                 {!! $c_data->icon ?? '--' !!}

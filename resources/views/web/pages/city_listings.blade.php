@@ -14,12 +14,14 @@
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                     <div class="breadcrumb_caption text-center py-5">
                         <h1 class="page_title fw-bold fs-1 fs-md-2 fs-lg-1">
-                            {{ $seoData->page_title ?? ($data['category']->name ?? 'Cities') }}</h1>
+                            {{ $seoData->page_title ?? ($data['category']->name ?? 'cities') }}
+                        </h1>
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb justify-content-center mt-2" style="color: white;">
                                 <li class=""><a href="{{ route('index') }}" style="color: white;">Home </a></li>
                                 <li class="active" aria-current="page" style="color: white;"> /
-                                    {{ $seoData->page_title ?? ($data['category']->name ?? 'Cities') }}</li>
+                                    {{ $seoData->page_title ?? ($data['category']->name ?? 'cities') }}
+                                </li>
                             </ol>
                         </nav>
                     </div>
@@ -41,7 +43,7 @@
                         <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6">
                             <div class="cats-wrap text-center">
                                 {{-- Link to category with location as path parameter --}}
-                                <a href="{{ route('category.slug', [$data['category']->slug, optional($city->city_rel)->name]) }}"
+                                <a href="{{ route('category.slug', [strtolower($data['category']->slug), strtolower(optional($city->city_rel)->name)]) }}"
                                     class="Goodup-catg-wrap">
                                     <div class="Goodup-catg-icon">
                                         <i class="fas fa-building"></i>
