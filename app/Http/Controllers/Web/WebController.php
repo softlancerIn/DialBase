@@ -13,7 +13,7 @@ use App\Models\Product;
 use DB;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Api\StateController;
-use App\Models\Admin;
+use App\Models\User;
 
 class WebController extends Controller
 {
@@ -29,7 +29,7 @@ class WebController extends Controller
             ->take(12)
             ->get();
 
-        $data['user'] = Admin::first();
+        $data['user'] = User::first();
 
         $query = Listing::with(['images', 'workingHours', 'amenities', 'category', 'reviews.user']);
 
@@ -219,7 +219,7 @@ class WebController extends Controller
         $all_listings_for_locations = Listing::where('category_id', $data['category']->id)->where('status', '1')->get();
         $data['locations'] = $all_listings_for_locations->pluck('city')->unique()->sort()->values();
 
-        $data['user'] = Admin::first();
+        $data['user'] = User::first();
 
         return view('web.pages.category_details', compact('data'));
     }
@@ -238,7 +238,7 @@ class WebController extends Controller
             ->with('city_rel')
             ->get();
 
-        $data['user'] = Admin::first();
+        $data['user'] = User::first();
 
         return view('web.pages.city_listings', compact('data'));
     }
@@ -374,7 +374,7 @@ class WebController extends Controller
         $data['featured_image'] = $data['listing']->images->where('image_type', 'featured')->first();
         $data['logo_image'] = $data['listing']->images->where('image_type', 'logo')->first();
 
-        $data['user'] = Admin::first();
+        $data['user'] = User::first();
 
         return view('web.pages.listing_details', compact('data'));
     }
