@@ -18,19 +18,12 @@ class StringHelper
      */
     public static function getInitials(?string $name = 'About Firms'): string
     {
-        $words = preg_split('/[\s\-]+/', trim($name));
-        $initials = '';
+        $words = explode(' ', trim($name));
 
-        foreach ($words as $word) {
-            if (!empty($word)) {
-                $initials .= mb_strtoupper(mb_substr($word, 0, 1));
-            }
-            if (mb_strlen($initials) >= 2) {
-                break;
-            }
-        }
-
-        return $initials;
+        return strtoupper(
+            substr($words[0], 0, 1) .
+            (isset($words[1]) ? substr($words[1], 0, 1) : '')
+        );
     }
 
     /**
