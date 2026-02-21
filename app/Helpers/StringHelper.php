@@ -16,7 +16,7 @@ class StringHelper
      * @param string|null $name
      * @return string
      */
-    public static function getInitials(?string $name = 'Admin'): string
+    public static function getInitials(?string $name = 'About Firms'): string
     {
         $words = preg_split('/[\s\-]+/', trim($name));
         $initials = '';
