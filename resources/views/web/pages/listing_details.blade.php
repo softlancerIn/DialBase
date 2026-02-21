@@ -162,8 +162,10 @@
                                                             <img src="{{ asset('storage/' . $review->user->profile_image) }}"
                                                                 class="img-fluid" alt="{{ $review->user->name }}">
                                                         @else
-                                                            <img src="{{ asset('assets/img/t-1.png') }}" class="img-fluid"
-                                                                alt="User">
+                                                            <div class="d-flex align-items-center justify-content-center text-white ft-bold"
+                                                                style="width: 50px; height: 50px; border-radius: 50%; background-color: #fca901; font-size: 20px;">
+                                                                {{ \App\Helpers\StringHelper::getInitials($review->user->name ?? 'User') }}
+                                                            </div>
                                                         @endif
                                                     </div>
                                                     <div class="reviews-comments-item-text">

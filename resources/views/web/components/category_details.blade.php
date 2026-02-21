@@ -41,7 +41,10 @@
                 @if ($logoImage)
                     <img src="{{ asset('storage/' . $logoImage->image_path) }}" class="img-fluid circle" alt="">
                 @else
-                    <img src="{{ asset('assets/img/t-1.png') }}" class="img-fluid circle" alt="">
+                    <div class="d-flex align-items-center justify-content-center text-white ft-bold circle img-fluid"
+                        style="width: 45px; height: 45px; background-color: #fca901; font-size: 18px;">
+                        {{ \App\Helpers\StringHelper::getInitials($listing->user->name) }}
+                    </div>
                 @endif
             </div>
             <h4 class="mb-0 ft-medium medium">
