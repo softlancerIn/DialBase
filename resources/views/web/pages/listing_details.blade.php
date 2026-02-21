@@ -29,7 +29,7 @@
                                         style="width: 90px; height: 90px; border-radius: 8px; border: 3px solid white; object-fit: cover;">
                                 @else
                                     <div class="d-flex align-items-center justify-content-center text-white ft-bold circle img-fluid"
-                                        style="width: 90px; height: 90px; border-radius: 8px; border: 3px solid white; object-fit: cover;">
+                                        style="width: 90px; height: 90px; border-radius: 8px; border: 2px solid #fca901; background-color: #dfa739ff; font-size: 48px;">
                                         {{ \App\Helpers\StringHelper::getInitials($data['user']->name) }}
                                     </div>
                                 @endif
