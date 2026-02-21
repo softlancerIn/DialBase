@@ -67,7 +67,7 @@
                         <div class="row justify-content-center">
                             @foreach ($data['listing'] as $list)
                                 <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
-                                    @include('web.components.category_details', ['listing' => $list])
+                                    @include('web.components.category_details', ['listing' => $list, 'user' => $data['user']])
                                 </div>
                             @endforeach
                         </div>

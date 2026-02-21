@@ -43,7 +43,7 @@
                 @else
                     <div class="d-flex align-items-center justify-content-center text-white ft-bold circle img-fluid"
                         style="width: 45px; height: 45px; background-color: #fca901; font-size: 18px;">
-                        {{ \App\Helpers\StringHelper::getInitials($listing->title) }}
+                        {{ \App\Helpers\StringHelper::getInitials($user->name) }}
                     </div>
                 @endif
             </div>
@@ -62,7 +62,7 @@
                 <div class="Goodup-rating">
                     <div class="Goodup-rates">
                         @foreach (range(1, 5) as $i)
-                            @if ($i <= round($listing?->average_rating))
+                            @if ($i <= round($listing->average_rating))
                                 <i class="fas fa-star"></i>
                             @else
                                 <i class="fas fa-star text-gray"></i>

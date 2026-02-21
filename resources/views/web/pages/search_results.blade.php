@@ -85,7 +85,7 @@
                         @if (isset($data['listings']) && $data['listings']->count() > 0)
                             @foreach ($data['listings'] as $listing)
                                 <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 mb-4">
-                                    @include('web.components.category_details', ['listing' => $listing])
+                                    @include('web.components.category_details', ['listing' => $listing, 'user' => $data['user']])
                                 </div>
                             @endforeach
                         @else
